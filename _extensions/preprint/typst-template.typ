@@ -3,6 +3,7 @@
   running-head: none,
   authors: none,
   affiliations: none,
+  authornote: none,
   abstract: none,
   keywords: none,
   margin: (x: 3.5cm, y: 3cm),
@@ -16,7 +17,7 @@
   doc,
 ) = {
   set page(
-    paper: paper,
+    paper: paper, 
     margin: margin,
     numbering: "1",
     header: locate(
@@ -28,6 +29,14 @@
             align(left)[#running-head],
             align(right)[#counter(page).display()]
           )
+        }
+    ),
+    footer-descent: 0pt,
+    footer: locate(
+        loc => if [#loc.page()] == [1] {
+          authornote
+        } else {
+          []
         }
     )
   )

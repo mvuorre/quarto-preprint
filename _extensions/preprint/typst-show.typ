@@ -30,6 +30,9 @@ $endif$
 $if(date)$
   date: [$date$],
 $endif$
+$if(authornote)$
+  authornote: [$authornote$],
+$endif$
 $if(lang)$
   lang: "$lang$",
 $endif$
