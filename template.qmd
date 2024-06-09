@@ -1,0 +1,49 @@
+---
+title: Long title
+running-head: Short title
+author:
+  - name: Matti Vuorre
+    email: mjvuorre@uvt.nl
+    orcid: 0000-0001-5052-066X
+    url: https://www.tilburguniversity.edu/staff/m-j-vuorre
+    corresponding: true
+    affiliation:
+      - ref: 1
+  - name: Co Author
+    equal-contributor: true
+    affiliation:
+      - ref: 2
+affiliations:
+  - id: 1
+    name: Tilburg University
+    department: Department of Social Psychology
+  - id: 2
+    name: Other institution
+    department: Other department
+abstract: Abstract goes here.
+keywords: [list, of keywords, here]
+license: CC BY
+authornote: This is an example author note.
+bibliography: bibliography.bib
+bibliographystyle: apa
+format:
+  preprint-typst: 
+    keep-typ: true
+mainfont: Libertinus Serif
+---
+
+XOXO offal biodiesel adaptogen normcore listicle, hot chicken adipisicing readymade ascot mukbang anim lyft cold-pressed [@r2024]. Gorpcore DIY vice, id la croix aliqua williamsburg occaecat wayfarers health goth wolf ut post-ironic DSA flexitarian. Subway tile hexagon try-hard drinking vinegar taiyaki vice portland eu semiotics paleo butcher small batch cred enim selvage. Health goth letterpress nulla, +1 shoreditch esse aliquip. Trust fund incididunt selvage enim. Farm-to-table marxism art party portland esse four dollar toast culpa selvage.
+
+# Introduction
+
+Pariatur laboris four dollar toast wayfarers solarpunk keffiyeh edison bulb grailed letterpress schlitz cloud bread taiyaki messenger bag raw denim. Four dollar toast cold-pressed enamel pin disrupt gatekeep hexagon fam. Brooklyn sed chia trust fund copper mug. Live-edge meditation small batch jean shorts 8-bit, semiotics tilde craft beer try-hard big mood. Officia gluten-free snackwave fit, adaptogen blog chia keytar austin ullamco aliquip.
+
+## A detailed point
+
+Gatekeep single-origin coffee yes plz marxism, same literally eiusmod fingerstache live-edge blackbird spyplane kogi ullamco hashtag laboris. Forage marxism in poke edison bulb try-hard tacos irony raclette. Tonx mukbang mlkshk roof party bitters, taxidermy gastropub nulla. Locavore godard tbh unicorn eiusmod poutine. Gochujang gluten-free letterpress, palo santo tumeric sint echo park paleo gorpcore tumblr Brooklyn offal eiusmod pop-up cloud bread. Elit big mood edison bulb, artisan esse et marxism neutral milk hotel slow-carb grailed flannel farm-to-table kombucha.
+
+### Unnecessary detail
+
+Poutine synth kombucha fanny pack fit hot chicken cornhole taiyaki pour-over copper mug nostrud ascot food truck. Taxidermy viral post-ironic irony, JOMO jawn whatever gorpcore PBR&B. Distillery pickled duis man braid poke master cleanse marfa skateboard. Hell of taiyaki lorem, cliche vegan praxis etsy kale chips humblebrag.
+
+Offal tumeric adaptogen chartreuse in squid art party. Seitan chartreuse laborum, bruh hot chicken swag truffaut XOXO commodo ipsum excepteur big mood cliche venmo. Celiac jawn sint gentrify, mumblecore skateboard hexagon. Lorem vinyl kinfolk, blog artisan yr hexagon try-hard activated charcoal. Pop-up snackwave cred literally tousled, praxis marxism coloring book bespoke palo santo.
