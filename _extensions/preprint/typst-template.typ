@@ -40,9 +40,11 @@
   set heading(numbering: sectionnumbering)
 
   if title != none {
-    align(center)[#block(inset: 2em)[
-      #text(weight: 600, size: fontsize + 0.5*fontsize)[#title]
-    ]]
+    align(center)[
+      #block(inset: 2em)[
+        #text(weight: 400, size: fontsize + 0.5*fontsize)[#title]
+      ]
+    ]
   }
 
   if authors != none {
@@ -55,7 +57,6 @@
         author =>
         align(center)[
           #text(
-            weight: 500, 
             size: fontsize + 0.2*fontsize
           )[#author.name#super[#author.affiliation]]
           #if author.keys().contains("orcid") {
