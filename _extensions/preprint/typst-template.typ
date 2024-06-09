@@ -2,6 +2,7 @@
   title: none,
   running-head: none,
   authors: none,
+  affiliations: none,
   date: none,
   abstract: none,
   cols: 1,
@@ -50,21 +51,35 @@
     grid(
       columns: (1fr,) * ncols,
       row-gutter: 1.5em,
-      ..authors.map(author =>
-          align(center)[
-            #text(weight: "bold")[#author.name] 
-            #box(
+      ..authors.map(
+        author =>
+        align(center)[
+          #text(
+            weight: 500, 
+            size: fontsize + 0.2*fontsize
+          )[#author.name#super[#author.affiliation]]
+          #if author.keys().contains("orcid") {
+            box(
               width: fontsize, 
               link(
                 author.orcid, 
                 figure(image("_extensions/preprint/orcid.svg", width: fontsize))
               )
-            ) \
-            #author.affiliation \
-            #author.email
-          ]
+            )
+          }
+        ]
       )
     )
+  }
+
+  if affiliations != none {
+    align(center)[
+      #block(below: 12pt)[
+        #for a in affiliations [
+          #super[#a.id]#a.name, #a.department \
+        ]
+      ]
+    ]
   }
 
   if date != none {

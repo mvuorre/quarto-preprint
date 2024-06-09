@@ -10,12 +10,22 @@ $if(by-author)$
 $for(by-author)$
 $if(it.name.literal)$
     ( name: [$it.name.literal$],
-      affiliation: [$for(it.affiliations)$$it.name$$sep$, $endfor$],
-      orcid: "https://orcid.org/$it.orcid$",
+      affiliation: [$for(it.affiliations)$$it.id$$sep$, $endfor$],
+      $if(it.orcid)$orcid: "https://orcid.org/$it.orcid$",$endif$
       email: [$it.email$] ),
 $endif$
 $endfor$
     ),
+$endif$
+$if(affiliations)$
+  affiliations: (
+    $for(affiliations)$(
+      id: "$it.id$",
+      name: "$it.name$",
+      department: "$it.department$"
+    ),
+    $endfor$
+  ),
 $endif$
 $if(date)$
   date: [$date$],
