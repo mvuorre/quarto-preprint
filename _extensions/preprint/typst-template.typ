@@ -3,16 +3,14 @@
   running-head: none,
   authors: none,
   affiliations: none,
-  date: none,
   abstract: none,
   keywords: none,
-  cols: 1,
   margin: (x: 3.5cm, y: 3cm),
   paper: "a4",
   lang: "en",
   region: "US",
-  font: (),
-  fontsize: 11pt,
+  font: ("Times", "Times New Roman"),
+  fontsize: 12pt,
   sectionnumbering: none,
   toc: false,
   doc,
@@ -97,10 +95,11 @@
   }
 
   if toc {
-    block(above: 0em, below: 2em)[
-    #outline(
-      title: auto,
-      depth: none
+    block(above: -2em, below: 0em, inset: 2em)[
+    #outline( 
+      title: text(weight: "semibold", size: fontsize*1.15)[Contents],
+      depth: 2,
+      indent: fontsize
     );
     ]
   }
