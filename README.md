@@ -1,12 +1,15 @@
 # Preprint Format
 
-This is a preprint template for Quarto documents. It renders to .pdf using Typst. This template's goal is to
+This is a manuscript / preprint template for Quarto documents. It renders to a PDF document using Typst. 
 
-- Be 100% Quarto standards compliant
-  - Users can write and preprint this without worrying about journal-specific formatting guidelines.
-  - As soon as a journal is specified, users can switch to any other Quarto format without editing custom YAML or other options (unless that format requires it.)
+This template's goal is to
+
 - Look nice
-- Accommodate all required fields typically used for OSF preprint metadata
+- Be fast
+- Just Work
+- Be 100% Quarto standards compliant
+  - Write manuscripts without worrying about special formatting & metadata
+  - Switch to a journal format without changing anything but `format:`
 
 ## Installing
 
