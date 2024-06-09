@@ -1,5 +1,6 @@
 #let preprint(
   title: none,
+  running-head: none,
   authors: none,
   date: none,
   abstract: none,
@@ -18,6 +19,17 @@
     paper: paper,
     margin: margin,
     numbering: "1",
+    header: locate(
+        loc => if [#loc.page()] == [1] {
+          []
+        } else {
+          grid(
+            columns: (1fr, 1fr),
+            align(left)[#running-head],
+            align(right)[#counter(page).display()]
+          )
+        }
+    )
   )
   set par(justify: true)
   set text(lang: lang,
