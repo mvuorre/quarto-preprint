@@ -20,8 +20,12 @@ affiliations:
   - id: 2
     name: Other institution
     department: Other department
-abstract: Abstract goes here.
-keywords: [list, of keywords, here]
+abstract: >
+  XOXO offal biodiesel adaptogen normcore listicle, hot chicken adipisicing readymade ascot mukbang anim lyft cold-pressed [@r2024]. Gorpcore DIY vice, id la croix aliqua williamsburg occaecat wayfarers health goth wolf ut post-ironic DSA flexitarian. Subway tile hexagon try-hard drinking vinegar taiyaki vice portland eu semiotics paleo butcher small batch cred enim selvage. Health goth letterpress nulla, +1 shoreditch esse aliquip. Trust fund incididunt selvage enim. Farm-to-table marxism art party portland esse four dollar toast culpa selvage.
+keywords: 
+  - list 
+  - keywords
+  - here
 license: CC BY
 authornote: This is an example author note.
 bibliography: bibliography.bib
@@ -31,8 +35,6 @@ format:
     keep-typ: true
 mainfont: Libertinus Serif
 ---
-
-XOXO offal biodiesel adaptogen normcore listicle, hot chicken adipisicing readymade ascot mukbang anim lyft cold-pressed [@r2024]. Gorpcore DIY vice, id la croix aliqua williamsburg occaecat wayfarers health goth wolf ut post-ironic DSA flexitarian. Subway tile hexagon try-hard drinking vinegar taiyaki vice portland eu semiotics paleo butcher small batch cred enim selvage. Health goth letterpress nulla, +1 shoreditch esse aliquip. Trust fund incididunt selvage enim. Farm-to-table marxism art party portland esse four dollar toast culpa selvage.
 
 # Introduction
 

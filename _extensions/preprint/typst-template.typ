@@ -5,6 +5,7 @@
   affiliations: none,
   date: none,
   abstract: none,
+  keywords: none,
   cols: 1,
   margin: (x: 3.5cm, y: 3cm),
   paper: "a4",
@@ -83,15 +84,15 @@
     ]
   }
 
-  if date != none {
-    align(center)[#block(inset: 1em)[
-      #date
-    ]]
+  if abstract != none {
+    block(above: 1em, below: -3em, inset: 2em)[
+      #text(weight: "semibold")[Abstract] #h(1em) #abstract
+    ]
   }
 
-  if abstract != none {
-    block(inset: 2em)[
-    #text(weight: "semibold")[Abstract] #h(1em) #abstract
+  if keywords != none {
+    block(above: -3em, below: -1em, inset: 2em)[
+      #text(weight: "semibold")[Keywords] #h(1em) #keywords
     ]
   }
 
@@ -104,9 +105,27 @@
     ]
   }
 
-  if cols == 1 {
-    doc
-  } else {
-    columns(cols, doc)
-  }
+  show heading.where(
+    level: 1
+  ): it => block(width: 100%, below: fontsize*1.5, above: fontsize*2)[
+    #set align(center)
+    #set text(size: fontsize*1.15)
+    #it.body
+  ]
+  
+  show heading.where(
+    level: 2
+  ): it => block(width: 100%, below: fontsize*1.25, above: fontsize*1.5)[
+    #set text(size: fontsize)
+    #it.body
+  ]
+
+  show heading.where(
+    level: 3
+  ): it => block(width: 100%, below: fontsize, above: fontsize*1.25)[
+    #set text(size: fontsize)
+    #it.body
+  ]
+
+  doc
 }
