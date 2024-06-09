@@ -1,23 +1,11 @@
-
-// This is an example typst template (based on the default template that ships
-// with Quarto). It defines a typst function named 'article' which provides
-// various customization options. This function is called from the 
-// 'typst-show.typ' file (which maps Pandoc metadata function arguments)
-//
-// If you are creating or packaging a custom typst template you will likely
-// want to replace this file and 'typst-show.typ' entirely. You can find 
-// documentation on creating typst templates and some examples here: 
-//   - https://typst.app/docs/tutorial/making-a-template/
-//   - https://github.com/typst/templates
-
-#let article(
+#let preprint(
   title: none,
   authors: none,
   date: none,
   abstract: none,
   cols: 1,
-  margin: (x: 1.25in, y: 1.25in),
-  paper: "us-letter",
+  margin: (x: 3.5cm, y: 3cm),
+  paper: "a4",
   lang: "en",
   region: "US",
   font: (),
@@ -52,7 +40,14 @@
       row-gutter: 1.5em,
       ..authors.map(author =>
           align(center)[
-            #author.name \
+            #text(weight: "bold")[#author.name] 
+            #box(
+              width: fontsize, 
+              link(
+                author.orcid, 
+                figure(image("_extensions/preprint/orcid.svg", width: fontsize))
+              )
+            ) \
             #author.affiliation \
             #author.email
           ]
