@@ -56,29 +56,29 @@
   }
 
   if authors != none {
-    let count = authors.len()
-    let ncols = calc.min(count, 3)
-    grid(
-      columns: (1fr,) * ncols,
-      row-gutter: 1.5em,
-      ..authors.map(
-        author =>
-        align(center)[
-          #text(
-            size: fontsize + 0.2*fontsize
-          )[#author.name#super[#author.affiliation]]
-          #if author.keys().contains("orcid") {
+    let author_strings = ()
+    for a in authors {
+      let x = [
+        #a.name#super[#a.affiliation]
+        #if a.keys().contains("orcid") {
             box(
               width: fontsize, 
               link(
-                author.orcid, 
-                figure(image("_extensions/preprint/orcid.svg", width: fontsize))
+                a.orcid, 
+                figure(
+                  image("_extensions/preprint/orcid.svg", width: fontsize)
+                )
               )
             )
           }
         ]
-      )
-    )
+      author_strings.push(x)
+    }
+    align(center)[
+      #text(size: fontsize + 0.2*fontsize)[
+        #author_strings.join(", ", last: " & ")
+      ]
+    ]
   }
 
   if affiliations != none {
