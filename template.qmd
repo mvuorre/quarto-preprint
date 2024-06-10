@@ -1,5 +1,5 @@
 ---
-title: Long title
+title: Long title is very long, perhaps longer than necessary
 running-head: Short title
 author:
   - name: Matti Vuorre
@@ -12,6 +12,7 @@ author:
   - name: Co Author
     equal-contributor: true
     affiliation:
+      - ref: 1
       - ref: 2
 affiliations:
   - id: 1

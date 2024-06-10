@@ -20,6 +20,7 @@
     paper: paper, 
     margin: margin,
     numbering: "1",
+    header-ascent: 48pt,
     header: locate(
         loc => if [#loc.page()] == [1] {
           []
@@ -34,13 +35,17 @@
     footer-descent: 0pt,
     footer: locate(
         loc => if [#loc.page()] == [1] {
-          authornote
+          stack(
+            spacing: 6pt,
+            line(length: 100%,  stroke: 0.5pt),
+            authornote
+          )
         } else {
           []
         }
     )
   )
-  set par(justify: true)
+  set par(justify: true, linebreaks: "optimized")
   set text(lang: lang,
            region: region,
            font: font,
