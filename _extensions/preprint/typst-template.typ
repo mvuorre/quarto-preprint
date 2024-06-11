@@ -90,7 +90,7 @@
     align(center)[
       #block(below: 12pt)[
         #for a in affiliations [
-          #super[#a.id]#a.name, #a.department \
+          #super[#a.id]#a.name#if a.keys().contains("department") {[, #a.department]} \
         ]
       ]
     ]

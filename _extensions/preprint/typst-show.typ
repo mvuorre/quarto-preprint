@@ -22,7 +22,7 @@ $if(affiliations)$
     $for(affiliations)$(
       id: "$it.id$",
       name: "$it.name$",
-      department: "$it.department$"
+      $if(it.department)$department: "$it.department$"$endif$
     ),
     $endfor$
   ),
