@@ -1,0 +1,96 @@
+---
+title: Example manuscript using the *preprint* Quarto template that tests various features
+running-head: Running head
+author:
+  - name: Matti Vuorre
+    email: mjvuorre@uvt.nl
+    orcid: 0000-0001-5052-066X
+    url: https://www.tilburguniversity.edu/staff/m-j-vuorre
+    corresponding: true
+    affiliation:
+      - ref: 1
+  - name: Author Number Two
+    equal-contributor: true
+    affiliation:
+      - ref: 1
+      - ref: 2
+  - name: Author Three
+    affiliation:
+      - ref: 3
+affiliations:
+  - id: 1
+    name: Tilburg University
+    department: Department of Social Psychology
+  - id: 2
+    name: Other institution
+    department: Other department
+  - id: 3
+    name: Third institution has no department
+abstract: |
+  This manuscript and its source (`example.qmd`) illustrate use of various [Quarto](https://quarto.org) & preprint template features.
+
+  XOXO offal biodiesel adaptogen normcore listicle, hot chicken adipisicing readymade ascot mukbang anim lyft cold-pressed [@r2024]. Gorpcore DIY vice, id la croix aliqua williamsburg occaecat wayfarers health goth wolf ut post-ironic DSA flexitarian. Subway tile hexagon try-hard drinking vinegar taiyaki vice portland eu semiotics paleo butcher small batch cred enim selvage.
+
+  Abstract paragraph number three.
+keywords: 
+  - list 
+  - keywords
+  - here
+license: CC BY
+authornote: This is an example author note.
+bibliography: bibliography.bib
+bibliographystyle: apa
+toc: true
+section-numbering: "1.1"
+execute: 
+  cache: true
+format:
+  preprint-typst: 
+    keep-typ: true
+    papersize: us-letter
+    margin:
+      x: 1.5cm
+      y: 2.5cm
+mainfont: Libertinus Serif
+---
+
+::: {.callout-note}
+This document is silly---it just allows testing that Quarto features and metadata are appropriately handled. Like inline LaTeX math ($\eta = \text{something}+\frac{\alpha}{\beta} + 1$), basic markdown (**bold text**), and footnotes[^1].
+:::
+
+[^1]: Footnote!
+
+# Introduction
+
+Pariatur laboris four dollar toast wayfarers solarpunk keffiyeh edison bulb grailed letterpress schlitz cloud bread taiyaki messenger bag raw denim. Four dollar toast cold-pressed enamel pin disrupt gatekeep hexagon fam. Brooklyn sed chia trust fund copper mug. Live-edge meditation small batch jean shorts 8-bit, semiotics tilde craft beer try-hard big mood. Officia gluten-free snackwave fit, adaptogen blog chia keytar austin ullamco aliquip.
+
+## A detailed point
+
+Gatekeep single-origin coffee yes plz marxism, same literally eiusmod fingerstache live-edge blackbird spyplane kogi ullamco hashtag laboris. Forage marxism in poke edison bulb try-hard tacos irony raclette. Tonx mukbang mlkshk roof party bitters, taxidermy gastropub nulla. Locavore godard tbh unicorn eiusmod poutine. Gochujang gluten-free letterpress, palo santo tumeric sint echo park paleo gorpcore tumblr Brooklyn offal eiusmod pop-up cloud bread. Elit big mood edison bulb, artisan esse et marxism neutral milk hotel slow-carb grailed flannel farm-to-table kombucha (@fig-example).
+
+```{r}
+#| label: fig-example
+#| fig-cap: This is an example scatterplot from R source.
+#| fig-height: 4
+#| fig-width: 4
+
+set.seed(1)
+data <- data.frame(x = rnorm(30), y = rnorm(30))
+plot(data)
+```
+
+### Unnecessary detail
+
+Poutine synth kombucha fanny pack fit hot chicken cornhole taiyaki pour-over copper mug nostrud ascot food truck. Taxidermy viral post-ironic irony, JOMO jawn whatever gorpcore PBR&B. Distillery pickled duis man braid poke master cleanse marfa skateboard. Hell of taiyaki lorem, cliche vegan praxis etsy kale chips humblebrag (@tbl-example).
+
+```{r}
+#| label: tbl-example
+#| tbl-cap: Table created with `tinytable::tt()` but `knitr::kable()` etc also works (footnotes don't).
+
+tinytable::tt(
+  head(data),
+  digits = 2, 
+)
+```
+
+Offal tumeric adaptogen chartreuse in squid art party. Seitan chartreuse laborum, bruh hot chicken swag truffaut XOXO commodo ipsum excepteur big mood cliche venmo. Celiac jawn sint gentrify, mumblecore skateboard hexagon. Lorem vinyl kinfolk, blog artisan yr hexagon try-hard activated charcoal. Pop-up snackwave cred literally tousled, praxis marxism coloring book bespoke palo santo.

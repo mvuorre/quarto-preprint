@@ -2,4 +2,4 @@
 *.typ
 *_cache/
 *_files/
-*.bib
+example.qmd
