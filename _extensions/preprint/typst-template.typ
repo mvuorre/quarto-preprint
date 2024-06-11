@@ -54,9 +54,7 @@
 
   if title != none {
     align(center)[
-      #block(inset: 2em)[
-        #text(weight: 400, size: fontsize + 0.5*fontsize)[#title]
-      ]
+      #text(weight: 400, size: fontsize + 0.5*fontsize)[#title]
     ]
   }
 
