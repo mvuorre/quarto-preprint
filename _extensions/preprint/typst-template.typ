@@ -98,7 +98,7 @@
 
   if abstract != none {
     block(above: 1em, below: -3em, inset: 2em)[
-      #text(weight: "semibold")[Abstract] #h(1em) #abstract
+      #abstract
     ]
   }
 
