@@ -32,7 +32,7 @@
           )
         }
     ),
-    footer-descent: 0pt,
+    footer-descent: 8pt,
     footer: locate(
         loc => if [#loc.page()] == [1] {
           stack(
