@@ -121,21 +121,21 @@
   ): it => block(width: 100%, below: fontsize*1.5, above: fontsize*2)[
     #set align(center)
     #set text(size: fontsize*1.15)
-    #it.body
+    #it
   ]
   
   show heading.where(
     level: 2
   ): it => block(width: 100%, below: fontsize*1.25, above: fontsize*1.5)[
     #set text(size: fontsize)
-    #it.body
+    #it
   ]
 
   show heading.where(
     level: 3
   ): it => block(width: 100%, below: fontsize, above: fontsize*1.25)[
     #set text(size: fontsize)
-    #it.body
+    #it
   ]
 
   doc
