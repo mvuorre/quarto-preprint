@@ -2,4 +2,5 @@
 # Temporary and output files
 *.typ
 **/*.pdf
-TODO.md
+*_cache/
+*_files/

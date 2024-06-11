@@ -1,0 +1,5 @@
+**/*.pdf
+*.typ
+*_cache/
+*_files/
+*.bib
