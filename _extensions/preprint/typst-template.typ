@@ -12,7 +12,7 @@
   region: "US",
   font: ("Times", "Times New Roman"),
   fontsize: 12pt,
-  sectionnumbering: none,
+  section-numbering: none,
   toc: false,
   doc,
 ) = {
@@ -50,7 +50,7 @@
            region: region,
            font: font,
            size: fontsize)
-  set heading(numbering: sectionnumbering)
+  set heading(numbering: section-numbering)
 
   if title != none {
     align(center)[
