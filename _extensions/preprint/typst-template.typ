@@ -123,7 +123,7 @@
     #set text(size: fontsize*1.15)
     #it
   ]
-  
+
   show heading.where(
     level: 2
   ): it => block(width: 100%, below: fontsize*1.25, above: fontsize*1.5)[
