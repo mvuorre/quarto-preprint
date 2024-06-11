@@ -67,7 +67,7 @@
         #a.name#super[#a.affiliation]
         #if a.keys().contains("orcid") {
             box(
-              width: fontsize, 
+              inset: -fontsize*0.2,
               link(
                 a.orcid, 
                 figure(
