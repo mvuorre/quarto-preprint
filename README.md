@@ -2,6 +2,8 @@
 
 This is a manuscript / preprint template for Quarto documents. It renders a Quarto source document to a PDF document using Typst. 
 
+[Example PDF output.](https://github.com/mvuorre/quarto-preprint/releases/latest/download/example.pdf)
+
 This template's goal is to
 
 - Look nice
