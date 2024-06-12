@@ -1,16 +1,10 @@
-all: example template
-
-example:
-
-.PHONY: all clean
+all: example
 
 example: example.qmd
-	quarto render $<
-
-template: template.qmd
-	quarto render $<
+	quarto render $< \
+	--output example.pdf
 
 clean:
 	rm -rf *.pdf *.typ *_cache/ *_files/
 
-.PHONY: renv clean
+.PHONY: all clean
