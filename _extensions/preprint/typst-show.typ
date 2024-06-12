@@ -12,7 +12,7 @@ $if(it.name.literal)$
     ( name: [$it.name.literal$],
       affiliation: [$for(it.affiliations)$$it.id$$sep$, $endfor$],
       $if(it.orcid)$orcid: "https://orcid.org/$it.orcid$",$endif$
-      email: [$it.email$] ),
+      $if(it.email)$email: [$it.email$]$endif$),
 $endif$
 $endfor$
     ),
@@ -29,6 +29,14 @@ $if(affiliations)$
 $endif$
 $if(date)$
   date: [$date$],
+$endif$
+$if(citation)$
+  citation: (
+    type: "$citation.type$",
+    container-title: "$citation.container-title$",
+    doi: "$citation.doi$",
+    url: "$citation.url$"
+  ),
 $endif$
 $if(authornote)$
   authornote: [$authornote$],

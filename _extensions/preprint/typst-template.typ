@@ -6,6 +6,8 @@
   authornote: none,
   abstract: none,
   keywords: none,
+  date: none,
+  citation: none,
   margin: (x: 3.5cm, y: 3cm),
   paper: "a4",
   lang: "en",
@@ -17,14 +19,42 @@
   bibliography-title: "References",
   doc,
 ) = {
+
+let author_strings = ()
+  if authors != none {
+    for a in authors {
+      let x = [
+        #a.name#super[#a.affiliation]
+        #if a.keys().contains("orcid") {
+            box(
+              inset: -fontsize*0.2,
+              link(
+                a.orcid, 
+                figure(
+                  image("_extensions/preprint/orcid.svg", width: fontsize)
+                )
+              )
+            )
+          }
+        ]
+      author_strings.push(x)
+      // Hack to add corresponding author since no such key exists in any author.
+      if a.keys().contains("email") {
+        authornote = [Send correspondence to #a.name (#a.email). #authornote]
+      }
+    }
+  }
+
   set page(
     paper: paper, 
     margin: margin,
     numbering: "1",
-    header-ascent: 48pt,
+    header-ascent: 30pt,
     header: locate(
         loc => if [#loc.page()] == [1] {
-          []
+          set align(right)
+          set text(size: fontsize*0.85)
+          [#link("https://doi.org/" + citation.doi, citation.doi)]
         } else {
           grid(
             columns: (1fr, 1fr),
@@ -55,31 +85,11 @@
     ]
   }
 
-  if authors != none {
-    let author_strings = ()
-    for a in authors {
-      let x = [
-        #a.name#super[#a.affiliation]
-        #if a.keys().contains("orcid") {
-            box(
-              inset: -fontsize*0.2,
-              link(
-                a.orcid, 
-                figure(
-                  image("_extensions/preprint/orcid.svg", width: fontsize)
-                )
-              )
-            )
-          }
-        ]
-      author_strings.push(x)
-    }
-    align(center)[
+  align(center)[
       #text(size: fontsize + 0.2*fontsize)[
         #author_strings.join(", ", last: " & ")
       ]
     ]
-  }
 
   if affiliations != none {
     align(center)[
