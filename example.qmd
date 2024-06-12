@@ -30,8 +30,6 @@ abstract: |
   This manuscript and its source (`example.qmd`) illustrate use of various [Quarto](https://quarto.org) & preprint template features.
 
   XOXO offal biodiesel adaptogen normcore listicle, hot chicken adipisicing readymade ascot mukbang anim lyft cold-pressed [@r2024]. Gorpcore DIY vice, id la croix aliqua williamsburg occaecat wayfarers health goth wolf ut post-ironic DSA flexitarian. Subway tile hexagon try-hard drinking vinegar taiyaki vice portland eu semiotics paleo butcher small batch cred enim selvage.
-
-  Abstract paragraph number three.
 keywords: 
   - list 
   - keywords
@@ -43,6 +41,8 @@ bibliographystyle: apa
 toc: true
 section-numbering: "1.1"
 bibliography-title: "Works referred to"
+mainfont: Libertinus Serif
+fontsize: 12pt
 execute: 
   cache: true
 format:
@@ -52,7 +52,6 @@ format:
     margin:
       x: 1.5cm
       y: 2.5cm
-mainfont: Libertinus Serif
 ---
 
 ::: {.callout-note}
@@ -63,7 +62,9 @@ This document is silly---it just allows testing that Quarto features and metadat
 
 # Introduction
 
-Pariatur laboris four dollar toast wayfarers solarpunk keffiyeh edison bulb grailed letterpress schlitz cloud bread taiyaki messenger bag raw denim. Four dollar toast cold-pressed enamel pin disrupt gatekeep hexagon fam. Brooklyn sed chia trust fund copper mug. Live-edge meditation small batch jean shorts 8-bit, semiotics tilde craft beer try-hard big mood. Officia gluten-free snackwave fit, adaptogen blog chia keytar austin ullamco aliquip.
+Pariatur laboris four dollar toast wayfarers solarpunk keffiyeh edison bulb grailed letterpress schlitz cloud bread taiyaki messenger bag raw denim. Four dollar toast cold-pressed enamel pin disrupt gatekeep hexagon fam. 
+
+Brooklyn sed chia trust fund copper mug. Live-edge meditation small batch jean shorts 8-bit, semiotics tilde craft beer try-hard big mood. Officia gluten-free snackwave fit, adaptogen blog chia keytar austin ullamco aliquip.
 
 ## A detailed point
 
