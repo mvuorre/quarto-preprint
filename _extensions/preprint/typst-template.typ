@@ -14,6 +14,7 @@
   fontsize: 12pt,
   section-numbering: none,
   toc: false,
+  bibliography-title: "References",
   doc,
 ) = {
   set page(
@@ -35,11 +36,7 @@
     footer-descent: 8pt,
     footer: locate(
         loc => if [#loc.page()] == [1] {
-          stack(
-            spacing: 6pt,
-            line(length: 100%,  stroke: 0.5pt),
-            authornote
-          )
+          block(inset: 0.5em)[#text(size: fontsize*0.9)[#authornote]]
         } else {
           []
         }
@@ -95,14 +92,14 @@
   }
 
   if abstract != none {
-    block(above: 1em, below: -3em, inset: 2em)[
+    block(above: 1em, below: -2em, inset: 2em)[
       #abstract
     ]
   }
 
   if keywords != none {
     block(above: -3em, below: -1em, inset: 2em)[
-      #text(weight: "semibold")[Keywords] #h(1em) #keywords
+      #text(style: "italic")[Keywords:] #keywords
     ]
   }
 
@@ -137,6 +134,8 @@
     #set text(size: fontsize)
     #it
   ]
+
+  set bibliography(title: bibliography-title)
 
   doc
 }

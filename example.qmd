@@ -42,6 +42,7 @@ bibliography: bibliography.bib
 bibliographystyle: apa
 toc: true
 section-numbering: "1.1"
+bibliography-title: "Works referred to"
 execute: 
   cache: true
 format:

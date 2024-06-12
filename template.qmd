@@ -1,6 +1,6 @@
 ---
 title: Your title
-# running-head: Running head
+running-head: Running head
 author:
   - name: Matti Vuorre
     email: mjvuorre@uvt.nl

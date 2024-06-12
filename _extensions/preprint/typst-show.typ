@@ -63,5 +63,8 @@ $endif$
 $if(toc)$
   toc: $toc$,
 $endif$
+$if(bibliography-title)$
+  bibliography-title: [$bibliography-title$],
+$endif$
   doc,
 )
