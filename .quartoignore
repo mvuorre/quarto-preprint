@@ -3,3 +3,4 @@
 *_cache/
 *_files/
 example.qmd
+Makefile
