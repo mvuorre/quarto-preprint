@@ -35,6 +35,12 @@ keywords:
   - keywords
   - here
 license: CC BY
+date: 2024-06-12
+citation:
+  type: article-journal
+  container-title: "PsyArXiv"
+  doi: "10.31234/osf.io/z3ejx"
+  url: https://osf.io/preprints/psyarxiv/z3ejx
 authornote: This is an example author note.
 bibliography: bibliography.bib
 bibliographystyle: apa
@@ -47,11 +53,11 @@ execute:
   cache: true
 format:
   preprint-typst: 
-    keep-typ: true
     papersize: us-letter
     margin:
-      x: 1.5cm
+      x: 3cm
       y: 2.5cm
+code-links: repo
 ---
 
 ::: {.callout-note}
