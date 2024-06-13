@@ -30,6 +30,9 @@ $endif$
 $if(date)$
   date: [$date$],
 $endif$
+$if(linkcolor)$
+  linkcolor: $linkcolor$,
+$endif$
 $if(citation)$
   citation: (
     type: "$citation.type$",

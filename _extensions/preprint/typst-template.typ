@@ -8,6 +8,7 @@
   keywords: none,
   date: none,
   citation: none,
+  linkcolor: rgb(0, 0, 0),
   margin: (x: 3.5cm, y: 3cm),
   paper: "a4",
   lang: "en",
@@ -20,7 +21,7 @@
   doc,
 ) = {
 
-let author_strings = ()
+  let author_strings = ()
   if authors != none {
     for a in authors {
       let x = [
@@ -45,6 +46,9 @@ let author_strings = ()
     }
   }
 
+  show link: set text(fill: linkcolor)
+  show cite: set text(fill: linkcolor)
+
   set page(
     paper: paper, 
     margin: margin,
@@ -54,7 +58,7 @@ let author_strings = ()
         loc => if [#loc.page()] == [1] {
           set align(right)
           set text(size: fontsize*0.85)
-          [#link("https://doi.org/" + citation.doi, citation.doi)]
+          [#link("https://doi.org/" + citation.doi, "https://doi.org/" + citation.doi)]
         } else {
           grid(
             columns: (1fr, 1fr),
@@ -66,7 +70,7 @@ let author_strings = ()
     footer-descent: 8pt,
     footer: locate(
         loc => if [#loc.page()] == [1] {
-          block(inset: 0.5em)[#text(size: fontsize*0.9)[#authornote]]
+          [#text(size: fontsize*0.9)[#authornote]]
         } else {
           []
         }
@@ -102,13 +106,13 @@ let author_strings = ()
   }
 
   if abstract != none {
-    block(above: 1em, below: -2em, inset: 2em)[
+    block(below: -3em, inset: 2.5em)[
       #abstract
     ]
   }
 
   if keywords != none {
-    block(above: -3em, below: -1em, inset: 2em)[
+    block(above: -4em, below: -1em, inset: 2.5em)[
       #text(style: "italic")[Keywords:] #keywords
     ]
   }
