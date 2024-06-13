@@ -8,6 +8,7 @@
   keywords: none,
   date: none,
   citation: none,
+  leading: 0.6em,
   linkcolor: rgb(0, 0, 0),
   margin: (x: 3.5cm, y: 3cm),
   paper: "a4",
@@ -77,11 +78,16 @@
         }
     )
   )
-  set par(justify: true, linebreaks: "optimized")
-  set text(lang: lang,
-           region: region,
-           font: font,
-           size: fontsize)
+  set par(
+    justify: true,
+    leading: leading
+  )
+  set text(
+    lang: lang,
+    region: region,
+    font: font,
+    size: fontsize
+  )
   set heading(numbering: section-numbering)
 
   if title != none {

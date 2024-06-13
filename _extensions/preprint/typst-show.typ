@@ -30,6 +30,9 @@ $endif$
 $if(date)$
   date: [$date$],
 $endif$
+$if(leading)$
+  leading: $leading$,
+$endif$
 $if(linkcolor)$
   linkcolor: $linkcolor$,
 $endif$
