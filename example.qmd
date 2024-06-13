@@ -27,7 +27,7 @@ affiliations:
   - id: 3
     name: Third institution has no department
 abstract: |
-  This manuscript and its source (`example.qmd`) illustrate use of various [Quarto](https://quarto.org) & preprint template features.
+  This manuscript and its source (`example.qmd`) illustrate use of various [Quarto](https://quarto.org) & *preprint* template features.
 
   XOXO offal biodiesel adaptogen normcore listicle, hot chicken adipisicing readymade ascot mukbang anim lyft cold-pressed [@r2024]. Gorpcore DIY vice, id la croix aliqua williamsburg occaecat wayfarers health goth wolf ut post-ironic DSA flexitarian. Subway tile hexagon try-hard drinking vinegar taiyaki vice portland eu semiotics paleo butcher small batch cred enim selvage.
 keywords: 
@@ -44,7 +44,8 @@ citation:
 authornote: This is an example author note.
 bibliography: bibliography.bib
 bibliographystyle: apa
-toc: true
+toc: false
+linkcolor: rgb(0, 0, 255)
 section-numbering: "1.1"
 bibliography-title: "Works referred to"
 mainfont: Libertinus Serif
@@ -54,17 +55,12 @@ execute:
 format:
   preprint-typst: 
     papersize: us-letter
+    keep-typ: true
     margin:
       x: 3cm
       y: 2.5cm
 code-links: repo
 ---
-
-::: {.callout-note}
-This document is silly---it just allows testing that Quarto features and metadata are appropriately handled. Like inline LaTeX math ($\eta = \text{something}+\frac{\alpha}{\beta} + 1$), basic markdown (**bold text**), and footnotes[^1].
-:::
-
-[^1]: Footnote!
 
 # Introduction
 
@@ -81,11 +77,18 @@ Gatekeep single-origin coffee yes plz marxism, same literally eiusmod fingerstac
 #| fig-cap: This is an example scatterplot from R source.
 #| fig-height: 4
 #| fig-width: 4
+#| echo: false
 
 set.seed(1)
 data <- data.frame(x = rnorm(30), y = rnorm(30))
 plot(data)
 ```
+
+::: {.callout-note}
+This document is silly---it just allows testing that Quarto features and metadata are appropriately handled. Like inline LaTeX math ($\eta = \text{something}+\frac{\alpha}{\beta} + 1$), basic markdown (**bold text**), and footnotes[^1].
+:::
+
+[^1]: Footnote!
 
 ### Unnecessary detail
 
@@ -93,7 +96,7 @@ Poutine synth kombucha fanny pack fit hot chicken cornhole taiyaki pour-over cop
 
 ```{r}
 #| label: tbl-example
-#| tbl-cap: Table created with `tinytable::tt()` but `knitr::kable()` etc also works (footnotes don't).
+#| tbl-cap: Tables created with `tinytable::tt()`, `knitr::kable()`, etc also work (footnotes don't).
 
 tinytable::tt(
   head(data),
