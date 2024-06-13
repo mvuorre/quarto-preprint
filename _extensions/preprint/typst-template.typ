@@ -26,8 +26,8 @@
   let author_strings = ()
   if authors != none {
     for a in authors {
-      let x = [
-        #a.name#super[#a.affiliation]
+      let author_string = [
+        #a.name#super[#a.affiliation]#if a.keys().contains("email") {[\*]}
         #if a.keys().contains("orcid") {
             box(
               inset: -0.2em,
@@ -40,11 +40,11 @@
             )
           }
         ]
-      author_strings.push(x)
       // Hack to add corresponding author since no such key exists in any author.
       if a.keys().contains("email") {
-        authornote = [Send correspondence to #a.name (#a.email). #authornote]
+        authornote = [\*Corresponding author: #a.name, #a.email. #authornote]
       }
+      author_strings.push(author_string)
     }
   }
 
@@ -139,15 +139,15 @@
 
   show heading.where(
     level: 1
-  ): it => block(width: 100%, below: 1.5em, above: 2em)[
+  ): it => block(width: 100%, below: 1.25em, above: 1.5em)[
     #set align(center)
-    #set text(size: 1.15em)
+    #set text(size: 1em)
     #it
   ]
 
   show heading.where(
     level: 2
-  ): it => block(width: 100%, below: 1.25em, above: 1.5em)[
+  ): it => block(width: 100%, below: 1.2em, above: 1.4em)[
     #set text(size: 1em)
     #it
   ]
