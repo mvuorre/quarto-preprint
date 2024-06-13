@@ -58,6 +58,7 @@
         loc => if [#loc.page()] == [1] {
           set align(right)
           set text(size: fontsize*0.85)
+          date; linebreak()
           [#link("https://doi.org/" + citation.doi, "https://doi.org/" + citation.doi)]
         } else {
           grid(
