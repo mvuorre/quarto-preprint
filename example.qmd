@@ -51,6 +51,7 @@ bibliography-title: "Works referred to"
 mainfont: Libertinus Serif
 fontsize: 12pt
 leading: 0.6em
+spacing: 0.95em
 execute: 
   cache: true
 format:

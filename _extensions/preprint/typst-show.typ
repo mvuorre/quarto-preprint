@@ -33,6 +33,9 @@ $endif$
 $if(leading)$
   leading: $leading$,
 $endif$
+$if(spacing)$
+  spacing: $spacing$,
+$endif$
 $if(linkcolor)$
   linkcolor: $linkcolor$,
 $endif$

@@ -9,6 +9,7 @@
   date: none,
   citation: none,
   leading: 0.6em,
+  spacing: 1em,
   linkcolor: rgb(0, 0, 0),
   margin: (x: 3.5cm, y: 3cm),
   paper: "a4",
@@ -29,11 +30,11 @@
         #a.name#super[#a.affiliation]
         #if a.keys().contains("orcid") {
             box(
-              inset: -fontsize*0.2,
+              inset: -0.2em,
               link(
                 a.orcid, 
                 figure(
-                  image("_extensions/preprint/orcid.svg", width: fontsize)
+                  image("_extensions/preprint/orcid.svg", width: 1em)
                 )
               )
             )
@@ -49,6 +50,8 @@
 
   show link: set text(fill: linkcolor)
   show cite: set text(fill: linkcolor)
+  // Space between paragraphs
+  show par: set block(spacing: spacing)
 
   set page(
     paper: paper, 
@@ -58,7 +61,7 @@
     header: locate(
         loc => if [#loc.page()] == [1] {
           set align(right)
-          set text(size: fontsize*0.85)
+          set text(size: 0.85em)
           date; linebreak()
           [#link("https://doi.org/" + citation.doi, "https://doi.org/" + citation.doi)]
         } else {
@@ -72,7 +75,7 @@
     footer-descent: 8pt,
     footer: locate(
         loc => if [#loc.page()] == [1] {
-          [#text(size: fontsize*0.9)[#authornote]]
+          [#text(size: 0.9em)[#authornote]]
         } else {
           []
         }
@@ -92,12 +95,12 @@
 
   if title != none {
     align(center)[
-      #text(weight: 400, size: fontsize + 0.5*fontsize)[#title]
+      #text(weight: 400, size: 1.5em)[#title]
     ]
   }
 
   align(center)[
-      #text(size: fontsize + 0.2*fontsize)[
+      #text(size: 1.2em)[
         #author_strings.join(", ", last: " & ")
       ]
     ]
@@ -127,32 +130,32 @@
   if toc {
     block(above: -2em, below: 0em, inset: 2em)[
     #outline( 
-      title: text(weight: "semibold", size: fontsize*1.15)[Contents],
+      title: text(weight: "semibold", size: 1.15em)[Contents],
       depth: 2,
-      indent: fontsize
+      indent: 1em
     );
     ]
   }
 
   show heading.where(
     level: 1
-  ): it => block(width: 100%, below: fontsize*1.5, above: fontsize*2)[
+  ): it => block(width: 100%, below: 1.5em, above: 2em)[
     #set align(center)
-    #set text(size: fontsize*1.15)
+    #set text(size: 1.15em)
     #it
   ]
 
   show heading.where(
     level: 2
-  ): it => block(width: 100%, below: fontsize*1.25, above: fontsize*1.5)[
-    #set text(size: fontsize)
+  ): it => block(width: 100%, below: 1.25em, above: 1.5em)[
+    #set text(size: 1em)
     #it
   ]
 
   show heading.where(
     level: 3
-  ): it => block(width: 100%, below: fontsize, above: fontsize*1.25)[
-    #set text(size: fontsize)
+  ): it => block(width: 100%, below: 1em, above: 1.25em)[
+    #set text(size: 1em)
     #it
   ]
 
