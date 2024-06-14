@@ -33,6 +33,9 @@ $endif$
 $if(leading)$
   leading: $leading$,
 $endif$
+$if(branding)$
+  branding: "$branding$",
+$endif$
 $if(spacing)$
   spacing: $spacing$,
 $endif$

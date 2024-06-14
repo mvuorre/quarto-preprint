@@ -8,6 +8,7 @@
   keywords: none,
   date: none,
   citation: none,
+  branding: none,
   leading: 0.6em,
   spacing: 1em,
   linkcolor: rgb(0, 0, 0),
@@ -62,8 +63,16 @@
         loc => if [#loc.page()] == [1] {
           set align(right)
           set text(size: 0.85em)
-          date; linebreak()
-          [#link("https://doi.org/" + citation.doi, "https://doi.org/" + citation.doi)]
+          box(
+            inset: 0.2em,
+            [#date; #linebreak()
+            #link("https://doi.org/" + citation.doi, "https://doi.org/" + citation.doi)]
+          )
+          box(
+            if branding == "psyarxiv" {
+              image("_extensions/preprint/psyarxiv.svg", width: 2.25em)
+            }
+          )
         } else {
           grid(
             columns: (1fr, 1fr),

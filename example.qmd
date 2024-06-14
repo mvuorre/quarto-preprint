@@ -41,6 +41,7 @@ citation:
   container-title: "PsyArXiv"
   doi: "10.31234/osf.io/z3ejx"
   url: https://osf.io/preprints/psyarxiv/z3ejx
+branding: psyarxiv
 authornote: This is an example author note.
 bibliography: bibliography.bib
 bibliographystyle: apa
