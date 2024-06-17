@@ -35,7 +35,7 @@
               link(
                 a.orcid, 
                 figure(
-                  image("_extensions/preprint/orcid.svg", width: 1em)
+                  image("_extensions/preprint/orcid.svg", width: 0.92em)
                 )
               )
             )
@@ -100,32 +100,39 @@
     font: font,
     size: fontsize
   )
-  set heading(numbering: section-numbering)
+  set heading(
+    numbering: section-numbering
+  )
 
   if title != none {
     align(center)[
-      #text(weight: 400, size: 1.5em)[#title]
+      #v(4em)
+      #block(below: 2em)[
+        #text(weight: 400, size: 1.5em)[#title]
+      ]
     ]
   }
 
   align(center)[
+    #block(below: 2em)[
       #text(size: 1.2em)[
         #author_strings.join(", ", last: " & ")
       ]
     ]
+  ]
 
   if affiliations != none {
     align(center)[
-      #block(below: 12pt)[
+      #block(below: 1em)[
         #for a in affiliations [
-          #super[#a.id]#a.name#if a.keys().contains("department") {[, #a.department]} \
+          #super[#a.id]#a.name#if a.keys().contains("department") [, #a.department] \
         ]
       ]
     ]
   }
 
   if abstract != none {
-    block(below: -3em, inset: 2.5em)[
+    block(above: 1em, below: -3em, inset: 2.5em)[
       #abstract
     ]
   }
