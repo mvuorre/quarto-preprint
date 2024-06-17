@@ -1,8 +1,12 @@
-all: example
+all: pdf docx
 
-example: example.qmd
+pdf: example.qmd
 	quarto render $< \
-	--output example.pdf
+	--to preprint-pdf
+
+docx: example.qmd
+	quarto render $< \
+	--to preprint-docx
 
 clean:
 	rm -rf *.pdf *.typ *_cache/ *_files/

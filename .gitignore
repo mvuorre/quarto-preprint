@@ -4,3 +4,4 @@
 **/*.pdf
 *_cache/
 *_files/
+/.luarc.json

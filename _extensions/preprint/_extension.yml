@@ -8,4 +8,5 @@ contributes:
       template-partials:
         - typst-template.typ
         - typst-show.typ
-
+    docx: 
+      reference-doc: preprint.docx
