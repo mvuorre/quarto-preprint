@@ -2,6 +2,7 @@
 # Temporary and output files
 *.typ
 **/*.pdf
+*.docx
 *_cache/
 *_files/
 /.luarc.json
