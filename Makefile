@@ -2,7 +2,7 @@ all: pdf docx
 
 pdf: example.qmd
 	quarto render $< \
-	--to preprint-pdf
+	--to preprint-typst
 
 docx: example.qmd
 	quarto render $< \
