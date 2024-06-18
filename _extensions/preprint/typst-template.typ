@@ -14,7 +14,7 @@
   spacing: 1em, // Between paragraphs https://typst.app/docs/reference/layout/block/#parameters-spacing
   first-line-indent: 0cm, // https://typst.app/docs/reference/model/par/#parameters-first-line-indent
   linkcolor: rgb(0, 0, 0), // https://typst.app/docs/reference/visualize/color/
-  margin: (x: 3.5cm, y: 3cm), // https://typst.app/docs/reference/layout/page/#parameters-margin
+  margin: (x: 3.2cm, y: 3cm), // https://typst.app/docs/reference/layout/page/#parameters-margin
   paper: "a4", // https://typst.app/docs/reference/layout/page/#parameters-paper
   lang: "en", // https://typst.app/docs/reference/text/text/#parameters-lang
   region: "US", // https://typst.app/docs/reference/text/text/#parameters-region
@@ -125,41 +125,38 @@
   // Level 1 headers
   show heading.where(
     level: 1
-  ): it => block(width: 100%, below: 1.25em, above: 1.5em)[
+  ): it => block(width: 100%, below: 1em, above: 1.25em)[
     #set align(center)
-    #set text(size: 1em)
+    #set text(size: fontsize*1.1, weight: "bold")
     #it
   ]
   // Level 2 headers
   show heading.where(
     level: 2
-  ): it => block(width: 100%, below: 1.2em, above: 1.4em)[
-    #set text(size: 1em)
+  ): it => block(width: 100%, below: 1em, above: 1.25em)[
+    #set text(size: fontsize*1.05)
     #it
   ]
   // Level 3 headers
   show heading.where(
     level: 3
-  ): it => block(width: 100%, below: 1em, above: 1.25em)[
-    #set text(size: 1em)
+  ): it => block(width: 100%, below: 0.8em, above: 1.2em)[
+    #set text(size: fontsize)
     #it
   ]
-  // Level 4 headers
+  // Level 4 headers are in paragraph
   show heading.where(
     level: 4
-  ): it => text(
-    size: 1em,
-    weight: "bold",
-    it + [.]
+  ): it => box(
+    inset: (top: 0em, bottom: 0em, left: 0em, right: 1em), 
+    text(size: 1em, weight: "bold", it)
   )
-  // Level 5 headers
+  // Level 5 headers are in paragraph
   show heading.where(
     level: 5
-  ): it => text(
-    size: 1em,
-    weight: "bold",
-    style: "italic",
-    it + [.]
+  ): it => box(
+    inset: (top: 0em, bottom: 0em, left: 0em, right: 1em), 
+    text(size: 1em, weight: "bold", style: "italic", it)
   )
 
   /* Content front matter */
@@ -168,7 +165,7 @@
   block(inset: (top: 2em, bottom: 0em, left: 2em, right: 2em))[
     #set align(center)
     #if title != none {
-      v(4em)
+      v(2em)
       [#text(weight: 400, size: 1.5em)[#title]]
     }
     #if authors != none {
@@ -186,6 +183,7 @@
   
   // Abstract and keywords block
   block(inset: (top: 2em, bottom: 0em, left: 2em, right: 2em))[
+    #set text(size: 0.89em)
     #if abstract != none {abstract}
     #if keywords != none {[#v(0.4em)#text(style: "italic")[Keywords:] #keywords]}
   ]
@@ -203,6 +201,7 @@
   }
 
   /* Content */
+  v(2em)
   if title-page {heading(title, numbering: none)}
   doc
 }
