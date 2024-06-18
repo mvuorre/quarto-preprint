@@ -36,6 +36,9 @@ $endif$
 $if(branding)$
   branding: "$branding$",
 $endif$
+$if(title-page)$
+  title-page: $title-page$,
+$endif$
 $if(spacing)$
   spacing: $spacing$,
 $endif$

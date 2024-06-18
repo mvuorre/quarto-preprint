@@ -46,6 +46,7 @@ authornote: This is an example author note.
 bibliography: bibliography.bib
 bibliographystyle: apa
 toc: false
+title-page: false
 linkcolor: rgb(0, 0, 255)
 section-numbering: "1.1"
 bibliography-title: "Works referred to"
