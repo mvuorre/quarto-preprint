@@ -1,6 +1,6 @@
 ---
-title: Example manuscript using the *preprint* Quarto template that tests various features
-running-head: Running head
+title: Example preprint manuscript using the *preprint* Quarto Typst extension
+running-head: "Example *preprint* document"
 author:
   - name: Matti Vuorre
     email: mjvuorre@uvt.nl
@@ -27,15 +27,14 @@ affiliations:
   - id: 3
     name: Third institution has no department
 abstract: |
-  This manuscript and its source (`example.qmd`) illustrate use of various [Quarto](https://quarto.org) & *preprint* template features.
-
-  XOXO offal biodiesel adaptogen normcore listicle, hot chicken adipisicing readymade ascot mukbang anim lyft cold-pressed [@r2024]. Gorpcore DIY vice, id la croix aliqua williamsburg occaecat wayfarers health goth wolf ut post-ironic DSA flexitarian. Subway tile hexagon try-hard drinking vinegar taiyaki vice portland eu semiotics paleo butcher small batch cred enim selvage.
+  This manuscript and its source (`example.qmd`) illustrate uses of various [Quarto](https://quarto.org) & *preprint* extension features. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Turpis tincidunt id aliquet risus feugiat. Id volutpat lacus laoreet non curabitur. Ipsum suspendisse ultrices gravida dictum fusce ut placerat. Sagittis id consectetur purus ut faucibus. Sodales ut etiam sit amet nisl. Nec tincidunt praesent semper feugiat nibh sed. Nisl pretium fusce id velit ut. Massa eget egestas purus viverra accumsan in. Nisl tincidunt eget nullam non nisi est. Ut diam quam nulla porttitor massa. Turpis egestas pretium aenean pharetra magna ac. Pretium nibh ipsum consequat nisl vel. Blandit volutpat maecenas volutpat blandit aliquam. Amet dictum sit amet justo donec enim diam vulputate. Mattis enim ut tellus elementum sagittis vitae et leo duis. Nam aliquam sem et tortor consequat id porta nibh venenatis. In ante metus dictum at. Feugiat vivamus at augue eget arcu dictum varius duis at.
 keywords: 
   - list 
   - keywords
   - here
-license: CC BY
-date: 2024-06-12
+  - but not
+  - too many
+date: "`r Sys.Date()`"
 citation:
   type: article-journal
   container-title: "PsyArXiv"
@@ -44,37 +43,26 @@ citation:
 branding: psyarxiv
 authornote: This is an example author note.
 bibliography: bibliography.bib
-bibliographystyle: apa
-toc: false
-title-page: false
-linkcolor: rgb(0, 0, 255)
-section-numbering: "1.1"
-bibliography-title: "Works referred to"
-mainfont: Libertinus Serif
-fontsize: 12pt
-leading: 0.6em
-spacing: 0.95em
-execute: 
-  cache: true
+linkcolor: blue
+mainfont: Fira Sans
+fontsize: 10pt
 format:
   preprint-typst: 
-    papersize: us-letter
     keep-typ: true
-    margin:
-      x: 3cm
-      y: 2.5cm
+execute: 
+  cache: true
 code-links: repo
 ---
 
-# Introduction
+Adipiscing elit duis tristique sollicitudin nibh sit amet commodo nulla [@r2024]. Iaculis nunc sed augue lacus viverra vitae congue eu consequat. Facilisi etiam dignissim diam quis enim lobortis scelerisque fermentum dui. 
 
-Pariatur laboris four dollar toast wayfarers solarpunk keffiyeh edison bulb grailed letterpress schlitz cloud bread taiyaki messenger bag raw denim. Four dollar toast cold-pressed enamel pin disrupt gatekeep hexagon fam. 
+# Level 1 header
 
-Brooklyn sed chia trust fund copper mug. Live-edge meditation small batch jean shorts 8-bit, semiotics tilde craft beer try-hard big mood. Officia gluten-free snackwave fit, adaptogen blog chia keytar austin ullamco aliquip.
+Ac turpis egestas maecenas pharetra. Scelerisque varius morbi enim nunc. Tortor posuere ac ut consequat semper viverra. Eget aliquet nibh praesent tristique magna. Risus at ultrices mi tempus imperdiet nulla malesuada. Fames ac turpis egestas sed tempus urna et pharetra. Diam phasellus vestibulum lorem sed. Sapien eget mi proin sed libero enim sed faucibus. Mattis rhoncus urna neque viverra justo nec ultrices dui sapien. Consequat ac felis donec et odio pellentesque.
 
-## A detailed point
+## Level 2 header
 
-Gatekeep single-origin coffee yes plz marxism, same literally eiusmod fingerstache live-edge blackbird spyplane kogi ullamco hashtag laboris. Forage marxism in poke edison bulb try-hard tacos irony raclette. Tonx mukbang mlkshk roof party bitters, taxidermy gastropub nulla. Locavore godard tbh unicorn eiusmod poutine. Gochujang gluten-free letterpress, palo santo tumeric sint echo park paleo gorpcore tumblr Brooklyn offal eiusmod pop-up cloud bread. Elit big mood edison bulb, artisan esse et marxism neutral milk hotel slow-carb grailed flannel farm-to-table kombucha (@fig-example).
+Gravida arcu ac tortor dignissim. Massa tempor nec feugiat nisl pretium. Ridiculus mus mauris vitae ultricies leo integer malesuada nunc. Tristique magna sit amet purus gravida quis. Ultrices neque ornare aenean euismod elementum. Cursus vitae congue mauris rhoncus aenean. Morbi tristique senectus et netus et malesuada fames ac turpis. Sed viverra tellus in hac habitasse platea dictumst vestibulum. Sed elementum tempus egestas sed sed risus pretium quam. Amet consectetur adipiscing elit ut aliquam.  (@fig-example).
 
 ```{r}
 #| label: fig-example
@@ -88,15 +76,31 @@ data <- data.frame(x = rnorm(30), y = rnorm(30))
 plot(data)
 ```
 
+Libero nunc consequat interdum varius sit. Augue eget arcu dictum varius duis at consectetur lorem donec. In nibh mauris cursus mattis. Sagittis purus sit amet volutpat. Magna fringilla urna porttitor rhoncus. Fringilla urna porttitor rhoncus dolor purus non enim praesent. Eget sit amet tellus cras adipiscing enim eu. 
+
 ::: {.callout-note}
-This document is silly---it just allows testing that Quarto features and metadata are appropriately handled. Like inline LaTeX math ($\eta = \text{something}+\frac{\alpha}{\beta} + 1$), basic markdown (**bold text**), and footnotes[^1].
+### Some Quarto markdown examples
+````
+This is a [Quarto callout](https://quarto.org/docs/authoring/callouts.html). This is inline LaTeX math: $\eta = \text{something}+\frac{\alpha}{\beta} + 1$. This is basic markdown: **bold text**, ~subscript~, and a footnote[^1].
+````
+This is a [Quarto callout](https://quarto.org/docs/authoring/callouts.html). This is inline LaTeX math: $\eta = \text{something}+\frac{\alpha}{\beta} + 1$. This is basic markdown: **bold text**, ~subscript~, and a footnote[^1].
 :::
 
 [^1]: Footnote!
 
-### Unnecessary detail
+### Level 3 header
 
-Poutine synth kombucha fanny pack fit hot chicken cornhole taiyaki pour-over copper mug nostrud ascot food truck. Taxidermy viral post-ironic irony, JOMO jawn whatever gorpcore PBR&B. Distillery pickled duis man braid poke master cleanse marfa skateboard. Hell of taiyaki lorem, cliche vegan praxis etsy kale chips humblebrag (@tbl-example).
+Accumsan lacus vel facilisis volutpat. Sed elementum tempus egestas sed sed risus pretium quam. Dictum fusce ut placerat orci nulla. Nisl rhoncus mattis rhoncus urna neque viverra justo nec ultrices. A arcu cursus vitae congue mauris rhoncus. Iaculis eu non diam phasellus vestibulum lorem sed risus (@eq-1):
+
+$$
+f(x \mid \mu, \sigma^2) = \frac{1}{\sqrt{2\pi \sigma^2}} \exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)?
+$$ {#eq-1}
+
+Dolor sit amet consectetur adipiscing elit. Augue lacus viverra vitae congue eu consequat ac felis. Erat pellentesque adipiscing commodo elit at imperdiet dui. 
+
+>A quote: "Elit ullamcorper dignissim cras tincidunt lobortis feugiat vivamus at."
+
+Justo donec enim diam vulputate ut pharetra. Ac turpis egestas maecenas pharetra convallis posuere morbi leo. Ullamcorper sit amet risus nullam (@tbl-example).
 
 ```{r}
 #| label: tbl-example
@@ -108,4 +112,14 @@ tinytable::tt(
 )
 ```
 
-Offal tumeric adaptogen chartreuse in squid art party. Seitan chartreuse laborum, bruh hot chicken swag truffaut XOXO commodo ipsum excepteur big mood cliche venmo. Celiac jawn sint gentrify, mumblecore skateboard hexagon. Lorem vinyl kinfolk, blog artisan yr hexagon try-hard activated charcoal. Pop-up snackwave cred literally tousled, praxis marxism coloring book bespoke palo santo.
+#### Level 4 header
+
+Nulla porttitor massa id neque aliquam. Elit duis tristique sollicitudin nibh sit amet commodo. Lorem dolor sed viverra ipsum nunc. Arcu felis bibendum ut tristique. Aliquam faucibus purus in massa. Cursus eget nunc scelerisque viverra mauris in. Lorem donec massa sapien faucibus et molestie ac. Ut venenatis tellus in metus vulputate eu scelerisque felis. 
+
+##### Level 5 header
+
+Fermentum leo vel orci porta non pulvinar neque laoreet. 
+
+# Conclusion
+
+Aenean pharetra magna ac placerat vestibulum lectus mauris. Nunc id cursus metus aliquam eleifend mi in nulla posuere. Et netus et malesuada fames ac turpis egestas. Nisi porta lorem mollis aliquam ut porttitor leo a. Tortor consequat id porta nibh venenatis cras. Congue eu consequat ac felis donec et.
