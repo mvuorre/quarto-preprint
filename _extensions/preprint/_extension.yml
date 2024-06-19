@@ -8,5 +8,7 @@ contributes:
       template-partials:
         - typst-template.typ
         - typst-show.typ
+      format-resources:
+        - '*.svg'
     docx: 
       reference-doc: preprint.docx
