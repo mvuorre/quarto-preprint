@@ -2,7 +2,7 @@
 
 This is a manuscript template for [Quarto](https://quarto.org) documents. It renders a Quarto source document to a PDF document using [Typst](https://typst.app/docs). 
 
-Manual and example output: [PDF (Typst)](https://mvuorre.github.io/quarto-preprint/index.pdf), [MS Word](https://mvuorre.github.io/quarto-preprint/index.docx), & [HTML](https://mvuorre.github.io/quarto-preprint).
+Example output and manual: [PDF (Typst)](https://mvuorre.github.io/quarto-preprint/index.pdf), [MS Word](https://mvuorre.github.io/quarto-preprint/index.docx), & [HTML](https://mvuorre.github.io/quarto-preprint).
 
 This template's goal is to
 
