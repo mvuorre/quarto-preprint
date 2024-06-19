@@ -286,10 +286,15 @@ Figure&nbsp;1: A cropped version of a basic Quarto .pdf document (left) and a <e
 <section id="common-quarto-options" class="level2">
 <h2 class="anchored" data-anchor-id="common-quarto-options">Common Quarto options</h2>
 <p>The code snippet above showed YAML metadata between triple-dashes. This YAML metadata can be used to control the output such as fonts, authors, whether to include a table of contents, and many more. We list and explain these options, with examples, below in roughly a decreasing order of importance to typical scholarly manuscripts.</p>
+<section id="title" class="level3">
+<h3 class="anchored" data-anchor-id="title">Title</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">"*preprint*: A Quarto Typst extension for computationally reproducible manuscripts"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Title of the manuscript. Required; needs to be in quotation marks only if it includes special characters such as colons. See relevant Quarto <a href="https://quarto.org/docs/output-formats/html-basics.html#overview">documentation</a>.</p>
+</section>
+<section id="authors-affiliations" class="level3">
+<h3 class="anchored" data-anchor-id="authors-affiliations">Authors &amp; affiliations</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">author</span><span class="kw">:</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Matti Vuorre</span></span>
@@ -305,77 +310,87 @@ Figure&nbsp;1: A cropped version of a basic Quarto .pdf document (left) and a <e
 </div>
 <p>Authors and their affiliations as explained in Quarto’s scholarly writing <a href="https://quarto.org/docs/authoring/front-matter.html">documentation</a>.</p>
 <p>A few features are not yet included. The <code>corresponding: true</code> syntax for indicating corresponding authors does not work. To indicate a corresponding author, specify an email for that author (as in above example). The <code>equal-contributor: true</code> option is not yet implemented.</p>
+</section>
+<section id="abstract-keywords-date" class="level3">
+<h3 class="anchored" data-anchor-id="abstract-keywords-date">Abstract, keywords, &amp; date</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">abstract</span><span class="kw">: </span><span class="ch">|</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  This document and its source code (`manual.qmd`) illustrate uses of various [Quarto](https://quarto.org) &amp; *preprint* extension features, such as weaving R code [@r2024] and prose.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  This document and its source code (`manual.qmd`) illustrate uses of various [Quarto](https://quarto.org) &amp; *preprint* extension features, such as weaving R code [@r2024] and prose.</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">keywords</span><span class="kw">:</span><span class="at"> </span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> list </span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> keywords</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> here</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> but not</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> too many</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="fu">date</span><span class="kw">:</span><span class="at"> </span><span class="st">"`r Sys.Date()`"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>The document’s abstract. Can include multiple paragraphs, Markdown, maths, references, and more.</p>
+<p>The document’s abstract can include multiple paragraphs, Markdown, maths, references, and more. A list of keywords and the document’s date can be added. Above example shows how to include the current date using R.</p>
+</section>
+<section id="citation-information" class="level3">
+<h3 class="anchored" data-anchor-id="citation-information">Citation information</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">keywords</span><span class="kw">:</span><span class="at"> </span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> list </span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> keywords</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> here</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> but not</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> too many</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="fu">date</span><span class="kw">:</span><span class="at"> </span><span class="st">"`r Sys.Date()`"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>A list of keywords and the document’s date can be added. Above example shows how to include the current date using R.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">citation</span><span class="kw">:</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">type</span><span class="kw">:</span><span class="at"> article-journal</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">container-title</span><span class="kw">:</span><span class="at"> </span><span class="st">"PsyArXiv"</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">doi</span><span class="kw">:</span><span class="at"> </span><span class="st">"10.31234/osf.io/z3ejx"</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">url</span><span class="kw">:</span><span class="at"> https://osf.io/preprints/psyarxiv/z3ejx</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">citation</span><span class="kw">:</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">type</span><span class="kw">:</span><span class="at"> article-journal</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">container-title</span><span class="kw">:</span><span class="at"> </span><span class="st">"PsyArXiv"</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">doi</span><span class="kw">:</span><span class="at"> </span><span class="st">"10.31234/osf.io/z3ejx"</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">url</span><span class="kw">:</span><span class="at"> https://osf.io/preprints/psyarxiv/z3ejx</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>This information is used by Quarto to include the document’s citation information to various formats and the document’s metadata. See relevant Quarto <a href="https://quarto.org/docs/authoring/create-citeable-articles.html">documentation</a>.</p>
+</section>
+<section id="other-common-options" class="level3">
+<h3 class="anchored" data-anchor-id="other-common-options">Other common options</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bibliography</span><span class="kw">:</span><span class="at"> bibliography-manual.bib</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">linkcolor</span><span class="kw">:</span><span class="at"> blue</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mainfont</span><span class="kw">:</span><span class="at"> Fira Sans</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">fontsize</span><span class="kw">:</span><span class="at"> 10pt</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">toc</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="fu">execute</span><span class="kw">:</span><span class="at"> </span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">cache</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="fu">code-links</span><span class="kw">:</span><span class="at"> repo</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bibliography</span><span class="kw">:</span><span class="at"> bibliography-manual.bib</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">linkcolor</span><span class="kw">:</span><span class="at"> blue</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mainfont</span><span class="kw">:</span><span class="at"> Fira Sans</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="fu">fontsize</span><span class="kw">:</span><span class="at"> 10pt</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">toc</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="fu">toc-depth</span><span class="kw">:</span><span class="at"> </span><span class="dv">2</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="fu">toc-title</span><span class="kw">:</span><span class="at"> </span><span class="st">"Contents of the document"</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="fu">code-links</span><span class="kw">:</span><span class="at"> repo</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>The above shows how to specify a bibliography file, color for links in the document, the main font and its size, table of contents (and its options). The <code>code-links</code> option is useful when the output formats include HTML.</p>
+</section>
+<section id="format" class="level3">
+<h3 class="anchored" data-anchor-id="format">Format</h3>
+<p>You can specify one or more formats, and settings specific to them, under the <code>format</code> key. See <a href="https://quarto.org/docs/output-formats/typst.html">here</a> for Quarto’s Typst-specific format options.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span><span class="kw">:</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">preprint-typst</span><span class="kw">:</span><span class="at"> </span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">keep-typ</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">html</span><span class="kw">:</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">fontsize</span><span class="kw">:</span><span class="at"> 12pt</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">preprint-docx</span><span class="kw">:</span><span class="at"> </span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="at">    default</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span><span class="kw">:</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">preprint-typst</span><span class="kw">:</span><span class="at"> </span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">keep-typ</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</section>
 </section>
 <section id="typst-preprint-extension-options" class="level2">
 <h2 class="anchored" data-anchor-id="typst-preprint-extension-options">Typst &amp; preprint-extension options</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">running-head</span><span class="kw">:</span><span class="at"> </span><span class="st">"*preprint* Quarto extension manual"</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">branding</span><span class="kw">:</span><span class="at"> psyarxiv</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">authornote</span><span class="kw">:</span><span class="at"> This is an example author note.</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="fu">title-page</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">running-head</span><span class="kw">:</span><span class="at"> </span><span class="st">"*preprint* Quarto extension manual"</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">branding</span><span class="kw">:</span><span class="at"> psyarxiv</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">authornote</span><span class="kw">:</span><span class="at"> This is an example author note.</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="fu">title-page</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<ul>
-<li><code>running-head</code> A text string used as the document’s running head.</li>
-</ul>
-<p>Typst geometry, layout, and formatting options</p>
+<p><code>running-head</code> should be a text string and is used as the document’s running head.</p>
+<p><code>branding</code> adds a specified preprint service’s logo to the document. Currently only “psyarxiv” is a valid value.</p>
+<p><code>authornote</code> allows adding information to the footer of the first page.</p>
+<p><code>title-page: true</code> adds page breaks after the title &amp; authors section and the abstract.</p>
+<section id="typst-geometry-layout-and-formatting-options" class="level3">
+<h3 class="anchored" data-anchor-id="typst-geometry-layout-and-formatting-options">Typst geometry, layout, and formatting options</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">leading</span><span class="kw">:</span><span class="at"> 0.6em</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">spacing</span><span class="kw">:</span><span class="at"> 1em</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">section-numbering</span><span class="kw">:</span><span class="at"> none</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">bibliography-title</span><span class="kw">:</span><span class="at"> </span><span class="st">"References"</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="fu">bibliography-style</span><span class="kw">:</span><span class="at"> </span><span class="st">"apa"</span></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="fu">margin</span><span class="kw">:</span></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">x</span><span class="kw">:</span><span class="at"> 1cm</span></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">y</span><span class="kw">:</span><span class="at"> 3cm</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">leading</span><span class="kw">:</span><span class="at"> 0.6em</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">spacing</span><span class="kw">:</span><span class="at"> 1em</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">section-numbering</span><span class="kw">:</span><span class="at"> none</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="fu">bibliography-title</span><span class="kw">:</span><span class="at"> </span><span class="st">"References"</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="fu">bibliography-style</span><span class="kw">:</span><span class="at"> </span><span class="st">"apa"</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="fu">margin</span><span class="kw">:</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">x</span><span class="kw">:</span><span class="at"> 1cm</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">y</span><span class="kw">:</span><span class="at"> 3cm</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
-<li>leading: 0.6em
+<li>leading
 <ul>
 <li>Space between lines of text <a href="https://typst.app/docs/reference/model/par/#parameters-leading" class="uri">https://typst.app/docs/reference/model/par/#parameters-leading</a></li>
 </ul></li>
-<li>spacing: 1em
+<li>spacing
 <ul>
 <li>Space between paragraphs <a href="https://typst.app/docs/reference/layout/block/#parameters-spacing" class="uri">https://typst.app/docs/reference/layout/block/#parameters-spacing</a></li>
 </ul></li>
@@ -383,29 +398,30 @@ Figure&nbsp;1: A cropped version of a basic Quarto .pdf document (left) and a <e
 <ul>
 <li>In Typst format e.g.&nbsp;“1.1”, do not include or leave empty (““) to not number sections.</li>
 </ul></li>
-<li>first-line-indent: 0cm
+<li>first-line-indent
 <ul>
 <li><a href="https://typst.app/docs/reference/model/par/#parameters-first-line-indent" class="uri">https://typst.app/docs/reference/model/par/#parameters-first-line-indent</a></li>
 </ul></li>
-<li>margin: (x: 3.2cm, y: 3cm)
+<li>margin
 <ul>
 <li>Page margins <a href="https://typst.app/docs/reference/layout/page/#parameters-margin" class="uri">https://typst.app/docs/reference/layout/page/#parameters-margin</a></li>
 </ul></li>
-<li>paper: “a4”
+<li>paper
 <ul>
 <li><a href="https://typst.app/docs/reference/layout/page/#parameters-paper" class="uri">https://typst.app/docs/reference/layout/page/#parameters-paper</a></li>
 </ul></li>
-<li>lang: “en”
+<li>lang
 <ul>
 <li><a href="https://typst.app/docs/reference/text/text/#parameters-lang" class="uri">https://typst.app/docs/reference/text/text/#parameters-lang</a></li>
 </ul></li>
-<li>region: “US”
+<li>region
 <ul>
 <li><a href="https://typst.app/docs/reference/text/text/#parameters-region" class="uri">https://typst.app/docs/reference/text/text/#parameters-region</a></li>
 </ul></li>
 <li>bibliography-title: “References”</li>
 <li>bibliography-style: “apa”</li>
 </ul>
+</section>
 </section>
 </section>
 <section id="example-content" class="level1">
@@ -434,10 +450,10 @@ Figure&nbsp;1: A cropped version of a basic Quarto .pdf document (left) and a <e
 <h3 class="anchored" data-anchor-id="tables">Tables</h3>
 <p>Tables are still the achilles heel of Typst (and any cross-format output, really). However, basic tables are more than possible, and below is an example table produced in R with the tinytable package (<a href="#tbl-example" class="quarto-xref">Table&nbsp;1</a>). Note that some features of tables, such as footnotes, are not yet implemented in Typst / Quarto.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>tinytable<span class="sc">::</span><span class="fu">tt</span>(</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(data),</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">digits =</span> <span class="dv">2</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>tinytable<span class="sc">::</span><span class="fu">tt</span>(</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(data),</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">digits =</span> <span class="dv">2</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div id="tbl-example" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-example-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">

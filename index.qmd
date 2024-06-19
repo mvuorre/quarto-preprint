@@ -166,11 +166,15 @@ In the documentation below, we have divided the YAML metadata options to two sec
 
 The code snippet above showed YAML metadata between triple-dashes. This YAML metadata can be used to control the output such as fonts, authors, whether to include a table of contents, and many more. We list and explain these options, with examples, below in roughly a decreasing order of importance to typical scholarly manuscripts.
 
+### Title
+
 ```{yaml}
 title: "*preprint*: A Quarto Typst extension for computationally reproducible manuscripts"
 ```
 
 Title of the manuscript. Required; needs to be in quotation marks only if it includes special characters such as colons. See relevant Quarto [documentation](https://quarto.org/docs/output-formats/html-basics.html#overview).
+
+### Authors & affiliations
 
 ```{yaml}
 author:
@@ -190,14 +194,11 @@ Authors and their affiliations as explained in Quarto's scholarly writing [docum
 
 A few features are not yet included. The `corresponding: true` syntax for indicating corresponding authors does not work. To indicate a corresponding author, specify an email for that author (as in above example). The `equal-contributor: true` option is not yet implemented.
 
+### Abstract, keywords, & date
+
 ```{yaml}
 abstract: |
   This document and its source code (`manual.qmd`) illustrate uses of various [Quarto](https://quarto.org) & *preprint* extension features, such as weaving R code [@r2024] and prose.
-```
-
-The document's abstract. Can include multiple paragraphs, Markdown, maths, references, and more.
-
-```{yaml}
 keywords: 
   - list 
   - keywords
@@ -207,7 +208,9 @@ keywords:
 date: "`r Sys.Date()`"
 ```
 
-A list of keywords and the document's date can be added. Above example shows how to include the current date using R.
+The document's abstract can include multiple paragraphs, Markdown, maths, references, and more. A list of keywords and the document's date can be added. Above example shows how to include the current date using R.
+
+### Citation information
 
 ```{yaml}
 citation:
@@ -219,25 +222,29 @@ citation:
 
 This information is used by Quarto to include the document's citation information to various formats and the document's metadata. See relevant Quarto [documentation](https://quarto.org/docs/authoring/create-citeable-articles.html).
 
+### Other common options
+
 ```{yaml}
 bibliography: bibliography-manual.bib
 linkcolor: blue
 mainfont: Fira Sans
 fontsize: 10pt
 toc: true
-execute: 
-  cache: true
+toc-depth: 2
+toc-title: "Contents of the document"
 code-links: repo
 ```
+
+The above shows how to specify a bibliography file, color for links in the document, the main font and its size, table of contents (and its options). The `code-links` option is useful when the output formats include HTML.
+
+### Format
+
+You can specify one or more formats, and settings specific to them, under the `format` key. See [here](https://quarto.org/docs/output-formats/typst.html) for Quarto's Typst-specific format options.
 
 ```{yaml}
 format:
   preprint-typst: 
     keep-typ: true
-  html:
-    fontsize: 12pt
-  preprint-docx: 
-    default
 ```
 
 ## Typst & preprint-extension options
@@ -249,9 +256,15 @@ authornote: This is an example author note.
 title-page: false
 ```
 
-- `running-head` A text string used as the document's running head. 
+`running-head` should be a text string and is used as the document's running head. 
 
-Typst geometry, layout, and formatting options
+`branding` adds a specified preprint service's logo to the document. Currently only "psyarxiv" is a valid value.
+
+`authornote` allows adding information to the footer of the first page.
+
+`title-page: true` adds page breaks after the title & authors section and the abstract.
+
+### Typst geometry, layout, and formatting options
 
 ```{yaml}
 leading: 0.6em
@@ -264,21 +277,21 @@ margin:
   y: 3cm
 ```
 
-- leading: 0.6em
+- leading
   - Space between lines of text <https://typst.app/docs/reference/model/par/#parameters-leading>
-- spacing: 1em
+- spacing
   - Space between paragraphs <https://typst.app/docs/reference/layout/block/#parameters-spacing>
 - section-numbering
   - In Typst format e.g. "1.1", do not include or leave empty ("") to not number sections.
-- first-line-indent: 0cm
+- first-line-indent
   - <https://typst.app/docs/reference/model/par/#parameters-first-line-indent>
-- margin: (x: 3.2cm, y: 3cm)
+- margin
   - Page margins <https://typst.app/docs/reference/layout/page/#parameters-margin>
-- paper: "a4"
+- paper
   - <https://typst.app/docs/reference/layout/page/#parameters-paper>
-- lang: "en"
+- lang
   - <https://typst.app/docs/reference/text/text/#parameters-lang>
-- region: "US"
+- region
   - <https://typst.app/docs/reference/text/text/#parameters-region>
 - bibliography-title: "References"
 - bibliography-style: "apa"
