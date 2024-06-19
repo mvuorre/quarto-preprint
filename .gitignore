@@ -11,6 +11,7 @@
 /.quarto/
 
 # Allow these in online docs
-!docs/*_files/
-!docs/*.pdf
-!docs/*.docx
+!docs/**/*_files/
+!docs/**/*.pdf
+!docs/**/*.docx
+!docs/**/*.png
