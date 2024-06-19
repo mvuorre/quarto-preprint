@@ -53,7 +53,7 @@
               link(
                 a.orcid, 
                 figure(
-                  image("_extensions/preprint/orcid.svg", width: 0.92em)
+                  image("orcid.svg", width: 0.92em)
                 )
               )
             )
@@ -86,7 +86,7 @@
           box(
             inset: 0.2em,
             if branding == "psyarxiv" {
-              image("_extensions/preprint/psyarxiv.svg", width: 2.25em)
+              image("psyarxiv.svg", width: 2.25em)
             }
           )
         } else {
