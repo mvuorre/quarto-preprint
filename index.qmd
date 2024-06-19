@@ -36,8 +36,8 @@ date: "`r Sys.Date()`"
 citation:
   type: article-journal
   container-title: "PsyArXiv"
-  doi: "10.31234/osf.io/z3ejx"
-  url: https://osf.io/preprints/psyarxiv/z3ejx
+  doi: "an.example.doi"
+  url: example.com
 branding: psyarxiv
 authornote: This is an example author note.
 bibliography: bibliography-manual.bib

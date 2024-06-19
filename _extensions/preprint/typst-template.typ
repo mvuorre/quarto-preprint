@@ -78,8 +78,10 @@
           set text(size: 0.85em)
           box(
             inset: 0.2em,
-            [#date
-            #if citation != none {linebreak(); link("https://doi.org/" + citation.doi, "https://doi.org/" + citation.doi)}]
+            [
+              #date
+              #if citation != none {linebreak(); link("https://doi.org/" + citation.doi, "https://doi.org/" + citation.doi)}
+            ]
           )
           box(
             inset: 0.2em,
