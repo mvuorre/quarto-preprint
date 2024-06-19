@@ -6,3 +6,6 @@ ex.qmd
 index.qmd
 bibliography-manual.bib
 Makefile
+docs/
+_quarto.yml
+*.png
