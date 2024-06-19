@@ -9,3 +9,8 @@
 .Rproj.user
 *.png
 /.quarto/
+
+# Allow these in online docs
+!docs/*_files/
+!docs/*.pdf
+!docs/*.docx
