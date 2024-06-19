@@ -1,0 +1,24 @@
+---
+title: Example preprint manuscript using the *preprint* Quarto Typst extension
+author:
+  - name: Matti Vuorre
+    email: mjvuorre@uvt.nl
+    orcid: 0000-0001-5052-066X
+    url: https://www.tilburguniversity.edu/staff/m-j-vuorre
+    corresponding: true
+    affiliation:
+      - ref: 1
+affiliations:
+  - id: 1
+    name: Tilburg University
+    department: Department of Social Psychology
+citation:
+  type: article-journal
+  container-title: "PsyArXiv"
+  doi: "10.31234/osf.io/z3ejx"
+  url: https://osf.io/preprints/psyarxiv/z3ejx
+bibliography: bibliography.bib
+format: pdf
+---
+
+This text will end up in the rendered .html file. Exciting [@r2024]!
