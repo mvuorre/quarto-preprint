@@ -166,8 +166,8 @@
   /* Content front matter */
 
   // Title, authors, and affiliations block
+  set align(center)
   block(inset: (top: 2em, bottom: 0em, left: 2em, right: 2em))[
-    #set align(center)
     #if title != none {
       v(2em)
       [#text(weight: 400, size: 1.5em)[#title]]
@@ -183,6 +183,7 @@
       ]
     }
   ]
+  set align(left)
   if title-page {pagebreak()}
   
   // Abstract and keywords block
