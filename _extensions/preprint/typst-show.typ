@@ -86,6 +86,15 @@ $endif$
 $if(toc)$
   toc: $toc$,
 $endif$
+$if(toc-depth)$
+  toc-depth: $toc-depth$,
+$endif$
+$if(toc-title)$
+  toc-title: "$toc-title$",
+$endif$
+$if(bibliography-style)$
+  bibliography-style: [$bibliography-style$],
+$endif$
 $if(bibliography-title)$
   bibliography-title: [$bibliography-title$],
 $endif$

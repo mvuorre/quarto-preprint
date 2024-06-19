@@ -1,4 +1,3 @@
-// document mode
 #let preprint(
   title: none,
   running-head: none,
@@ -23,7 +22,10 @@
   fontsize: 11pt,
   section-numbering: none,
   toc: false,
+  toc-depth: 3,
+  toc-title: "Contents",
   bibliography-title: "References",
+  bibliography-style: "apa",
   doc,
 ) = {
 
@@ -37,7 +39,7 @@
   show par: set block(spacing: spacing)
 
   // Allow custom title for bibliography section
-  set bibliography(title: bibliography-title)
+  set bibliography(title: bibliography-title, style: bibliography-style)
 
   // Format author strings here, so can use in author note
   let author_strings = ()
@@ -58,7 +60,7 @@
           }
         ]
       if a.keys().contains("email") {
-        authornote = [\*Corresponding author: #a.name, #a.email. #authornote]
+        authornote = [\*Corresponding author: #a.name, #a.email.\ #authornote]
       }
       author_strings.push(author_string)
     }
@@ -96,7 +98,7 @@
     footer-descent: 24pt,
     footer: locate(
         loc => if [#loc.page()] == [1] {
-          [#text(size: 0.9em)[#authornote]]
+          [#text(size: 0.85em)[#authornote]]
         } else {
           []
         }
@@ -141,7 +143,7 @@
   show heading.where(
     level: 3
   ): it => block(width: 100%, below: 0.8em, above: 1.2em)[
-    #set text(size: fontsize)
+    #set text(size: fontsize, style: "italic")
     #it
   ]
   // Level 4 headers are in paragraph
@@ -182,26 +184,29 @@
   if title-page {pagebreak()}
   
   // Abstract and keywords block
-  block(inset: (top: 2em, bottom: 0em, left: 2em, right: 2em))[
+  block(inset: (top: 2em, bottom: 0em, left: 2.4em, right: 2.4em))[
     #set text(size: 0.89em)
-    #if abstract != none {abstract}
+    #if abstract != none {
+      abstract
+    }
     #if keywords != none {[#v(0.4em)#text(style: "italic")[Keywords:] #keywords]}
   ]
-  if title-page {pagebreak()}
 
   // Table of contents
   if toc {
     block(inset: (top: 2em, bottom: 0em, left: 2em, right: 2em))[
     #outline( 
-      title: text(weight: "semibold", size: 1.15em)[Contents],
-      depth: 2,
+      title: text(weight: "semibold", size: 1.15em)[#toc-title],
+      depth: toc-depth,
       indent: 1em
     );
     ]
   }
+  if title-page {pagebreak()}
 
   /* Content */
   v(2em)
   if title-page {heading(title, numbering: none)}
   doc
+
 }
