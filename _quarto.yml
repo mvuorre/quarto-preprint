@@ -1,0 +1,15 @@
+project:
+  title: "Quarto preprint"
+  render: 
+    - index.qmd
+  output-dir: docs
+
+format:
+  html:
+    fontsize: 12pt
+  preprint-typst: 
+    keep-typ: true
+  preprint-docx: 
+    default
+code-links: repo
+

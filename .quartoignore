@@ -2,5 +2,7 @@
 *.typ
 *_cache/
 *_files/
-example.qmd
+ex.qmd
+index.qmd
+bibliography-manual.bib
 Makefile

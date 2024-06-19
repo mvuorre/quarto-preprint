@@ -1,0 +1,391 @@
+---
+title: "*preprint*: A Quarto Typst extension for computationally reproducible manuscripts"
+running-head: "*preprint* Quarto extension manual"
+author:
+  - name: Matti Vuorre
+    email: mjvuorre@uvt.nl
+    orcid: 0000-0001-5052-066X
+    url: https://www.tilburguniversity.edu/staff/m-j-vuorre
+    affiliation:
+      - ref: 1
+  - name: Example Author Number Two
+    affiliation:
+      - ref: 1
+      - ref: 2
+  - name: Example Author Three
+    affiliation:
+      - ref: 3
+affiliations:
+  - id: 1
+    name: Tilburg University
+    department: Department of Social Psychology
+  - id: 2
+    name: Other institution
+    department: Other department
+  - id: 3
+    name: Third institution has no department
+abstract: |
+  This document and its source code (`manual.qmd`) illustrate uses of various [Quarto](https://quarto.org) & *preprint* extension features, such as weaving R code [@r2024] and prose. It also serves as an example output document.
+keywords: 
+  - list 
+  - keywords
+  - here
+  - but not
+  - too many
+date: "`r Sys.Date()`"
+citation:
+  type: article-journal
+  container-title: "PsyArXiv"
+  doi: "10.31234/osf.io/z3ejx"
+  url: https://osf.io/preprints/psyarxiv/z3ejx
+branding: psyarxiv
+authornote: This is an example author note.
+bibliography: bibliography-manual.bib
+linkcolor: blue
+mainfont: Fira Sans
+fontsize: 10pt
+title-page: false
+toc: true
+toc-depth: 2
+toc-title: "Contents"
+section-numbering: ""
+code-links: repo
+execute: 
+  cache: true
+---
+
+```{r}
+#| label: setup
+#| include: false
+options(digits = 3)
+```
+
+# Preface
+
+::: {.content-visible when-format="html"}
+
+::: {.callout-note}
+You are viewing HTML output of a Quarto document. To see **quarto-preprint** outputs in [PDF](index.pdf) or [MS Word](index.docx), click the links here or in the right side bar.  
+:::
+
+:::
+
+[Quarto](https://quarto.org) is an "*An open-source scientific and technical publishing system*". It is both a markup language that extends [pandoc](https://pandoc.org/) [Markdown](https://quarto.org/docs/authoring/markdown-basics.html) and a program that renders source code written in Quarto Markdown to a variety of formats including PDF, MS Word, HTML, ePub, and many [more](https://quarto.org/docs/output-formats/all-formats.html). This source code can include prose (this text), maths ($\sqrt{2}$), code evaluation (`{{r}} sqrt(2)` renders to `{r} round(sqrt(2), digits = 3)`), scholarly [metadata](https://quarto.org/docs/authoring/front-matter.html), and more. In short, Quarto is a language and engine for reproducible manuscripts.
+
+The look and feel of the output documents can be controlled within the source document (e.g. [here](https://quarto.org/docs/output-formats/html-basics.html)), or by using a Quarto [extension](https://quarto.org/docs/extensions/). [**quarto-preprint**](https://github.com/mvuorre/quarto-preprint) is such an extension, designed to produce neat PDF documents quickly with minimum fuss. It is called "preprint" because it provides a basic layout in a Quarto-standards compliant package, allowing users to easily switch to a journal-specific [extension](https://quarto.org/docs/extensions/listing-journals.html) if they so choose. It also produces basic Word .docx documents to facilitate collaboration and/or further WYSIWYG editing. 
+
+Moreover, I was partly motivated to create this extension by a hope that it would encourage scholars to think more proactively about the roles that preprints play in the modern scholarly communication landscape [@severBiomedicalPublishingHistoric2023; @syedValuingPreprintsMust2024; @moshontzGuidePostingManaging2021; @ahmedFutureAcademicPublishing2023].
+
+Why might one use the **preprint** extension? One, it renders documents from Quarto markdown to PDF using [Typst](https://typst.app/docs)[^typst], and therefore is very fast in doing so. Typst doesn't require complicated LaTeX installations on their computers, and so is practically easier to use than other PDF-producing methods. Typst also simplifies the development and codebase of **preprint**, thus making edits, bug fixes, forks, and new features easier. Second, **preprint** aims to be 100% Quarto standards compliant: Users don't need to adapt their source code in any way when they switch to other formats, such as other journal extensions, or completely different output formats such as HTML[^feats].
+
+[^feats]: There are a few small features that likely won't show up in other formats, such as `branding` (see below), but their inclusion or exclusion in the metadata doesn't impact how sources are rendered to other formats.
+
+[^typst]: "*[Typst](https://typst.app/docs) is a new markup-based typesetting system for the sciences. It is designed to be an alternative both to advanced tools like LaTeX and simpler tools like Word and Google Docs.*"
+
+This document is both a reference manual to several Quarto (and additional) features supported by **preprint**, and an example **preprint** document. You can find its Quarto markdown source code [here](https://github.com/mvuorre/quarto-preprint/blob/main/manual.qmd). You can view the latest version of the PDF output [here](todo) ([HTML](todo), [MS Word](todo)).
+
+## A basic Quarto example
+
+Here are the contents of a basic Quarto markdown file, called `myfile.qmd`:
+
+```yaml
+---
+title: Example preprint manuscript using the *preprint* Quarto Typst extension
+author:
+  - name: Matti Vuorre
+    email: mjvuorre@uvt.nl
+    orcid: 0000-0001-5052-066X
+    url: https://www.tilburguniversity.edu/staff/m-j-vuorre
+    affiliation:
+      - ref: 1
+affiliations:
+  - id: 1
+    name: Tilburg University
+    department: Department of Social Psychology
+bibliography: bibliography.bib
+format: pdf
+---
+
+This will be the body text of my new document. Exciting [@r2024]!
+```
+
+This source code renders (e.g. in [RStudio](https://quarto.org/docs/get-started/authoring/rstudio.html#rendering) or [CLI](https://quarto.org/docs/get-started/authoring/text-editor.html#rendering)) to @fig-ex (left).
+
+```{r}
+#| include: false
+
+# Render and convert examples to images
+library(quarto)
+library(pdftools)
+library(magick)
+
+quarto_render("ex.qmd", output_format = "pdf", output_file = "ex-latex.pdf")
+quarto_render("ex.qmd", output_format = "preprint-typst", output_file = "ex-typst.pdf")
+
+pdf_convert(
+  pdf = "ex-latex.pdf",
+  format = "png",
+  dpi = 220,
+  filenames = "ex-latex.png"
+)
+
+pdf_convert(
+  pdf = "ex-typst.pdf",
+  format = "png",
+  dpi = 220,
+  filenames = "ex-typst.png"
+)
+
+latex <- image_read("ex-latex.png") |> 
+  image_crop("2200x800+0+200") |> 
+  image_scale(geometry_size_percent(width = 36, height = NULL)) |> 
+  image_border(color = "black", geometry = "2x2")
+
+typst <- image_read("ex-typst.png") |> 
+  image_crop("2200x800+0+330") |> 
+  image_scale(geometry_size_percent(width = 36, height = NULL)) |> 
+  image_border(color = "black", geometry = "2x2")
+
+image_append(c(latex, typst)) |> 
+  image_write("ex.png")
+```
+
+![A cropped version of a basic Quarto .pdf document (left) and a *preprint* Quarto .pdf document (right).](ex.png){#fig-ex}
+
+However, @fig-ex (left) lacks several features that we've come to expect from scholarly outputs. Basics such as authors' affiliations are missing. **preprint** includes many such features. Changing `format: pdf` in the above source code to `format: preprint-typst` instructs Quarto to use the **preprint** extension, which produces the PDF document in @fig-ex (right).
+
+That is, **preprint-typst** is a Quarto extension that formats your Quarto source---which can be prose, code, math, tables, figures, etc.---to a pleasant looking .pdf via Typst.
+
+# *preprint* Quarto extension manual
+
+The preprint Quarto extension provides functionality through Quarto metadata, some of which is mapped to a Typst template and its variables. Therefore, if you cannot find the information you're looking for in this manual, consult either the [Quarto](https://quarto.org/docs/authoring/front-matter.html) or [Typst]((https://typst.app/docs)) documentation.
+
+In the documentation below, we have divided the YAML metadata options to two sections. First are options that are common to most if not all Quarto formats. Second are options specific to the Typst format and the **preprint** Typst format extension.
+
+## Common Quarto options
+
+The code snippet above showed YAML metadata between triple-dashes. This YAML metadata can be used to control the output such as fonts, authors, whether to include a table of contents, and many more. We list and explain these options, with examples, below in roughly a decreasing order of importance to typical scholarly manuscripts.
+
+```{yaml}
+title: "*preprint*: A Quarto Typst extension for computationally reproducible manuscripts"
+```
+
+Title of the manuscript. Required; needs to be in quotation marks only if it includes special characters such as colons. See relevant Quarto [documentation](https://quarto.org/docs/output-formats/html-basics.html#overview).
+
+```{yaml}
+author:
+  - name: Matti Vuorre
+    email: mjvuorre@uvt.nl
+    orcid: 0000-0001-5052-066X
+    url: https://www.tilburguniversity.edu/staff/m-j-vuorre
+    affiliation:
+      - ref: 1
+affiliations:
+  - id: 1
+    name: Tilburg University
+    department: Department of Social Psychology
+```
+
+Authors and their affiliations as explained in Quarto's scholarly writing [documentation](https://quarto.org/docs/authoring/front-matter.html).
+
+A few features are not yet included. The `corresponding: true` syntax for indicating corresponding authors does not work. To indicate a corresponding author, specify an email for that author (as in above example). The `equal-contributor: true` option is not yet implemented.
+
+```{yaml}
+abstract: |
+  This document and its source code (`manual.qmd`) illustrate uses of various [Quarto](https://quarto.org) & *preprint* extension features, such as weaving R code [@r2024] and prose.
+```
+
+The document's abstract. Can include multiple paragraphs, Markdown, maths, references, and more.
+
+```{yaml}
+keywords: 
+  - list 
+  - keywords
+  - here
+  - but not
+  - too many
+date: "`r Sys.Date()`"
+```
+
+A list of keywords and the document's date can be added. Above example shows how to include the current date using R.
+
+```{yaml}
+citation:
+  type: article-journal
+  container-title: "PsyArXiv"
+  doi: "10.31234/osf.io/z3ejx"
+  url: https://osf.io/preprints/psyarxiv/z3ejx
+```
+
+This information is used by Quarto to include the document's citation information to various formats and the document's metadata. See relevant Quarto [documentation](https://quarto.org/docs/authoring/create-citeable-articles.html).
+
+```{yaml}
+bibliography: bibliography-manual.bib
+linkcolor: blue
+mainfont: Fira Sans
+fontsize: 10pt
+toc: true
+execute: 
+  cache: true
+code-links: repo
+```
+
+```{yaml}
+format:
+  preprint-typst: 
+    keep-typ: true
+  html:
+    fontsize: 12pt
+  preprint-docx: 
+    default
+```
+
+## Typst & preprint-extension options
+
+```{yaml}
+running-head: "*preprint* Quarto extension manual"
+branding: psyarxiv
+authornote: This is an example author note.
+title-page: false
+```
+
+- `running-head` A text string used as the document's running head. 
+
+Typst geometry, layout, and formatting options
+
+```{yaml}
+leading: 0.6em
+spacing: 1em
+section-numbering: none
+bibliography-title: "References"
+bibliography-style: "apa"
+margin:
+  x: 1cm
+  y: 3cm
+```
+
+- leading: 0.6em
+  - Space between lines of text <https://typst.app/docs/reference/model/par/#parameters-leading>
+- spacing: 1em
+  - Space between paragraphs <https://typst.app/docs/reference/layout/block/#parameters-spacing>
+- section-numbering
+  - In Typst format e.g. "1.1", do not include or leave empty ("") to not number sections.
+- first-line-indent: 0cm
+  - <https://typst.app/docs/reference/model/par/#parameters-first-line-indent>
+- margin: (x: 3.2cm, y: 3cm)
+  - Page margins <https://typst.app/docs/reference/layout/page/#parameters-margin>
+- paper: "a4"
+  - <https://typst.app/docs/reference/layout/page/#parameters-paper>
+- lang: "en"
+  - <https://typst.app/docs/reference/text/text/#parameters-lang>
+- region: "US"
+  - <https://typst.app/docs/reference/text/text/#parameters-region>
+- bibliography-title: "References"
+- bibliography-style: "apa"
+
+# Example content
+
+Let us first take a look at body text and headings.
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Enim sed faucibus turpis in. Nec dui nunc mattis enim ut tellus. Bibendum ut tristique et egestas quis ipsum suspendisse ultrices gravida. Convallis posuere morbi leo urna. Sed velit dignissim sodales ut eu sem integer vitae justo. Convallis posuere morbi leo urna molestie at elementum eu facilisis. Aliquam sem et tortor consequat. Quam viverra orci sagittis eu. Sed arcu non odio euismod lacinia at quis risus sed. Egestas dui id ornare arcu odio ut sem. Lorem ipsum dolor sit amet consectetur. 
+
+## Heading level 2
+
+Eget arcu dictum varius duis at. Netus et malesuada fames ac turpis. Pellentesque sit amet porttitor eget. Egestas tellus rutrum tellus pellentesque eu tincidunt tortor. Risus quis varius quam quisque id diam. Vel pretium lectus quam id leo in vitae. Sit amet aliquam id diam maecenas ultricies mi eget mauris. Auctor urna nunc id cursus metus aliquam eleifend. Arcu dictum varius duis at consectetur lorem. Tempus iaculis urna id volutpat lacus laoreet non. Adipiscing elit ut aliquam purus sit amet. At auctor urna nunc id cursus metus aliquam. Pharetra vel turpis nunc eget lorem dolor. 
+
+### Heading level 3
+
+Tristique et egestas quis ipsum suspendisse ultrices gravida dictum fusce. Mauris commodo quis imperdiet massa tincidunt nunc pulvinar. Commodo elit at imperdiet dui accumsan sit amet nulla. Consectetur lorem donec massa sapien faucibus. In vitae turpis massa sed elementum tempus egestas sed sed. Aliquam faucibus purus in massa tempor. Dignissim diam quis enim lobortis scelerisque fermentum dui faucibus in. Montes nascetur ridiculus mus mauris vitae ultricies leo. Sociis natoque penatibus et magnis dis parturient montes nascetur. 
+
+#### Heading level 4
+
+Consectetur libero id faucibus nisl. Consequat interdum varius sit amet mattis vulputate enim. Amet mattis vulputate enim nulla aliquet porttitor lacus luctus. Mauris augue neque gravida in fermentum et sollicitudin ac. Pharetra diam sit amet nisl suscipit adipiscing bibendum est ultricies. Nisi quis eleifend quam adipiscing. Diam ut venenatis tellus in. Dignissim enim sit amet venenatis urna cursus eget. Hac habitasse platea dictumst quisque sagittis. In fermentum et sollicitudin ac orci phasellus egestas tellus rutrum. 
+
+##### Heading level 5
+
+Aliquam faucibus purus in massa tempor nec feugiat nisl pretium. Malesuada proin libero nunc consequat interdum varius. Vulputate dignissim suspendisse in est. Congue eu consequat ac felis donec et odio pellentesque diam. Viverra justo nec ultrices dui sapien. Faucibus vitae aliquet nec ullamcorper sit amet risus. Metus aliquam eleifend mi in. Risus quis varius quam quisque id diam vel quam. Et malesuada fames ac turpis egestas integer eget aliquet. 
+
+## Floats
+
+### Tables
+
+```{r}
+#| include: false
+
+set.seed(1)
+data <- data.frame(x = rnorm(30), y = rnorm(30))
+```
+
+Tables are still the achilles heel of Typst (and any cross-format output, really). However, basic tables are more than possible, and below is an example table produced in R with the tinytable package (@tbl-example). Note that some features of tables, such as footnotes, are not yet implemented in Typst / Quarto.
+
+```{r}
+#| label: tbl-example
+#| tbl-cap: Tables created with `tinytable::tt()`, `knitr::kable()`, etc work.
+#| echo: true
+
+tinytable::tt(
+  head(data),
+  digits = 2
+)
+```
+
+### Figures
+
+Below is an example figure created in R (@fig-example).
+
+```{r}
+#| label: fig-example
+#| fig-cap: Example R scatterplot.
+#| fig-height: 3
+#| fig-width: 3
+#| echo: false
+
+plot(data)
+```
+
+## Quarto markdown features
+
+### Maths
+
+LaTeX math notation is automatically converted to Typst and as such works just fine either inline ($y_i = \alpha + \beta x_i + \epsilon_i$) or in display mode (@eq-1):
+
+$$
+f(x \mid \mu, \sigma^2) = \frac{1}{\sqrt{2\pi \sigma^2}} \exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)
+$$ {#eq-1}
+
+### Block quotes
+
+To insert a quote block, prepend a paragraph with `>`:
+
+>A quote: "*Elit ullamcorper dignissim cras tincidunt lobortis feugiat vivamus at.*"
+
+### Callouts
+
+[Callout blocks](https://quarto.org/docs/authoring/callouts.html) can be useful for highlighting content, such as one might do in a box that defines key terms, etc.
+
+::: {.callout-note}
+#### All kinds of markup
+````
+This is basic markdown: **bold text**, ~subscript~, and a footnote[^1].
+````
+This is basic markdown: **bold text**, ~subscript~, and a footnote[^1].
+:::
+
+[^1]: Footnote!
+
+### Code listings
+
+Code listings kind of work but currently are listed as Figures (@lst-r), but with separate numbering.
+
+```{r}
+#| lst-label: lst-r
+#| lst-cap: R code for pRos.
+#| collapse: true
+
+1+1
+```
+ 
+
+# Help / contributing
+
+Send your bug reports and pull requests to <https://github.com/mvuorre/quarto-preprint>

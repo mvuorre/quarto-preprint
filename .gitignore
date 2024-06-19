@@ -6,3 +6,6 @@
 *_cache/
 *_files/
 /.luarc.json
+.Rproj.user
+*.png
+/.quarto/
