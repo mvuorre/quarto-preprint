@@ -2,14 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.43">
+<meta name="generator" content="quarto-1.5.46">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Matti Vuorre">
-<meta name="author" content="Example Author Number Two">
-<meta name="author" content="Example Author Three">
-<meta name="dcterms.date" content="2024-06-19">
+<meta name="dcterms.date" content="2024-06-21">
 <meta name="keywords" content="list, keywords, here, but not, too many">
 
 <title>preprint: A Quarto Typst extension for computationally reproducible manuscripts</title>
@@ -130,25 +128,49 @@ window.Quarto = {
 <div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
 <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
   <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Contents</h2>
+    <h2 id="toc-title">Table of contents</h2>
    
-  <ul class="collapse">
+  <ul>
   <li><a href="#preface" id="toc-preface" class="nav-link active" data-scroll-target="#preface">Preface</a>
   <ul class="collapse">
   <li><a href="#a-basic-quarto-example" id="toc-a-basic-quarto-example" class="nav-link" data-scroll-target="#a-basic-quarto-example">A basic Quarto example</a></li>
   </ul></li>
   <li><a href="#preprint-quarto-extension-manual" id="toc-preprint-quarto-extension-manual" class="nav-link" data-scroll-target="#preprint-quarto-extension-manual"><em>preprint</em> Quarto extension manual</a>
   <ul class="collapse">
-  <li><a href="#common-quarto-options" id="toc-common-quarto-options" class="nav-link" data-scroll-target="#common-quarto-options">Common Quarto options</a></li>
-  <li><a href="#typst-preprint-extension-options" id="toc-typst-preprint-extension-options" class="nav-link" data-scroll-target="#typst-preprint-extension-options">Typst &amp; preprint-extension options</a></li>
+  <li><a href="#common-quarto-options" id="toc-common-quarto-options" class="nav-link" data-scroll-target="#common-quarto-options">Common Quarto options</a>
+  <ul class="collapse">
+  <li><a href="#title" id="toc-title" class="nav-link" data-scroll-target="#title">Title</a></li>
+  <li><a href="#authors-affiliations" id="toc-authors-affiliations" class="nav-link" data-scroll-target="#authors-affiliations">Authors &amp; affiliations</a></li>
+  <li><a href="#abstract-keywords-date" id="toc-abstract-keywords-date" class="nav-link" data-scroll-target="#abstract-keywords-date">Abstract, keywords, &amp; date</a></li>
+  <li><a href="#citation-information" id="toc-citation-information" class="nav-link" data-scroll-target="#citation-information">Citation information</a></li>
+  <li><a href="#other-common-options" id="toc-other-common-options" class="nav-link" data-scroll-target="#other-common-options">Other common options</a></li>
+  <li><a href="#format" id="toc-format" class="nav-link" data-scroll-target="#format">Format</a></li>
+  </ul></li>
+  <li><a href="#typst-preprint-extension-options" id="toc-typst-preprint-extension-options" class="nav-link" data-scroll-target="#typst-preprint-extension-options">Typst &amp; preprint-extension options</a>
+  <ul class="collapse">
+  <li><a href="#typst-geometry-layout-and-formatting-options" id="toc-typst-geometry-layout-and-formatting-options" class="nav-link" data-scroll-target="#typst-geometry-layout-and-formatting-options">Typst geometry, layout, and formatting options</a></li>
+  </ul></li>
   </ul></li>
   <li><a href="#example-content" id="toc-example-content" class="nav-link" data-scroll-target="#example-content">Example content</a>
   <ul class="collapse">
-  <li><a href="#heading-level-2" id="toc-heading-level-2" class="nav-link" data-scroll-target="#heading-level-2">Heading level 2</a></li>
-  <li><a href="#floats" id="toc-floats" class="nav-link" data-scroll-target="#floats">Floats</a></li>
-  <li><a href="#quarto-markdown-features" id="toc-quarto-markdown-features" class="nav-link" data-scroll-target="#quarto-markdown-features">Quarto markdown features</a></li>
+  <li><a href="#heading-level-2" id="toc-heading-level-2" class="nav-link" data-scroll-target="#heading-level-2">Heading level 2</a>
+  <ul class="collapse">
+  <li><a href="#heading-level-3" id="toc-heading-level-3" class="nav-link" data-scroll-target="#heading-level-3">Heading level 3</a></li>
   </ul></li>
-  <li><a href="#help-contributing" id="toc-help-contributing" class="nav-link" data-scroll-target="#help-contributing">Help / contributing</a></li>
+  <li><a href="#floats" id="toc-floats" class="nav-link" data-scroll-target="#floats">Floats</a>
+  <ul class="collapse">
+  <li><a href="#tables" id="toc-tables" class="nav-link" data-scroll-target="#tables">Tables</a></li>
+  <li><a href="#figures" id="toc-figures" class="nav-link" data-scroll-target="#figures">Figures</a></li>
+  </ul></li>
+  <li><a href="#quarto-markdown-features" id="toc-quarto-markdown-features" class="nav-link" data-scroll-target="#quarto-markdown-features">Quarto markdown features</a>
+  <ul class="collapse">
+  <li><a href="#maths" id="toc-maths" class="nav-link" data-scroll-target="#maths">Maths</a></li>
+  <li><a href="#block-quotes" id="toc-block-quotes" class="nav-link" data-scroll-target="#block-quotes">Block quotes</a></li>
+  <li><a href="#callouts" id="toc-callouts" class="nav-link" data-scroll-target="#callouts">Callouts</a></li>
+  <li><a href="#code-listings" id="toc-code-listings" class="nav-link" data-scroll-target="#code-listings">Code listings</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#help-contributing" id="toc-help-contributing" class="nav-link" data-scroll-target="#help-contributing">Help &amp; contributing</a></li>
   </ul>
 <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="index.pdf"><i class="bi bi-file-pdf"></i>Typst (preprint)</a></li><li><a href="index.docx"><i class="bi bi-file-word"></i>MS Word (preprint)</a></li></ul></div><div class="quarto-code-links"><h2>Code Links</h2><ul><li><a href="https://github.com/mvuorre/quarto-preprint/" target="_blank"><i class="bi bi-github"></i>GitHub Repo</a></li></ul></div></nav>
 </div>
@@ -161,8 +183,8 @@ window.Quarto = {
 
 
 <div class="quarto-title-meta-author">
-  <div class="quarto-title-meta-heading">Authors</div>
-  <div class="quarto-title-meta-heading">Affiliations</div>
+  <div class="quarto-title-meta-heading">Author</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
   
     <div class="quarto-title-meta-contents">
     <p class="author"><a href="https://www.tilburguniversity.edu/staff/m-j-vuorre">Matti Vuorre</a> <a href="mailto:mjvuorre@uvt.nl" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> <a href="https://orcid.org/0000-0001-5052-066X" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
@@ -170,25 +192,6 @@ window.Quarto = {
   <div class="quarto-title-meta-contents">
         <p class="affiliation">
             Tilburg University
-          </p>
-      </div>
-    <div class="quarto-title-meta-contents">
-    <p class="author">Example Author Number Two </p>
-  </div>
-  <div class="quarto-title-meta-contents">
-        <p class="affiliation">
-            Tilburg University
-          </p>
-        <p class="affiliation">
-            Other institution
-          </p>
-      </div>
-    <div class="quarto-title-meta-contents">
-    <p class="author">Example Author Three </p>
-  </div>
-  <div class="quarto-title-meta-contents">
-        <p class="affiliation">
-            Third institution has no department
           </p>
       </div>
   </div>
@@ -199,7 +202,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">June 19, 2024</p>
+      <p class="date">June 21, 2024</p>
     </div>
   </div>
   
@@ -345,8 +348,8 @@ Figure&nbsp;1: A cropped version of a basic Quarto .pdf document (left) and a <e
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mainfont</span><span class="kw">:</span><span class="at"> Fira Sans</span></span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="fu">fontsize</span><span class="kw">:</span><span class="at"> 10pt</span></span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">toc</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="fu">toc-depth</span><span class="kw">:</span><span class="at"> </span><span class="dv">2</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="fu">toc-title</span><span class="kw">:</span><span class="at"> </span><span class="st">"Contents of the document"</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="fu">toc_depth</span><span class="kw">:</span><span class="at"> </span><span class="dv">2</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="fu">toc_title</span><span class="kw">:</span><span class="at"> </span><span class="st">"Contents of the document"</span></span>
 <span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="fu">code-links</span><span class="kw">:</span><span class="at"> repo</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The above shows how to specify a bibliography file, color for links in the document, the main font and its size, table of contents (and its options). The <code>code-links</code> option is useful when the output formats include HTML.</p>
@@ -457,7 +460,7 @@ Figure&nbsp;1: A cropped version of a basic Quarto .pdf document (left) and a <e
 <div id="tbl-example" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-example-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Table&nbsp;1: Tables created with <code>tinytable::tt()</code>, <code>knitr::kable()</code>, etc work.
+Table&nbsp;1: Table created with <code>tinytable::tt()</code>
 </figcaption>
 <div aria-describedby="tbl-example-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
@@ -578,6 +581,53 @@ window.addEventListener('load', function () { styleCell_tinytable_1igxauyyiaf8rn
 </figure>
 </div>
 </div>
+<div class="cell">
+<div id="tbl-example2" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-example2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2: Table created with <code>knitr::kable()</code>
+</figcaption>
+<div aria-describedby="tbl-example2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment cell caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: right;">x</th>
+<th style="text-align: right;">y</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">-0.63</td>
+<td style="text-align: right;">1.36</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">0.18</td>
+<td style="text-align: right;">-0.10</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">-0.84</td>
+<td style="text-align: right;">0.39</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1.60</td>
+<td style="text-align: right;">-0.05</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">0.33</td>
+<td style="text-align: right;">-1.38</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">-0.82</td>
+<td style="text-align: right;">-0.41</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</figure>
+</div>
+</div>
 </section>
 <section id="figures" class="level3">
 <h3 class="anchored" data-anchor-id="figures">Figures</h3>
@@ -616,25 +666,25 @@ f(x \mid \mu, \sigma^2) = \frac{1}{\sqrt{2\pi \sigma^2}} \exp\left(-\frac{(x-\mu
 </section>
 <section id="callouts" class="level3">
 <h3 class="anchored" data-anchor-id="callouts">Callouts</h3>
-<p><a href="https://quarto.org/docs/authoring/callouts.html">Callout blocks</a> can be useful for highlighting content, such as one might do in a box that defines key terms, etc.</p>
-<div class="callout callout-style-default callout-note callout-titled">
+<p><a href="https://quarto.org/docs/authoring/callouts.html">Callout blocks</a>, such as <a href="#tip-example" class="quarto-xref">Tip&nbsp;1</a>, can be useful for highlighting content, such as one might do in a box that defines key terms, etc.</p>
+<div id="tip-example" class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-All kinds of markup
+Tip&nbsp;1: All kinds of markup
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<pre><code>This is basic markdown: **bold text**, ~subscript~, and a footnote[^1].</code></pre>
-<p>This is basic markdown: <strong>bold text</strong>, <sub>subscript</sub>, and a footnote<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>.</p>
+<pre><code>This is basic markdown: **bold text** &amp; ~subscript~.</code></pre>
+<p>This is basic markdown: <strong>bold text</strong> &amp; <sub>subscript</sub>.</p>
 </div>
 </div>
 </section>
 <section id="code-listings" class="level3">
 <h3 class="anchored" data-anchor-id="code-listings">Code listings</h3>
-<p>Code listings kind of work but currently are listed as Figures (<a href="#lst-r" class="quarto-xref">Listing&nbsp;1</a>), but with separate numbering.</p>
+<p>Code listings can also be cross-referenced (<a href="#lst-r" class="quarto-xref">Listing&nbsp;1</a>).</p>
 <div class="cell">
 <div id="lst-r" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-lst figure">
@@ -652,8 +702,8 @@ Listing&nbsp;1: R code for pRos.
 </section>
 </section>
 <section id="help-contributing" class="level1">
-<h1>Help / contributing</h1>
-<p>Send your bug reports and pull requests to <a href="https://github.com/mvuorre/quarto-preprint" class="uri">https://github.com/mvuorre/quarto-preprint</a></p>
+<h1>Help &amp; contributing</h1>
+<p>Send your bug reports and pull requests to <a href="https://github.com/mvuorre/quarto-preprint" class="uri">https://github.com/mvuorre/quarto-preprint</a>.</p>
 
 </section>
 
@@ -679,11 +729,9 @@ Syed, Moin. 2024. <span>“Valuing <span>Preprints Must</span> Be <span>Part</sp
 <ol>
 <li id="fn1"><p>“<em><a href="https://typst.app/docs">Typst</a> is a new markup-based typesetting system for the sciences. It is designed to be an alternative both to advanced tools like LaTeX and simpler tools like Word and Google Docs.</em>”<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>There are a few small features that likely won’t show up in other formats, such as <code>branding</code> (see below), but their inclusion or exclusion in the metadata doesn’t impact how sources are rendered to other formats.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p>Footnote!<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@article{vuorre,
-  author = {Vuorre, Matti and Author Number Two, Example and Author
-    Three, Example},
+  author = {Vuorre, Matti},
   title = {*Preprint*: {A} {Quarto} {Typst} Extension for
     Computationally Reproducible Manuscripts},
   journal = {PsyArXiv},
@@ -697,9 +745,8 @@ Syed, Moin. 2024. <span>“Valuing <span>Preprints Must</span> Be <span>Part</sp
     and prose. It also serves as an example output document.}
 }
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-vuorre" class="csl-entry quarto-appendix-citeas" role="listitem">
-Vuorre, Matti, Example Author Number Two, and Example Author Three. n.d.
-<span>“*Preprint*: A Quarto Typst Extension for Computationally
-Reproducible Manuscripts.”</span> <em>PsyArXiv</em>. <a href="https://doi.org/an.example.doi">https://doi.org/an.example.doi</a>.
+Vuorre, Matti. n.d. <span>“*Preprint*: A Quarto Typst Extension for
+Computationally Reproducible Manuscripts.”</span> <em>PsyArXiv</em>. <a href="https://doi.org/an.example.doi">https://doi.org/an.example.doi</a>.
 </div></div></section></div></main>
 <!-- /main column -->
 <script id="quarto-html-after-body" type="application/javascript">
