@@ -36,9 +36,6 @@ $endif$
 $if(branding)$
   branding: "$branding$",
 $endif$
-$if(title-page)$
-  title-page: $title-page$,
-$endif$
 $if(spacing)$
   spacing: $spacing$,
 $endif$
@@ -86,11 +83,14 @@ $endif$
 $if(toc)$
   toc: $toc$,
 $endif$
-$if(toc-depth)$
-  toc-depth: $toc-depth$,
+$if(toc_depth)$
+  toc_depth: $toc_depth$,
 $endif$
-$if(toc-title)$
-  toc-title: "$toc-title$",
+$if(toc_title)$
+  toc_title: "$toc_title$",
+$endif$
+$if(toc_indent)$
+  toc_indent: "$toc_indent$",
 $endif$
 $if(bibliography-style)$
   bibliography-style: [$bibliography-style$],
