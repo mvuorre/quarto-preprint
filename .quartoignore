@@ -9,3 +9,5 @@ Makefile
 docs/
 _quarto.yml
 *.png
+*.svg
+*.html

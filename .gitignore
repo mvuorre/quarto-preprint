@@ -2,12 +2,14 @@
 # Temporary and output files
 *.typ
 **/*.pdf
+*.png
+*.svg
+*.html
 *.docx
 *_cache/
 *_files/
 /.luarc.json
 .Rproj.user
-*.png
 /.quarto/
 
 # Allow these in online docs
