@@ -40,7 +40,6 @@ section-numbering: ""
 code-links: repo
 execute: 
   cache: true
-format: preprint-typst
 ---
 
 ```{r}
