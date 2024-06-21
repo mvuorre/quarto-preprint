@@ -8,22 +8,10 @@ author:
     url: https://www.tilburguniversity.edu/staff/m-j-vuorre
     affiliation:
       - ref: 1
-  - name: Example Author Number Two
-    affiliation:
-      - ref: 1
-      - ref: 2
-  - name: Example Author Three
-    affiliation:
-      - ref: 3
 affiliations:
   - id: 1
     name: Tilburg University
     department: Department of Social Psychology
-  - id: 2
-    name: Other institution
-    department: Other department
-  - id: 3
-    name: Third institution has no department
 abstract: |
   This document and its source code (`manual.qmd`) illustrate uses of various [Quarto](https://quarto.org) & *preprint* extension features, such as weaving R code [@r2024] and prose. It also serves as an example output document.
 keywords: 
@@ -58,6 +46,7 @@ format: preprint-typst
 ```{r}
 #| label: setup
 #| include: false
+
 options(digits = 3)
 ```
 
@@ -334,10 +323,22 @@ Tables are still the achilles heel of Typst (and any cross-format output, really
 
 ```{r}
 #| label: tbl-example
-#| tbl-cap: Tables created with `tinytable::tt()`, `knitr::kable()`, etc work.
+#| tbl-cap: Table created with `tinytable::tt()`
 #| echo: true
 
 tinytable::tt(
+  head(data),
+  digits = 2
+)
+```
+
+
+```{r}
+#| label: tbl-example2
+#| tbl-cap: Table created with `knitr::kable()`
+#| echo: false
+
+knitr::kable(
   head(data),
   digits = 2
 )
@@ -375,21 +376,19 @@ To insert a quote block, prepend a paragraph with `>`:
 
 ### Callouts
 
-[Callout blocks](https://quarto.org/docs/authoring/callouts.html) can be useful for highlighting content, such as one might do in a box that defines key terms, etc.
+[Callout blocks](https://quarto.org/docs/authoring/callouts.html), such as @tip-example, can be useful for highlighting content, such as one might do in a box that defines key terms, etc.
 
-::: {.callout-note}
+::: {#tip-example .callout-tip}
 #### All kinds of markup
 ````
-This is basic markdown: **bold text**, ~subscript~, and a footnote[^1].
+This is basic markdown: **bold text** & ~subscript~.
 ````
-This is basic markdown: **bold text**, ~subscript~, and a footnote[^1].
+This is basic markdown: **bold text** & ~subscript~.
 :::
-
-[^1]: Footnote!
 
 ### Code listings
 
-Code listings kind of work but currently are listed as Figures (@lst-r), but with separate numbering.
+Code listings can also be cross-referenced (@lst-r).
 
 ```{r}
 #| lst-label: lst-r
@@ -398,8 +397,7 @@ Code listings kind of work but currently are listed as Figures (@lst-r), but wit
 
 1+1
 ```
- 
 
-# Help / contributing
+# Help & contributing
 
-Send your bug reports and pull requests to <https://github.com/mvuorre/quarto-preprint>
+Send your bug reports and pull requests to <https://github.com/mvuorre/quarto-preprint>.
