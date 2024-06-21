@@ -202,7 +202,7 @@
     } else {
       toc_title
     }
-    block(above: 0em, below: 2em)[
+    block(inset: (top: 2em, bottom: 0em, left: 2.4em, right: 2.4em))[
     #outline(
       title: toc_title,
       depth: toc_depth,
