@@ -219,8 +219,8 @@ linkcolor: blue
 mainfont: Fira Sans
 fontsize: 10pt
 toc: true
-toc-depth: 2
-toc-title: "Contents of the document"
+toc_depth: 2
+toc_title: "Contents of the document"
 code-links: repo
 ```
 
