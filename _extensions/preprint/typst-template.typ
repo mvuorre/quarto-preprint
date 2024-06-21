@@ -17,15 +17,16 @@
   paper: "a4", // https://typst.app/docs/reference/layout/page/#parameters-paper
   lang: "en", // https://typst.app/docs/reference/text/text/#parameters-lang
   region: "US", // https://typst.app/docs/reference/text/text/#parameters-region
-  title-page: false,
   font: ("Times", "Times New Roman", "Arial"),
   fontsize: 11pt,
   section-numbering: none,
   toc: false,
-  toc-depth: 3,
-  toc-title: "Contents",
+  toc_title: "contents",
+  toc_depth: none,
+  toc_indent: 1.5em,
   bibliography-title: "References",
   bibliography-style: "apa",
+  cols: 1,
   doc,
 ) = {
 
@@ -184,7 +185,6 @@
     }
   ]
   set align(left)
-  if title-page {pagebreak()}
   
   // Abstract and keywords block
   block(inset: (top: 2em, bottom: 0em, left: 2.4em, right: 2.4em))[
@@ -197,19 +197,32 @@
 
   // Table of contents
   if toc {
-    block(inset: (top: 2em, bottom: 0em, left: 2em, right: 2em))[
-    #outline( 
-      title: text(weight: "semibold", size: 1.15em)[#toc-title],
-      depth: toc-depth,
-      indent: 1em
+    let title = if toc_title == none {
+      auto
+    } else {
+      toc_title
+    }
+    block(above: 0em, below: 2em)[
+    #outline(
+      title: toc_title,
+      depth: toc_depth,
+      indent: toc_indent
     );
     ]
   }
-  if title-page {pagebreak()}
 
   /* Content */
   v(2em)
-  if title-page {heading(title, numbering: none)}
-  doc
+  
+  if cols == 1 {
+    doc
+  } else {
+    columns(cols, doc)
+  }
 
 }
+
+#set table(
+  inset: 6pt,
+  stroke: none
+)
