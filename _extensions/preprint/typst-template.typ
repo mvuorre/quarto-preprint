@@ -167,27 +167,40 @@
 
   /* Content front matter */
 
-  // Title, authors, and affiliations block
-  block(inset: (top: 2em, bottom: 0em, left: 2em, right: 2em))[
-    #if title != none {
-      v(2em)
-      align(center)[#text(weight: 400, size: 1.5em)[#title]]
-    }
-    #if authors != none {
-      v(0.4em)
-      align(center)[
-        #text(size: 1.2em)[#author_strings.join(", ", last: " & ")]
+  let titleblock(
+    body, 
+    width: 100%, 
+    size: 1.5em, 
+    weight: "bold", 
+    above: 1em, 
+    below: 0em
+  ) = [
+    #align(center)[
+      #block(width: width, above: above, below: below)[
+        #text(weight: weight, size: size)[#body]
       ]
-    }
-    #if affiliations != none {
-      v(0.3em)
-      align(center)[
-        #for a in affiliations [
-          #super[#a.id]#a.name#if a.keys().contains("department") [, #a.department] \
-        ]
-      ]
-    }
+    ]
   ]
+
+  if title != none {
+    titleblock(title)
+  }
+
+  if authors != none {
+    titleblock(
+      weight: "regular", size: 1.25em,
+      [#author_strings.join(", ", last: " & ")]
+    )
+  }
+
+  if affiliations != none {
+    titleblock(
+      weight: "regular", size: 1.1em, below: 2em,
+      for a in affiliations [
+        #super[#a.id]#a.name#if a.keys().contains("department") [, #a.department] \
+      ]
+    )
+  }
   
   // Abstract and keywords block
   block(inset: (top: 2em, bottom: 0em, left: 2.4em, right: 2.4em))[
@@ -206,11 +219,11 @@
       toc_title
     }
     block(inset: (top: 2em, bottom: 0em, left: 2.4em, right: 2.4em))[
-    #outline(
-      title: toc_title,
-      depth: toc_depth,
-      indent: toc_indent
-    );
+      #outline(
+        title: toc_title,
+        depth: toc_depth,
+        indent: toc_indent
+      )
     ]
   }
 
