@@ -39,13 +39,6 @@ execute:
   cache: true
 ---
 
-```{r}
-#| label: setup
-#| include: false
-
-options(digits = 3)
-```
-
 # Preface
 
 ::: {.content-visible when-format="html"}
