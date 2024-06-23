@@ -79,12 +79,11 @@ Here are the contents of a basic Quarto markdown file, called `myfile.qmd`:
 
 ```yaml
 ---
-title: Example preprint manuscript using the *preprint* Quarto Typst extension
+title: Example preprint
 author:
   - name: Matti Vuorre
     email: mjvuorre@uvt.nl
     orcid: 0000-0001-5052-066X
-    url: https://www.tilburguniversity.edu/staff/m-j-vuorre
     affiliation:
       - ref: 1
 affiliations:
@@ -95,7 +94,7 @@ bibliography: bibliography.bib
 format: pdf
 ---
 
-This will be the body text of my new document. Exciting [@r2024]!
+This text will end up in the rendered .html file. Exciting [@r2024]!
 ```
 
 This source code renders (e.g. in [RStudio](https://quarto.org/docs/get-started/authoring/rstudio.html#rendering) or [CLI](https://quarto.org/docs/get-started/authoring/text-editor.html#rendering)) to @fig-ex (left).
@@ -103,10 +102,32 @@ This source code renders (e.g. in [RStudio](https://quarto.org/docs/get-started/
 ```{r}
 #| include: false
 
-# Render and convert examples to images
+# Create, render, and convert an example to images
 library(quarto)
 library(pdftools)
 library(magick)
+
+writeLines(
+'---
+title: Example preprint
+author:
+  - name: Matti Vuorre
+    email: mjvuorre@uvt.nl
+    orcid: 0000-0001-5052-066X
+    affiliation:
+      - ref: 1
+affiliations:
+  - id: 1
+    name: Tilburg University
+    department: Department of Social Psychology
+bibliography: bibliography.bib
+format: pdf
+---
+
+This text will end up in the rendered .html file. Exciting [@r2024]!
+',
+  con = "ex.qmd"
+)
 
 quarto_render("ex.qmd", output_format = "pdf", output_file = "ex-latex.pdf")
 quarto_render("ex.qmd", output_format = "preprint-typst", output_file = "ex-typst.pdf")
@@ -137,6 +158,8 @@ typst <- image_read("ex-typst.png") |>
 
 image_append(c(latex, typst)) |> 
   image_write("ex.png")
+
+file.remove("ex.qmd")
 ```
 
 ![A cropped version of a basic Quarto .pdf document (left) and a *preprint* Quarto .pdf document (right).](ex.png){#fig-ex}
