@@ -50,11 +50,11 @@
         #a.name#super[#a.affiliation]#if a.keys().contains("email") {[\*]}
         #if a.keys().contains("orcid") {
             box(
-              inset: -0.2em,
+              height: 1em,
               link(
                 a.orcid, 
                 figure(
-                  image("orcid.svg", width: 0.92em)
+                  image("orcid.svg", height: 0.9em)
                 )
               )
             )
@@ -167,24 +167,26 @@
   /* Content front matter */
 
   // Title, authors, and affiliations block
-  set align(center)
   block(inset: (top: 2em, bottom: 0em, left: 2em, right: 2em))[
     #if title != none {
       v(2em)
-      [#text(weight: 400, size: 1.5em)[#title]]
+      align(center)[#text(weight: 400, size: 1.5em)[#title]]
     }
     #if authors != none {
       v(0.4em)
-      text(size: 1.2em)[#author_strings.join(", ", last: " & ")]
+      align(center)[
+        #text(size: 1.2em)[#author_strings.join(", ", last: " & ")]
+      ]
     }
     #if affiliations != none {
       v(0.3em)
-      for a in affiliations [
-        #super[#a.id]#a.name#if a.keys().contains("department") [, #a.department] \
+      align(center)[
+        #for a in affiliations [
+          #super[#a.id]#a.name#if a.keys().contains("department") [, #a.department] \
+        ]
       ]
     }
   ]
-  set align(left)
   
   // Abstract and keywords block
   block(inset: (top: 2em, bottom: 0em, left: 2.4em, right: 2.4em))[
