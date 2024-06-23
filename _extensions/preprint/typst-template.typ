@@ -27,6 +27,7 @@
   bibliography-title: "References",
   bibliography-style: "apa",
   cols: 1,
+  col-gutter: 4.2%,
   doc,
 ) = {
 
@@ -219,7 +220,11 @@
   if cols == 1 {
     doc
   } else {
-    columns(cols, doc)
+    columns(
+      cols, 
+      gutter: col-gutter, 
+      doc
+    )
   }
 
 }
