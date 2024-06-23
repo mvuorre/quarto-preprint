@@ -1,6 +1,6 @@
 ---
-title: "*preprint*: A Quarto Typst extension for computationally reproducible manuscripts"
-running-head: "*preprint* Quarto extension manual"
+title: "*quarto-preprint*: A Quarto Typst extension for efficient typesetting of computationally reproducible manuscripts"
+running-head: "*quarto-preprint*"
 author:
   - name: Matti Vuorre
     email: mjvuorre@uvt.nl
@@ -13,13 +13,14 @@ affiliations:
     name: Tilburg University
     department: Department of Social Psychology
 abstract: |
-  This document and its source code (`manual.qmd`) illustrate uses of various [Quarto](https://quarto.org) & *preprint* extension features, such as weaving R code [@r2024] and prose. It also serves as an example output document.
+  [Quarto](https://quarto.org) is a "*scientific and technical publishing system*", e.g. for computationally reproducible manuscripts. It is both a markup language that extends [pandoc](https://pandoc.org/) [markdown](https://quarto.org/docs/authoring/markdown-basics.html) and a program that renders Quarto markdown sources to a variety of formats including PDF, MS Word, HTML, presentations, ePub, and many [more](https://quarto.org/docs/output-formats/all-formats.html). The source code can include prose (this text), math ($\sqrt{2}$), code evaluation (`{{r}} sqrt(2)` renders to `{r} round(sqrt(2), digits = 3)`), scholarly [metadata](https://quarto.org/docs/authoring/front-matter.html), and more. The look and feel of the output documents can be controlled [within](https://quarto.org/docs/output-formats/html-basics.html) the source document, or by using an [extension](https://quarto.org/docs/extensions/). [*quarto-preprint*](https://github.com/mvuorre/quarto-preprint) is such an extension, designed to produce neat documents quickly with minimum effort. It is called "*quarto-__preprint__*" because it facilitates multiformat rendering and switching to journal-specific [formats](https://quarto.org/docs/extensions/listing-journals.html) by being 100% Quarto standards compliant. It also produces basic MS Word documents to facilitate collaboration and/or further WYSIWYG editing. This document is both the manual and an example document using `quarto-preprint`. 
 keywords: 
-  - list 
-  - keywords
-  - here
-  - but not
-  - too many
+  - Quarto 
+  - Typst
+  - preprints
+  - communication
+  - typesetting
+  - tools
 date: "`r Sys.Date()`"
 citation:
   type: article-journal
@@ -30,14 +31,10 @@ branding: psyarxiv
 authornote: This is an example author note.
 bibliography: bibliography-manual.bib
 linkcolor: blue
-mainfont: Fira Sans
-fontsize: 10pt
-title-page: false
 toc: true
 toc_depth: 2
 toc_title: "Contents"
 section-numbering: ""
-code-links: repo
 execute: 
   cache: true
 ---
@@ -54,26 +51,22 @@ options(digits = 3)
 ::: {.content-visible when-format="html"}
 
 ::: {.callout-note}
-You are viewing HTML output of a Quarto document. To see **quarto-preprint** outputs in [PDF](index.pdf) or [MS Word](index.docx), click the links here or in the right side bar.  
+You are viewing HTML output of a Quarto document. To see *quarto-preprint* outputs in [PDF](index.pdf) or [MS Word](index.docx), click the links here or in the right side bar.  
 :::
 
 :::
 
-[Quarto](https://quarto.org) is an "*An open-source scientific and technical publishing system*". It is both a markup language that extends [pandoc](https://pandoc.org/) [Markdown](https://quarto.org/docs/authoring/markdown-basics.html) and a program that renders source code written in Quarto Markdown to a variety of formats including PDF, MS Word, HTML, ePub, and many [more](https://quarto.org/docs/output-formats/all-formats.html). This source code can include prose (this text), maths ($\sqrt{2}$), code evaluation (`{{r}} sqrt(2)` renders to `{r} round(sqrt(2), digits = 3)`), scholarly [metadata](https://quarto.org/docs/authoring/front-matter.html), and more. In short, Quarto is a language and engine for reproducible manuscripts.
+I hope that *quarto-preprint* could help encourage scholars to think more proactively about the roles that preprints play in the modern scholarly communication landscape [@severBiomedicalPublishingHistoric2023; @syedValuingPreprintsMust2024; @moshontzGuidePostingManaging2021; @ahmedFutureAcademicPublishing2023].
 
-The look and feel of the output documents can be controlled within the source document (e.g. [here](https://quarto.org/docs/output-formats/html-basics.html)), or by using a Quarto [extension](https://quarto.org/docs/extensions/). [**quarto-preprint**](https://github.com/mvuorre/quarto-preprint) is such an extension, designed to produce neat PDF documents quickly with minimum fuss. It is called "preprint" because it provides a basic layout in a Quarto-standards compliant package, allowing users to easily switch to a journal-specific [extension](https://quarto.org/docs/extensions/listing-journals.html) if they so choose. It also produces basic Word .docx documents to facilitate collaboration and/or further WYSIWYG editing. 
-
-Moreover, I was partly motivated to create this extension by a hope that it would encourage scholars to think more proactively about the roles that preprints play in the modern scholarly communication landscape [@severBiomedicalPublishingHistoric2023; @syedValuingPreprintsMust2024; @moshontzGuidePostingManaging2021; @ahmedFutureAcademicPublishing2023].
-
-Why might one use the **preprint** extension? One, it renders documents from Quarto markdown to PDF using [Typst](https://typst.app/docs)[^typst], and therefore is very fast in doing so. Typst doesn't require complicated LaTeX installations on their computers, and so is practically easier to use than other PDF-producing methods. Typst also simplifies the development and codebase of **preprint**, thus making edits, bug fixes, forks, and new features easier. Second, **preprint** aims to be 100% Quarto standards compliant: Users don't need to adapt their source code in any way when they switch to other formats, such as other journal extensions, or completely different output formats such as HTML[^feats].
+Why might one use the *quarto-preprint* extension? One, it renders documents from Quarto markdown to PDF using [Typst](https://typst.app/docs)[^typst], and therefore is very fast in doing so. Typst doesn't require complicated LaTeX installations and so is practically easier to use than other PDF-producing methods. Typst also simplifies the development and codebase of templates and Quarto formats, and thus makes edits, bug fixes, forks, and new features easier. Second, *quarto-preprint* aims to be 100% Quarto standards compliant: Users don't need to adapt their source code in any way when they switch to other formats, such as other journal extensions, or completely different output formats such as HTML[^feats].
 
 [^feats]: There are a few small features that likely won't show up in other formats, such as `branding` (see below), but their inclusion or exclusion in the metadata doesn't impact how sources are rendered to other formats.
 
 [^typst]: "*[Typst](https://typst.app/docs) is a new markup-based typesetting system for the sciences. It is designed to be an alternative both to advanced tools like LaTeX and simpler tools like Word and Google Docs.*"
 
-This document is both a reference manual to several Quarto (and additional) features supported by **preprint**, and an example **preprint** document. You can find its Quarto markdown source code [here](https://github.com/mvuorre/quarto-preprint/blob/main/manual.qmd). You can view the latest version of the PDF output [here](todo) ([HTML](todo), [MS Word](todo)).
+This document is both the *quarto-preprint* manual, and an example document making use of it. You can find its Quarto markdown source code [here](https://github.com/mvuorre/quarto-preprint/blob/main/index.qmd). You can view the latest version of the PDF output [here](https://mvuorre.github.io/quarto-preprint/index.pdf) ([MS Word](https://mvuorre.github.io/quarto-preprint/index.docx), [HTML](https://mvuorre.github.io/quarto-preprint)).
 
-## A basic Quarto example
+## A Quarto example
 
 Here are the contents of a basic Quarto markdown file, called `myfile.qmd`:
 
@@ -164,15 +157,15 @@ file.remove("ex.qmd")
 
 ![A cropped version of a basic Quarto .pdf document (left) and a *preprint* Quarto .pdf document (right).](ex.png){#fig-ex}
 
-However, @fig-ex (left) lacks several features that we've come to expect from scholarly outputs. Basics such as authors' affiliations are missing. **preprint** includes many such features. Changing `format: pdf` in the above source code to `format: preprint-typst` instructs Quarto to use the **preprint** extension, which produces the PDF document in @fig-ex (right).
+However, @fig-ex (left) lacks several features that we've come to expect from scholarly outputs, such as authors' affiliations. *quarto-preprint* includes many such features. Changing `format: pdf` in the above source code to `format: preprint-typst` instructs Quarto to use the extension, which produces the PDF document in @fig-ex (right).
 
-That is, **preprint-typst** is a Quarto extension that formats your Quarto source---which can be prose, code, math, tables, figures, etc.---to a pleasant looking .pdf via Typst.
+That is, *quarto-preprint* is a Quarto extension that provides a Quarto format called `preprint-typst`, which formats your Quarto source---which can be prose, code, math, tables, figures, etc.---to a pleasant looking .pdf via Typst.
 
-# *preprint* Quarto extension manual
+# *quarto-preprint* manual
 
-The preprint Quarto extension provides functionality through Quarto metadata, some of which is mapped to a Typst template and its variables. Therefore, if you cannot find the information you're looking for in this manual, consult either the [Quarto](https://quarto.org/docs/authoring/front-matter.html) or [Typst]((https://typst.app/docs)) documentation.
+The preprint Quarto extension provides functionality through Quarto metadata, some of which is mapped to a Typst template and its variables. Therefore, if you cannot find the information you're looking for in this manual, consult either the [Quarto](https://quarto.org/docs/output-formats/typst.html) or [Typst](https://typst.app/docs) documentation.
 
-In the documentation below, we have divided the YAML metadata options to two sections. First are options that are common to most if not all Quarto formats. Second are options specific to the Typst format and the **preprint** Typst format extension.
+In the documentation below, we have divided the YAML metadata options to two sections. First are options that are common to most if not all Quarto formats. Second are options specific to the Typst format and the *quarto-preprint* Typst format extension.
 
 ## Common Quarto options
 
@@ -265,7 +258,6 @@ format:
 running-head: "*preprint* Quarto extension manual"
 branding: psyarxiv
 authornote: This is an example author note.
-title-page: false
 ```
 
 `running-head` should be a text string and is used as the document's running head. 
@@ -273,8 +265,6 @@ title-page: false
 `branding` adds a specified preprint service's logo to the document. Currently only "psyarxiv" is a valid value.
 
 `authornote` allows adding information to the footer of the first page.
-
-`title-page: true` adds page breaks after the title & authors section and the abstract.
 
 ### Typst geometry, layout, and formatting options
 
@@ -349,7 +339,7 @@ Tables are still the achilles heel of Typst (and any cross-format output, really
 #| echo: true
 
 tinytable::tt(
-  head(data),
+  head(data, 2),
   digits = 2
 )
 ```
@@ -361,7 +351,7 @@ tinytable::tt(
 #| echo: false
 
 knitr::kable(
-  head(data),
+  head(data, 2),
   digits = 2
 )
 ```

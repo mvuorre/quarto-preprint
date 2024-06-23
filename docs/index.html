@@ -2,15 +2,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.46">
+<meta name="generator" content="quarto-1.5.47">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Matti Vuorre">
-<meta name="dcterms.date" content="2024-06-21">
-<meta name="keywords" content="list, keywords, here, but not, too many">
+<meta name="dcterms.date" content="2024-06-23">
+<meta name="keywords" content="Quarto, Typst, preprints, communication, typesetting, tools">
 
-<title>preprint: A Quarto Typst extension for computationally reproducible manuscripts</title>
+<title>quarto-preprint: A Quarto Typst extension for efficient typesetting of computationally reproducible manuscripts</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -133,9 +133,9 @@ window.Quarto = {
   <ul>
   <li><a href="#preface" id="toc-preface" class="nav-link active" data-scroll-target="#preface">Preface</a>
   <ul class="collapse">
-  <li><a href="#a-basic-quarto-example" id="toc-a-basic-quarto-example" class="nav-link" data-scroll-target="#a-basic-quarto-example">A basic Quarto example</a></li>
+  <li><a href="#a-quarto-example" id="toc-a-quarto-example" class="nav-link" data-scroll-target="#a-quarto-example">A Quarto example</a></li>
   </ul></li>
-  <li><a href="#preprint-quarto-extension-manual" id="toc-preprint-quarto-extension-manual" class="nav-link" data-scroll-target="#preprint-quarto-extension-manual"><em>preprint</em> Quarto extension manual</a>
+  <li><a href="#quarto-preprint-manual" id="toc-quarto-preprint-manual" class="nav-link" data-scroll-target="#quarto-preprint-manual"><em>quarto-preprint</em> manual</a>
   <ul class="collapse">
   <li><a href="#common-quarto-options" id="toc-common-quarto-options" class="nav-link" data-scroll-target="#common-quarto-options">Common Quarto options</a>
   <ul class="collapse">
@@ -172,13 +172,13 @@ window.Quarto = {
   </ul></li>
   <li><a href="#help-contributing" id="toc-help-contributing" class="nav-link" data-scroll-target="#help-contributing">Help &amp; contributing</a></li>
   </ul>
-<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="index.pdf"><i class="bi bi-file-pdf"></i>Typst (preprint)</a></li><li><a href="index.docx"><i class="bi bi-file-word"></i>MS Word (preprint)</a></li></ul></div><div class="quarto-code-links"><h2>Code Links</h2><ul><li><a href="https://github.com/mvuorre/quarto-preprint/" target="_blank"><i class="bi bi-github"></i>GitHub Repo</a></li></ul></div></nav>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="index.pdf"><i class="bi bi-file-pdf"></i>Typst (preprint)</a></li><li><a href="index.docx"><i class="bi bi-file-word"></i>MS Word (preprint)</a></li></ul></div><div class="quarto-other-links"><h2>Other Links</h2><ul><li><a href="https://mvuorre.github.io/quarto-preprint"><i class="bi bi-globe2"></i>Website</a></li><li><a href="https://github.com/mvuorre/quarto-preprint"><i class="bi bi-github"></i>GitHub Repository</a></li></ul></div></nav>
 </div>
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><em>preprint</em>: A Quarto Typst extension for computationally reproducible manuscripts</h1>
+<h1 class="title"><em>quarto-preprint</em>: A Quarto Typst extension for efficient typesetting of computationally reproducible manuscripts</h1>
 </div>
 
 
@@ -202,7 +202,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">June 21, 2024</p>
+      <p class="date">June 23, 2024</p>
     </div>
   </div>
   
@@ -212,14 +212,14 @@ window.Quarto = {
 <div>
   <div class="abstract">
     <div class="block-title">Abstract</div>
-    <p>This document and its source code (<code>manual.qmd</code>) illustrate uses of various <a href="https://quarto.org">Quarto</a> &amp; <em>preprint</em> extension features, such as weaving R code <span class="citation" data-cites="r2024">(<a href="#ref-r2024" role="doc-biblioref">R Core Team 2024</a>)</span> and prose. It also serves as an example output document.</p>
+    <p><a href="https://quarto.org">Quarto</a> is a “<em>scientific and technical publishing system</em>”, e.g.&nbsp;for computationally reproducible manuscripts. It is both a markup language that extends <a href="https://pandoc.org/">pandoc</a> <a href="https://quarto.org/docs/authoring/markdown-basics.html">markdown</a> and a program that renders Quarto markdown sources to a variety of formats including PDF, MS Word, HTML, presentations, ePub, and many <a href="https://quarto.org/docs/output-formats/all-formats.html">more</a>. The source code can include prose (this text), math (<span class="math inline">\(\sqrt{2}\)</span>), code evaluation (<code>{r} sqrt(2)</code> renders to 1.414), scholarly <a href="https://quarto.org/docs/authoring/front-matter.html">metadata</a>, and more. The look and feel of the output documents can be controlled <a href="https://quarto.org/docs/output-formats/html-basics.html">within</a> the source document, or by using an <a href="https://quarto.org/docs/extensions/">extension</a>. <a href="https://github.com/mvuorre/quarto-preprint"><em>quarto-preprint</em></a> is such an extension, designed to produce neat documents quickly with minimum effort. It is called “<em>quarto-<strong>preprint</strong></em>” because it facilitates multiformat rendering and switching to journal-specific <a href="https://quarto.org/docs/extensions/listing-journals.html">formats</a> by being 100% Quarto standards compliant. It also produces basic MS Word documents to facilitate collaboration and/or further WYSIWYG editing. This document is both the manual and an example document using <code>quarto-preprint</code>.</p>
   </div>
 </div>
 
 <div>
   <div class="keywords">
     <div class="block-title">Keywords</div>
-    <p>list, keywords, here, but not, too many</p>
+    <p>Quarto, Typst, preprints, communication, typesetting, tools</p>
   </div>
 </div>
 
@@ -238,35 +238,32 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>You are viewing HTML output of a Quarto document. To see <strong>quarto-preprint</strong> outputs in <a href="index.pdf">PDF</a> or <a href="index.docx">MS Word</a>, click the links here or in the right side bar.</p>
+<p>You are viewing HTML output of a Quarto document. To see <em>quarto-preprint</em> outputs in <a href="index.pdf">PDF</a> or <a href="index.docx">MS Word</a>, click the links here or in the right side bar.</p>
 </div>
 </div>
-<p><a href="https://quarto.org">Quarto</a> is an “<em>An open-source scientific and technical publishing system</em>”. It is both a markup language that extends <a href="https://pandoc.org/">pandoc</a> <a href="https://quarto.org/docs/authoring/markdown-basics.html">Markdown</a> and a program that renders source code written in Quarto Markdown to a variety of formats including PDF, MS Word, HTML, ePub, and many <a href="https://quarto.org/docs/output-formats/all-formats.html">more</a>. This source code can include prose (this text), maths (<span class="math inline">\(\sqrt{2}\)</span>), code evaluation (<code>{r} sqrt(2)</code> renders to 1.414), scholarly <a href="https://quarto.org/docs/authoring/front-matter.html">metadata</a>, and more. In short, Quarto is a language and engine for reproducible manuscripts.</p>
-<p>The look and feel of the output documents can be controlled within the source document (e.g.&nbsp;<a href="https://quarto.org/docs/output-formats/html-basics.html">here</a>), or by using a Quarto <a href="https://quarto.org/docs/extensions/">extension</a>. <a href="https://github.com/mvuorre/quarto-preprint"><strong>quarto-preprint</strong></a> is such an extension, designed to produce neat PDF documents quickly with minimum fuss. It is called “preprint” because it provides a basic layout in a Quarto-standards compliant package, allowing users to easily switch to a journal-specific <a href="https://quarto.org/docs/extensions/listing-journals.html">extension</a> if they so choose. It also produces basic Word .docx documents to facilitate collaboration and/or further WYSIWYG editing.</p>
-<p>Moreover, I was partly motivated to create this extension by a hope that it would encourage scholars to think more proactively about the roles that preprints play in the modern scholarly communication landscape <span class="citation" data-cites="severBiomedicalPublishingHistoric2023 syedValuingPreprintsMust2024 moshontzGuidePostingManaging2021 ahmedFutureAcademicPublishing2023">(<a href="#ref-severBiomedicalPublishingHistoric2023" role="doc-biblioref">Sever 2023</a>; <a href="#ref-syedValuingPreprintsMust2024" role="doc-biblioref">Syed 2024</a>; <a href="#ref-moshontzGuidePostingManaging2021" role="doc-biblioref">Moshontz et al. 2021</a>; <a href="#ref-ahmedFutureAcademicPublishing2023" role="doc-biblioref">Ahmed et al. 2023</a>)</span>.</p>
-<p>Why might one use the <strong>preprint</strong> extension? One, it renders documents from Quarto markdown to PDF using <a href="https://typst.app/docs">Typst</a><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, and therefore is very fast in doing so. Typst doesn’t require complicated LaTeX installations on their computers, and so is practically easier to use than other PDF-producing methods. Typst also simplifies the development and codebase of <strong>preprint</strong>, thus making edits, bug fixes, forks, and new features easier. Second, <strong>preprint</strong> aims to be 100% Quarto standards compliant: Users don’t need to adapt their source code in any way when they switch to other formats, such as other journal extensions, or completely different output formats such as HTML<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>.</p>
-<p>This document is both a reference manual to several Quarto (and additional) features supported by <strong>preprint</strong>, and an example <strong>preprint</strong> document. You can find its Quarto markdown source code <a href="https://github.com/mvuorre/quarto-preprint/blob/main/manual.qmd">here</a>. You can view the latest version of the PDF output <a href="todo">here</a> (<a href="todo">HTML</a>, <a href="todo">MS Word</a>).</p>
-<section id="a-basic-quarto-example" class="level2">
-<h2 class="anchored" data-anchor-id="a-basic-quarto-example">A basic Quarto example</h2>
+<p>I hope that <em>quarto-preprint</em> could help encourage scholars to think more proactively about the roles that preprints play in the modern scholarly communication landscape <span class="citation" data-cites="severBiomedicalPublishingHistoric2023 syedValuingPreprintsMust2024 moshontzGuidePostingManaging2021 ahmedFutureAcademicPublishing2023">(<a href="#ref-severBiomedicalPublishingHistoric2023" role="doc-biblioref">Sever 2023</a>; <a href="#ref-syedValuingPreprintsMust2024" role="doc-biblioref">Syed 2024</a>; <a href="#ref-moshontzGuidePostingManaging2021" role="doc-biblioref">Moshontz et al. 2021</a>; <a href="#ref-ahmedFutureAcademicPublishing2023" role="doc-biblioref">Ahmed et al. 2023</a>)</span>.</p>
+<p>Why might one use the <em>quarto-preprint</em> extension? One, it renders documents from Quarto markdown to PDF using <a href="https://typst.app/docs">Typst</a><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, and therefore is very fast in doing so. Typst doesn’t require complicated LaTeX installations and so is practically easier to use than other PDF-producing methods. Typst also simplifies the development and codebase of templates and Quarto formats, and thus makes edits, bug fixes, forks, and new features easier. Second, <em>quarto-preprint</em> aims to be 100% Quarto standards compliant: Users don’t need to adapt their source code in any way when they switch to other formats, such as other journal extensions, or completely different output formats such as HTML<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>.</p>
+<p>This document is both the <em>quarto-preprint</em> manual, and an example document making use of it. You can find its Quarto markdown source code <a href="https://github.com/mvuorre/quarto-preprint/blob/main/index.qmd">here</a>. You can view the latest version of the PDF output <a href="https://mvuorre.github.io/quarto-preprint/index.pdf">here</a> (<a href="https://mvuorre.github.io/quarto-preprint/index.docx">MS Word</a>, <a href="https://mvuorre.github.io/quarto-preprint">HTML</a>).</p>
+<section id="a-quarto-example" class="level2">
+<h2 class="anchored" data-anchor-id="a-quarto-example">A Quarto example</h2>
 <p>Here are the contents of a basic Quarto markdown file, called <code>myfile.qmd</code>:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> Example preprint manuscript using the *preprint* Quarto Typst extension</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> Example preprint</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">author</span><span class="kw">:</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Matti Vuorre</span></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">email</span><span class="kw">:</span><span class="at"> mjvuorre@uvt.nl</span></span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">orcid</span><span class="kw">:</span><span class="at"> 0000-0001-5052-066X</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">url</span><span class="kw">:</span><span class="at"> https://www.tilburguniversity.edu/staff/m-j-vuorre</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">affiliation</span><span class="kw">:</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">ref</span><span class="kw">:</span><span class="at"> </span><span class="dv">1</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">affiliations</span><span class="kw">:</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">id</span><span class="kw">:</span><span class="at"> </span><span class="dv">1</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Tilburg University</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">department</span><span class="kw">:</span><span class="at"> Department of Social Psychology</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="fu">bibliography</span><span class="kw">:</span><span class="at"> bibliography.bib</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span><span class="kw">:</span><span class="at"> pdf</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="at">This will be the body text of my new document. Exciting [@r2024]!</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">affiliation</span><span class="kw">:</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">ref</span><span class="kw">:</span><span class="at"> </span><span class="dv">1</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">affiliations</span><span class="kw">:</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> </span><span class="fu">id</span><span class="kw">:</span><span class="at"> </span><span class="dv">1</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Tilburg University</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">department</span><span class="kw">:</span><span class="at"> Department of Social Psychology</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="fu">bibliography</span><span class="kw">:</span><span class="at"> bibliography.bib</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span><span class="kw">:</span><span class="at"> pdf</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="at">This text will end up in the rendered .html file. Exciting [@r2024]!</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>This source code renders (e.g.&nbsp;in <a href="https://quarto.org/docs/get-started/authoring/rstudio.html#rendering">RStudio</a> or <a href="https://quarto.org/docs/get-started/authoring/text-editor.html#rendering">CLI</a>) to <a href="#fig-ex" class="quarto-xref">Figure&nbsp;1</a> (left).</p>
 <div id="fig-ex" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -278,14 +275,14 @@ Figure&nbsp;1: A cropped version of a basic Quarto .pdf document (left) and a <e
 </figcaption>
 </figure>
 </div>
-<p>However, <a href="#fig-ex" class="quarto-xref">Figure&nbsp;1</a> (left) lacks several features that we’ve come to expect from scholarly outputs. Basics such as authors’ affiliations are missing. <strong>preprint</strong> includes many such features. Changing <code>format: pdf</code> in the above source code to <code>format: preprint-typst</code> instructs Quarto to use the <strong>preprint</strong> extension, which produces the PDF document in <a href="#fig-ex" class="quarto-xref">Figure&nbsp;1</a> (right).</p>
-<p>That is, <strong>preprint-typst</strong> is a Quarto extension that formats your Quarto source—which can be prose, code, math, tables, figures, etc.—to a pleasant looking .pdf via Typst.</p>
+<p>However, <a href="#fig-ex" class="quarto-xref">Figure&nbsp;1</a> (left) lacks several features that we’ve come to expect from scholarly outputs, such as authors’ affiliations. <em>quarto-preprint</em> includes many such features. Changing <code>format: pdf</code> in the above source code to <code>format: preprint-typst</code> instructs Quarto to use the extension, which produces the PDF document in <a href="#fig-ex" class="quarto-xref">Figure&nbsp;1</a> (right).</p>
+<p>That is, <em>quarto-preprint</em> is a Quarto extension that provides a Quarto format called <code>preprint-typst</code>, which formats your Quarto source—which can be prose, code, math, tables, figures, etc.—to a pleasant looking .pdf via Typst.</p>
 </section>
 </section>
-<section id="preprint-quarto-extension-manual" class="level1">
-<h1><em>preprint</em> Quarto extension manual</h1>
-<p>The preprint Quarto extension provides functionality through Quarto metadata, some of which is mapped to a Typst template and its variables. Therefore, if you cannot find the information you’re looking for in this manual, consult either the <a href="https://quarto.org/docs/authoring/front-matter.html">Quarto</a> or <a href="(https://typst.app/docs)">Typst</a> documentation.</p>
-<p>In the documentation below, we have divided the YAML metadata options to two sections. First are options that are common to most if not all Quarto formats. Second are options specific to the Typst format and the <strong>preprint</strong> Typst format extension.</p>
+<section id="quarto-preprint-manual" class="level1">
+<h1><em>quarto-preprint</em> manual</h1>
+<p>The preprint Quarto extension provides functionality through Quarto metadata, some of which is mapped to a Typst template and its variables. Therefore, if you cannot find the information you’re looking for in this manual, consult either the <a href="https://quarto.org/docs/output-formats/typst.html">Quarto</a> or <a href="https://typst.app/docs">Typst</a> documentation.</p>
+<p>In the documentation below, we have divided the YAML metadata options to two sections. First are options that are common to most if not all Quarto formats. Second are options specific to the Typst format and the <em>quarto-preprint</em> Typst format extension.</p>
 <section id="common-quarto-options" class="level2">
 <h2 class="anchored" data-anchor-id="common-quarto-options">Common Quarto options</h2>
 <p>The code snippet above showed YAML metadata between triple-dashes. This YAML metadata can be used to control the output such as fonts, authors, whether to include a table of contents, and many more. We list and explain these options, with examples, below in roughly a decreasing order of importance to typical scholarly manuscripts.</p>
@@ -369,13 +366,11 @@ Figure&nbsp;1: A cropped version of a basic Quarto .pdf document (left) and a <e
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">running-head</span><span class="kw">:</span><span class="at"> </span><span class="st">"*preprint* Quarto extension manual"</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">branding</span><span class="kw">:</span><span class="at"> psyarxiv</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">authornote</span><span class="kw">:</span><span class="at"> This is an example author note.</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="fu">title-page</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">authornote</span><span class="kw">:</span><span class="at"> This is an example author note.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><code>running-head</code> should be a text string and is used as the document’s running head.</p>
 <p><code>branding</code> adds a specified preprint service’s logo to the document. Currently only “psyarxiv” is a valid value.</p>
 <p><code>authornote</code> allows adding information to the footer of the first page.</p>
-<p><code>title-page: true</code> adds page breaks after the title &amp; authors section and the abstract.</p>
 <section id="typst-geometry-layout-and-formatting-options" class="level3">
 <h3 class="anchored" data-anchor-id="typst-geometry-layout-and-formatting-options">Typst geometry, layout, and formatting options</h3>
 <div class="cell">
@@ -454,7 +449,7 @@ Figure&nbsp;1: A cropped version of a basic Quarto .pdf document (left) and a <e
 <p>Tables are still the achilles heel of Typst (and any cross-format output, really). However, basic tables are more than possible, and below is an example table produced in R with the tinytable package (<a href="#tbl-example" class="quarto-xref">Table&nbsp;1</a>). Note that some features of tables, such as footnotes, are not yet implemented in Typst / Quarto.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>tinytable<span class="sc">::</span><span class="fu">tt</span>(</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(data),</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(data, <span class="dv">2</span>),</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">digits =</span> <span class="dv">2</span></span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div id="tbl-example" class="cell quarto-float quarto-figure quarto-figure-center anchored">
@@ -501,27 +496,11 @@ Table&nbsp;1: Table created with <code>tinytable::tt()</code>
         <tbody>
                 <tr>
                   <td>-0.63</td>
-                  <td> 1.359</td>
+                  <td> 1.4</td>
                 </tr>
                 <tr>
                   <td> 0.18</td>
-                  <td>-0.103</td>
-                </tr>
-                <tr>
-                  <td>-0.84</td>
-                  <td> 0.388</td>
-                </tr>
-                <tr>
-                  <td> 1.6 </td>
-                  <td>-0.054</td>
-                </tr>
-                <tr>
-                  <td> 0.33</td>
-                  <td>-1.377</td>
-                </tr>
-                <tr>
-                  <td>-0.82</td>
-                  <td>-0.415</td>
+                  <td>-0.1</td>
                 </tr>
         </tbody>
       </table>
@@ -604,22 +583,6 @@ Table&nbsp;2: Table created with <code>knitr::kable()</code>
 <tr class="even">
 <td style="text-align: right;">0.18</td>
 <td style="text-align: right;">-0.10</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">-0.84</td>
-<td style="text-align: right;">0.39</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">1.60</td>
-<td style="text-align: right;">-0.05</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">0.33</td>
-<td style="text-align: right;">-1.38</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">-0.82</td>
-<td style="text-align: right;">-0.41</td>
 </tr>
 </tbody>
 </table>
@@ -715,9 +678,6 @@ Ahmed, Abubakari, Aceil Al-Khatib, Yap Boum, Humberto Debat, Alonso Gurmendi Dun
 <div id="ref-moshontzGuidePostingManaging2021" class="csl-entry" role="listitem">
 Moshontz, Hannah, Grace Binion, Haley Walton, Benjamin T. Brown, and Moin Syed. 2021. <span>“A <span>Guide</span> to <span>Posting</span> and <span>Managing Preprints</span>.”</span> <em>Advances in Methods and Practices in Psychological Science</em> 4 (2): 25152459211019948. <a href="https://doi.org/10.1177/25152459211019948">https://doi.org/10.1177/25152459211019948</a>.
 </div>
-<div id="ref-r2024" class="csl-entry" role="listitem">
-R Core Team. 2024. <span>“R: <span>A Language</span> and <span>Environment</span> for <span>Statistical Computing</span>. <span>Version</span> 4.4.0.”</span> Vienna, Austria: R Foundation for Statistical Computing.
-</div>
 <div id="ref-severBiomedicalPublishingHistoric2023" class="csl-entry" role="listitem">
 Sever, Richard. 2023. <span>“Biomedical Publishing: <span>Past</span> Historic, Present Continuous, Future Conditional.”</span> <em>PLOS Biology</em> 21 (10): e3002234. <a href="https://doi.org/10.1371/journal.pbio.3002234">https://doi.org/10.1371/journal.pbio.3002234</a>.
 </div>
@@ -732,21 +692,45 @@ Syed, Moin. 2024. <span>“Valuing <span>Preprints Must</span> Be <span>Part</sp
 </ol>
 </section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@article{vuorre,
   author = {Vuorre, Matti},
-  title = {*Preprint*: {A} {Quarto} {Typst} Extension for
-    Computationally Reproducible Manuscripts},
+  title = {*Quarto-Preprint*: {A} {Quarto} {Typst} Extension for
+    Efficient Typesetting of Computationally Reproducible Manuscripts},
   journal = {PsyArXiv},
   date = {},
   url = {example.com},
   doi = {an.example.doi},
   langid = {en},
-  abstract = {This document and its source code (`manual.qmd`)
-    illustrate uses of various {[}Quarto{]}(https://quarto.org) \&amp;
-    *preprint* extension features, such as weaving R code {[}@r2024{]}
-    and prose. It also serves as an example output document.}
+  abstract = {{[}Quarto{]}(https://quarto.org) is a “*scientific and
+    technical publishing system*”, e.g. for computationally reproducible
+    manuscripts. It is both a markup language that extends
+    {[}pandoc{]}(https://pandoc.org/)
+    {[}markdown{]}(https://quarto.org/docs/authoring/markdown-basics.html)
+    and a program that renders Quarto markdown sources to a variety of
+    formats including PDF, MS Word, HTML, presentations, ePub, and many
+    {[}more{]}(https://quarto.org/docs/output-formats/all-formats.html).
+    The source code can include prose (this text), math
+    (\$\textbackslash sqrt\{2\}\$), code evaluation (`\{\{r\}\} sqrt(2)`
+    renders to `\{r\} round(sqrt(2), digits = 3)`), scholarly
+    {[}metadata{]}(https://quarto.org/docs/authoring/front-matter.html),
+    and more. The look and feel of the output documents can be
+    controlled
+    {[}within{]}(https://quarto.org/docs/output-formats/html-basics.html)
+    the source document, or by using an
+    {[}extension{]}(https://quarto.org/docs/extensions/).
+    {[}*quarto-preprint*{]}(https://github.com/mvuorre/quarto-preprint)
+    is such an extension, designed to produce neat documents quickly
+    with minimum effort. It is called “*quarto-\_\_preprint\_\_*”
+    because it facilitates multiformat rendering and switching to
+    journal-specific
+    {[}formats{]}(https://quarto.org/docs/extensions/listing-journals.html)
+    by being 100\% Quarto standards compliant. It also produces basic MS
+    Word documents to facilitate collaboration and/or further WYSIWYG
+    editing. This document is both the manual and an example document
+    using `quarto-preprint`.}
 }
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-vuorre" class="csl-entry quarto-appendix-citeas" role="listitem">
-Vuorre, Matti. n.d. <span>“*Preprint*: A Quarto Typst Extension for
-Computationally Reproducible Manuscripts.”</span> <em>PsyArXiv</em>. <a href="https://doi.org/an.example.doi">https://doi.org/an.example.doi</a>.
+Vuorre, Matti. n.d. <span>“*Quarto-Preprint*: A Quarto Typst Extension
+for Efficient Typesetting of Computationally Reproducible
+Manuscripts.”</span> <em>PsyArXiv</em>. <a href="https://doi.org/an.example.doi">https://doi.org/an.example.doi</a>.
 </div></div></section></div></main>
 <!-- /main column -->
 <script id="quarto-html-after-body" type="application/javascript">
