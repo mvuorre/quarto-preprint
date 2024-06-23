@@ -5,6 +5,9 @@ project:
   output-dir: docs
 
 format:
+  preprint-typst:
+    fontsize: 10pt
+    mainfont: Libertinus Serif
   html:
     toc: true
     fontsize: 12pt
@@ -16,8 +19,5 @@ format:
       - text: GitHub Repository
         href: https://github.com/mvuorre/quarto-preprint
         icon: github
-  preprint-typst:
-    fontsize: 10pt
-    mainfont: Libertinus Serif
   preprint-docx:
     default
