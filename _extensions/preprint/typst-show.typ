@@ -92,6 +92,12 @@ $endif$
 $if(toc_indent)$
   toc_indent: "$toc_indent$",
 $endif$
+$if(columns)$
+  cols: $columns$,
+$endif$
+$if(col-gutter)$
+  col-gutter: $col-gutter$,
+$endif$
 $if(bibliography-style)$
   bibliography-style: [$bibliography-style$],
 $endif$
