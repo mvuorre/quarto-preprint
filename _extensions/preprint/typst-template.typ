@@ -5,18 +5,18 @@
   affiliations: none,
   abstract: none,
   keywords: none,
-  authornote: none, // Appears in 1st page footer
-  citation: none, // citation.doi appears in 1st page header
-  date: none, // Appears in 1st page header
-  branding: none, // Appears in 1st page header
-  leading: 0.6em, // https://typst.app/docs/reference/model/par/#parameters-leading
-  spacing: 1em, // Between paragraphs https://typst.app/docs/reference/layout/block/#parameters-spacing
-  first-line-indent: 0cm, // https://typst.app/docs/reference/model/par/#parameters-first-line-indent
-  linkcolor: rgb(0, 0, 0), // https://typst.app/docs/reference/visualize/color/
-  margin: (x: 3.2cm, y: 3cm), // https://typst.app/docs/reference/layout/page/#parameters-margin
-  paper: "a4", // https://typst.app/docs/reference/layout/page/#parameters-paper
-  lang: "en", // https://typst.app/docs/reference/text/text/#parameters-lang
-  region: "US", // https://typst.app/docs/reference/text/text/#parameters-region
+  authornote: none,
+  citation: none,
+  date: none,
+  branding: none,
+  leading: 0.6em,
+  spacing: 1em,
+  first-line-indent: 0cm,
+  linkcolor: rgb(0, 0, 0),
+  margin: (x: 3.2cm, y: 3cm),
+  paper: "a4",
+  lang: "en",
+  region: "US",
   font: ("Times", "Times New Roman", "Arial"),
   fontsize: 11pt,
   section-numbering: none,
@@ -36,9 +36,6 @@
   // Set link and cite colors
   show link: set text(fill: linkcolor)
   show cite: set text(fill: linkcolor)
-  
-  // Set space between paragraphs
-  show par: set block(spacing: spacing)
 
   // Allow custom title for bibliography section
   set bibliography(title: bibliography-title, style: bibliography-style)
@@ -75,6 +72,7 @@
     numbering: "1",
     header-ascent: 50%,
     header: locate(
+        // Page 1 header can include citation and branding
         loc => if [#loc.page()] == [1] {
           set align(right)
           set text(size: 0.85em)
@@ -92,6 +90,7 @@
             }
           )
         } else {
+          // Page >1 header has running head and page number
           grid(
             columns: (1fr, 1fr),
             align(left)[#running-head],
@@ -101,6 +100,7 @@
     ),
     footer-descent: 24pt,
     footer: locate(
+        // Page 1 footer has author note
         loc => if [#loc.page()] == [1] {
           [#text(size: 0.85em)[#authornote]]
         } else {
@@ -115,6 +115,8 @@
     leading: leading,
     first-line-indent: first-line-indent
   )
+  // Set space between paragraphs
+  show par: set block(spacing: spacing)
 
   // Text settings
   set text(
@@ -204,11 +206,13 @@
   
   // Abstract and keywords block
   block(inset: (top: 2em, bottom: 0em, left: 2.4em, right: 2.4em))[
-    #set text(size: 0.89em)
+    #set text(size: 0.92em)
     #if abstract != none {
       abstract
     }
-    #if keywords != none {[#v(0.4em)#text(style: "italic")[Keywords:] #keywords]}
+    #if keywords != none {
+      [#v(0.4em)#text(style: "italic")[Keywords:] #keywords]
+    }
   ]
 
   // Table of contents
@@ -228,8 +232,11 @@
   }
 
   /* Content */
+
+  // Separate content a bit from front matter
   v(2em)
   
+  // Show document content with cols if specified
   if cols == 1 {
     doc
   } else {
@@ -242,6 +249,7 @@
 
 }
 
+// Remove gridlines from tables
 #set table(
   inset: 6pt,
   stroke: none
