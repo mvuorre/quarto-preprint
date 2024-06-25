@@ -124,7 +124,7 @@ See also Quarto's Typst format [documentation](https://quarto.org/docs/output-fo
 
 ## Help
 
-Please submit an [issue](https://github.com/mvuorre/quarto-preprint/issues), optimally with a reproducible example, if something isn't working. You can also email Matti.
+If something isn't working, please submit an [issue](https://github.com/mvuorre/quarto-preprint/issues), optimally with a reproducible example / full details of what you're trying to do, how, and what goes wrong. You can also email Matti.
 
 ## Contributing
 
