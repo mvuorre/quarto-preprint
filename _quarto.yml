@@ -6,7 +6,7 @@ project:
 
 format:
   preprint-typst:
-    fontsize: 10pt
+    fontsize: 11pt
     mainfont: Libertinus Serif
   html:
     toc: true
