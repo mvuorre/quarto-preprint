@@ -122,6 +122,22 @@ fontsize: 11pt
 
 See also Quarto's Typst format [documentation](https://quarto.org/docs/output-formats/typst.html), and Quarto's [guide](https://quarto.org/docs/authoring/front-matter.html) on writing scholarly documents.
 
+## Tips
+
+###  Collaboration
+
+It can be useful to also output a MS Word document for collaboration. To do so, you can include `docx` as an output format as shown [here](https://quarto.org/docs/output-formats/ms-word.html). `quarto-preprint` also provides a slightly improved bare-bones MS Word output format `preprint-docx`.
+
+[Typst](https://typst.app) also provides an online interface. That could be especially useful for collaborating on documents. You can create a .typ file by including
+
+```yaml
+format:
+  preprint-typst:
+    keep-typ: true
+```
+
+in the document's YAML. Then, copypaste the resulting .typ file and other required materials (bibliography file, image files, etc) to the Typst online interface. See an example [here](https://typst.app/project/rk4zWONKPIF5lRxF_HU1I5).
+
 ## Help
 
 If something isn't working, please submit an [issue](https://github.com/mvuorre/quarto-preprint/issues), optimally with a reproducible example / full details of what you're trying to do, how, and what goes wrong. You can also email Matti.
