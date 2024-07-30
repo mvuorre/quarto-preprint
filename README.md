@@ -26,13 +26,13 @@ In other words, `quarto-preprint` should provide a reliable and fuss-free Quarto
 Add template to an existing project:
 
 ```bash
-quarto add template mvuorre/preprint
+quarto add template mvuorre/quarto-preprint
 ```
 
 Start a new Quarto project that uses `quarto-preprint`:
 
 ```bash
-quarto use template mvuorre/preprint
+quarto use template mvuorre/quarto-preprint
 ```
 
 ## Use
