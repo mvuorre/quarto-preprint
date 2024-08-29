@@ -45,7 +45,8 @@
   if authors != none {
     for a in authors {
       let author_string = [
-        #a.name#super[#a.affiliation]#if a.keys().contains("email") {[\*]}
+        // Solo manuscripts don't have institutional id
+        #a.name#if authors.len() > 1 [#super[#a.affiliation]]#if a.keys().contains("email") {[\*]}
         #if a.keys().contains("orcid") {
             box(
               height: 1em,
@@ -59,7 +60,7 @@
           }
         ]
       if a.keys().contains("email") {
-        authornote = [\*Corresponding author: #a.name, #a.email.\ #authornote]
+        authornote = [\*Send correspondence to: #a.name, #a.email.\ #authornote]
       }
       author_strings.push(author_string)
     }
@@ -199,7 +200,7 @@
     titleblock(
       weight: "regular", size: 1.1em, below: 2em,
       for a in affiliations [
-        #super[#a.id]#a.name#if a.keys().contains("department") [, #a.department] \
+        #if authors.len() > 1 [#super[#a.id]]#a.name#if a.keys().contains("department") [, #a.department] \
       ]
     )
   }
