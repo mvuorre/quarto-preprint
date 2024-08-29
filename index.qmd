@@ -270,6 +270,7 @@ bibliography-style: "apa"
 margin:
   x: 1cm
   y: 3cm
+cols: 1
 ```
 
 - leading
@@ -290,6 +291,7 @@ margin:
   - <https://typst.app/docs/reference/text/text/#parameters-region>
 - bibliography-title: "References"
 - bibliography-style: "apa"
+- cols: columns in the main document (experimental)
 
 # Example content
 

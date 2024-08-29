@@ -92,8 +92,8 @@ $endif$
 $if(toc_indent)$
   toc_indent: "$toc_indent$",
 $endif$
-$if(columns)$
-  cols: $columns$,
+$if(cols)$
+  cols: $cols$,
 $endif$
 $if(col-gutter)$
   col-gutter: $col-gutter$,
