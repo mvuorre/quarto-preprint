@@ -110,7 +110,7 @@ bibliography: bibliography.bib
 format: pdf
 ---
 
-This text will end up in the rendered .html file. Exciting [@r2024]!
+This text will end up in the rendered file [@r2024]!
 ',
   con = "ex.qmd"
 )
