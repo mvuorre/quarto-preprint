@@ -37,7 +37,7 @@ quarto use template mvuorre/quarto-preprint
 
 ## Use
 
-Write Quarto markdown and add `format: apaish-typst` to the document's YAML metadata. Then, render your document, for example from the command line with
+Write Quarto markdown and add `format: preprint-typst` to the document's YAML metadata. Then, render your document, for example from the command line with
 
 ```bash
 quarto render <filename>.qmd
