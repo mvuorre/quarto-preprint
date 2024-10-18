@@ -6,6 +6,7 @@ author:
     email: mjvuorre@uvt.nl
     orcid: 0000-0001-5052-066X
     url: https://www.tilburguniversity.edu/staff/m-j-vuorre
+    corresponding: true
     affiliation:
       - ref: 1
 affiliations:

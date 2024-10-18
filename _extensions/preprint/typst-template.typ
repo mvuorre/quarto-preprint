@@ -1,7 +1,7 @@
 #let preprint(
   title: none,
   running-head: none,
-  authors: none,
+  authors: (),
   affiliations: none,
   abstract: none,
   keywords: none,
@@ -60,7 +60,7 @@
             )
           }
         ]
-      if a.keys().contains("email") {
+      if a.keys().contains("corresponding") {
         authornote = [\*Send correspondence to: #a.name, #a.email.\ #authornote]
       }
       author_strings.push(author_string)
