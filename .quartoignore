@@ -2,9 +2,7 @@
 *.typ
 *_cache/
 *_files/
-ex.qmd
 index.qmd
-bibliography-manual.bib
 Makefile
 docs/
 _quarto.yml

@@ -2,26 +2,21 @@
 title: Your title
 running-head: Running head
 author:
-  - name: Matti Vuorre
-    email: mjvuorre@uvt.nl
-    orcid: 0000-0001-5052-066X
-    url: https://www.tilburguniversity.edu/staff/m-j-vuorre
+  - name: My Name
+    email: myemail@example.com
+    orcid: 0000-0000-0000-0000
+    url: https://
     corresponding: true
     affiliation:
       - ref: 1
 affiliations:
   - id: 1
-    name: Tilburg University
-    department: Department of Social Psychology
+    name: Example University
+    department: Example Department
 abstract: |
   Abstract.
-keywords: 
-  - list 
-  - keywords
-  - here
+keywords: [list, keywords, here]
 authornote: This is an example author note.
 bibliography: bibliography.bib
-bibliographystyle: apa
 format: preprint-typst
-mainfont: Libertinus Serif
 ---
