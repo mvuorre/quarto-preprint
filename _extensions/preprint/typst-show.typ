@@ -83,14 +83,14 @@ $endif$
 $if(toc)$
   toc: $toc$,
 $endif$
-$if(toc_depth)$
-  toc_depth: $toc_depth$,
+$if(toc-depth)$
+  toc-depth: $toc-depth$,
 $endif$
-$if(toc_title)$
-  toc_title: "$toc_title$",
+$if(toc-title)$
+  toc-title: "$toc-title$",
 $endif$
-$if(toc_indent)$
-  toc_indent: "$toc_indent$",
+$if(toc-indent)$
+  toc-indent: "$toc-indent$",
 $endif$
 $if(cols)$
   cols: $cols$,
