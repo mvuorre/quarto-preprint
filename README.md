@@ -6,55 +6,11 @@ Matti Vuorre
 - [<span class="toc-section-number">1</span> Preface](#preface)
 - [<span class="toc-section-number">2</span> Preprint Quarto
   extension](#preprint-quarto-extension)
-  - [<span class="toc-section-number">2.1</span> Purpose](#purpose)
 - [<span class="toc-section-number">3</span> Use](#use)
-  - [<span class="toc-section-number">3.1</span> Install](#install)
-  - [<span class="toc-section-number">3.2</span> Use](#use-1)
-    - [<span class="toc-section-number">3.2.1</span> Configuration &
-      options (YAML metadata)](#configuration--options-yaml-metadata)
-  - [<span class="toc-section-number">3.3</span> Tips](#tips)
-    - [<span class="toc-section-number">3.3.1</span>
-      Collaboration](#collaboration)
-  - [<span class="toc-section-number">3.4</span> Help](#help)
-  - [<span class="toc-section-number">3.5</span> A Quarto
-    example](#a-quarto-example)
 - [<span class="toc-section-number">4</span> *quarto-preprint*
   manual](#quarto-preprint-manual)
-  - [<span class="toc-section-number">4.1</span> Common Quarto
-    options](#common-quarto-options)
-    - [<span class="toc-section-number">4.1.1</span> Title](#title)
-    - [<span class="toc-section-number">4.1.2</span> Authors &
-      affiliations](#authors--affiliations)
-    - [<span class="toc-section-number">4.1.3</span> Abstract, keywords,
-      & date](#abstract-keywords--date)
-    - [<span class="toc-section-number">4.1.4</span> Citation
-      information](#citation-information)
-    - [<span class="toc-section-number">4.1.5</span> Other common
-      options](#other-common-options)
-    - [<span class="toc-section-number">4.1.6</span> Format](#format)
-  - [<span class="toc-section-number">4.2</span> Typst &
-    preprint-extension options](#typst--preprint-extension-options)
-    - [<span class="toc-section-number">4.2.1</span> Typst geometry,
-      layout, and formatting
-      options](#typst-geometry-layout-and-formatting-options)
 - [<span class="toc-section-number">5</span> Example
   content](#example-content)
-  - [<span class="toc-section-number">5.1</span> Heading level
-    2](#heading-level-2)
-    - [<span class="toc-section-number">5.1.1</span> Heading level
-      3](#heading-level-3)
-  - [<span class="toc-section-number">5.2</span> Floats](#floats)
-    - [<span class="toc-section-number">5.2.1</span> Tables](#tables)
-    - [<span class="toc-section-number">5.2.2</span> Figures](#figures)
-  - [<span class="toc-section-number">5.3</span> Quarto markdown
-    features](#quarto-markdown-features)
-    - [<span class="toc-section-number">5.3.1</span> Maths](#maths)
-    - [<span class="toc-section-number">5.3.2</span> Block
-      quotes](#block-quotes)
-    - [<span class="toc-section-number">5.3.3</span>
-      Callouts](#callouts)
-    - [<span class="toc-section-number">5.3.4</span> Code
-      listings](#code-listings)
 - [<span class="toc-section-number">6</span> Help &
   contributing](#help--contributing)
 
