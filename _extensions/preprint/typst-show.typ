@@ -65,6 +65,9 @@ $endif$
 $if(keywords)$
   keywords: [$for(keywords)$$it$$sep$, $endfor$],
 $endif$
+$if(wordcount)$
+  wordcount: [$wordcount$],
+$endif$
 $if(margin)$
   margin: ($for(margin/pairs)$$margin.key$: $margin.value$,$endfor$),
 $endif$

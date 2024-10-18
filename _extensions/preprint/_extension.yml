@@ -1,8 +1,10 @@
 title: Preprint
 author: Matti Vuorre
-version: 0.9.2
+version: 0.10.0
 quarto-required: ">=1.5.47"
 contributes:
+  shortcodes: 
+    - "_extensions/andrewheiss/wordcount/words.lua"
   formats:
     typst:
       template-partials:
@@ -10,5 +12,12 @@ contributes:
         - typst-show.typ
       format-resources:
         - '*.svg'
+      citeproc: false
+      filters:
+        - at: pre-quarto
+          path: _extensions/andrewheiss/wordcount/citeproc.lua
+        - at: pre-quarto
+          path: _extensions/andrewheiss/wordcount/wordcount.lua
+      count-code-blocks: false
     docx: 
       reference-doc: preprint.docx

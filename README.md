@@ -38,6 +38,7 @@ The output of Quarto documents is configured through YAML metadata either in the
 running-head: "*preprint* Quarto extension manual"
 branding: psyarxiv
 authornote: This is an example author note.
+wordcount: "{{< words-body >}}"
 ```
 
 `running-head` should be a text string and is used as the document's running head. 
@@ -45,6 +46,8 @@ authornote: This is an example author note.
 `branding` adds a specified preprint service's logo to the document. Currently only "psyarxiv" is a valid value.
 
 `authornote` allows adding information to the footer of the first page.
+
+`wordcount` add a word count using <https://github.com/andrewheiss/quarto-wordcount> (see above example, and link for instructions on use).
 
 # Help & contributing
 
