@@ -7,15 +7,17 @@ $if(running-head)$
 $endif$
 $if(by-author)$
   authors: (
-$for(by-author)$
-$if(it.name.literal)$
-    ( name: [$it.name.literal$],
-      affiliation: [$for(it.affiliations)$$it.id$$sep$, $endfor$],
-      $if(it.orcid)$orcid: "https://orcid.org/$it.orcid$",$endif$
-      $if(it.email)$email: [$it.email$]$endif$),
-$endif$
-$endfor$
-    ),
+  $for(by-author)$
+      ( 
+        name: [$it.name.literal$],
+        affiliation: [$for(it.affiliations)$$it.id$$sep$, $endfor$],
+        $if(it.attributes.corresponding)$corresponding: $it.attributes.corresponding$,$endif$
+        $if(it.attributes.equal-contributor)$equal-contributor: $it.attributes.equal-contributor$,$endif$
+        $if(it.orcid)$orcid: "https://orcid.org/$it.orcid$",$endif$
+        $if(it.email)$email: [$it.email$]$endif$
+      ),
+  $endfor$
+  ),
 $endif$
 $if(affiliations)$
   affiliations: (
