@@ -12,7 +12,7 @@
   leading: 0.6em,
   spacing: 1em,
   first-line-indent: 0cm,
-  linkcolor: rgb(0, 0, 0),
+  linkcolor: black,
   margin: (x: 3.2cm, y: 3cm),
   paper: "a4",
   lang: "en",
@@ -21,9 +21,9 @@
   fontsize: 11pt,
   section-numbering: none,
   toc: false,
-  toc_title: "contents",
-  toc_depth: none,
-  toc_indent: 1.5em,
+  toc-title: "contents",
+  toc-depth: none,
+  toc-indent: 1.5em,
   bibliography-title: "References",
   bibliography-style: "apa",
   cols: 1,
@@ -131,7 +131,6 @@
   set heading(
     numbering: section-numbering
   )
-  // Level 1 headers
   show heading.where(
     level: 1
   ): it => block(width: 100%, below: 1em, above: 1.25em)[
@@ -139,28 +138,25 @@
     #set text(size: fontsize*1.1, weight: "bold")
     #it
   ]
-  // Level 2 headers
   show heading.where(
     level: 2
   ): it => block(width: 100%, below: 1em, above: 1.25em)[
     #set text(size: fontsize*1.05)
     #it
   ]
-  // Level 3 headers
   show heading.where(
     level: 3
   ): it => block(width: 100%, below: 0.8em, above: 1.2em)[
     #set text(size: fontsize, style: "italic")
     #it
   ]
-  // Level 4 headers are in paragraph
+  // Level 4 & 5 headers are in paragraph
   show heading.where(
     level: 4
   ): it => box(
     inset: (top: 0em, bottom: 0em, left: 0em, right: 1em), 
     text(size: 1em, weight: "bold", it)
   )
-  // Level 5 headers are in paragraph
   show heading.where(
     level: 5
   ): it => box(
@@ -218,16 +214,16 @@
 
   // Table of contents
   if toc {
-    let title = if toc_title == none {
+    let title = if toc-title == none {
       auto
     } else {
-      toc_title
+      toc-title
     }
     block(inset: (top: 2em, bottom: 0em, left: 2.4em, right: 2.4em))[
       #outline(
-        title: toc_title,
-        depth: toc_depth,
-        indent: toc_indent
+        title: toc-title,
+        depth: toc-depth,
+        indent: toc-indent
       )
     ]
   }

@@ -4,20 +4,5 @@ project:
     - index.qmd
   output-dir: docs
 
-format:
-  preprint-typst:
-    fontsize: 11pt
-    mainfont: Libertinus Serif
-  html:
-    toc: true
-    fontsize: 12pt
-    mainfont: Fira Sans
-    other-links: 
-      - text: Website
-        href: https://mvuorre.github.io/quarto-preprint
-        icon: globe2
-      - text: GitHub Repository
-        href: https://github.com/mvuorre/quarto-preprint
-        icon: github
-  preprint-docx:
-    default
+execute:
+  cache: true
