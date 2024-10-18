@@ -5,6 +5,7 @@
   affiliations: none,
   abstract: none,
   keywords: none,
+  wordcount: none,
   authornote: none,
   citation: none,
   date: none,
@@ -209,6 +210,9 @@
     }
     #if keywords != none {
       [#v(0.4em)#text(style: "italic")[Keywords:] #keywords]
+    }
+    #if wordcount != none {
+      [\ #text(style: "italic")[Words:] #wordcount]
     }
   ]
 

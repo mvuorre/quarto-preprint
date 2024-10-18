@@ -15,15 +15,13 @@ affiliations:
 abstract: |
   This is an example Quarto document using the `preprint-typst` format.
 keywords: [Quarto, Typst, extension, preprint]
+wordcount: "{{< words-body >}}"
 date: "`r Sys.Date()`"
 citation:
   type: article-journal
   container-title: "PsyArXiv"
   doi: "an.example.doi"
   url: example.com
-toc: true
-toc-depth: 2
-toc-title: "Contents"
 number-sections: true
 bibliography: bibliography.bib
 fontsize: 11pt
@@ -147,4 +145,8 @@ Code listings can also be cross-referenced (@lst-r).
 #| collapse: true
 
 1 + 1
+```
+
+```{r}
+1 + 1 + 1
 ```
