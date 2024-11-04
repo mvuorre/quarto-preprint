@@ -17,7 +17,7 @@ Example output: <https://mvuorre.github.io/quarto-preprint/index.pdf>.
 Add template to an existing project:
 
 ```bash
-quarto add template mvuorre/quarto-preprint
+quarto add mvuorre/quarto-preprint
 ```
 
 Start a new Quarto project that uses `quarto-preprint`:
