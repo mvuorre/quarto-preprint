@@ -232,6 +232,13 @@
     ]
   }
 
+  // Center figure, left-align caption.
+  show figure: set block(inset: (top: 0.4em, bottom: 0.2em))
+    show figure: it => {
+      align(center, it.body)
+      align(left, it.caption)
+  }
+
   /* Content */
 
   // Separate content a bit from front matter
