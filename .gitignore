@@ -11,9 +11,9 @@
 /.luarc.json
 .Rproj.user
 /.quarto/
+/docs/index_files/figure-docx/
 
 # Allow these in online docs
 !docs/**/*_files/
 !docs/**/*.pdf
-!docs/**/*.docx
 !docs/**/*.png
