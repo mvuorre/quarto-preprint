@@ -102,7 +102,7 @@ Below is an example figure created in R [@r2024] (@fig-example).
 #| label: fig-example
 #| fig-cap: Example R scatterplot.
 #| fig-height: 3
-#| fig-width: 3
+#| fig-width: 7
 #| echo: false
 
 plot(data)
