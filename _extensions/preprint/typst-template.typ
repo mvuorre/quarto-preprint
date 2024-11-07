@@ -181,7 +181,7 @@
   ) = [
     #align(center)[
       #block(width: width, above: above, below: below)[
-        #text(weight: weight, size: size)[#body]
+        #text(weight: weight, size: size, hyphenate: false)[#body]
       ]
     ]
   ]
