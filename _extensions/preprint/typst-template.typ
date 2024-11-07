@@ -45,10 +45,12 @@
   let author_strings = ()
   if authors != none {
     for a in authors {
-      let author_string = [
+      let author_string = box[#{
         // Solo manuscripts don't have institutional id
-        #box[#a.name]#if authors.len() > 1 [#super[#a.affiliation]]#if a.keys().contains("email") {[\*]}
-        #if a.keys().contains("orcid") {
+        a.name
+        if authors.len() > 1 {super(a.affiliation)}
+        if a.keys().contains("email") {[\*]}
+        if a.keys().contains("orcid") {
             box(
               height: 1em,
               link(
@@ -59,7 +61,9 @@
               )
             )
           }
+        }
         ]
+
       if a.keys().contains("corresponding") {
         authornote = [\*Send correspondence to: #a.name, #a.email.\ #authornote]
       }
