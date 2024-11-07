@@ -122,7 +122,11 @@
     first-line-indent: first-line-indent
   )
   // Set space between paragraphs
-  show par: set block(spacing: spacing)
+  if sys.version >= version(0,12,0) {
+    set par(spacing: spacing)
+  } else {
+    show par: set block(spacing: spacing)
+  }
 
   // Text settings
   set text(
