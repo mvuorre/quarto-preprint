@@ -12,6 +12,8 @@
 .Rproj.user
 /.quarto/
 /docs/index_files/figure-docx/
+/tests/*.pdf
+/tests/*.svg
 
 # Allow these in online docs
 !docs/**/*_files/
