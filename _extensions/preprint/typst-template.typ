@@ -41,6 +41,10 @@
   // Allow custom title for bibliography section
   set bibliography(title: bibliography-title, style: bibliography-style)
 
+  // Bibliography paragraph spacing
+  show bibliography: set par(spacing: spacing, leading: leading) if sys.version >= version(0, 12, 0)
+  show bibliography: set block(spacing: leading) if sys.version < version(0, 12, 0)
+
   // Format author strings here, so can use in author note
   let author_strings = ()
   if authors != none {
