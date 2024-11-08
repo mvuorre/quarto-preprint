@@ -1,0 +1,42 @@
+---
+title: "Appendices"
+author:
+  - name: Matti Vuorre
+    email: mjvuorre@uvt.nl
+    orcid: 0000-0001-5052-066X
+    url: https://www.tilburguniversity.edu/staff/m-j-vuorre
+    corresponding: true
+    affiliation:
+      - ref: 1
+affiliations:
+  - id: 1
+    name: Tilburg University
+    department: Department of Social Psychology
+format:
+  preprint-typst: default
+  html: default
+---
+
+# Normal header 1
+
+Content
+
+## Normal header 2
+
+Content
+
+### Normal header 3
+
+Content
+
+# Appendix header 1 {.appendix}
+
+Content
+
+## Appendix header 2 {.appendix}
+
+Content
+
+### Appendix header 3 {.appendix}
+
+Content
