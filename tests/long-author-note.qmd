@@ -1,0 +1,18 @@
+---
+title: "Long author note"
+author:
+  - name: Matti Vuorre
+    email: mjvuorre@uvt.nl
+    orcid: 0000-0001-5052-066X
+    url: https://www.tilburguniversity.edu/staff/m-j-vuorre
+    corresponding: true
+    affiliation:
+      - ref: 1
+affiliations:
+  - id: 1
+    name: Tilburg University
+    department: Department of Social Psychology
+format:
+  preprint-typst:
+    authornote: This is a long example author note. This is a long example author note. This is a long example author note. This is a long example author note. This is a long example author note. This is a long example author note. This is a long example author note. This is a long example author note. This is a long example author note. This is a long example author note. This is a long example author note. This is a long example author note. This is a long example author note. This is a long example author note. This is a long example author note. This is a long example author note. This is a long example author note. 
+---
