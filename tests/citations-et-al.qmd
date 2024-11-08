@@ -1,0 +1,28 @@
+---
+title: "Citations drop et al after first occurrence?"
+author:
+  - name: Matti Vuorre
+    email: mjvuorre@uvt.nl
+    orcid: 0000-0001-5052-066X
+    url: https://www.tilburguniversity.edu/staff/m-j-vuorre
+    corresponding: true
+    affiliation:
+      - ref: 1
+affiliations:
+  - id: 1
+    name: Tilburg University
+    department: Department of Social Psychology
+format:
+  preprint-typst: default
+bibliography: bibliography.bib
+suppress-bibliography: true
+---
+
+```{r} 
+quarto::quarto_version()
+```
+
+
+This should say et al @bolger2019.
+
+This should say et al @bolger2019.
