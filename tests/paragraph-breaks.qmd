@@ -1,0 +1,29 @@
+---
+title: "Appendices"
+author:
+  - name: Matti Vuorre
+    email: mjvuorre@uvt.nl
+    orcid: 0000-0001-5052-066X
+    url: https://www.tilburguniversity.edu/staff/m-j-vuorre
+    corresponding: true
+    affiliation:
+      - ref: 1
+affiliations:
+  - id: 1
+    name: Tilburg University
+    department: Department of Social Psychology
+format:
+  preprint-typst: default
+bibliography: bibliography.bib
+suppress-bibliography: true
+---
+
+```{r} 
+quarto::quarto_version()
+```
+
+This is a regular text paragraph. This is a regular text paragraph. This is a regular text paragraph. This is a regular text paragraph. This is a regular text paragraph.
+
+This is a regular text paragraph. This is a regular text paragraph. This is a regular text paragraph. This is a regular text paragraph. This is a regular text paragraph.
+
+Different versions of R will show up in the references: [@r20240], [@r20241], [@r20242].
