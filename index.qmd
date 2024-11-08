@@ -25,6 +25,7 @@ citation:
   url: example.com
 number-sections: true
 bibliography: bibliography.bib
+suppress-bibliography: true
 fontsize: 11pt
 mainfont: Libertinus Serif
 format:
