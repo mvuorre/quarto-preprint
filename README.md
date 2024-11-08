@@ -49,7 +49,13 @@ wordcount: "{{< words-body >}}"
 
 `wordcount` add a word count using <https://github.com/andrewheiss/quarto-wordcount> (see above example, and link for instructions on use).
 
-# Help & contributing
+# Help
+
+## Known limitations and issues
+
+- Must add `suppress-bibliography: true` to YAML so that the wordcount extension doesn't lead to duplicated bibliographies.
+
+## Contributing
 
 Send your bug reports and pull requests to <https://github.com/mvuorre/quarto-preprint>. If you're reporting a bug, please include a reproducible example / full details of what you're trying to do, how, and what goes wrong. 
 

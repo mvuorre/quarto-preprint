@@ -18,5 +18,6 @@ abstract: |
 keywords: [list, keywords, here]
 authornote: This is an example author note.
 bibliography: bibliography.bib
+suppress-bibliography: true
 format: preprint-typst
 ---
