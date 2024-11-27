@@ -19,7 +19,7 @@ keywords: [Quarto, Typst, extension, preprint]
 wordcount: "{{< words-body >}}"
 date: "`r Sys.Date()`"
 citation:
-  type: article-journal
+  type: article
   container-title: "PsyArXiv"
   doi: "an.example.doi"
   url: example.com
@@ -32,7 +32,6 @@ format:
   preprint-typst:
     section-numbering: "1.1.1.A.a"
     bibliographystyle: apa
-    branding: psyarxiv
     authornote: This is an example author note.
     keep-typ: true
 ---
@@ -41,23 +40,23 @@ format:
 
 This is an example `preprint-typst` document. Let us first take a look at body text and headings.
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Enim sed faucibus turpis in. Nec dui nunc mattis enim ut tellus. Bibendum ut tristique et egestas quis ipsum suspendisse ultrices gravida. Convallis posuere morbi leo urna. Sed velit dignissim sodales ut eu sem integer vitae justo. Convallis posuere morbi leo urna molestie at elementum eu facilisis. Aliquam sem et tortor consequat. Quam viverra orci sagittis eu. Sed arcu non odio euismod lacinia at quis risus sed. Egestas dui id ornare arcu odio ut sem. Lorem ipsum dolor sit amet consectetur. 
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Enim sed faucibus turpis in. Nec dui nunc mattis enim ut tellus. Bibendum ut tristique et egestas quis ipsum suspendisse ultrices gravida. Convallis posuere morbi leo urna. Sed velit dignissim sodales ut eu sem integer vitae justo. Convallis posuere morbi leo urna molestie at elementum eu facilisis. Aliquam sem et tortor consequat. Quam viverra orci sagittis eu. Sed arcu non odio euismod lacinia at quis risus sed. Egestas dui id ornare arcu odio ut sem. Lorem ipsum dolor sit amet consectetur.
 
 ## Heading level 2
 
-Eget arcu dictum varius duis at. Netus et malesuada fames ac turpis. Pellentesque sit amet porttitor eget. Egestas tellus rutrum tellus pellentesque eu tincidunt tortor. Risus quis varius quam quisque id diam. Vel pretium lectus quam id leo in vitae. Sit amet aliquam id diam maecenas ultricies mi eget mauris. Auctor urna nunc id cursus metus aliquam eleifend. Arcu dictum varius duis at consectetur lorem. Tempus iaculis urna id volutpat lacus laoreet non. Adipiscing elit ut aliquam purus sit amet. At auctor urna nunc id cursus metus aliquam. Pharetra vel turpis nunc eget lorem dolor. 
+Eget arcu dictum varius duis at. Netus et malesuada fames ac turpis. Pellentesque sit amet porttitor eget. Egestas tellus rutrum tellus pellentesque eu tincidunt tortor. Risus quis varius quam quisque id diam. Vel pretium lectus quam id leo in vitae. Sit amet aliquam id diam maecenas ultricies mi eget mauris. Auctor urna nunc id cursus metus aliquam eleifend. Arcu dictum varius duis at consectetur lorem. Tempus iaculis urna id volutpat lacus laoreet non. Adipiscing elit ut aliquam purus sit amet. At auctor urna nunc id cursus metus aliquam. Pharetra vel turpis nunc eget lorem dolor.
 
 ### Heading level 3
 
-Tristique et egestas quis ipsum suspendisse ultrices gravida dictum fusce. Mauris commodo quis imperdiet massa tincidunt nunc pulvinar. Commodo elit at imperdiet dui accumsan sit amet nulla. Consectetur lorem donec massa sapien faucibus. In vitae turpis massa sed elementum tempus egestas sed sed. Aliquam faucibus purus in massa tempor. Dignissim diam quis enim lobortis scelerisque fermentum dui faucibus in. Montes nascetur ridiculus mus mauris vitae ultricies leo. Sociis natoque penatibus et magnis dis parturient montes nascetur. 
+Tristique et egestas quis ipsum suspendisse ultrices gravida dictum fusce. Mauris commodo quis imperdiet massa tincidunt nunc pulvinar. Commodo elit at imperdiet dui accumsan sit amet nulla. Consectetur lorem donec massa sapien faucibus. In vitae turpis massa sed elementum tempus egestas sed sed. Aliquam faucibus purus in massa tempor. Dignissim diam quis enim lobortis scelerisque fermentum dui faucibus in. Montes nascetur ridiculus mus mauris vitae ultricies leo. Sociis natoque penatibus et magnis dis parturient montes nascetur.
 
 #### Heading level 4
 
-Consectetur libero id faucibus nisl. Consequat interdum varius sit amet mattis vulputate enim. Amet mattis vulputate enim nulla aliquet porttitor lacus luctus. Mauris augue neque gravida in fermentum et sollicitudin ac. Pharetra diam sit amet nisl suscipit adipiscing bibendum est ultricies. Nisi quis eleifend quam adipiscing. Diam ut venenatis tellus in. Dignissim enim sit amet venenatis urna cursus eget. Hac habitasse platea dictumst quisque sagittis. In fermentum et sollicitudin ac orci phasellus egestas tellus rutrum. 
+Consectetur libero id faucibus nisl. Consequat interdum varius sit amet mattis vulputate enim. Amet mattis vulputate enim nulla aliquet porttitor lacus luctus. Mauris augue neque gravida in fermentum et sollicitudin ac. Pharetra diam sit amet nisl suscipit adipiscing bibendum est ultricies. Nisi quis eleifend quam adipiscing. Diam ut venenatis tellus in. Dignissim enim sit amet venenatis urna cursus eget. Hac habitasse platea dictumst quisque sagittis. In fermentum et sollicitudin ac orci phasellus egestas tellus rutrum.
 
 ##### Heading level 5
 
-Aliquam faucibus purus in massa tempor nec feugiat nisl pretium. Malesuada proin libero nunc consequat interdum varius. Vulputate dignissim suspendisse in est. Congue eu consequat ac felis donec et odio pellentesque diam. Viverra justo nec ultrices dui sapien. Faucibus vitae aliquet nec ullamcorper sit amet risus. Metus aliquam eleifend mi in. Risus quis varius quam quisque id diam vel quam. Et malesuada fames ac turpis egestas integer eget aliquet. 
+Aliquam faucibus purus in massa tempor nec feugiat nisl pretium. Malesuada proin libero nunc consequat interdum varius. Vulputate dignissim suspendisse in est. Congue eu consequat ac felis donec et odio pellentesque diam. Viverra justo nec ultrices dui sapien. Faucibus vitae aliquet nec ullamcorper sit amet risus. Metus aliquam eleifend mi in. Risus quis varius quam quisque id diam vel quam. Et malesuada fames ac turpis egestas integer eget aliquet.
 
 ## Floats
 

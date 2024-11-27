@@ -1,14 +1,14 @@
 *quarto-preprint* is a [Quarto](https://quarto.org) extension for rendering Quarto source documents to PDF documents via [Typst](https://typst.app/docs). It aims to
 
 - Just Work™️
-  - Typst doesn't require complicated LaTeX installations     
+  - Typst doesn't require complicated LaTeX installations
 - Be fast
   - Typst creates PDF files very quickly
 - Be 100% Quarto standards compliant
   - Write manuscripts without worrying about formatting & metadata
   - Switch to any Quarto journal format without changing anything but `format:` (and whatever is required by the destination format)
 
-To use (see below), install the extension and set your Quarto output format to `preprint-typst`. The extension also provides a `preprint-docx` format, which renders Quarto source documents to MS Word documents with some basic layout improvements. 
+To use (see below), install the extension and set your Quarto output format to `preprint-typst`. The extension also provides a `preprint-docx` format, which renders Quarto source documents to MS Word documents with some basic layout improvements.
 
 Example output: <https://mvuorre.github.io/quarto-preprint/index.pdf>.
 
@@ -36,14 +36,11 @@ The output of Quarto documents is configured through YAML metadata either in the
 
 ```{yaml}
 running-head: "*preprint* Quarto extension manual"
-branding: psyarxiv
 authornote: This is an example author note.
 wordcount: "{{< words-body >}}"
 ```
 
-`running-head` should be a text string and is used as the document's running head. 
-
-`branding` adds a specified preprint service's logo to the document. Currently only "psyarxiv" is a valid value.
+`running-head` should be a text string and is used as the document's running head.
 
 `authornote` allows adding information to the footer of the first page.
 
@@ -57,7 +54,7 @@ wordcount: "{{< words-body >}}"
 
 ## Contributing
 
-Send your bug reports and pull requests to <https://github.com/mvuorre/quarto-preprint>. If you're reporting a bug, please include a reproducible example / full details of what you're trying to do, how, and what goes wrong. 
+Send your bug reports and pull requests to <https://github.com/mvuorre/quarto-preprint>. If you're reporting a bug, please include a reproducible example / full details of what you're trying to do, how, and what goes wrong.
 
 ## Tips
 
