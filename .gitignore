@@ -14,6 +14,7 @@
 /docs/index_files/figure-docx/
 /tests/*.pdf
 /tests/*.svg
+/tests/_extensions
 
 # Allow these in online docs
 !docs/**/*_files/
