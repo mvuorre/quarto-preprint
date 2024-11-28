@@ -10,8 +10,10 @@ tests: $(TEST_FILES)
 	@for file in $^; do \
 		quarto render $$file; \
 	done
+	mkdir -p tests/use; cd tests/use; quarto use template ../../. --no-prompt
 
 clean:
-	rm -rf *.pdf *.typ *.png *_cache/ *_files/ tests/_extensions
+	rm -rf *.pdf *.typ *.png *_cache/ *_files/ tests/*.pdf tests/*.html docs/
+	find tests/ -mindepth 1 -type d -exec rm -r {} +
 
 .PHONY: all clean tests

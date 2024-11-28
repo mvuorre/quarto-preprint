@@ -9,4 +9,4 @@ _quarto.yml
 *.png
 *.svg
 *.html
-/tests/
+tests/
