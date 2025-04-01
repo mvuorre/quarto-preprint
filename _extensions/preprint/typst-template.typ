@@ -1,3 +1,5 @@
+#import "@preview/fontawesome:0.5.0": *
+
 #let preprint(
   title: none,
   running-head: none,
@@ -57,14 +59,9 @@
         if authors.len() > 1 {super(a.affiliation)}
         if a.keys().contains("email") {[\*]}
         if a.keys().contains("orcid") {
-            box(
-              height: 1em,
               link(
                 a.orcid,
-                figure(
-                  image.decode(orcidSvg, height: 0.9em)
-                )
-              )
+            fa-orcid(fill: rgb("a6ce39"), size: 0.8em)
             )
           }
         }
