@@ -80,25 +80,17 @@
     margin: margin,
     numbering: "1",
     header-ascent: 50%,
-    header: locate(
-        loc => if [#loc.page()] != [1] {
-          // Page >1 header has running head and page number
-          grid(
+    header: context { if(counter(page).get().at(0)== 1) [
+        #grid(
             columns: (1fr, 1fr),
             align(left)[#running-head],
             align(right)[#counter(page).display()]
-          )
-        }
-    ),
+        )
+    ]},
     footer-descent: 24pt,
-    footer: locate(
-        // Page 1 footer has author note
-        loc => if [#loc.page()] == [1] {
-          [#text(size: 0.85em)[#authornote]]
-        } else {
-          []
-        }
-    )
+    footer: context { if(counter(page).get().at(0)== 1) [
+        #[#text(size: 0.85em)[#authornote]]
+    ]}
   )
 
   // Paragraph settings

@@ -10,7 +10,7 @@ tests: $(TEST_FILES)
 	@for file in $^; do \
 		quarto render $$file; \
 	done
-	mkdir -p tests/use; cd tests/use; quarto use template ../../. --no-prompt
+	rm -rf tests/use; mkdir -p tests/use; cd tests/use; quarto use template ../../. --no-prompt
 
 clean:
 	rm -rf *.pdf *.typ *.png *_cache/ *_files/ tests/*.pdf tests/*.html docs/
