@@ -79,7 +79,7 @@
   set page(
     paper: paper,
     margin: margin,
-    numbering: "1",
+    numbering: none,
     header-ascent: 50%,
     header: context { if(counter(page).get().at(0) > 1) [
         #grid(
