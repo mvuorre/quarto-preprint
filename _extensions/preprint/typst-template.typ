@@ -80,15 +80,15 @@
     margin: margin,
     numbering: "1",
     header-ascent: 50%,
-    header: context { if(counter(page).get().at(0)== 1) [
+    header: context { if(counter(page).get().at(0) > 1) [
         #grid(
             columns: (1fr, 1fr),
             align(left)[#running-head],
             align(right)[#counter(page).display()]
         )
     ]},
-    footer-descent: 24pt,
-    footer: context { if(counter(page).get().at(0)== 1) [
+    footer-descent: 10%,
+    footer: context { if(counter(page).get().at(0) == 1) [
         #[#text(size: 0.85em)[#authornote]]
     ]}
   )
