@@ -1,8 +1,7 @@
 project:
   title: "Quarto preprint"
-  render: 
+  render:
     - index.qmd
-  output-dir: docs
 
 execute:
   cache: true

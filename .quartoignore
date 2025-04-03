@@ -10,3 +10,5 @@ _quarto.yml
 *.svg
 *.html
 tests/
+NEWS.md
+.release.timestamp

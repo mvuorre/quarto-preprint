@@ -10,7 +10,7 @@
 
 To use (see below), install the extension and set your Quarto output format to `preprint-typst`. The extension also provides a `preprint-docx` format, which renders Quarto source documents to MS Word documents with some basic layout improvements.
 
-Example output: <https://mvuorre.github.io/quarto-preprint/index.pdf>.
+Example output: <https://github.com/mvuorre/quarto-preprint/releases/latest/download/index.pdf>.
 
 ## Install
 

@@ -15,8 +15,4 @@
 /tests/*.pdf
 /tests/*.svg
 /tests/**/
-
-# Allow these in online docs
-!docs/**/*_files/
-!docs/**/*.pdf
-!docs/**/*.png
+.release.timestamp

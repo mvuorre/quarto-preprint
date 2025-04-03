@@ -15,7 +15,7 @@ affiliations:
     department: Example Department
 abstract: |
   Abstract.
-keywords: [list, keywords, here]
+categories: [list, keywords, here]
 authornote: This is an example author note.
 bibliography: bibliography.bib
 suppress-bibliography: true
