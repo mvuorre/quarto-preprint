@@ -1,3 +1,7 @@
+## 0.14.0
+
+- Support `equal-contributor` author metadata
+
 ## 0.13.0
 
 - Allow more control over layout settings with YAML variables
