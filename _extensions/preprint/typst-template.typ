@@ -6,7 +6,7 @@
   authors: (),
   affiliations: none,
   abstract: none,
-  keywords: none,
+  categories: none,
   wordcount: none,
   authornote: none,
   citation: none,
@@ -188,14 +188,14 @@
     )
   }
 
-  // Abstract and keywords block
+  // Abstract and categories block
   block(inset: (top: 2em, bottom: 0em, left: 2.4em, right: 2.4em))[
     #set text(size: 0.92em)
     #if abstract != none {
       abstract
     }
-    #if keywords != none {
-      [#v(0.4em)#text(style: "italic")[Keywords:] #keywords]
+    #if categories != none {
+      [#v(0.4em)#text(style: "italic")[keywords:] #categories]
     }
     #if wordcount != none {
       [\ #text(style: "italic")[Words:] #wordcount]

@@ -15,7 +15,7 @@ affiliations:
     department: Department of Social Psychology
 abstract: |
   This is an example Quarto document using the `preprint-typst` format.
-keywords: [Quarto, Typst, extension, preprint]
+categories: [Quarto, Typst, extension, preprint]
 wordcount: "{{< words-body >}}"
 date: "`r Sys.Date()`"
 citation:
