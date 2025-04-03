@@ -1,3 +1,7 @@
+## 0.12.2
+
+- Fix issue with author notes
+
 ## 0.12.1
 
 - Fix issue with citations (#23)
