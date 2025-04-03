@@ -55,34 +55,6 @@
   // Bibliography paragraph spacing
   show bibliography: set par(spacing: spacing, leading: leading)
 
-  // Format author strings here, so can use in author note
-  let author_strings = ()
-  if authors != none {
-    for a in authors {
-      let author_string = box[#{
-        // Solo manuscripts don't have institutional id
-        a.name
-        if authors.len() > 1 {super(a.affiliation)}
-        if a.keys().contains("corresponding") {
-          footnote(numbering: "*", [
-            Send correspondence to: #a.name, #a.email.
-            #if authornote != none [#authornote]
-          ])
-          counter(footnote).update(0)
-        }
-        if a.keys().contains("orcid") {
-              link(
-                a.orcid,
-                fa-orcid(fill: rgb("a6ce39"), size: 0.8em)
-            )
-          }
-        }
-        ]
-
-      author_strings.push(author_string)
-    }
-  }
-
   /* Page layout settings */
 
   // Page settings (including headers & footers)
@@ -110,7 +82,6 @@
     spacing: spacing,
     first-line-indent: (amount: first-line-indent, all: all),
   )
-
 
   // Text settings
   set text(
@@ -178,6 +149,65 @@
     titleblock(title, above: 0em, below: 2em)
   }
 
+  /* Author formatting */
+
+  // Format author strings here, so can use in author note
+  let author_strings = ()
+  let equal_contributors = ()
+  
+  if authors != none {
+    // First pass: collect equal contributors
+    for a in authors {
+      if a.keys().contains("equal-contributor") and a.at("equal-contributor") == true {
+        equal_contributors.push(a.name)
+      }
+    }
+    
+    // Create equal contributor note text to reuse
+    let equal_contrib_text = none
+    if equal_contributors.len() > 1 {
+      equal_contrib_text = [#equal_contributors.join(", ", last: " & ") contributed equally to this work.]
+    }
+    
+    // Second pass: build author display strings with attached footnotes
+    for a in authors {
+      let author_elements = (a.name,)
+      
+      // Add affiliation superscript for multi-author papers
+      if authors.len() > 1 {
+        author_elements.push(super(a.affiliation))
+      }
+      
+      // Add equal contributor marker if needed
+      if a.keys().contains("equal-contributor") and a.at("equal-contributor") == true and equal_contributors.len() > 1 {
+        author_elements.push(super[§])
+      }
+      
+      // Add corresponding author footnote directly to the author name
+      if a.keys().contains("corresponding") {
+        author_elements.push(
+          footnote(numbering: "*", [
+            Send correspondence to: #a.name, #a.email.
+            #if equal_contrib_text != none [
+              #super[§]#equal_contrib_text
+            ]
+            #if authornote != none [#authornote]
+          ])
+        )
+      }
+      
+      // Add ORCID if available
+      if a.keys().contains("orcid") {
+        author_elements.push(
+          link(a.orcid, fa-orcid(fill: rgb("a6ce39"), size: 0.8em))
+        )
+      }
+      
+      // Add author string to the list
+      author_strings.push(box(author_elements.join()))
+    }
+  }
+
   if authors != none {
     titleblock(
       weight: "regular", size: 1.25em,
@@ -193,6 +223,9 @@
       ]
     )
   }
+  
+  // Reset footnote counter for the main document
+  counter(footnote).update(0)
 
   /* Abstract and metadata section */
 

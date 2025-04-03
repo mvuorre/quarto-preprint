@@ -7,12 +7,27 @@ author:
     orcid: 0000-0001-5052-066X
     url: https://www.tilburguniversity.edu/staff/m-j-vuorre
     corresponding: true
+    equal-contributor: true
     affiliation:
       - ref: 1
+  - name: Second Author
+    email: mail@example.com
+    orcid: 0000-0001-5052-066X
+    url: https://www.tilburguniversity.edu/staff/m-j-vuorre
+    equal-contributor: true
+    affiliation:
+      - ref: 2
+      - ref: 3
 affiliations:
   - id: 1
     name: Tilburg University
     department: Department of Social Psychology
+  - id: 2
+    name: Example Institution
+    department: Department of Examples
+  - id: 3
+    name: Example Second Institution
+    department: Department of Examples
 abstract: |
   This is an example Quarto document using the `preprint-typst` format.
 categories: [Quarto, Typst, extension, preprint]
