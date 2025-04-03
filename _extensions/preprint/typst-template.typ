@@ -57,18 +57,21 @@
         // Solo manuscripts don't have institutional id
         a.name
         if authors.len() > 1 {super(a.affiliation)}
-        if a.keys().contains("email") {[\*]}
+        if a.keys().contains("corresponding") {[\*]}
         if a.keys().contains("orcid") {
               link(
                 a.orcid,
-            fa-orcid(fill: rgb("a6ce39"), size: 0.8em)
+                fa-orcid(fill: rgb("a6ce39"), size: 0.8em)
             )
           }
         }
         ]
 
       if a.keys().contains("corresponding") {
-        authornote = [\*Send correspondence to: #a.name, #a.email.\ #authornote]
+        authornote = [
+            Send correspondence to: #a.name, #a.email.
+            #authornote
+        ]
       }
       author_strings.push(author_string)
     }
@@ -87,11 +90,13 @@
             align(right)[#counter(page).display()]
         )
     ]},
-    footer-descent: 10%,
-    footer: context { if(counter(page).get().at(0) == 1) [
-        #[#text(size: 0.85em)[#authornote]]
-    ]}
+    footer-descent: 10%
   )
+
+    if authornote != none {
+        footnote(numbering: "*", authornote)
+        counter(footnote).update(0)
+    }
 
   // Paragraph settings
   set par(
