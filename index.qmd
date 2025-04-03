@@ -25,11 +25,11 @@ citation:
   url: example.com
 number-sections: true
 bibliography: bibliography.bib
-suppress-bibliography: true
 fontsize: 11pt
 mainfont: Libertinus Serif
 format:
   preprint-typst:
+    suppress-bibliography: true
     section-numbering: "1.1.1.A.a"
     bibliographystyle: apa
     authornote: This is an example author note.
@@ -132,9 +132,6 @@ To insert a quote block, prepend a paragraph with `>`:
 
 ::: {#tip-example .callout-tip}
 #### All kinds of markup
-````
-This is basic markdown: **bold text** & ~subscript~.
-````
 This is basic markdown: **bold text** & ~subscript~.
 :::
 
@@ -148,8 +145,4 @@ Code listings can also be cross-referenced (@lst-r).
 #| collapse: true
 
 1 + 1
-```
-
-```{r}
-1 + 1 + 1
 ```
