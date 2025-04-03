@@ -1,3 +1,10 @@
+## 0.13.0
+
+- Allow more control over layout settings with YAML variables
+  - Use `first-line-indent` and `all` to control paragraph indents
+- Small layout improvements to level 4 & 5 headers
+- Document more YAML variables
+
 ## 0.12.2
 
 - Fix issue with author notes

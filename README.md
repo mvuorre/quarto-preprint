@@ -32,19 +32,31 @@ The output of Quarto documents is configured through YAML metadata either in the
 
 `preprint-typst` aims to include all standard Quarto front matter options for scholarly writing. Please report missing features (or other bugs) on [GitHub](https://github.com/mvuorre/quarto-preprint/issues). In addition, there are a few options specific to Typst, and the `quarto-preprint` format.
 
-## Options specific to `quarto-preprint`
+## Typst variables
+
+In addition to Quarto [Typst variables](https://quarto.org/docs/output-formats/typst.html), `quarto-preprint` supports passing many Typst layout variables in the document front-matter. See `_extensions/preprint/typst-template.typ` for a full list; some are highlighted below.
 
 ```{yaml}
-running-head: "*preprint* Quarto extension manual"
-authornote: This is an example author note.
-wordcount: "{{< words-body >}}"
+format:
+  preprint-typst:
+    suppress-bibliography: true
+    section-numbering: "1."
+    bibliographystyle: apa
+    authornote: This is an example author note.
+    keep-typ: true
+    running-head: "*preprint* Quarto extension manual"
+    authornote: This is an example author note.
+    wordcount: "{{< words-body >}}"
+    leading: 0.6em # line spacing
+    spacing: 0.6em # paragraph spacing
+    first-line-indent: 1.8em # Amount to indent lines 1< of paragraph
+    all: false # Whether to also indent the first line of each paragraph with above
+    linkcolor: black
 ```
 
-`running-head` should be a text string and is used as the document's running head.
-
-`authornote` allows adding information to the footer of the first page.
-
-`wordcount` add a word count using <https://github.com/andrewheiss/quarto-wordcount> (see above example, and link for instructions on use).
+- `running-head` should be a text string and is used as the document's running head.
+- `authornote` allows adding information to the footer of the first page.
+- `wordcount` add a word count using <https://github.com/andrewheiss/quarto-wordcount> (see above example, and link for instructions on use).
 
 # Help
 

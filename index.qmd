@@ -16,7 +16,6 @@ affiliations:
 abstract: |
   This is an example Quarto document using the `preprint-typst` format.
 categories: [Quarto, Typst, extension, preprint]
-wordcount: "{{< words-body >}}"
 date: "`r Sys.Date()`"
 citation:
   type: article
@@ -30,10 +29,11 @@ mainfont: Libertinus Serif
 format:
   preprint-typst:
     suppress-bibliography: true
-    section-numbering: "1.1.1.A.a"
+    section-numbering: "1."
     bibliographystyle: apa
     authornote: This is an example author note.
     keep-typ: true
+    wordcount: "{{< words-body >}}"
 ---
 
 # Introduction
@@ -43,6 +43,8 @@ This is an example `preprint-typst` document. Let us first take a look at body t
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Enim sed faucibus turpis in. Nec dui nunc mattis enim ut tellus. Bibendum ut tristique et egestas quis ipsum suspendisse ultrices gravida. Convallis posuere morbi leo urna. Sed velit dignissim sodales ut eu sem integer vitae justo. Convallis posuere morbi leo urna molestie at elementum eu facilisis. Aliquam sem et tortor consequat. Quam viverra orci sagittis eu. Sed arcu non odio euismod lacinia at quis risus sed. Egestas dui id ornare arcu odio ut sem. Lorem ipsum dolor sit amet consectetur.[^fn-1]
 
 [^fn-1]: This is a footnote.
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Enim sed faucibus turpis in. Nec dui nunc mattis enim ut tellus. Bibendum ut tristique et egestas quis ipsum suspendisse ultrices gravida. Convallis posuere morbi leo urna. Sed velit dignissim sodales ut eu sem integer vitae justo. Convallis posuere morbi leo urna molestie at elementum eu facilisis. Aliquam sem et tortor consequat. Quam viverra orci sagittis eu. Sed arcu non odio euismod lacinia at quis risus sed. Egestas dui id ornare arcu odio ut sem. Lorem ipsum dolor sit amet consectetur.
 
 ## Heading level 2
 

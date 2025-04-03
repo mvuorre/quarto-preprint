@@ -13,21 +13,22 @@
   citation: none,
   date: none,
   branding: none,
-  
+
   // Layout settings
   leading: 0.6em,
-  spacing: 1em,
-  first-line-indent: 0cm,
+  spacing: 0.6em,
+  first-line-indent: 1.8em,
+  all: false,
   linkcolor: black,
   margin: (x: 3.2cm, y: 3cm),
   paper: "a4",
-  
+
   // Typography settings
   lang: "en",
   region: "US",
   font: ("Times", "Times New Roman", "Arial"),
   fontsize: 11pt,
-  
+
   // Structure settings
   section-numbering: none,
   toc: false,
@@ -38,7 +39,7 @@
   bibliography-style: "apa",
   cols: 1,
   col-gutter: 4.2%,
-  
+
   doc
 ) = {
 
@@ -107,7 +108,7 @@
     justify: true,
     leading: leading,
     spacing: spacing,
-    first-line-indent: first-line-indent
+    first-line-indent: (amount: first-line-indent, all: all),
   )
 
 
@@ -146,14 +147,14 @@
   show heading.where(
     level: 4
   ): it => box(
-    inset: (top: 0em, bottom: 0em, left: 0em, right: 1em),
-    text(size: 1em, weight: "bold", it)
+    inset: (top: 0em, bottom: 0em, left: 0em, right: 0.1em),
+    text(size: 1em, weight: "bold", it.body + [.])
   )
   show heading.where(
     level: 5
   ): it => box(
-    inset: (top: 0em, bottom: 0em, left: 0em, right: 1em),
-    text(size: 1em, weight: "bold", style: "italic", it)
+    inset: (top: 0em, bottom: 0em, left: 0em, right: 0.1em),
+    text(size: 1em, weight: "bold", style: "italic", it.body + [.])
   )
 
   /* Front matter formatting */
@@ -197,6 +198,7 @@
 
   block(inset: (top: 1em, bottom: 0em, left: 2.4em, right: 2.4em))[
     #set text(size: 0.92em)
+    #set par(first-line-indent: 0em)
     #if abstract != none {
       abstract
     }
