@@ -40,7 +40,9 @@ format:
 
 This is an example `preprint-typst` document. Let us first take a look at body text and headings.
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Enim sed faucibus turpis in. Nec dui nunc mattis enim ut tellus. Bibendum ut tristique et egestas quis ipsum suspendisse ultrices gravida. Convallis posuere morbi leo urna. Sed velit dignissim sodales ut eu sem integer vitae justo. Convallis posuere morbi leo urna molestie at elementum eu facilisis. Aliquam sem et tortor consequat. Quam viverra orci sagittis eu. Sed arcu non odio euismod lacinia at quis risus sed. Egestas dui id ornare arcu odio ut sem. Lorem ipsum dolor sit amet consectetur.
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Enim sed faucibus turpis in. Nec dui nunc mattis enim ut tellus. Bibendum ut tristique et egestas quis ipsum suspendisse ultrices gravida. Convallis posuere morbi leo urna. Sed velit dignissim sodales ut eu sem integer vitae justo. Convallis posuere morbi leo urna molestie at elementum eu facilisis. Aliquam sem et tortor consequat. Quam viverra orci sagittis eu. Sed arcu non odio euismod lacinia at quis risus sed. Egestas dui id ornare arcu odio ut sem. Lorem ipsum dolor sit amet consectetur.[^fn-1]
+
+[^fn-1]: This is a footnote.
 
 ## Heading level 2
 
