@@ -1,3 +1,7 @@
+## 0.14.1
+
+- Remove spurious callout captions
+
 ## 0.14.0
 
 - Support `equal-contributor` author metadata
