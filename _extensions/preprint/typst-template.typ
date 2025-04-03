@@ -1,6 +1,7 @@
 #import "@preview/fontawesome:0.5.0": *
 
 #let preprint(
+  // Document metadata
   title: none,
   running-head: none,
   authors: (),
@@ -12,31 +13,38 @@
   citation: none,
   date: none,
   branding: none,
+  
+  // Layout settings
   leading: 0.6em,
   spacing: 1em,
   first-line-indent: 0cm,
   linkcolor: black,
   margin: (x: 3.2cm, y: 3cm),
   paper: "a4",
+  
+  // Typography settings
   lang: "en",
   region: "US",
   font: ("Times", "Times New Roman", "Arial"),
   fontsize: 11pt,
+  
+  // Structure settings
   section-numbering: none,
   toc: false,
-  toc-title: "contents",
+  toc-title: none,
   toc-depth: none,
   toc-indent: 1.5em,
   bibliography-title: "References",
   bibliography-style: "apa",
   cols: 1,
   col-gutter: 4.2%,
-  doc,
+  
+  doc
 ) = {
 
   /* Document settings */
 
-  // Set link and cite colors
+  // Link and cite colors
   show link: set text(fill: linkcolor)
   show cite: set text(fill: linkcolor)
 
@@ -44,8 +52,7 @@
   set bibliography(title: bibliography-title, style: bibliography-style)
 
   // Bibliography paragraph spacing
-  show bibliography: set par(spacing: spacing, leading: leading) if sys.version >= version(0, 12, 0)
-  show bibliography: set block(spacing: leading) if sys.version < version(0, 12, 0)
+  show bibliography: set par(spacing: spacing, leading: leading)
 
   // Format author strings here, so can use in author note
   let author_strings = ()
@@ -75,6 +82,8 @@
     }
   }
 
+  /* Page layout settings */
+
   // Page settings (including headers & footers)
   set page(
     paper: paper,
@@ -91,18 +100,16 @@
     footer-descent: 10%
   )
 
+  /* Typography settings */
+
   // Paragraph settings
   set par(
     justify: true,
     leading: leading,
+    spacing: spacing,
     first-line-indent: first-line-indent
   )
-  // Set space between paragraphs
-  if sys.version >= version(0,12,0) {
-    set par(spacing: spacing)
-  } else {
-    show par: set block(spacing: spacing)
-  }
+
 
   // Text settings
   set text(
@@ -149,7 +156,7 @@
     text(size: 1em, weight: "bold", style: "italic", it)
   )
 
-  /* Content front matter */
+  /* Front matter formatting */
 
   let titleblock(
     body,
@@ -167,7 +174,7 @@
   ]
 
   if title != none {
-    titleblock(title)
+    titleblock(title, above: 0em, below: 2em)
   }
 
   if authors != none {
@@ -186,14 +193,15 @@
     )
   }
 
-  // Abstract and categories block
-  block(inset: (top: 2em, bottom: 0em, left: 2.4em, right: 2.4em))[
+  /* Abstract and metadata section */
+
+  block(inset: (top: 1em, bottom: 0em, left: 2.4em, right: 2.4em))[
     #set text(size: 0.92em)
     #if abstract != none {
       abstract
     }
     #if categories != none {
-      [#v(0.4em)#text(style: "italic")[keywords:] #categories]
+      [#v(0.4em)#text(style: "italic")[Keywords:] #categories]
     }
     #if wordcount != none {
       [\ #text(style: "italic")[Words:] #wordcount]
@@ -202,11 +210,6 @@
 
   // Table of contents
   if toc {
-    let title = if toc-title == none {
-      auto
-    } else {
-      toc-title
-    }
     block(inset: (top: 2em, bottom: 0em, left: 2.4em, right: 2.4em))[
       #outline(
         title: toc-title,
@@ -216,6 +219,8 @@
     ]
   }
 
+  /* Figure styling */
+
   // Center figure, left-align caption.
   show figure: set block(inset: (top: 0.4em, bottom: 0.2em))
     show figure: it => {
@@ -223,7 +228,7 @@
       align(left, it.caption)
   }
 
-  /* Content */
+  /* Document content */
 
   // Separate content a bit from front matter
   v(2em)
