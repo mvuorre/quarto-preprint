@@ -19,8 +19,9 @@ tests: $(TEST_FILES)
 	@echo "Creating GitHub release..."
 	@VERSION=$$(grep -m 1 "version:" _extensions/preprint/_extension.yml | sed 's/version: *//; s/"//g'); \
 	CHANGELOG=$$(awk '/^## '$$VERSION'$$/{flag=1; next} /^## [0-9]/{flag=0} flag' NEWS.md); \
-	gh release create v$$VERSION --title "v$$VERSION" --notes "$$CHANGELOG"
+	gh release create v$$VERSION --title "v$$VERSION" --notes "$$CHANGELOG" index.pdf
 	@touch .release.timestamp
+
 release: .release.timestamp
 
 # Clean all intermediate files
