@@ -1,3 +1,7 @@
+## 0.12.1
+
+- Fix issue with citations (#23)
+
 ## 0.12.0
 
 - Switch to MIT license
