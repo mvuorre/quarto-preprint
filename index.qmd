@@ -96,7 +96,7 @@ knitr::kable(
 
 ### Figures
 
-Below is an example figure created in R [@r2024] (@fig-example).
+Below is an example figure created in R [@rcoreteamLanguageEnvironmentStatistical2025] (@fig-example).
 
 ```{r}
 #| label: fig-example
