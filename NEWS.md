@@ -1,3 +1,7 @@
+## 0.14.2
+
+- Add vertical space around floats
+
 ## 0.14.1
 
 - Remove spurious callout captions

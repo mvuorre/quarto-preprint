@@ -13,7 +13,6 @@
   citation: none,
   date: none,
   branding: none,
-
   // Layout settings
   leading: 0.6em,
   spacing: 0.6em,
@@ -22,13 +21,11 @@
   linkcolor: black,
   margin: (x: 3.2cm, y: 3cm),
   paper: "a4",
-
   // Typography settings
   lang: "en",
   region: "US",
   font: ("Times", "Times New Roman", "Arial"),
   fontsize: 11pt,
-
   // Structure settings
   section-numbering: none,
   toc: false,
@@ -39,12 +36,9 @@
   bibliography-style: "apa",
   cols: 1,
   col-gutter: 4.2%,
-
-  doc
+  doc,
 ) = {
-
   /* Document settings */
-
   // Link and cite colors
   show link: set text(fill: linkcolor)
   show cite: set text(fill: linkcolor)
@@ -55,22 +49,24 @@
   // Bibliography paragraph spacing
   show bibliography: set par(spacing: spacing, leading: leading)
 
-  /* Page layout settings */
+  // Space around figures
+  show figure: f => { [#v(leading * 2) #f #v(leading * 2) ] }
 
-  // Page settings (including headers & footers)
+  /* Page layout settings */
   set page(
     paper: paper,
     margin: margin,
     numbering: none,
     header-ascent: 50%,
-    header: context { if(counter(page).get().at(0) > 1) [
+    header: context {
+      if (counter(page).get().at(0) > 1) [
         #grid(
-            columns: (1fr, 1fr),
-            align(left)[#running-head],
-            align(right)[#counter(page).display()]
+          columns: (1fr, 1fr),
+          align(left)[#running-head], align(right)[#counter(page).display()],
         )
-    ]},
-    footer-descent: 10%
+      ]
+    },
+    footer-descent: 10%,
   )
 
   /* Typography settings */
@@ -88,44 +84,32 @@
     lang: lang,
     region: region,
     font: font,
-    size: fontsize
+    size: fontsize,
   )
 
   // Headers
-  set heading(
-    numbering: section-numbering
-  )
-  show heading.where(
-    level: 1
-  ): it => block(width: 100%, below: 1em, above: 1.25em)[
+  set heading(numbering: section-numbering)
+  show heading.where(level: 1): it => block(width: 100%, below: 1em, above: 1.25em)[
     #set align(center)
-    #set text(size: fontsize*1.1, weight: "bold")
+    #set text(size: fontsize * 1.1, weight: "bold")
     #it
   ]
-  show heading.where(
-    level: 2
-  ): it => block(width: 100%, below: 1em, above: 1.25em)[
-    #set text(size: fontsize*1.05)
+  show heading.where(level: 2): it => block(width: 100%, below: 1em, above: 1.25em)[
+    #set text(size: fontsize * 1.05)
     #it
   ]
-  show heading.where(
-    level: 3
-  ): it => block(width: 100%, below: 0.8em, above: 1.2em)[
+  show heading.where(level: 3): it => block(width: 100%, below: 0.8em, above: 1.2em)[
     #set text(size: fontsize, style: "italic")
     #it
   ]
   // Level 4 & 5 headers are in paragraph
-  show heading.where(
-    level: 4
-  ): it => box(
+  show heading.where(level: 4): it => box(
     inset: (top: 0em, bottom: 0em, left: 0em, right: 0.1em),
-    text(size: 1em, weight: "bold", it.body + [.])
+    text(size: 1em, weight: "bold", it.body + [.]),
   )
-  show heading.where(
-    level: 5
-  ): it => box(
+  show heading.where(level: 5): it => box(
     inset: (top: 0em, bottom: 0em, left: 0em, right: 0.1em),
-    text(size: 1em, weight: "bold", style: "italic", it.body + [.])
+    text(size: 1em, weight: "bold", style: "italic", it.body + [.]),
   )
 
   /* Front matter formatting */
@@ -136,7 +120,7 @@
     size: 1.5em,
     weight: "bold",
     above: 1em,
-    below: 0em
+    below: 0em,
   ) = [
     #align(center)[
       #block(width: width, above: above, below: below)[
@@ -186,21 +170,22 @@
       // Add corresponding author footnote directly to the author name
       if a.keys().contains("corresponding") {
         author_elements.push(
-          footnote(numbering: "*", [
-            Send correspondence to: #a.name, #a.email.
-            #if equal_contrib_text != none [
-              #super[§]#equal_contrib_text
-            ]
-            #if authornote != none [#authornote]
-          ])
+          footnote(
+            numbering: "*",
+            [
+              Send correspondence to: #a.name, #a.email.
+              #if equal_contrib_text != none [
+                #super[§]#equal_contrib_text
+              ]
+              #if authornote != none [#authornote]
+            ],
+          ),
         )
       }
 
       // Add ORCID if available
       if a.keys().contains("orcid") {
-        author_elements.push(
-          link(a.orcid, fa-orcid(fill: rgb("a6ce39"), size: 0.8em))
-        )
+        author_elements.push(link(a.orcid, fa-orcid(fill: rgb("a6ce39"), size: 0.8em)))
       }
 
       // Add author string to the list
@@ -210,17 +195,20 @@
 
   if authors != none {
     titleblock(
-      weight: "regular", size: 1.25em,
-      [#author_strings.join(", ", last: " & ")]
+      weight: "regular",
+      size: 1.25em,
+      [#author_strings.join(", ", last: " & ")],
     )
   }
 
   if affiliations != none {
     titleblock(
-      weight: "regular", size: 1.1em, below: 2em,
+      weight: "regular",
+      size: 1.1em,
+      below: 2em,
       for a in affiliations [
         #if authors.len() > 1 [#super[#a.id]]#a.name#if a.keys().contains("department") [, #a.department] \
-      ]
+      ],
     )
   }
 
@@ -249,7 +237,7 @@
       #outline(
         title: toc-title,
         depth: toc-depth,
-        indent: toc-indent
+        indent: toc-indent,
       )
     ]
   }
@@ -266,10 +254,9 @@
     columns(
       cols,
       gutter: col-gutter,
-      doc
+      doc,
     )
   }
-
 }
 
 // Remove gridlines from tables
