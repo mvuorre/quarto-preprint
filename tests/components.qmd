@@ -21,10 +21,7 @@ format:
 
 # Normal header 1
 
-This document tests various Quarto components:
-
-- [ ] Appendices
-- [x] Subtitle
+This document tests various Quarto components.
 
 ## Normal header 2
 

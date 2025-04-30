@@ -1,3 +1,7 @@
+## 0.15.0
+
+This release brings `quarto-preprint` closer to parity with updates to the default Quarto Typst template.
+
 ## 0.14.3
 
 - Update `andrewheiss/word-count` and required Quarto version

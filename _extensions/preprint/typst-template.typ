@@ -27,12 +27,15 @@
   region: "US",
   font: ("Times", "Times New Roman", "Arial"),
   fontsize: 11pt,
+  title-size: 1.5em,
+  subtitle-size: 1.25em,
   // Structure settings
-  section-numbering: none,
+  sectionnumbering: none,
+  pagenumbering: "1",
   toc: false,
-  toc-title: none,
-  toc-depth: none,
-  toc-indent: 1.5em,
+  toc_title: none,
+  toc_depth: none,
+  toc_indent: 1.5em,
   bibliography-title: "References",
   bibliography-style: "apa",
   cols: 1,
@@ -63,7 +66,7 @@
       if (counter(page).get().at(0) > 1) [
         #grid(
           columns: (1fr, 1fr),
-          align(left)[#running-head], align(right)[#counter(page).display()],
+          align(left)[#running-head], align(right)[#counter(page).display(pagenumbering)],
         )
       ]
     },
@@ -89,7 +92,7 @@
   )
 
   // Headers
-  set heading(numbering: section-numbering)
+  set heading(numbering: sectionnumbering)
   show heading.where(level: 1): it => block(width: 100%, below: 1em, above: 1.25em)[
     #set align(center)
     #set text(size: fontsize * 1.1, weight: "bold")
@@ -118,7 +121,7 @@
   let titleblock(
     body,
     width: 100%,
-    size: 1.5em,
+    size: title-size,
     weight: "bold",
     above: 1em,
     below: 0em,
@@ -134,7 +137,7 @@
     titleblock(title, above: 0em)
   }
   if subtitle != none {
-    titleblock(subtitle, size: 1.25em)
+    titleblock(subtitle, size: subtitle-size)
   }
 
   /* Author formatting */
@@ -240,9 +243,9 @@
   if toc {
     block(inset: (top: 2em, bottom: 0em, left: 2.4em, right: 2.4em))[
       #outline(
-        title: toc-title,
-        depth: toc-depth,
-        indent: toc-indent,
+        title: toc_title,
+        depth: toc_depth,
+        indent: toc_indent,
       )
     ]
   }

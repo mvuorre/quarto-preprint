@@ -48,7 +48,7 @@ format:
     bibliographystyle: apa
     authornote: This is an example author note.
     keep-typ: true
-    wordcount: "{{< words-body >}}"
+    wordcount: '{{< words-body >}}'
 ---
 
 # Introduction

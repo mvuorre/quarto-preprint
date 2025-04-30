@@ -1,4 +1,5 @@
 #show: doc => preprint(
+// Default Quarto template variables
 $if(title)$
   title: [$title$],
 $endif$
@@ -35,9 +36,48 @@ $endif$
 $if(date)$
   date: [$date$],
 $endif$
-$if(branding)$
-  branding: "$branding$",
+$if(lang)$
+  lang: "$lang$",
 $endif$
+$if(region)$
+  region: "$region$",
+$endif$
+$if(abstract)$
+  abstract: [$abstract$],
+$endif$
+$if(margin)$
+  margin: ($for(margin/pairs)$$margin.key$: $margin.value$,$endfor$),
+$endif$
+$if(papersize)$
+  paper: "$papersize$",
+$endif$
+$if(mainfont)$
+  font: ("$mainfont$",),
+$elseif(brand.typography.base.family)$
+  font: $brand.typography.base.family$,
+$endif$
+$if(fontsize)$
+  fontsize: $fontsize$,
+$elseif(brand.typography.base.size)$
+  fontsize: $brand.typography.base.size$,
+$endif$
+$if(section-numbering)$
+  sectionnumbering: "$section-numbering$",
+$endif$
+  pagenumbering: $if(page-numbering)$"$page-numbering$"$else$none$endif$,
+$if(toc)$
+  toc: $toc$,
+$endif$
+$if(toc-title)$
+  toc_title: [$toc-title$],
+$endif$
+$if(toc-indent)$
+  toc_indent: $toc-indent$,
+$endif$
+$if(toc-depth)$
+  toc_depth: $toc-depth$,
+$endif$
+// Additional Typst variables
 $if(leading)$
   leading: $leading$,
 $endif$
@@ -64,50 +104,11 @@ $endif$
 $if(authornote)$
   authornote: [$authornote$],
 $endif$
-$if(lang)$
-  lang: "$lang$",
-$endif$
-$if(region)$
-  region: "$region$",
-$endif$
-$if(abstract)$
-  abstract: [$abstract$],
-$endif$
 $if(categories)$
   categories: [$for(categories)$$it$$sep$, $endfor$],
 $endif$
 $if(wordcount)$
   wordcount: [$wordcount$],
-$endif$
-$if(margin)$
-  margin: ($for(margin/pairs)$$margin.key$: $margin.value$,$endfor$),
-$endif$
-$if(papersize)$
-  paper: "$papersize$",
-$endif$
-$if(mainfont)$
-  font: ("$mainfont$",),
-$endif$
-$if(fontsize)$
-  fontsize: $fontsize$,
-$endif$
-$if(section-numbering)$
-  section-numbering: "$section-numbering$",
-$endif$
-$if(toc)$
-  toc: $toc$,
-$endif$
-$if(toc-depth)$
-  toc-depth: $toc-depth$,
-$endif$
-$if(toc-title)$
-  toc-title: "$toc-title$",
-$endif$
-$if(toc-indent)$
-  toc-indent: "$toc-indent$",
-$endif$
-$if(cols)$
-  cols: $cols$,
 $endif$
 $if(col-gutter)$
   col-gutter: $col-gutter$,
@@ -118,5 +119,6 @@ $endif$
 $if(bibliography-title)$
   bibliography-title: [$bibliography-title$],
 $endif$
+  cols: $if(columns)$$columns$$else$1$endif$,
   doc,
 )
