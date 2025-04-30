@@ -14,6 +14,10 @@ tests: $(TEST_FILES)
 	done
 	rm -rf tests/use; mkdir -p tests/use; cd tests/use; quarto use template ../../. --no-prompt
 
+# Update dependencies
+deps:
+	quarto add andrewheiss/quarto-wordcount --embed preprint --no-prompt
+
 # Create a GitHub release
 .release.timestamp: index.pdf NEWS.md _extensions/preprint/_extension.yml
 	@echo "Creating GitHub release..."
@@ -29,4 +33,4 @@ clean:
 	rm -rf *.pdf *.typ *.png *_cache/ *_files/ tests/*.pdf tests/*.html .release.timestamp
 	find tests/ -mindepth 1 -type d -exec rm -r {} +
 
-.PHONY: clean tests release all render
+.PHONY: clean tests release all render deps
