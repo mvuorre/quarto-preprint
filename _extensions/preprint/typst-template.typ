@@ -4,6 +4,7 @@
   // Document metadata
   title: none,
   running-head: none,
+  subtitle: none,
   authors: (),
   affiliations: none,
   abstract: none,
@@ -130,7 +131,10 @@
   ]
 
   if title != none {
-    titleblock(title, above: 0em, below: 2em)
+    titleblock(title, above: 0em)
+  }
+  if subtitle != none {
+    titleblock(subtitle, size: 1.25em)
   }
 
   /* Author formatting */
@@ -197,6 +201,7 @@
     titleblock(
       weight: "regular",
       size: 1.25em,
+      above: 2.5em,
       [#author_strings.join(", ", last: " & ")],
     )
   }

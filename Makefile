@@ -30,7 +30,7 @@ release: .release.timestamp
 
 # Clean all intermediate files
 clean:
-	rm -rf *.pdf *.typ *.png *_cache/ *_files/ tests/*.pdf tests/*.html .release.timestamp
+	rm -rf *.pdf *.typ *.png *_cache/ *_files/ tests/*.pdf tests/*.html tests/*.typ .release.timestamp
 	find tests/ -mindepth 1 -type d -exec rm -r {} +
 
 .PHONY: clean tests release all render deps

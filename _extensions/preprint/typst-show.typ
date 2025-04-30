@@ -2,6 +2,9 @@
 $if(title)$
   title: [$title$],
 $endif$
+$if(subtitle)$
+  subtitle: [$subtitle$],
+$endif$
 $if(running-head)$
   running-head: [$running-head$],
 $endif$

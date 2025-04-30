@@ -1,5 +1,7 @@
 ---
-title: "Appendices"
+title: Components
+subtitle: |
+  *Testing various Quarto components*
 author:
   - name: Matti Vuorre
     email: mjvuorre@uvt.nl
@@ -19,7 +21,10 @@ format:
 
 # Normal header 1
 
-Content
+This document tests various Quarto components:
+
+- [ ] Appendices
+- [x] Subtitle
 
 ## Normal header 2
 
