@@ -1,3 +1,7 @@
+## 0.14.3
+
+- Update `andrewheiss/word-count` and required Quarto version
+
 ## 0.14.2
 
 - Add vertical space around floats
