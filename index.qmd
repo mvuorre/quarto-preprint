@@ -32,23 +32,10 @@ abstract: |
   This is an example Quarto document using the `preprint-typst` format.
 categories: [Quarto, Typst, extension, preprint]
 date: "`r Sys.Date()`"
-citation:
-  type: article
-  container-title: "PsyArXiv"
-  doi: "an.example.doi"
-  url: example.com
-number-sections: true
 bibliography: bibliography.bib
-fontsize: 11pt
-mainfont: Libertinus Serif
-format:
-  preprint-typst:
-    suppress-bibliography: true
-    section-numbering: "1."
-    bibliographystyle: apa
-    authornote: This is an example author note.
-    keep-typ: true
-    wordcount: '{{< words-body >}}'
+authornote: This is an example author note.
+wordcount: '{{< words-body >}}' # https://github.com/andrewheiss/quarto-wordcount
+format: preprint-typst
 ---
 
 # Introduction

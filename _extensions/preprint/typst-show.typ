@@ -104,8 +104,11 @@ $endif$
 $if(authornote)$
   authornote: [$authornote$],
 $endif$
+// Use categories or keywords
 $if(categories)$
   categories: [$for(categories)$$it$$sep$, $endfor$],
+$elseif(keywords)$
+  categories: [$for(keywords)$$it$$sep$, $endfor$],
 $endif$
 $if(wordcount)$
   wordcount: [$wordcount$],
@@ -113,8 +116,8 @@ $endif$
 $if(col-gutter)$
   col-gutter: $col-gutter$,
 $endif$
-$if(bibliography-style)$
-  bibliography-style: [$bibliography-style$],
+$if(bibliographystyle)$
+  bibliographystyle: [$bibliographystyle$],
 $endif$
 $if(bibliography-title)$
   bibliography-title: [$bibliography-title$],

@@ -13,6 +13,7 @@ contributes:
         - typst-template.typ
         - typst-show.typ
       citeproc: false
+      suppress-bibliography: true
       filters:
         - at: pre-quarto
           path: _extensions/andrewheiss/wordcount/citeproc.lua

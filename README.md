@@ -28,41 +28,11 @@ quarto use template mvuorre/quarto-preprint
 
 ## Configuration
 
-The output of Quarto documents is configured through YAML metadata either in the document's front matter (between triple dashes), or in a `_quarto.yml` file. Read more about these at Quarto's [guide](https://quarto.org/docs/authoring/front-matter.html) to writing scholarly documents, Quarto's Typst format [documentation](https://quarto.org/docs/output-formats/typst.html), and the [Typst documentation](https://typst.app/docs) pages.
+The output of Quarto documents is configured through YAML front-matter metadata. Read more at Quarto's [guide](https://quarto.org/docs/authoring/front-matter.html) to writing scholarly documents, Quarto's Typst format [documentation](https://quarto.org/docs/output-formats/typst.html), and the [Typst documentation](https://typst.app/docs) pages.
 
-`preprint-typst` aims to include all standard Quarto front matter options for scholarly writing. Please report missing features (or other bugs) on [GitHub](https://github.com/mvuorre/quarto-preprint/issues). In addition, there are a few options specific to Typst, and the `quarto-preprint` format.
-
-## Typst variables
-
-In addition to Quarto [Typst variables](https://quarto.org/docs/output-formats/typst.html), `quarto-preprint` supports passing many Typst layout variables in the document front-matter. See `_extensions/preprint/typst-template.typ` for a full list; some are highlighted below.
-
-```{yaml}
-format:
-  preprint-typst:
-    suppress-bibliography: true
-    section-numbering: "1."
-    bibliographystyle: apa
-    authornote: This is an example author note.
-    keep-typ: true
-    running-head: "*preprint* Quarto extension manual"
-    authornote: This is an example author note.
-    wordcount: "{{< words-body >}}"
-    leading: 0.6em # line spacing
-    spacing: 0.6em # paragraph spacing
-    first-line-indent: 1.8em # Amount to indent lines 1< of paragraph
-    all: false # Whether to also indent the first line of each paragraph with above
-    linkcolor: black
-```
-
-- `running-head` should be a text string and is used as the document's running head.
-- `authornote` allows adding information to the footer of the first page.
-- `wordcount` add a word count using <https://github.com/andrewheiss/quarto-wordcount> (see above example, and link for instructions on use).
+`preprint-typst` aims to include all standard Quarto front matter options for scholarly writing. Please report missing features on [GitHub](https://github.com/mvuorre/quarto-preprint/issues). In addition to standard Quarto front-matter, `quarto-preprint` supports additional fields and Typst variables, such as author notes and paragraph formatting ([leading, spacing, first-line-indent](https://typst.app/docs/reference/model/par/#parameters)).
 
 # Help
-
-## Known limitations and issues
-
-- Must add `suppress-bibliography: true` to YAML so that the wordcount extension doesn't lead to duplicated bibliographies.
 
 ## Contributing
 

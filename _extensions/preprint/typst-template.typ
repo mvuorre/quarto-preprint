@@ -11,9 +11,8 @@
   categories: none,
   wordcount: none,
   authornote: none,
-  citation: none,
-  date: none,
-  branding: none,
+  citation: none, // Not used currently
+  date: none, // Not used currently
   // Layout settings
   leading: 0.6em,
   spacing: 0.6em,
@@ -25,7 +24,7 @@
   // Typography settings
   lang: "en",
   region: "US",
-  font: ("Times", "Times New Roman", "Arial"),
+  font: ("Libertinus Serif", "Times", "Times New Roman", "Arial"),
   fontsize: 11pt,
   title-size: 1.5em,
   subtitle-size: 1.25em,
@@ -37,7 +36,7 @@
   toc_depth: none,
   toc_indent: 1.5em,
   bibliography-title: "References",
-  bibliography-style: "apa",
+  bibliographystyle: "apa",
   cols: 1,
   col-gutter: 4.2%,
   doc,
@@ -48,7 +47,7 @@
   show cite: set text(fill: linkcolor)
 
   // Allow custom title for bibliography section
-  set bibliography(title: bibliography-title, style: bibliography-style)
+  set bibliography(title: bibliography-title, style: bibliographystyle)
 
   // Bibliography paragraph spacing
   show bibliography: set par(spacing: spacing, leading: leading)
