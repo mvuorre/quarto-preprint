@@ -31,6 +31,7 @@
   // Structure settings
   sectionnumbering: none,
   pagenumbering: "1",
+  linenumbering: none,
   toc: false,
   toc_title: none,
   toc_depth: none,
@@ -81,6 +82,7 @@
     spacing: spacing,
     first-line-indent: (amount: first-line-indent, all: all),
   )
+  set par.line(numbering: linenumbering)
 
   // Text settings
   set text(

@@ -1,3 +1,9 @@
+## 0.16.0
+
+In progress.
+
+- Support `line-number` (`true`/`false`)
+
 ## 0.15.0
 
 This release brings `quarto-preprint` closer to parity with updates to the default Quarto Typst template.
