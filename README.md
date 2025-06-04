@@ -40,6 +40,27 @@ Send your bug reports and pull requests to <https://github.com/mvuorre/quarto-pr
 
 ## Tips
 
+### Word count
+
+Include `wordcount: '{{< words-body >}}'` in the document YAML to add a word count just below the abstract and keywords. This functionality is provided by Andrew Heiss's wordcount extension: <https://github.com/andrewheiss/quarto-wordcount>
+
+### Full-width floats in two-column mode
+
+When writing a two-column document, include `functions: place` in the document YAML. You can then use Typst's [`place()`](https://typst.app/docs/reference/layout/place/) function to specify a div that spans the entire page. For example:
+
+````
+::: {.place arguments='auto, scope: "parent", float: true'}
+```{r}
+#| label: fig-fullwidth
+#| fig-cap: A figure across columns.
+
+plot(1:10, 1:10)
+```
+:::
+````
+
+will produce an R plot that spans the page.
+
 ### Collaboration
 
 It can be useful to also output a MS Word document for collaboration. To do so, you can include `docx` as an output format as shown [here](https://quarto.org/docs/output-formats/ms-word.html). `quarto-preprint` also provides a slightly improved bare-bones MS Word output format `preprint-docx`.

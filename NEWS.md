@@ -1,7 +1,6 @@
 ## 0.16.0
 
-In progress.
-
+- Support full-width floats in two-column documents using <https://github.com/christopherkenny/typst-function>
 - Support `line-number` (`true`/`false`)
 
 ## 0.15.0
