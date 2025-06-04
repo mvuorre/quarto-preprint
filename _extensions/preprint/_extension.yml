@@ -19,6 +19,7 @@ contributes:
           path: _extensions/andrewheiss/wordcount/citeproc.lua
         - at: pre-quarto
           path: _extensions/andrewheiss/wordcount/wordcount.lua
+        - _extensions/christopherkenny/typst-function/typst-function.lua
       count-code-blocks: false
     docx:
       reference-doc: preprint.docx

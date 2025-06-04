@@ -54,7 +54,7 @@
   show bibliography: set par(spacing: spacing, leading: leading)
 
   // Space around figures
-  show figure: f => { [#v(leading * 2) #f #v(leading * 2) ] }
+  show figure: f => { [#v(leading) #f #v(leading) ] }
 
   /* Page layout settings */
   set page(
