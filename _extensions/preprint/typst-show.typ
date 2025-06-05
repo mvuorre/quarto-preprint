@@ -45,9 +45,6 @@ $endif$
 $if(abstract)$
   abstract: [$abstract$],
 $endif$
-$if(margin)$
-  margin: ($for(margin/pairs)$$margin.key$: $margin.value$,$endfor$),
-$endif$
 $if(papersize)$
   paper: "$papersize$",
 $endif$
@@ -55,11 +52,6 @@ $if(mainfont)$
   font: ("$mainfont$",),
 $elseif(brand.typography.base.family)$
   font: $brand.typography.base.family$,
-$endif$
-$if(fontsize)$
-  fontsize: $fontsize$,
-$elseif(brand.typography.base.size)$
-  fontsize: $brand.typography.base.size$,
 $endif$
 $if(section-numbering)$
   sectionnumbering: "$section-numbering$",
@@ -123,6 +115,15 @@ $endif$
 $if(bibliography-title)$
   bibliography-title: [$bibliography-title$],
 $endif$
+// Theme-based settings
+$if(theme-jou)$
+  $if(margin)$margin: ($for(margin/pairs)$$margin.key$: $margin.value$,$endfor$),$else$margin: (x: 2cm, y: 3cm),$endif$
+  $if(fontsize)$fontsize: $fontsize$,$else$fontsize: 10pt,$endif$
+  cols: $if(columns)$$columns$$else$2$endif$,
+$else$
+  $if(margin)$margin: ($for(margin/pairs)$$margin.key$: $margin.value$,$endfor$),$endif$
+  $if(fontsize)$fontsize: $fontsize$,$elseif(brand.typography.base.size)$fontsize: $brand.typography.base.size$,$endif$
   cols: $if(columns)$$columns$$else$1$endif$,
+$endif$
   doc,
 )

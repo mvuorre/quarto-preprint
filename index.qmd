@@ -34,7 +34,8 @@ categories: [Quarto, Typst, extension, preprint]
 date: "`r Sys.Date()`"
 bibliography: bibliography.bib
 authornote: This is an example author note.
-wordcount: '{{< words-body >}}' # https://github.com/andrewheiss/quarto-wordcount
+wordcount: '{{< words-body >}}'
+functions: place
 format: preprint-typst
 ---
 
@@ -75,22 +76,10 @@ set.seed(1)
 data <- data.frame(x = rnorm(30), y = rnorm(30))
 ```
 
-Here are a couple of example tables (@tbl-example, @tbl-example2).
+Here is an example table (@tbl-example).
 
 ```{r}
 #| label: tbl-example
-#| tbl-cap: Table created with `tinytable::tt()`
-#| echo: true
-
-tinytable::tt(
-  head(data, 2),
-  digits = 2,
-  notes = "Note. This is a footnote."
-)
-```
-
-```{r}
-#| label: tbl-example2
 #| tbl-cap: Table created with `knitr::kable()`
 #| echo: false
 
@@ -114,6 +103,42 @@ Below is an example figure created in R [@rcoreteamLanguageEnvironmentStatistica
 plot(data)
 ```
 
+Sometimes you want to write a document in two-column mode. Those tend to look pretty nice. However what if you have a really wide table or figure? Here's what you can do to make the figure occupy the entire width of the page.
+
+First, include
+```yaml
+functions: place
+```
+in the document's YAML.
+
+Then, wrap your figure in a Quarto div[^fn0] like this:
+
+```
+::: {.place arguments='auto, scope: "parent", float: true'}
+<Any content, e.g. code for drawing a figure>
+:::
+```
+
+The above uses the Typst's `place()`[^fn1] function through the typst-function[^fn2] Quarto extension to place the div's content in `"parent"` scope (the document page is the column's parent) and must specify that Typst should treat the content as a float. The `auto` indicates where the figure should be on the page, and can be either auto, bottom, or top.
+
+::: {.place arguments='auto, scope: "parent", float: true'}
+```{r}
+#| label: fig-2
+#| fig-cap: A figure across columns.
+#| fig-height: 3
+#| fig-width: 7
+#| echo: false
+
+plot(data)
+```
+:::
+
+Although this feels a bit hacky (it's less clean than something like a "`#| scope: parent`" chunk option, which would be nice), it doesn't affect other formats. Current Typst limitations can also lead the float to be placed below footnotes, as shown in this example.
+
+[^fn0]: <https://quarto.org/docs/authoring/markdown-basics.html#sec-divs-and-spans>
+[^fn1]: <https://typst.app/docs/reference/layout/place/>
+[^fn2]: <https://github.com/christopherkenny/typst-function>
+
 ## Quarto markdown features
 
 ### Maths
@@ -136,7 +161,11 @@ To insert a quote block, prepend a paragraph with `>`:
 
 ::: {#tip-example .callout-tip}
 #### All kinds of markup
-This is basic markdown: **bold text** & ~subscript~.
+Markdown: `*italics*, **bold text**, ~subscript~, ^superscript^ & ~~strikethrough~~`
+
+renders as
+
+*italics*, **bold text**, ~subscript~, ^superscript^ & ~~strikethrough~~
 :::
 
 ### Code listings
@@ -148,5 +177,5 @@ Code listings can also be cross-referenced (@lst-r).
 #| lst-cap: R code for pRos.
 #| collapse: true
 
-1 + 1
+sqrt(1 + 1)
 ```

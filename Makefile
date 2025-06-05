@@ -5,18 +5,20 @@ render: index.pdf
 index.pdf: index.qmd _extensions/preprint/typst-show.typ _extensions/preprint/typst-template.typ
 	quarto render index.qmd
 
-# Render all test documents
-TEST_FILES := $(wildcard tests/*.qmd)
-tests: $(TEST_FILES)
-	cd tests; quarto add ../. --no-prompt
-	@for file in $^; do \
-		quarto render $$file; \
-	done
-	rm -rf tests/use; mkdir -p tests/use; cd tests/use; quarto use template ../../. --no-prompt
+# Test metadata options
+test: index.qmd
+	mkdir -p tests
+	# Test default output
+	quarto render $< --to preprint-typst --output-dir tests --output index.pdf
+	# Test theme-jou
+	quarto render $< --to preprint-typst --output-dir tests --output index_theme-jou.pdf -M theme-jou:true
+	# Test theme-jou with line numbers
+	quarto render $< --to preprint-typst --output-dir tests --output index_theme-jou_linenumber.pdf -M theme-jou:true -M line-number:true
 
 # Update dependencies
 deps:
 	quarto add andrewheiss/quarto-wordcount --embed preprint --no-prompt
+	quarto add christopherkenny/typst-function --embed preprint --no-prompt
 
 # Create a GitHub release
 .release.timestamp: index.pdf NEWS.md _extensions/preprint/_extension.yml
@@ -30,7 +32,6 @@ release: .release.timestamp
 
 # Clean all intermediate files
 clean:
-	rm -rf *.pdf *.typ *.png *_cache/ *_files/ tests/*.pdf tests/*.html tests/*.typ .release.timestamp
-	find tests/ -mindepth 1 -type d -exec rm -r {} +
+	rm -rf *.pdf *.typ *.png *_cache/ *_files/ tests/ .release.timestamp
 
-.PHONY: clean tests release all render deps
+.PHONY: clean test release all render deps

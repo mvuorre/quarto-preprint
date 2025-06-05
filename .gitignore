@@ -1,18 +1,12 @@
 
 # Temporary and output files
-*.typ
 **/*.pdf
 *.png
 *.svg
 *.html
-*.docx
 *_cache/
 *_files/
 /.luarc.json
-.Rproj.user
 /.quarto/
-/docs/index_files/figure-docx/
-/tests/*.pdf
-/tests/*.svg
-/tests/**/
+/tests/
 .release.timestamp

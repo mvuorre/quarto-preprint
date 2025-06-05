@@ -61,6 +61,7 @@
     paper: paper,
     margin: margin,
     numbering: none,
+    columns: cols,
     header-ascent: 50%,
     header: context {
       if (counter(page).get().at(0) > 1) [
@@ -72,6 +73,7 @@
     },
     footer-descent: 10%,
   )
+  set columns(gutter: col-gutter)
 
   /* Typography settings */
 
@@ -134,13 +136,6 @@
     ]
   ]
 
-  if title != none {
-    titleblock(title, above: 0em)
-  }
-  if subtitle != none {
-    titleblock(subtitle, size: subtitle-size)
-  }
-
   /* Author formatting */
 
   // Format author strings here, so can use in author note
@@ -201,71 +196,72 @@
     }
   }
 
-  if authors != none {
-    titleblock(
-      weight: "regular",
-      size: 1.25em,
-      above: 2.5em,
-      [#author_strings.join(", ", last: " & ")],
-    )
-  }
+  place(
+    top,
+    scope: "parent",
+    float: true,
+    {
+      if title != none {
+        titleblock(title, above: 0em)
+      }
+      if subtitle != none {
+        titleblock(subtitle, size: subtitle-size)
+      }
 
-  if affiliations != none {
-    titleblock(
-      weight: "regular",
-      size: 1.1em,
-      below: 2em,
-      for a in affiliations [
-        #if authors.len() > 1 [#super[#a.id]]#a.name#if a.keys().contains("department") [, #a.department] \
-      ],
-    )
-  }
+      if authors != none {
+        titleblock(
+          weight: "regular",
+          size: 1.25em,
+          above: 2.5em,
+          [#author_strings.join(", ", last: " & ")],
+        )
+      }
 
-  // Reset footnote counter for the main document
-  counter(footnote).update(0)
+      if affiliations != none {
+        titleblock(
+          weight: "regular",
+          size: 1.1em,
+          below: 2em,
+          for a in affiliations [
+            #if authors.len() > 1 [#super[#a.id]]#a.name#if a.keys().contains("department") [, #a.department] \
+          ],
+        )
+      }
 
-  /* Abstract and metadata section */
+      // Reset footnote counter for the main document
+      counter(footnote).update(0)
 
-  block(inset: (top: 1em, bottom: 0em, left: 2.4em, right: 2.4em))[
-    #set text(size: 0.92em)
-    #set par(first-line-indent: 0em)
-    #if abstract != none {
-      abstract
-    }
-    #if categories != none {
-      [#v(0.4em)#text(style: "italic")[Keywords:] #categories]
-    }
-    #if wordcount != none {
-      [\ #text(style: "italic")[Words:] #wordcount]
-    }
-  ]
+      /* Abstract and metadata section */
 
-  // Table of contents
-  if toc {
-    block(inset: (top: 2em, bottom: 0em, left: 2.4em, right: 2.4em))[
-      #outline(
-        title: toc_title,
-        depth: toc_depth,
-        indent: toc_indent,
-      )
-    ]
-  }
+      block(inset: (top: 1em, bottom: 0em, left: 2.4em, right: 2.4em))[
+        #set text(size: 0.92em)
+        #set par(first-line-indent: 0em)
+        #if abstract != none {
+          abstract
+        }
+        #if categories != none {
+          block()[#v(0.4em)#text(style: "italic")[Keywords:] #categories]
+        }
+        #if wordcount != none {
+          block(inset: (bottom: if toc { 0em } else { 2em }))[#text(style: "italic")[Words:] #wordcount]
+        }
+      ]
+
+      // Table of contents
+      if toc {
+        block(inset: (top: 1em, bottom: 2em, left: 2.4em, right: 2.4em))[
+          #outline(
+            title: toc_title,
+            depth: toc_depth,
+            indent: toc_indent,
+          )
+        ]
+      }
+    },
+  )
 
   /* Document content */
-
-  // Separate content a bit from front matter
-  v(2em)
-
-  // Show document content with cols if specified
-  if cols == 1 {
-    doc
-  } else {
-    columns(
-      cols,
-      gutter: col-gutter,
-      doc,
-    )
-  }
+  doc
 }
 
 // Remove gridlines from tables

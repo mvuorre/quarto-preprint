@@ -1,3 +1,8 @@
+## 0.17.0
+
+- Support "themes" that bundle layout settings
+  - `theme-jou: true` is a two-column layout with smaller margins and text
+
 ## 0.16.0
 
 - Support full-width floats in two-column documents using <https://github.com/christopherkenny/typst-function>
