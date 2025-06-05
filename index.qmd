@@ -43,27 +43,21 @@ format: preprint-typst
 
 This is an example `preprint-typst` document. Let us first take a look at body text and headings.
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Enim sed faucibus turpis in. Nec dui nunc mattis enim ut tellus. Bibendum ut tristique et egestas quis ipsum suspendisse ultrices gravida. Convallis posuere morbi leo urna. Sed velit dignissim sodales ut eu sem integer vitae justo. Convallis posuere morbi leo urna molestie at elementum eu facilisis. Aliquam sem et tortor consequat. Quam viverra orci sagittis eu. Sed arcu non odio euismod lacinia at quis risus sed. Egestas dui id ornare arcu odio ut sem. Lorem ipsum dolor sit amet consectetur.[^fn-1]
+{{< lipsum 1 >}}[^fn-1]
 
 [^fn-1]: This is a footnote.
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Enim sed faucibus turpis in. Nec dui nunc mattis enim ut tellus. Bibendum ut tristique et egestas quis ipsum suspendisse ultrices gravida. Convallis posuere morbi leo urna. Sed velit dignissim sodales ut eu sem integer vitae justo. Convallis posuere morbi leo urna molestie at elementum eu facilisis. Aliquam sem et tortor consequat. Quam viverra orci sagittis eu. Sed arcu non odio euismod lacinia at quis risus sed. Egestas dui id ornare arcu odio ut sem. Lorem ipsum dolor sit amet consectetur.
-
 ## Heading level 2
-
-Eget arcu dictum varius duis at. Netus et malesuada fames ac turpis. Pellentesque sit amet porttitor eget. Egestas tellus rutrum tellus pellentesque eu tincidunt tortor. Risus quis varius quam quisque id diam. Vel pretium lectus quam id leo in vitae. Sit amet aliquam id diam maecenas ultricies mi eget mauris. Auctor urna nunc id cursus metus aliquam eleifend. Arcu dictum varius duis at consectetur lorem. Tempus iaculis urna id volutpat lacus laoreet non. Adipiscing elit ut aliquam purus sit amet. At auctor urna nunc id cursus metus aliquam. Pharetra vel turpis nunc eget lorem dolor.
 
 ### Heading level 3
 
-Tristique et egestas quis ipsum suspendisse ultrices gravida dictum fusce. Mauris commodo quis imperdiet massa tincidunt nunc pulvinar. Commodo elit at imperdiet dui accumsan sit amet nulla. Consectetur lorem donec massa sapien faucibus. In vitae turpis massa sed elementum tempus egestas sed sed. Aliquam faucibus purus in massa tempor. Dignissim diam quis enim lobortis scelerisque fermentum dui faucibus in. Montes nascetur ridiculus mus mauris vitae ultricies leo. Sociis natoque penatibus et magnis dis parturient montes nascetur.
-
 #### Heading level 4
 
-Consectetur libero id faucibus nisl. Consequat interdum varius sit amet mattis vulputate enim. Amet mattis vulputate enim nulla aliquet porttitor lacus luctus. Mauris augue neque gravida in fermentum et sollicitudin ac. Pharetra diam sit amet nisl suscipit adipiscing bibendum est ultricies. Nisi quis eleifend quam adipiscing. Diam ut venenatis tellus in. Dignissim enim sit amet venenatis urna cursus eget. Hac habitasse platea dictumst quisque sagittis. In fermentum et sollicitudin ac orci phasellus egestas tellus rutrum.
+Level 4 and 5 headers are in paragraph.
 
 ##### Heading level 5
 
-Aliquam faucibus purus in massa tempor nec feugiat nisl pretium. Malesuada proin libero nunc consequat interdum varius. Vulputate dignissim suspendisse in est. Congue eu consequat ac felis donec et odio pellentesque diam. Viverra justo nec ultrices dui sapien. Faucibus vitae aliquet nec ullamcorper sit amet risus. Metus aliquam eleifend mi in. Risus quis varius quam quisque id diam vel quam. Et malesuada fames ac turpis egestas integer eget aliquet.
+Level 5 header is indented.
 
 ## Floats
 
@@ -80,7 +74,7 @@ Here is an example table (@tbl-example).
 
 ```{r}
 #| label: tbl-example
-#| tbl-cap: Table created with `knitr::kable()`
+#| tbl-cap: Table created with `knitr::kable()`.
 #| echo: false
 
 knitr::kable(
@@ -91,49 +85,35 @@ knitr::kable(
 
 ### Figures
 
-Below is an example figure created in R [@rcoreteamLanguageEnvironmentStatistical2025] (@fig-example).
+::: {#fig-1}
+{{< placeholder 400 200 format=svg >}}
+:::
 
-```{r}
-#| label: fig-example
-#| fig-cap: Example R scatterplot.
-#| fig-height: 3
-#| fig-width: 7
-#| echo: false
+@fig-1 is a figure.
 
-plot(data)
-```
+### Full-width content
 
-Sometimes you want to write a document in two-column mode. Those tend to look pretty nice. However what if you have a really wide table or figure? Here's what you can do to make the figure occupy the entire width of the page.
+You can also include page-wide figures (or any other content) in documents that have more than one column. See @fig-2 for an example. First, include
 
-First, include
 ```yaml
 functions: place
 ```
-in the document's YAML.
 
-Then, wrap your figure in a Quarto div[^fn0] like this:
+in the document's YAML. Then, wrap your figure in a Quarto div[^fn0] like this:
 
 ```
 ::: {.place arguments='auto, scope: "parent", float: true'}
-<Any content, e.g. code for drawing a figure>
+Everything here will span the whole page.
 :::
 ```
 
-The above uses the Typst's `place()`[^fn1] function through the typst-function[^fn2] Quarto extension to place the div's content in `"parent"` scope (the document page is the column's parent) and must specify that Typst should treat the content as a float. The `auto` indicates where the figure should be on the page, and can be either auto, bottom, or top.
+The above uses the Typst's `place()`[^fn1] function through the typst-function[^fn2] Quarto extension to place the div's content in `"parent"` scope (the document page is the column's parent) and must specify that Typst should treat the content as a float. `auto` indicates where the figure should be on the page, and can be either `auto`, `bottom`, or `top`. (Note `auto` and `bottom` can make the figure appear below footnotes.)
 
-::: {.place arguments='auto, scope: "parent", float: true'}
-```{r}
-#| label: fig-2
-#| fig-cap: A figure across columns.
-#| fig-height: 3
-#| fig-width: 7
-#| echo: false
-
-plot(data)
-```
+:::: {.place arguments='auto, scope: "parent", float: true'}
+::: {#fig-2}
+{{< placeholder 600 100 format=svg >}}
 :::
-
-Although this feels a bit hacky (it's less clean than something like a "`#| scope: parent`" chunk option, which would be nice), it doesn't affect other formats. Current Typst limitations can also lead the float to be placed below footnotes, as shown in this example.
+::::
 
 [^fn0]: <https://quarto.org/docs/authoring/markdown-basics.html#sec-divs-and-spans>
 [^fn1]: <https://typst.app/docs/reference/layout/place/>
@@ -143,7 +123,7 @@ Although this feels a bit hacky (it's less clean than something like a "`#| scop
 
 ### Maths
 
-LaTeX math notation is automatically converted to Typst and as such works just fine either inline ($y_i = \alpha + \beta x_i + \epsilon_i$) or in display mode (@eq-1):
+LaTeX math notation is automatically converted to Typst and as such works just fine either inline ($y_i = \alpha + \beta x_i + \epsilon_i$) or in display mode (@eq-1).
 
 $$
 f(x \mid \mu, \sigma^2) = \frac{1}{\sqrt{2\pi \sigma^2}} \exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)
@@ -151,7 +131,7 @@ $$ {#eq-1}
 
 ### Block quotes
 
-To insert a quote block, prepend a paragraph with `>`:
+To insert a block quote, prepend a paragraph with `>`:
 
 >A quote: "*Elit ullamcorper dignissim cras tincidunt lobortis feugiat vivamus at.*"
 
@@ -170,7 +150,7 @@ renders as
 
 ### Code listings
 
-Code listings can also be cross-referenced (@lst-r).
+Code listings can also be cross-referenced. @lst-r shows some great R [@rcoreteamLanguageEnvironmentStatistical2025] code.
 
 ```{r}
 #| lst-label: lst-r
