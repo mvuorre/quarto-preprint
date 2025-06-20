@@ -1,3 +1,7 @@
+// Quarto Preprint Template for Typst
+// A scholarly document template providing academic paper formatting
+// Supports multi-column layouts, author metadata, and bibliographies
+
 #import "@preview/fontawesome:0.5.0": *
 
 #let preprint(
@@ -120,78 +124,89 @@
   )
 
   /* Front matter formatting */
-
-  let titleblock(
-    body,
-    width: 100%,
-    size: title-size,
-    weight: "bold",
-    above: 1em,
-    below: 0em,
-  ) = [
-    #align(center)[
-      #block(width: width, above: above, below: below)[
-        #text(weight: weight, size: size, hyphenate: false)[#body]
-      ]
-    ]
-  ]
-
-  /* Author formatting */
-
-  // Format author strings here, so can use in author note
-  let author_strings = ()
-  let equal_contributors = ()
-
-  if authors != none {
-    // First pass: collect equal contributors
+  // Collect authors marked as equal contributors
+  let collect_equal_contributors(authors) = {
+    let equal_contributors = ()
     for a in authors {
       if a.keys().contains("equal-contributor") and a.at("equal-contributor") == true {
         equal_contributors.push(a.name)
       }
     }
+    equal_contributors
+  }
 
-    // Create equal contributor note text to reuse
-    let equal_contrib_text = none
+  // Generate equal contributor note text
+  let create_equal_contrib_text(equal_contributors) = {
     if equal_contributors.len() > 1 {
-      equal_contrib_text = [#equal_contributors.join(", ", last: " & ") contributed equally to this work.]
+      [#equal_contributors.join(", ", last: " & ") contributed equally to this work.]
+    } else {
+      none
+    }
+  }
+
+  // Build author display elements (name, affiliation, markers, etc.)
+  let build_author_elements(author, authors, equal_contributors) = {
+    let elements = (author.name,)
+
+    // Add affiliation superscript for multi-author papers
+    if authors.len() > 1 {
+      elements.push(super(author.affiliation))
     }
 
-    // Second pass: build author display strings with attached footnotes
+    // Add equal contributor marker if needed
+    if (
+      author.keys().contains("equal-contributor")
+        and author.at("equal-contributor") == true
+        and equal_contributors.len() > 1
+    ) {
+      elements.push(super[§])
+    }
+
+    elements
+  }
+
+  // Create corresponding author footnote
+  let create_corresponding_footnote(author, equal_contrib_text, authornote) = {
+    footnote(
+      numbering: "*",
+      [
+        Send correspondence to: #author.name, #author.email.
+        #if equal_contrib_text != none [
+          #super[§]#equal_contrib_text
+        ]
+        #if authornote != none [#authornote]
+      ],
+    )
+  }
+
+  // Add ORCID link if available
+  let add_orcid_link(elements, author) = {
+    if author.keys().contains("orcid") {
+      elements.push(link(author.orcid, fa-orcid(fill: rgb("a6ce39"), size: 0.8em)))
+    }
+    elements
+  }
+
+  /* Author formatting */
+
+  let author_strings = ()
+  if authors != none {
+    let equal_contributors = collect_equal_contributors(authors)
+    let equal_contrib_text = create_equal_contrib_text(equal_contributors)
+
+    // Build author display strings
     for a in authors {
-      let author_elements = (a.name,)
+      let author_elements = build_author_elements(a, authors, equal_contributors)
 
-      // Add affiliation superscript for multi-author papers
-      if authors.len() > 1 {
-        author_elements.push(super(a.affiliation))
-      }
-
-      // Add equal contributor marker if needed
-      if a.keys().contains("equal-contributor") and a.at("equal-contributor") == true and equal_contributors.len() > 1 {
-        author_elements.push(super[§])
-      }
-
-      // Add corresponding author footnote directly to the author name
+      // Add corresponding author footnote if needed
       if a.keys().contains("corresponding") {
-        author_elements.push(
-          footnote(
-            numbering: "*",
-            [
-              Send correspondence to: #a.name, #a.email.
-              #if equal_contrib_text != none [
-                #super[§]#equal_contrib_text
-              ]
-              #if authornote != none [#authornote]
-            ],
-          ),
-        )
+        author_elements.push(create_corresponding_footnote(a, equal_contrib_text, authornote))
       }
 
-      // Add ORCID if available
-      if a.keys().contains("orcid") {
-        author_elements.push(link(a.orcid, fa-orcid(fill: rgb("a6ce39"), size: 0.8em)))
-      }
+      // Add ORCID link if available
+      author_elements = add_orcid_link(author_elements, a)
 
-      // Add author string to the list
+      // Add completed author string to the list
       author_strings.push(box(author_elements.join()))
     }
   }
@@ -202,30 +217,38 @@
     float: true,
     {
       if title != none {
-        titleblock(title, above: 0em)
+        align(center)[
+          #block(width: 100%, above: 0em, below: 0em)[
+            #text(weight: "bold", size: title-size)[#title]
+          ]
+        ]
       }
       if subtitle != none {
-        titleblock(subtitle, size: subtitle-size)
+        align(center)[
+          #block(width: 100%, above: 1em, below: 0em)[
+            #text(weight: "bold", size: subtitle-size)[#subtitle]
+          ]
+        ]
       }
 
       if authors != none {
-        titleblock(
-          weight: "regular",
-          size: 1.25em,
-          above: 2.5em,
-          [#author_strings.join(", ", last: " & ")],
-        )
+        align(center)[
+          #block(width: 100%, above: 2.5em, below: 0em)[
+            #text(weight: "regular", size: subtitle-size)[#author_strings.join(", ", last: " & ")]
+          ]
+        ]
       }
 
       if affiliations != none {
-        titleblock(
-          weight: "regular",
-          size: 1.1em,
-          below: 2em,
-          for a in affiliations [
-            #if authors.len() > 1 [#super[#a.id]]#a.name#if a.keys().contains("department") [, #a.department] \
-          ],
-        )
+        align(center)[
+          #block(width: 100%, above: 1em, below: 2em)[
+            #text(weight: "regular", size: 1.1em)[
+              #for a in affiliations [
+                #if authors.len() > 1 [#super[#a.id]]#a.name#if a.keys().contains("department") [, #a.department] \
+              ]
+            ]
+          ]
+        ]
       }
 
       // Reset footnote counter for the main document

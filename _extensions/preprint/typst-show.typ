@@ -115,12 +115,14 @@ $endif$
 $if(bibliography-title)$
   bibliography-title: [$bibliography-title$],
 $endif$
-// Theme-based settings
+// Theme-based settings - simplified conditional logic
 $if(theme-jou)$
-  $if(margin)$margin: ($for(margin/pairs)$$margin.key$: $margin.value$,$endfor$),$else$margin: (x: 2cm, y: 3cm),$endif$
-  $if(fontsize)$fontsize: $fontsize$,$else$fontsize: 10pt,$endif$
+  // Journal theme: compact 2-column layout
+  margin: $if(margin)$($for(margin/pairs)$$margin.key$: $margin.value$,$endfor$)$else$(x: 2cm, y: 3cm)$endif$,
+  fontsize: $if(fontsize)$$fontsize$$else$10pt$endif$,
   cols: $if(columns)$$columns$$else$2$endif$,
 $else$
+  // Default theme: single-column layout
   $if(margin)$margin: ($for(margin/pairs)$$margin.key$: $margin.value$,$endfor$),$endif$
   $if(fontsize)$fontsize: $fontsize$,$elseif(brand.typography.base.size)$fontsize: $brand.typography.base.size$,$endif$
   cols: $if(columns)$$columns$$else$1$endif$,

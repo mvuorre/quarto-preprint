@@ -1,3 +1,11 @@
+## 0.18.0
+
+In progress.
+
+- Refactor codebase for improved maintainability and clarity
+  - Create functions to format author info
+  - Simplify theme-jou conditional logic
+
 ## 0.17.0
 
 - Support "themes" that bundle layout settings
