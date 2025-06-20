@@ -2,7 +2,72 @@
 // A scholarly document template providing academic paper formatting
 // Supports multi-column layouts, author metadata, and bibliographies
 
+// Imports
 #import "@preview/fontawesome:0.5.0": *
+
+/* Front matter formatting helper functions */
+// Collect authors marked as equal contributors
+#let collect_equal_contributors(authors) = {
+  let equal_contributors = ()
+  for a in authors {
+    if a.keys().contains("equal-contributor") and a.at("equal-contributor") == true {
+      equal_contributors.push(a.name)
+    }
+  }
+  equal_contributors
+}
+
+// Generate equal contributor note text
+#let create_equal_contrib_text(equal_contributors) = {
+  if equal_contributors.len() > 1 {
+    [equal_contributors.join(", ", last: " & ") contributed equally to this work.]
+  } else {
+    none
+  }
+}
+
+// Build author display elements (name, affiliation, markers, etc.)
+#let build_author_elements(author, authors, equal_contributors) = {
+  let elements = (author.name,)
+
+  // Add affiliation superscript for multi-author papers
+  if authors.len() > 1 {
+    elements.push(super(author.affiliation))
+  }
+
+  // Add equal contributor marker if needed
+  if (
+    author.keys().contains("equal-contributor")
+      and author.at("equal-contributor") == true
+      and equal_contributors.len() > 1
+  ) {
+    elements.push(super[§])
+  }
+
+  elements
+}
+
+// Create corresponding author footnote
+#let create_corresponding_footnote(author, equal_contrib_text, authornote) = {
+  footnote(
+    numbering: "*",
+    [
+      Send correspondence to: #author.name, #author.email.
+      #if equal_contrib_text != none [
+        #super[§]#equal_contrib_text
+      ]
+      #if authornote != none [#authornote]
+    ],
+  )
+}
+
+// Add ORCID link if available
+#let add_orcid_link(elements, author) = {
+  if author.keys().contains("orcid") {
+    elements.push(link(author.orcid, fa-orcid(fill: rgb("a6ce39"), size: 0.8em)))
+  }
+  elements
+}
 
 #let preprint(
   // Document metadata
@@ -123,72 +188,7 @@
     text(size: 1em, weight: "bold", style: "italic", it.body + [.]),
   )
 
-  /* Front matter formatting */
-  // Collect authors marked as equal contributors
-  let collect_equal_contributors(authors) = {
-    let equal_contributors = ()
-    for a in authors {
-      if a.keys().contains("equal-contributor") and a.at("equal-contributor") == true {
-        equal_contributors.push(a.name)
-      }
-    }
-    equal_contributors
-  }
-
-  // Generate equal contributor note text
-  let create_equal_contrib_text(equal_contributors) = {
-    if equal_contributors.len() > 1 {
-      [#equal_contributors.join(", ", last: " & ") contributed equally to this work.]
-    } else {
-      none
-    }
-  }
-
-  // Build author display elements (name, affiliation, markers, etc.)
-  let build_author_elements(author, authors, equal_contributors) = {
-    let elements = (author.name,)
-
-    // Add affiliation superscript for multi-author papers
-    if authors.len() > 1 {
-      elements.push(super(author.affiliation))
-    }
-
-    // Add equal contributor marker if needed
-    if (
-      author.keys().contains("equal-contributor")
-        and author.at("equal-contributor") == true
-        and equal_contributors.len() > 1
-    ) {
-      elements.push(super[§])
-    }
-
-    elements
-  }
-
-  // Create corresponding author footnote
-  let create_corresponding_footnote(author, equal_contrib_text, authornote) = {
-    footnote(
-      numbering: "*",
-      [
-        Send correspondence to: #author.name, #author.email.
-        #if equal_contrib_text != none [
-          #super[§]#equal_contrib_text
-        ]
-        #if authornote != none [#authornote]
-      ],
-    )
-  }
-
-  // Add ORCID link if available
-  let add_orcid_link(elements, author) = {
-    if author.keys().contains("orcid") {
-      elements.push(link(author.orcid, fa-orcid(fill: rgb("a6ce39"), size: 0.8em)))
-    }
-    elements
-  }
-
   /* Author formatting */
-
   let author_strings = ()
   if authors != none {
     let equal_contributors = collect_equal_contributors(authors)
