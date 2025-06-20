@@ -5,15 +5,33 @@ render: index.pdf
 index.pdf: index.qmd _extensions/preprint/typst-show.typ _extensions/preprint/typst-template.typ
 	quarto render index.qmd
 
-# Test metadata options
-test: index.qmd
+# Individual test targets
+test-default: index.qmd
 	mkdir -p tests
-	# Test default output
-	quarto render $< --to preprint-typst --output-dir tests --output index.pdf
-	# Test theme-jou
+	quarto render $< --to preprint-typst --output-dir tests --output index_default.pdf
+
+test-theme-jou: index.qmd
+	mkdir -p tests
 	quarto render $< --to preprint-typst --output-dir tests --output index_theme-jou.pdf -M theme-jou:true
-	# Test theme-jou with line numbers
+
+test-linenumbers: index.qmd
+	mkdir -p tests
 	quarto render $< --to preprint-typst --output-dir tests --output index_theme-jou_linenumber.pdf -M theme-jou:true -M line-number:true
+
+test-single-author: index.qmd
+	mkdir -p tests
+	quarto render $< --to preprint-typst --output-dir tests --output index_single-author.pdf -M author:'[{name: "Solo Author", email: "solo@example.com", corresponding: true, affiliation: "Institution"}]'
+
+test-typography: index.qmd
+	mkdir -p tests
+	quarto render $< --to preprint-typst --output-dir tests --output index_typography.pdf -M fontsize:12pt -M leading:0.8em -M first-line-indent:0em
+
+test-toc-numbering: index.qmd
+	mkdir -p tests
+	quarto render $< --to preprint-typst --output-dir tests --output index_toc-numbering.pdf -M toc:true -M section-numbering:1.1.a
+
+# Run all tests
+test: test-default test-theme-jou test-linenumbers test-single-author test-typography test-toc-numbering
 
 # Update dependencies
 deps:
@@ -34,4 +52,4 @@ release: .release.timestamp
 clean:
 	rm -rf *.pdf *.typ *.png *_cache/ *_files/ tests/ .release.timestamp
 
-.PHONY: clean test release all render deps
+.PHONY: clean test test-default test-theme-jou test-linenumbers test-single-author test-typography test-toc-numbering release all render deps
