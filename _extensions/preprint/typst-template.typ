@@ -20,7 +20,7 @@
 // Generate equal contributor note text
 #let create_equal_contrib_text(equal_contributors) = {
   if equal_contributors.len() > 1 {
-    [equal_contributors.join(", ", last: " & ") contributed equally to this work.]
+    [#equal_contributors.join(", ", last: " & ") contributed equally to this work.]
   } else {
     none
   }
@@ -210,6 +210,10 @@
       author_strings.push(box(author_elements.join()))
     }
   }
+  // Hack: Include authors outside of scope: parent
+  // to ensure their associated footnotes show in main document. (TODO)
+  hide(author_strings.join(", ", last: " & "))
+  v(-2.4em)
 
   place(
     top,

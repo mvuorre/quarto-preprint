@@ -1,7 +1,6 @@
-## 0.18.0
+## 0.17.1
 
-In progress.
-
+- Fix a bug where author-related footnotes didn't show up
 - Refactor codebase for improved maintainability and clarity
   - Create functions to format author info
   - Simplify theme-jou conditional logic
