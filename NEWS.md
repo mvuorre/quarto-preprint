@@ -1,5 +1,7 @@
-## 0.17.1
+## 0.18.0
 
+- Implement appendices
+    - Requires using citeproc with known Typst bibliography formatting problems
 - Fix a bug where author-related footnotes didn't show up
 - Refactor codebase for improved maintainability and clarity
   - Create functions to format author info
