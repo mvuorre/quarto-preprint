@@ -20,6 +20,18 @@ authornote: This is an example author note.
 bibliography: bibliography.bib
 format:
   preprint-typst:
-    bibliographystyle: apa
-    suppress-bibliography: true
+    default
 ---
+
+# Introduction
+
+# Methods
+
+# Results
+
+# Discussion
+
+# References
+
+:::{#refs}
+:::

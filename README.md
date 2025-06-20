@@ -26,23 +26,15 @@ Start a new Quarto project that uses `quarto-preprint`:
 quarto use template mvuorre/quarto-preprint
 ```
 
-## Configuration
+## Configuration and use
 
 The output of Quarto documents is configured through YAML front-matter metadata. Read more at Quarto's [guide](https://quarto.org/docs/authoring/front-matter.html) to writing scholarly documents, Quarto's Typst format [documentation](https://quarto.org/docs/output-formats/typst.html), and the [Typst documentation](https://typst.app/docs) pages.
 
 `preprint-typst` aims to include all standard Quarto front matter options for scholarly writing. Please report missing features on [GitHub](https://github.com/mvuorre/quarto-preprint/issues). In addition to standard Quarto front-matter, `quarto-preprint` supports additional fields and Typst variables, such as author notes and paragraph formatting ([leading, spacing, first-line-indent](https://typst.app/docs/reference/model/par/#parameters)).
 
-# Help
-
-## Contributing
-
-Send your bug reports and pull requests to <https://github.com/mvuorre/quarto-preprint>. If you're reporting a bug, please include a reproducible example / full details of what you're trying to do, how, and what goes wrong.
-
-## Tips
-
 ### Word count
 
-Include `wordcount: '{{< words-body >}}'` in the document YAML to add a word count just below the abstract and keywords. This functionality is provided by Andrew Heiss's wordcount extension: <https://github.com/andrewheiss/quarto-wordcount>
+Include `wordcount: true` in the document YAML to add an approximate word count just below the abstract and keywords.
 
 ### Full-width floats in two-column mode
 
@@ -61,16 +53,16 @@ plot(1:10, 1:10)
 
 will produce an R plot that spans the page.
 
-### Collaboration
+### Bibliography
 
-It can be useful to also output a MS Word document for collaboration. To do so, you can include `docx` as an output format as shown [here](https://quarto.org/docs/output-formats/ms-word.html). `quarto-preprint` also provides a slightly improved bare-bones MS Word output format `preprint-docx`.
+This uses `citeproc: true` to allow inserting reference sections before appendices using Quarto's "[refs div](https://quarto.org/docs/authoring/citations.html#bibliography-generation)". Due to Typst limitations the bibliography won't necessarily be formatted exactly as specified, for example hanging indents in APA-style bibliographies don't work. Set [`citeproc: false`](https://quarto.org/docs/authoring/citations.html#typst) and provide a `bibliographystyle` to use a Typst native bibliography, but note it won't work well with appendices.
 
-[Typst](https://typst.app) also provides an online interface. That could be especially useful for collaborating on documents. You can create a .typ file by including
+### Appendix
 
-```yaml
-format:
-  preprint-typst:
-    keep-typ: true
-```
+Include `functions: [place, appendix]` in the document's YAML, and write content inside a `::: {.appendix}` div. That content will be placed inside an appendix that is always page-width, and comes after the references section if desired (see above).
 
-in the document's YAML. Then, copy-paste the resulting .typ file and other required materials (bibliography & image files, etc.) to the Typst online interface. See an example [here](https://typst.app/project/rk4zWONKPIF5lRxF_HU1I5).
+# Help
+
+## Contributing
+
+Send your bug reports and pull requests to <https://github.com/mvuorre/quarto-preprint>. If you're reporting a bug, please include a reproducible example / full details of what you're trying to do, how, and what goes wrong.

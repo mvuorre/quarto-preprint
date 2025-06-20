@@ -104,7 +104,7 @@ $elseif(keywords)$
   categories: [$for(keywords)$$it$$sep$, $endfor$],
 $endif$
 $if(wordcount)$
-  wordcount: [$wordcount$],
+  wordcount: $wordcount$,
 $endif$
 $if(col-gutter)$
   col-gutter: $col-gutter$,

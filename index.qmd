@@ -33,9 +33,10 @@ abstract: |
 categories: [Quarto, Typst, extension, preprint]
 date: "`r Sys.Date()`"
 bibliography: bibliography.bib
+csl: https://www.zotero.org/styles/apa
 authornote: This is an example author note.
-wordcount: '{{< words-body >}}'
-functions: place
+wordcount: true
+functions: [place, appendix]
 format: preprint-typst
 ---
 
@@ -159,3 +160,42 @@ Code listings can also be cross-referenced. @lst-r shows some great R [@rcoretea
 
 sqrt(1 + 1)
 ```
+
+# References
+
+:::{#refs}
+:::
+
+::: {.appendix}
+
+# Appendix A: Testing {.appendix}
+
+Appendices have appropriate float references like @fig-3, @tbl-3, @lst-app, and @tip-appendix.
+
+::: {#fig-3}
+{{< placeholder 200 100 format=svg >}}
+:::
+
+::: {#tbl-3}
+{{< placeholder 200 100 format=svg >}}
+:::
+
+```{r}
+#| lst-label: lst-app
+#| lst-cap: R code.
+#| collapse: true
+
+sqrt(1 + 1)
+```
+
+::: {#tip-appendix .callout-tip}
+Appendices are an experimental feature
+:::
+
+Equations (@eq-app) work too but their numbering needs fixing.
+
+$$
+f(x \mid \mu, \sigma^2) = \frac{1}{\sqrt{2\pi \sigma^2}} \exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)
+$$ {#eq-app}
+
+:::

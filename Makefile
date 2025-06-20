@@ -1,7 +1,6 @@
-all: render
+all: index.pdf
 
 # Render example document
-render: index.pdf
 index.pdf: index.qmd _extensions/preprint/typst-show.typ _extensions/preprint/typst-template.typ
 	quarto render index.qmd
 
@@ -9,6 +8,12 @@ index.pdf: index.qmd _extensions/preprint/typst-show.typ _extensions/preprint/ty
 test-default: index.qmd
 	mkdir -p tests
 	quarto render $< --to preprint-typst --output-dir tests --output index_default.pdf
+
+test-appendix: index.qmd
+	mkdir -p tests
+	quarto render $< --to preprint-typst --output-dir tests --output index_appendix_theme-jou.pdf -M theme-jou:true
+	quarto render $< --to preprint-typst --output-dir tests --output index_appendix.pdf -M keep-typ:true
+	quarto render $< --to html --output-dir tests --output index_appendix.html -M toc:true
 
 test-theme-jou: index.qmd
 	mkdir -p tests
@@ -35,7 +40,6 @@ test: test-default test-theme-jou test-linenumbers test-single-author test-typog
 
 # Update dependencies
 deps:
-	quarto add andrewheiss/quarto-wordcount --embed preprint --no-prompt
 	quarto add christopherkenny/typst-function --embed preprint --no-prompt
 
 # Create a GitHub release

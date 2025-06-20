@@ -6,6 +6,7 @@
 *.html
 *_cache/
 *_files/
+index.typ
 /.luarc.json
 /.quarto/
 /tests/

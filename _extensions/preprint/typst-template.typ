@@ -4,6 +4,38 @@
 
 // Imports
 #import "@preview/fontawesome:0.5.0": *
+#import "@preview/wordometer:0.1.4": word-count, total-words
+
+// Appendix function, use with YAML
+// functions: [place, appendix]
+// And wrap appendix in a {.appendix} div
+#let appendix(content) = {
+  pagebreak()
+  set heading(numbering: none)
+  // Reset counters
+  // TODO: Programmatically reset all (callout) counters
+  // TODO: Reset equation and other counters
+  counter(heading).update(0)
+  counter(figure.where(kind: "quarto-float-fig")).update(0)
+  counter(figure.where(kind: "quarto-float-tbl")).update(0)
+  counter(figure.where(kind: "quarto-float-lst")).update(0)
+  counter(figure.where(kind: "quarto-callout-Tip")).update(0)
+
+  // Figure & Table Numbering
+  set figure(
+    numbering: it => {
+      [A.#it]
+    },
+  )
+  place(
+    auto,
+    scope: "parent",
+    float: true,
+    {
+      content
+    },
+  )
+}
 
 /* Front matter formatting helper functions */
 // Collect authors marked as equal contributors
@@ -105,10 +137,11 @@
   toc_title: none,
   toc_depth: none,
   toc_indent: 1.5em,
-  bibliography-title: "References",
-  bibliographystyle: "apa",
   cols: 1,
   col-gutter: 4.2%,
+  // Bibliography settings (no effect if citeproc used)
+  bibliography-title: "References",
+  bibliographystyle: "apa",
   doc,
 ) = {
   /* Document settings */
@@ -116,10 +149,8 @@
   show link: set text(fill: linkcolor)
   show cite: set text(fill: linkcolor)
 
-  // Allow custom title for bibliography section
+  // Customize Typst bibliography (no effect if using citeproc)
   set bibliography(title: bibliography-title, style: bibliographystyle)
-
-  // Bibliography paragraph spacing
   show bibliography: set par(spacing: spacing, leading: leading)
 
   // Space around figures
@@ -269,8 +300,8 @@
         #if categories != none {
           block()[#v(0.4em)#text(style: "italic")[Keywords:] #categories]
         }
-        #if wordcount != none {
-          block(inset: (bottom: if toc { 0em } else { 2em }))[#text(style: "italic")[Words:] #wordcount]
+        #if wordcount == true {
+          block(inset: (bottom: if toc { 0em } else { 2em }))[#text(style: "italic")[Words:] #total-words]
         }
       ]
 
@@ -286,7 +317,8 @@
       }
     },
   )
-
+  // Word count with wordometer package
+  show: word-count.with(exclude: (<refs>))
   /* Document content */
   doc
 }

@@ -5,19 +5,11 @@ authors:
 version: 0.17.1
 quarto-required: ">=1.7.29"
 contributes:
-  shortcodes:
-    - "_extensions/andrewheiss/wordcount/words.lua"
   formats:
     typst:
       template-partials:
         - typst-template.typ
         - typst-show.typ
-      citeproc: false
-      suppress-bibliography: true
+      citeproc: true
       filters:
-        - at: pre-quarto
-          path: _extensions/andrewheiss/wordcount/citeproc.lua
-        - at: pre-quarto
-          path: _extensions/andrewheiss/wordcount/wordcount.lua
         - _extensions/christopherkenny/typst-function/typst-function.lua
-      count-code-blocks: false
