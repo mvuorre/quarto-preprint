@@ -1,3 +1,7 @@
+## 0.18.1
+
+- Fix author footnote bug
+
 ## 0.18.0
 
 - Implement appendices

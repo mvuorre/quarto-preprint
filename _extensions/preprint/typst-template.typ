@@ -244,6 +244,7 @@
   // Hack: Include authors outside of scope: parent
   // to ensure their associated footnotes show in main document. (TODO)
   hide(author_strings.join(", ", last: " & "))
+  counter(footnote).update(n => n - 1)
   v(-2.4em)
 
   place(
@@ -290,7 +291,6 @@
       counter(footnote).update(0)
 
       /* Abstract and metadata section */
-
       block(inset: (top: 1em, bottom: 0em, left: 2.4em, right: 2.4em))[
         #set text(size: 0.92em)
         #set par(first-line-indent: 0em)
