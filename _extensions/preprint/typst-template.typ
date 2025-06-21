@@ -86,6 +86,12 @@
   doc,
 ) = {
   /* Document settings */
+  set document(
+    title: if title != none { title } else { none },
+    author: if authors != none { authors.map(a => str(a.name.text)) } else { () },
+    description: abstract,
+    keywords: categories.text,
+  )
   // Link and cite colors
   show link: set text(fill: linkcolor)
   show cite: set text(fill: linkcolor)
@@ -159,7 +165,6 @@
     inset: (top: 0em, bottom: 0em, left: 0em, right: 0.1em),
     text(size: 1em, weight: "bold", style: "italic", it.body + [.]),
   )
-
 
   // Construct author display
   let author_display = if authors != none {
