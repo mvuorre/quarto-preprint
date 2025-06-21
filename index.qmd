@@ -155,7 +155,7 @@ Code listings can also be cross-referenced. @lst-r shows some great R [@rcoretea
 
 ```{r}
 #| lst-label: lst-r
-#| lst-cap: R code for pRos.
+#| lst-cap: R code example.
 #| collapse: true
 
 sqrt(1 + 1)

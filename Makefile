@@ -36,7 +36,7 @@ test-toc-numbering: index.qmd
 	quarto render $< --to preprint-typst --output-dir tests --output index_toc-numbering.pdf -M toc:true -M section-numbering:1.1.a
 
 # Run all tests
-test: test-default test-theme-jou test-linenumbers test-single-author test-typography test-toc-numbering
+test: test-default test-theme-jou test-linenumbers test-single-author test-typography test-toc-numbering test-appendix
 
 # Update dependencies
 deps:

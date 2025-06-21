@@ -19,7 +19,11 @@
   counter(figure.where(kind: "quarto-float-fig")).update(0)
   counter(figure.where(kind: "quarto-float-tbl")).update(0)
   counter(figure.where(kind: "quarto-float-lst")).update(0)
+  counter(figure.where(kind: "quarto-callout-Note")).update(0)
+  counter(figure.where(kind: "quarto-callout-Warning")).update(0)
+  counter(figure.where(kind: "quarto-callout-Important")).update(0)
   counter(figure.where(kind: "quarto-callout-Tip")).update(0)
+  counter(figure.where(kind: "quarto-callout-Caution")).update(0)
 
   // Figure & Table Numbering
   set figure(
@@ -179,8 +183,8 @@
               #if authornote != none [#authornote]
             ],
           )
-          if a.keys().contains("orcid") { parts.push(link(a.orcid, fa-orcid(fill: rgb("a6ce39"), size: 0.8em))) }
         }
+        if a.keys().contains("orcid") { parts.push(link(a.orcid, fa-orcid(fill: rgb("a6ce39"), size: 0.8em))) }
         parts.join()
       })
       .join(", ", last: " & ")
