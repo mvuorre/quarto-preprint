@@ -37,69 +37,6 @@
   )
 }
 
-/* Front matter formatting helper functions */
-// Collect authors marked as equal contributors
-#let collect_equal_contributors(authors) = {
-  let equal_contributors = ()
-  for a in authors {
-    if a.keys().contains("equal-contributor") and a.at("equal-contributor") == true {
-      equal_contributors.push(a.name)
-    }
-  }
-  equal_contributors
-}
-
-// Generate equal contributor note text
-#let create_equal_contrib_text(equal_contributors) = {
-  if equal_contributors.len() > 1 {
-    [#equal_contributors.join(", ", last: " & ") contributed equally to this work.]
-  } else {
-    none
-  }
-}
-
-// Build author display elements (name, affiliation, markers, etc.)
-#let build_author_elements(author, authors, equal_contributors) = {
-  let elements = (author.name,)
-
-  // Add affiliation superscript for multi-author papers
-  if authors.len() > 1 {
-    elements.push(super(author.affiliation))
-  }
-
-  // Add equal contributor marker if needed
-  if (
-    author.keys().contains("equal-contributor")
-      and author.at("equal-contributor") == true
-      and equal_contributors.len() > 1
-  ) {
-    elements.push(super[§])
-  }
-
-  elements
-}
-
-// Create corresponding author footnote
-#let create_corresponding_footnote(author, equal_contrib_text, authornote) = {
-  footnote(
-    numbering: "*",
-    [
-      Send correspondence to: #author.name, #author.email.
-      #if equal_contrib_text != none [
-        #super[§]#equal_contrib_text
-      ]
-      #if authornote != none [#authornote]
-    ],
-  )
-}
-
-// Add ORCID link if available
-#let add_orcid_link(elements, author) = {
-  if author.keys().contains("orcid") {
-    elements.push(link(author.orcid, fa-orcid(fill: rgb("a6ce39"), size: 0.8em)))
-  }
-  elements
-}
 
 #let preprint(
   // Document metadata
@@ -219,34 +156,44 @@
     text(size: 1em, weight: "bold", style: "italic", it.body + [.]),
   )
 
-  /* Author formatting */
-  let author_strings = ()
-  if authors != none {
-    let equal_contributors = collect_equal_contributors(authors)
-    let equal_contrib_text = create_equal_contrib_text(equal_contributors)
 
-    // Build author display strings
-    for a in authors {
-      let author_elements = build_author_elements(a, authors, equal_contributors)
+  // Construct author display
+  let author_display = if authors != none {
+    authors
+      .map(a => {
+        let parts = (a.name,)
+        if authors.len() > 1 { parts.push(super(a.affiliation)) }
+        let equal_authors = authors.filter(auth => (
+          auth.keys().contains("equal-contributor") and auth.at("equal-contributor") == true
+        ))
+        if a.keys().contains("equal-contributor") and a.at("equal-contributor") == true and equal_authors.len() > 1 {
+          parts.push(super[§])
+        }
+        if a.keys().contains("corresponding") {
+          parts.push(
+            footnote(numbering: "*")[
+              Send correspondence to: #a.name, #a.email.
+              #if equal_authors.len() > 1 [
+                #super[§]#equal_authors.map(auth => auth.name).join(", ", last: " & ") contributed equally to this work.
+              ]
+              #if authornote != none [#authornote]
+            ],
+          )
+          if a.keys().contains("orcid") { parts.push(link(a.orcid, fa-orcid(fill: rgb("a6ce39"), size: 0.8em))) }
+        }
+        parts.join()
+      })
+      .join(", ", last: " & ")
+  } else { none }
 
-      // Add corresponding author footnote if needed
-      if a.keys().contains("corresponding") {
-        author_elements.push(create_corresponding_footnote(a, equal_contrib_text, authornote))
-      }
-
-      // Add ORCID link if available
-      author_elements = add_orcid_link(author_elements, a)
-
-      // Add completed author string to the list
-      author_strings.push(box(author_elements.join()))
-    }
+  // Hack: Include authors outside of "scope: parent" to ensure footnotes show
+  if author_display != none {
+    hide(author_display)
+    counter(footnote).update(n => n - 1)
+    v(-2.4em)
   }
-  // Hack: Include authors outside of scope: parent
-  // to ensure their associated footnotes show in main document. (TODO)
-  hide(author_strings.join(", ", last: " & "))
-  counter(footnote).update(n => n - 1)
-  v(-2.4em)
 
+  // Place title, author, abstract always in one column
   place(
     top,
     scope: "parent",
@@ -267,10 +214,10 @@
         ]
       }
 
-      if authors != none {
+      if author_display != none {
         align(center)[
           #block(width: 100%, above: 2.5em, below: 0em)[
-            #text(weight: "regular", size: subtitle-size)[#author_strings.join(", ", last: " & ")]
+            #text(weight: "regular", size: subtitle-size)[#author_display]
           ]
         ]
       }
@@ -287,9 +234,6 @@
         ]
       }
 
-      // Reset footnote counter for the main document
-      counter(footnote).update(0)
-
       /* Abstract and metadata section */
       block(inset: (top: 1em, bottom: 0em, left: 2.4em, right: 2.4em))[
         #set text(size: 0.92em)
@@ -304,6 +248,9 @@
           block(inset: (bottom: if toc { 0em } else { 2em }))[#text(style: "italic")[Words:] #total-words]
         }
       ]
+
+      // Reset footnote counter for the main document
+      counter(footnote).update(0)
 
       // Table of contents
       if toc {
