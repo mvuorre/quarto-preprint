@@ -9,12 +9,6 @@ test-default: index.qmd
 	mkdir -p tests
 	quarto render $< --to preprint-typst --output-dir tests --output index_default.pdf
 
-test-appendix: index.qmd
-	mkdir -p tests
-	quarto render $< --to preprint-typst --output-dir tests --output index_appendix_theme-jou.pdf -M theme-jou:true
-	quarto render $< --to preprint-typst --output-dir tests --output index_appendix.pdf -M keep-typ:true
-	quarto render $< --to html --output-dir tests --output index_appendix.html -M toc:true
-
 test-theme-jou: index.qmd
 	mkdir -p tests
 	quarto render $< --to preprint-typst --output-dir tests --output index_theme-jou.pdf -M theme-jou:true
@@ -56,4 +50,4 @@ release: .release.timestamp
 clean:
 	rm -rf *.pdf *.typ *.png *_cache/ *_files/ tests/ .release.timestamp
 
-.PHONY: clean test test-default test-theme-jou test-linenumbers test-single-author test-typography test-toc-numbering release all render deps
+.PHONY: clean test test-default test-theme-jou test-linenumbers test-single-author test-typography test-toc-numbering release all deps
