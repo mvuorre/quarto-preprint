@@ -7,7 +7,8 @@ index.pdf: index.qmd _extensions/preprint/typst-show.typ _extensions/preprint/ty
 # Individual test targets
 test-default: index.qmd
 	mkdir -p tests
-	quarto render $< --to preprint-typst --output-dir tests --output index_default.pdf
+	quarto render $< --to preprint-typst --output-dir tests --output index_default.pdf -M keep-typ:true
+	quarto render $< --to html --output-dir tests --output index_default.html
 
 test-theme-jou: index.qmd
 	mkdir -p tests

@@ -168,7 +168,7 @@ sqrt(1 + 1)
 
 ::: {.appendix}
 
-# Appendix A: Testing {.appendix}
+# Appendix A: Testing
 
 {{< lipsum 1 >}}
 
