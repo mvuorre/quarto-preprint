@@ -146,9 +146,7 @@ To insert a block quote, prepend a paragraph with `>`:
 #### All kinds of markup
 Markdown: `*italics*, **bold text**, ~subscript~, ^superscript^ & ~~strikethrough~~`
 
-renders as
-
-*italics*, **bold text**, ~subscript~, ^superscript^ & ~~strikethrough~~
+Renders as: *italics*, **bold text**, ~subscript~, ^superscript^ & ~~strikethrough~~
 :::
 
 ### Code listings
@@ -193,7 +191,7 @@ sqrt(1 + 1)
 ```
 
 ::: {#tip-appendix .callout-tip}
-Appendices are an experimental feature
+Appendices are an experimental feature.
 :::
 
 Equations (@eq-app) work too but their numbering continues from main document.

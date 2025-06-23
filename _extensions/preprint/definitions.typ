@@ -164,7 +164,11 @@
       inset: 8pt,
     )[#text(icon_color, weight: 900)[#icon] #title])
       + if (body != []) {
-        block(inset: 1pt, width: 100%, block(fill: body_background_color, width: 100%, inset: 8pt, body))
+        block(inset: 1pt, width: 100%, block(fill: body_background_color, width: 100%, inset: 8pt, [
+          #set align(left)
+          #set par(first-line-indent: 0em)
+          #body
+        ]))
       },
   )
 }

@@ -3,6 +3,8 @@
 In progress
 
 - Fix appendix alignment from center to left
+- Fix figure caption alignment
+- Fix callout body text alignment
 
 ## 0.18.1
 
