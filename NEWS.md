@@ -1,7 +1,7 @@
-## 1.0.0
+## 0.19.0
 
-In progress
-
+- Use custom definitions.typ to customize more elements
+    - <https://quarto.org/docs/output-formats/typst-custom.html#advanced-customization>
 - Fix appendix alignment from center to left
 - Fix figure caption alignment
 - Fix callout body text alignment
