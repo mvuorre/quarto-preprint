@@ -4,7 +4,7 @@
 
 // Imports
 #import "@preview/fontawesome:0.5.0": *
-#import "@preview/wordometer:0.1.4": word-count, total-words
+#import "@preview/wordometer:0.1.4": total-words, word-count
 
 // Appendix function, use with YAML
 // functions: [place, appendix]
@@ -26,19 +26,13 @@
   counter(figure.where(kind: "quarto-callout-Caution")).update(0)
 
   // Figure & Table Numbering
-  set figure(
-    numbering: it => {
-      [A.#it]
-    },
-  )
-  place(
-    auto,
-    scope: "parent",
-    float: true,
-    {
-      content
-    },
-  )
+  set figure(numbering: it => {
+    [A.#it]
+  })
+  place(auto, scope: "parent", float: true, {
+    set align(left)
+    content
+  })
 }
 
 
@@ -125,12 +119,7 @@
   /* Typography settings */
 
   // Paragraph settings
-  set par(
-    justify: true,
-    leading: leading,
-    spacing: spacing,
-    first-line-indent: (amount: first-line-indent, all: all),
-  )
+  set par(justify: true, leading: leading, spacing: spacing, first-line-indent: (amount: first-line-indent, all: all))
   set par.line(numbering: linenumbering)
 
   // Text settings
@@ -157,14 +146,17 @@
     #it
   ]
   // Level 4 & 5 headers are in paragraph
-  show heading.where(level: 4): it => box(
-    inset: (top: 0em, bottom: 0em, left: 0em, right: 0.1em),
-    text(size: 1em, weight: "bold", it.body + [.]),
-  )
-  show heading.where(level: 5): it => box(
-    inset: (top: 0em, bottom: 0em, left: 0em, right: 0.1em),
-    text(size: 1em, weight: "bold", style: "italic", it.body + [.]),
-  )
+  show heading.where(level: 4): it => box(inset: (top: 0em, bottom: 0em, left: 0em, right: 0.1em), text(
+    size: 1em,
+    weight: "bold",
+    it.body + [.],
+  ))
+  show heading.where(level: 5): it => box(inset: (top: 0em, bottom: 0em, left: 0em, right: 0.1em), text(
+    size: 1em,
+    weight: "bold",
+    style: "italic",
+    it.body + [.],
+  ))
 
   // Construct author display
   let author_display = if authors != none {
@@ -179,15 +171,13 @@
           parts.push(super[§])
         }
         if a.keys().contains("corresponding") {
-          parts.push(
-            footnote(numbering: "*")[
-              Send correspondence to: #a.name, #a.email.
-              #if equal_authors.len() > 1 [
-                #super[§]#equal_authors.map(auth => auth.name).join(", ", last: " & ") contributed equally to this work.
-              ]
-              #if authornote != none [#authornote]
-            ],
-          )
+          parts.push(footnote(numbering: "*")[
+            Send correspondence to: #a.name, #a.email.
+            #if equal_authors.len() > 1 [
+              #super[§]#equal_authors.map(auth => auth.name).join(", ", last: " & ") contributed equally to this work.
+            ]
+            #if authornote != none [#authornote]
+          ])
         }
         if a.keys().contains("orcid") { parts.push(link(a.orcid, fa-orcid(fill: rgb("a6ce39"), size: 0.8em))) }
         parts.join()
@@ -203,76 +193,71 @@
   }
 
   // Place title, author, abstract always in one column
-  place(
-    top,
-    scope: "parent",
-    float: true,
-    {
-      if title != none {
-        align(center)[
-          #block(width: 100%, above: 0em, below: 0em)[
-            #text(weight: "bold", size: title-size)[#title]
-          ]
+  place(top, scope: "parent", float: true, {
+    if title != none {
+      align(center)[
+        #block(width: 100%, above: 0em, below: 0em)[
+          #text(weight: "bold", size: title-size)[#title]
         ]
-      }
-      if subtitle != none {
-        align(center)[
-          #block(width: 100%, above: 1em, below: 0em)[
-            #text(weight: "bold", size: subtitle-size)[#subtitle]
-          ]
+      ]
+    }
+    if subtitle != none {
+      align(center)[
+        #block(width: 100%, above: 1em, below: 0em)[
+          #text(weight: "bold", size: subtitle-size)[#subtitle]
         ]
-      }
+      ]
+    }
 
-      if author_display != none {
-        align(center)[
-          #block(width: 100%, above: 2.5em, below: 0em)[
-            #text(weight: "regular", size: subtitle-size)[#author_display]
-          ]
+    if author_display != none {
+      align(center)[
+        #block(width: 100%, above: 2.5em, below: 0em)[
+          #text(weight: "regular", size: subtitle-size)[#author_display]
         ]
-      }
+      ]
+    }
 
-      if affiliations != none {
-        align(center)[
-          #block(width: 100%, above: 1em, below: 2em)[
-            #text(weight: "regular", size: 1.1em)[
-              #for a in affiliations [
-                #if authors.len() > 1 [#super[#a.id]]#a.name#if a.keys().contains("department") [, #a.department] \
-              ]
+    if affiliations != none {
+      align(center)[
+        #block(width: 100%, above: 1em, below: 2em)[
+          #text(weight: "regular", size: 1.1em)[
+            #for a in affiliations [
+              #if authors.len() > 1 [#super[#a.id]]#a.name#if a.keys().contains("department") [, #a.department] \
             ]
           ]
         ]
-      }
-
-      /* Abstract and metadata section */
-      block(inset: (top: 1em, bottom: 0em, left: 2.4em, right: 2.4em))[
-        #set text(size: 0.92em)
-        #set par(first-line-indent: 0em)
-        #if abstract != none {
-          abstract
-        }
-        #if categories != none {
-          block()[#v(0.4em)#text(style: "italic")[Keywords:] #categories]
-        }
-        #if wordcount == true {
-          block(inset: (bottom: if toc { 0em } else { 2em }))[#text(style: "italic")[Words:] #total-words]
-        }
       ]
+    }
 
-      // Reset footnote counter for the main document
-      counter(footnote).update(0)
-
-      // Table of contents
-      if toc {
-        block(inset: (top: 1em, bottom: 2em, left: 2.4em, right: 2.4em))[
-          #outline(
-            title: toc_title,
-            depth: toc_depth,
-            indent: toc_indent,
-          )
-        ]
+    /* Abstract and metadata section */
+    block(inset: (top: 1em, bottom: 0em, left: 2.4em, right: 2.4em))[
+      #set text(size: 0.92em)
+      #set par(first-line-indent: 0em)
+      #if abstract != none {
+        abstract
       }
-    },
-  )
+      #if categories != none {
+        block()[#v(0.4em)#text(style: "italic")[Keywords:] #categories]
+      }
+      #if wordcount == true {
+        block(inset: (bottom: if toc { 0em } else { 2em }))[#text(style: "italic")[Words:] #total-words]
+      }
+    ]
+
+    // Reset footnote counter for the main document
+    counter(footnote).update(0)
+
+    // Table of contents
+    if toc {
+      block(inset: (top: 1em, bottom: 2em, left: 2.4em, right: 2.4em))[
+        #outline(
+          title: toc_title,
+          depth: toc_depth,
+          indent: toc_indent,
+        )
+      ]
+    }
+  })
   // Word count with wordometer package
   show: word-count.with(exclude: (<refs>))
   /* Document content */

@@ -170,6 +170,8 @@ sqrt(1 + 1)
 
 # Appendix A: Testing {.appendix}
 
+{{< lipsum 1 >}}
+
 Appendices have appropriate float references like @fig-3, @tbl-3, @lst-app, and @tip-appendix.
 
 ::: {#fig-3}

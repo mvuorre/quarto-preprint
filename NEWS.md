@@ -1,3 +1,9 @@
+## 1.0.0
+
+In progress
+
+- Fix appendix alignment from center to left
+
 ## 0.18.1
 
 - Fix author footnote bug
