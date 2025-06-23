@@ -86,7 +86,9 @@ knitr::kable(
 
 ### Figures
 
-::: {#fig-1}
+Figures are centered by default.
+
+::: {#fig-1 fig-cap="Example figure."}
 {{< placeholder 400 200 format=svg >}}
 :::
 
