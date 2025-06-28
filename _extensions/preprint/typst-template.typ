@@ -54,7 +54,7 @@
   spacing: 0.6em,
   first-line-indent: 1.8em,
   all: false,
-  linkcolor: black,
+  linkcolor: blue,
   margin: (x: 3.2cm, y: 3cm),
   paper: "a4",
   // Typography settings
