@@ -1,4 +1,5 @@
-# *quarto-preprint* extension manual (v0.19.0)
+# *quarto-preprint*: A Quarto extension for creating PDF documents with
+Typst
 Matti Vuorre
 2025-07-01
 
@@ -11,12 +12,20 @@ Matti Vuorre
     options](#preprint-typst-extension-options)
 - [Example content](#example-content)
   - [Floats](#floats)
-  - [Quarto markdown features](#quarto-markdown-features)
+  - [Full-width content](#full-width-content)
+  - [Maths](#maths)
 - [Get help & contribute](#get-help--contribute)
 - [References](#references)
 - [Appendix A: Tips and tricks](#appendix-a-tips-and-tricks)
 
 <!-- README.md is automatically generated from manual.qmd -->
+
+> “An article about computational science in a scientific publication is
+> not the scholarship itself, it is merely advertising of the
+> scholarship. The actual scholarship is the complete software
+> development environment and the complete set of instructions which
+> generated the figures.” –Buckheit and Donoho (1995, paraphrasing Jon
+> Claerbout)
 
 [Quarto](https://quarto.org/) is “An open-source scientific and
 technical publishing system” (Allaire et al., 2025) for writing
@@ -69,12 +78,16 @@ quarto use template mvuorre/quarto-preprint
 You will then answer a series of questions (project name etc.) and end
 up with a new project directory with a {project-name}.qmd file that
 provides a starter Quarto document template that uses the
-*preprint-typst* format. In addition
+*preprint-typst* format. It also creates a boilerplate
+[\_quarto.yml](https://quarto.org/docs/projects/quarto-projects.html#shared-metadata)
+file where you can specify the Quarto project’s metadata, and an example
+bibliography.bib file.
 
 # Use & configuration
 
 The output of Quarto documents is configured through YAML front matter
-metadata. To specify an [output
+[metadata](https://quarto.org/docs/authoring/front-matter.html). To
+specify an [output
 format](https://quarto.org/docs/output-formats/all-formats.html) for
 your document, include (for example) `format: preprint-typst` in the
 front matter. Here is a minimal example YAML front matter that specifies
@@ -93,6 +106,7 @@ format:
   html:
     title-block-banner: true
 ---
+Document content goes here...
 ```
 
 Note that many front matter variables can be specified for all output
@@ -101,14 +115,13 @@ above). To learn more about Quarto’s front matter options, see Quarto’s
 [guide](https://quarto.org/docs/authoring/front-matter.html) to writing
 scholarly documents, and Quarto’s Typst format
 [documentation](https://quarto.org/docs/output-formats/typst.html).
-*preprint-typst* aims to include all standard Quarto front matter
-options for scholarly writing.
 
-In addition to standard Quarto front matter, *preprint-typst* supports
-additional fields and Typst variables, such as author notes and
-paragraph formatting. Below, we list available YAML configuration
-options roughly organized by their specificity to different Quarto
-output formats.
+*preprint-typst* aims to include all standard Quarto front matter
+options for scholarly writing. In addition to standard Quarto YAML
+variables, *preprint-typst* supports additional fields and Typst
+variables, such as author notes and paragraph formatting. Below, we list
+available YAML configuration options roughly organized by their
+specificity to different Quarto output formats.
 
 ## Universal Quarto options
 
@@ -158,35 +171,41 @@ output formats.
   [URL](https://www.zotero.org/styles/)
   \[[Quarto](https://quarto.org/docs/authoring/citations.html)\]
   - Example: `csl: https://www.zotero.org/styles/apa` or `csl: apa.csl`
-- `citeproc` (boolean) - Use Pandoc citation processing
+- `citeproc` (boolean;
+  <a href="#tip-bib" class="quarto-xref">Tip 1</a>) - Use Pandoc
+  citation processing
   \[[Quarto](https://quarto.org/docs/authoring/citations.html#typst)\]
   - Example: `citeproc: true`
 
-Typst has its [own citation processing
-system](https://quarto.org/docs/authoring/citations.html#typst), but by
-default *preprint-typst* turns it off by using `citeproc: true` to allow
-better bibliography customization and use of Quarto’s [`#refs`
-div](https://quarto.org/docs/authoring/citations.html#bibliography-generation).
-In your document, include
-
-``` md
-# References
-
-::: {#refs}
-:::
-```
-
-to display the bibliography section anywhere in the document. Read more
-at Quarto’s [citations
-documentation](https://quarto.org/docs/authoring/citations.html#typst).
-
-- When citeproc is off (`citeproc: false`)
-  - `bibliography-title` (string) - Bibliography section title
-    - Example: `bibliography-title: "References"`
-  - `bibliographystyle` (string) - Citation style
-    \[[Quarto](https://quarto.org/docs/output-formats/typst.html#bibliography),
-    [Typst](https://typst.app/docs/reference/model/bibliography/#styles)\]
-    - Example: `bibliographystyle: "apa"`
+> [!NOTE]
+>
+> ### Quarto, Typst, and bibliography processing
+>
+> Typst has its [own citation processing
+> system](https://quarto.org/docs/authoring/citations.html#typst), but
+> by default *preprint-typst* turns it off by using `citeproc: true` to
+> allow better bibliography customization and use of Quarto’s [`#refs`
+> div](https://quarto.org/docs/authoring/citations.html#bibliography-generation).
+> In your document, include
+>
+> ``` md
+> # References
+>
+> ::: {#refs}
+> :::
+> ```
+>
+> to display the bibliography section anywhere in the document. Read
+> more at Quarto’s [citations
+> documentation](https://quarto.org/docs/authoring/citations.html#typst).
+>
+> - When citeproc is off (`citeproc: false`)
+>   - `bibliography-title` (string) - Bibliography section title
+>     - Example: `bibliography-title: "References"`
+>   - `bibliographystyle` (string) - Citation style
+>     \[[Quarto](https://quarto.org/docs/output-formats/typst.html#bibliography),
+>     [Typst](https://typst.app/docs/reference/model/bibliography/#styles)\]
+>     - Example: `bibliographystyle: "apa"`
 
 ### Typography
 
@@ -297,8 +316,9 @@ Word, etc.*
   - Example: `functions: ["place", "appendix"]`
 
 When starting a new project that uses the *quarto-preprint* template
-(`quarto use template mvuorre/quarto-preprint`), many useful options
-already have default values you can build on. See Quarto’s Typst
+(`quarto use template mvuorre/quarto-preprint`), the template Quarto
+file already includes some useful variables and their values. See
+Quarto’s Typst
 [documentation](https://quarto.org/docs/output-formats/typst.html) for
 standard options and Typst [documentation](https://typst.app/docs) for
 styling details.
@@ -358,7 +378,7 @@ Figure 1: Example figure.
 
 <a href="#fig-1" class="quarto-xref">Figure 1</a> is a figure.
 
-### Full-width content
+## Full-width content
 
 You can also include page-wide figures (or any other content) in
 documents that have more than one column. See
@@ -369,20 +389,22 @@ include
 functions: place
 ```
 
-in the document’s YAML. Then, wrap your figure in a Quarto div[^1] like
-this:
+in the document’s YAML. Then, wrap your figure in a [Quarto
+div](https://quarto.org/docs/authoring/markdown-basics.html#sec-divs-and-spans)
+like this:
 
     ::: {.place arguments='auto, scope: "parent", float: true'}
     Everything here will span the whole page.
     :::
 
-The above uses the Typst’s `place()`[^2] function through the
-typst-function[^3] Quarto extension to place the div’s content in
-`"parent"` scope (the document page is the column’s parent) and must
-specify that Typst should treat the content as a float. `auto` indicates
-where the figure should be on the page, and can be either `auto`,
-`bottom`, or `top`. (Note `auto` and `bottom` can make the figure appear
-below footnotes.)
+The above uses the Typst’s [`place()`
+function](https://typst.app/docs/reference/layout/place/) through the
+[typst-function](https://github.com/christopherkenny/typst-function)
+Quarto extension to place the div’s content in `"parent"` scope (the
+document page is the column’s parent) and must specify that Typst should
+treat the content as a float. `auto` indicates where the figure should
+be on the page, and can be either `auto`, `bottom`, or `top`. (Note
+`auto` and `bottom` can make the figure appear below footnotes.)
 
 <div class="place"
 arguments="auto, scope: &quot;parent&quot;, float: true">
@@ -397,9 +419,7 @@ Figure 2
 
 </div>
 
-## Quarto markdown features
-
-### Maths
+## Maths
 
 LaTeX math notation is automatically converted to Typst and as such
 works just fine either inline ($y_i = \alpha + \beta x_i + \epsilon_i$)
@@ -408,30 +428,6 @@ or in display mode (<a href="#eq-1" class="quarto-xref">Equation 1</a>).
 <span id="eq-1">$$
 f(x \mid \mu, \sigma^2) = \frac{1}{\sqrt{2\pi \sigma^2}} \exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)
  \qquad(1)$$</span>
-
-### Block quotes
-
-To insert a block quote, prepend a paragraph with `>`:
-
-> A quote: “*Elit ullamcorper dignissim cras tincidunt lobortis feugiat
-> vivamus at.*”
-
-### Callouts
-
-[Callout blocks](https://quarto.org/docs/authoring/callouts.html), such
-as <a href="#tip-example" class="quarto-xref">Tip 1</a>, can be useful
-for highlighting content, such as one might do in a box that defines key
-terms, etc.
-
-> [!NOTE]
->
-> ### All kinds of markup
->
-> Markdown:
-> `*italics*, **bold text**, ~subscript~, ^superscript^ & ~~strikethrough~~`
->
-> Renders as: *italics*, **bold text**, <sub>subscript</sub>,
-> <sup>superscript</sup> & ~~strikethrough~~
 
 # Get help & contribute
 
@@ -552,9 +548,3 @@ f(x \mid \mu, \sigma^2) = \frac{1}{\sqrt{2\pi \sigma^2}} \exp\left(-\frac{(x-\mu
  \qquad(2)$$</span>
 
 </div>
-
-[^1]: <https://quarto.org/docs/authoring/markdown-basics.html#sec-divs-and-spans>
-
-[^2]: <https://typst.app/docs/reference/layout/place/>
-
-[^3]: <https://github.com/christopherkenny/typst-function>
