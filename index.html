@@ -1,0 +1,1255 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.32">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Matti Vuorre">
+<meta name="dcterms.date" content="2025-07-01">
+
+<title>quarto-preprint extension manual (v0.19.0) – Quarto preprint</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-a612748d1b9edfb70068d8f8d296748d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="quarto-light">
+
+<div id="quarto-search-results"></div>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title"><em>quarto-preprint</em> extension manual (v0.19.0)</h1>
+            <p class="subtitle lead">Testing</p>
+                                <div class="quarto-categories">
+                <div class="quarto-category">Quarto</div>
+                <div class="quarto-category">Typst</div>
+                <div class="quarto-category">extension</div>
+                <div class="quarto-category">typesetting</div>
+                <div class="quarto-category">preprint</div>
+              </div>
+                  </div>
+  </div>
+    
+  <div class="quarto-title-meta-author">
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-heading">Affiliation</div>
+    
+      <div class="quarto-title-meta-contents">
+      <p class="author"><a href="https://www.tilburguniversity.edu/staff/m-j-vuorre">Matti Vuorre</a> <a href="mailto:mjvuorre@uvt.nl" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> <a href="https://orcid.org/0000-0001-5052-066X" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
+    </div>
+    <div class="quarto-title-meta-contents">
+          <p class="affiliation">
+              Tilburg University
+            </p>
+        </div>
+    </div>
+
+  <div class="quarto-title-meta">
+
+        
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">July 1, 2025</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  <div>
+    <div class="abstract">
+      <div class="block-title">Abstract</div>
+      <p><em>quarto-preprint</em> is a Quarto extension for creating PDF documents from markdown content with Typst. It provides one Quarto output format, <em>preprint-typst</em>, that aims to Just Work (Typst doesn’t require LaTeX installations and ships with Quarto), be fast (Typst creates PDF files very quickly), and be 100% Quarto standards compliant (write documents without worrying about formatting &amp; metadata, switch to other Quarto formatd without changing anything but the output format). Its intended uses cases are worry-free but flexible typesetting of Quarto documents to PDF, especially when users might want to easily switch to other (e.g.&nbsp;journal-specific) formats.</p>
+    </div>
+  </div>
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Contents</h2>
+   
+  <ul>
+  <li><a href="#install" id="toc-install" class="nav-link active" data-scroll-target="#install">Install</a></li>
+  <li><a href="#use-configuration" id="toc-use-configuration" class="nav-link" data-scroll-target="#use-configuration">Use &amp; configuration</a>
+  <ul class="collapse">
+  <li><a href="#universal-quarto-options" id="toc-universal-quarto-options" class="nav-link" data-scroll-target="#universal-quarto-options">Universal Quarto options</a>
+  <ul class="collapse">
+  <li><a href="#document-information" id="toc-document-information" class="nav-link" data-scroll-target="#document-information">Document information</a></li>
+  <li><a href="#bibliography-citations" id="toc-bibliography-citations" class="nav-link" data-scroll-target="#bibliography-citations">Bibliography &amp; citations</a></li>
+  <li><a href="#typography" id="toc-typography" class="nav-link" data-scroll-target="#typography">Typography</a></li>
+  <li><a href="#language-localization" id="toc-language-localization" class="nav-link" data-scroll-target="#language-localization">Language &amp; localization</a></li>
+  <li><a href="#figures" id="toc-figures" class="nav-link" data-scroll-target="#figures">Figures</a></li>
+  </ul></li>
+  <li><a href="#quarto-typst-options" id="toc-quarto-typst-options" class="nav-link" data-scroll-target="#quarto-typst-options">Quarto Typst options</a>
+  <ul class="collapse">
+  <li><a href="#page-layout" id="toc-page-layout" class="nav-link" data-scroll-target="#page-layout">Page layout</a></li>
+  <li><a href="#section-numbering" id="toc-section-numbering" class="nav-link" data-scroll-target="#section-numbering">Section numbering</a></li>
+  </ul></li>
+  <li><a href="#advanced-typst-formatting" id="toc-advanced-typst-formatting" class="nav-link" data-scroll-target="#advanced-typst-formatting">Advanced Typst formatting</a></li>
+  <li><a href="#preprint-typst-extension-options" id="toc-preprint-typst-extension-options" class="nav-link" data-scroll-target="#preprint-typst-extension-options"><em>preprint-typst</em> extension options</a></li>
+  </ul></li>
+  <li><a href="#example-content" id="toc-example-content" class="nav-link" data-scroll-target="#example-content">Example content</a>
+  <ul class="collapse">
+  <li><a href="#floats" id="toc-floats" class="nav-link" data-scroll-target="#floats">Floats</a>
+  <ul class="collapse">
+  <li><a href="#tables" id="toc-tables" class="nav-link" data-scroll-target="#tables">Tables</a></li>
+  <li><a href="#figures-1" id="toc-figures-1" class="nav-link" data-scroll-target="#figures-1">Figures</a></li>
+  <li><a href="#full-width-content" id="toc-full-width-content" class="nav-link" data-scroll-target="#full-width-content">Full-width content</a></li>
+  </ul></li>
+  <li><a href="#quarto-markdown-features" id="toc-quarto-markdown-features" class="nav-link" data-scroll-target="#quarto-markdown-features">Quarto markdown features</a>
+  <ul class="collapse">
+  <li><a href="#maths" id="toc-maths" class="nav-link" data-scroll-target="#maths">Maths</a></li>
+  <li><a href="#block-quotes" id="toc-block-quotes" class="nav-link" data-scroll-target="#block-quotes">Block quotes</a></li>
+  <li><a href="#callouts" id="toc-callouts" class="nav-link" data-scroll-target="#callouts">Callouts</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#get-help-contribute" id="toc-get-help-contribute" class="nav-link" data-scroll-target="#get-help-contribute">Get help &amp; contribute</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/mvuorre/quarto-preprint/edit/main/manual.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/mvuorre/quarto-preprint/blob/main/manual.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/mvuorre/quarto-preprint/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="manual.pdf"><i class="bi bi-file-pdf"></i>Typst (preprint)</a></li></ul></div><div class="quarto-other-links"><h2>Other Links</h2><ul><li><a href="manual_ex2.pdf"><i class="bi bi-file-pdf"></i>Journal theme example</a></li><li><a href="manual_ex3.pdf"><i class="bi bi-file-pdf"></i>Many authors example</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<p><a href="https://quarto.org/">Quarto</a> is “An open-source scientific and technical publishing system” <span class="citation" data-cites="allaireQuarto2025">(<a href="#ref-allaireQuarto2025" role="doc-biblioref">Allaire et al., 2025</a>)</span> for writing reproducible documents that combine computations and prose written in <a href="https://quarto.org/docs/authoring/markdown-basics.html">markdown</a> into HTML, PDF, Word, and other outputs. For many R users, Quarto is a successor of <a href="https://rmarkdown.rstudio.com/">R Markdown</a> but with a broader scope and better support for different output formats and computational content in other languages.</p>
+<p><a href="https://github.com/mvuorre/quarto-preprint"><em>quarto-preprint</em></a> is a Quarto extension that provides one such output format, called <em>preprint-typst</em>. When using this format, Quarto renders your document into PDF using <a href="https://typst.app/">Typst</a>, a modern replacement for LaTeX. This document explains how to install, use and customize the output of Quarto documents created with the <em>preprint-typst</em> format. Example manuscripts using <em>preprint-typst</em> format include:</p>
+<ul>
+<li>Vuorre, M. (2025). Estimating Signal Detection Models with regression using the brms R package. OSF. <a href="https://doi.org/10.31234/osf.io/vtfc3_v1" class="uri">https://doi.org/10.31234/osf.io/vtfc3_v1</a></li>
+<li>Vuorre, M., Johannes, N., &amp; Przybylski, A. (2025). Three objections to a novel paradigm in social media effects research. OSF. <a href="https://doi.org/10.31234/osf.io/dpuya_v2" class="uri">https://doi.org/10.31234/osf.io/dpuya_v2</a></li>
+<li>Vuorre, M., Kay, M., &amp; Bolger, N. (2024). Communicating causal effect heterogeneity. OSF. <a href="https://doi.org/10.31234/osf.io/mwg4f" class="uri">https://doi.org/10.31234/osf.io/mwg4f</a></li>
+</ul>
+<section id="install" class="level1">
+<h1>Install</h1>
+<p>You can use this Quarto extension in two ways. First, you can add it to an existing project with</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode zsh code-with-copy"><code class="sourceCode zsh"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> add mvuorre/quarto-preprint</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The <code>quarto add</code> command, which you use on the command line and not the R console, creates a <code>_extensions/preprint/</code> directory in your project. The <em>preprint-typst</em> format is then ready to use in any Quarto document in that project.</p>
+<p>Second, you can start a new <a href="https://quarto.org/docs/projects/quarto-projects.html">Quarto project</a> that uses <em>quarto-preprint</em> with <code>quarto-use</code>:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> use template mvuorre/quarto-preprint</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>You will then answer a series of questions (project name etc.) and end up with a new project directory with a {project-name}.qmd file that provides a starter Quarto document template that uses the <em>preprint-typst</em> format. In addition it creates a boilerplate <a href="https://quarto.org/docs/projects/quarto-projects.html#shared-metadata">_quarto.yml</a> file where you can specify the Quarto project’s metadata, and an example bibliography.bib file.</p>
+</section>
+<section id="use-configuration" class="level1">
+<h1>Use &amp; configuration</h1>
+<p>The output of Quarto documents is configured through YAML front matter metadata. To specify an <a href="https://quarto.org/docs/output-formats/all-formats.html">output format</a> for your document, include (for example) <code>format: preprint-typst</code> in the front matter. Here is a minimal example YAML front matter that specifies a title, a table of contents, and two output formats:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> A document</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Top-level options apply to all formats,</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># such as this table of contents</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">toc</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span><span class="kw">:</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">preprint-typst</span><span class="kw">:</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co">    # Options under a format apply only to that format</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">wordcount</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">html</span><span class="kw">:</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">title-block-banner</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Note that many front matter variables can be specified for all output formats (such as <code>toc</code> above) or for only some of them (like <code>wordcount</code> above). To learn more about Quarto’s front matter options, see Quarto’s <a href="https://quarto.org/docs/authoring/front-matter.html">guide</a> to writing scholarly documents, and Quarto’s Typst format <a href="https://quarto.org/docs/output-formats/typst.html">documentation</a>. <em>preprint-typst</em> aims to include all standard Quarto front matter options for scholarly writing.</p>
+<p>In addition to standard Quarto front matter, <em>preprint-typst</em> supports additional fields and Typst variables, such as author notes and paragraph formatting. Below, we list available YAML configuration options roughly organized by their specificity to different Quarto output formats.</p>
+<section id="universal-quarto-options" class="level2">
+<h2 class="anchored" data-anchor-id="universal-quarto-options">Universal Quarto options</h2>
+<p><em>These work across all Quarto output formats (HTML, PDF, Word, etc.)</em></p>
+<section id="document-information" class="level3">
+<h3 class="anchored" data-anchor-id="document-information">Document information</h3>
+<ul>
+<li><code>title</code> (string) - Document title [Documentation: <a href="https://quarto.org/docs/authoring/front-matter.html">Quarto</a>]
+<ul>
+<li>Example: <code>title: "My Paper"</code></li>
+</ul></li>
+<li><code>author</code> (string/array) - Author details with name, affiliation, email, etc. [<a href="https://quarto.org/docs/authoring/front-matter.html#authors-and-affiliations">Quarto</a>]</li>
+<li><code>affiliations</code> (array) - Author affiliations with id, name, department [<a href="https://quarto.org/docs/authoring/front-matter.html#authors-and-affiliations">Quarto</a>]</li>
+<li><code>subtitle</code> (string) - Document subtitle [<a href="https://quarto.org/docs/authoring/front-matter.html">Quarto</a>]
+<ul>
+<li>Example: <code>subtitle: "A Study"</code></li>
+</ul></li>
+<li><code>abstract</code> (string) - Document abstract [<a href="https://quarto.org/docs/authoring/front-matter.html">Quarto</a>]
+<ul>
+<li>Example: <code>abstract: "This study..."</code></li>
+</ul></li>
+<li><code>categories</code> (array) - Keywords/categories for the document [<a href="https://quarto.org/docs/authoring/front-matter.html">Quarto</a>]
+<ul>
+<li>Example: <code>categories: ["science", "study"]</code></li>
+</ul></li>
+<li><code>date</code> (string) - Publication date [<a href="https://quarto.org/docs/authoring/front-matter.html">Quarto</a>]
+<ul>
+<li>Example: <code>date: "2024-01-01"</code></li>
+</ul></li>
+<li><code>toc</code> (boolean) - Include table of contents [<a href="https://quarto.org/docs/output-formats/typst.html">Quarto</a>]
+<ul>
+<li>Example: <code>toc: true</code></li>
+</ul></li>
+<li><code>toc-title</code> (string) - Customize TOC title [<a href="https://quarto.org/docs/output-formats/typst.html">Quarto</a>]
+<ul>
+<li>Example: <code>toc-title: "Contents"</code></li>
+</ul></li>
+<li><code>toc-depth</code> (integer) - Number of heading levels in TOC [<a href="https://quarto.org/docs/output-formats/typst.html">Quarto</a>]
+<ul>
+<li>Example: <code>toc-depth: 2</code></li>
+</ul></li>
+<li><code>number-sections</code> (boolean) - Number section headings [<a href="https://quarto.org/docs/output-formats/typst.html">Quarto</a>]
+<ul>
+<li>Example: <code>number-sections: true</code></li>
+</ul></li>
+</ul>
+</section>
+<section id="bibliography-citations" class="level3">
+<h3 class="anchored" data-anchor-id="bibliography-citations">Bibliography &amp; citations</h3>
+<ul>
+<li><code>bibliography</code> (string/array) - Bibliography file [<a href="https://quarto.org/docs/authoring/footnotes-and-citations.html">Quarto</a>]
+<ul>
+<li>Example: <code>bibliography: "bibliography.bib"</code></li>
+</ul></li>
+<li><code>csl</code> (string) - Citation Style Language file or <a href="https://www.zotero.org/styles/">URL</a> [<a href="https://quarto.org/docs/authoring/citations.html">Quarto</a>]
+<ul>
+<li>Example: <code>csl: https://www.zotero.org/styles/apa</code> or <code>csl: apa.csl</code></li>
+</ul></li>
+<li><code>citeproc</code> (boolean) - Use Pandoc citation processing [<a href="https://quarto.org/docs/authoring/citations.html#typst">Quarto</a>]
+<ul>
+<li>Example: <code>citeproc: true</code></li>
+</ul></li>
+</ul>
+<p>Typst has its <a href="https://quarto.org/docs/authoring/citations.html#typst">own citation processing system</a>, but by default <em>preprint-typst</em> turns it off by using <code>citeproc: true</code> to allow better bibliography customization and use of Quarto’s <a href="https://quarto.org/docs/authoring/citations.html#bibliography-generation"><code>#refs</code> div</a>. In your document, include</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># References</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>::: {#refs}</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>:::</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>to display the bibliography section anywhere in the document. Read more at Quarto’s <a href="https://quarto.org/docs/authoring/citations.html#typst">citations documentation</a>.</p>
+<ul>
+<li>When citeproc is off (<code>citeproc: false</code>)
+<ul>
+<li><code>bibliography-title</code> (string) - Bibliography section title
+<ul>
+<li>Example: <code>bibliography-title: "References"</code></li>
+</ul></li>
+<li><code>bibliographystyle</code> (string) - Citation style [<a href="https://quarto.org/docs/output-formats/typst.html#bibliography">Quarto</a>, <a href="https://typst.app/docs/reference/model/bibliography/#styles">Typst</a>]
+<ul>
+<li>Example: <code>bibliographystyle: "apa"</code></li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="typography" class="level3">
+<h3 class="anchored" data-anchor-id="typography">Typography</h3>
+<ul>
+<li><code>fontsize</code> (string) - Base font size for document text [<a href="https://quarto.org/docs/output-formats/typst.html">Quarto</a>]
+<ul>
+<li>Example: <code>fontsize: "11pt"</code></li>
+</ul></li>
+<li><code>mainfont</code> (string) - Main document font [<a href="https://quarto.org/docs/output-formats/typst.html">Quarto</a>]
+<ul>
+<li>Example: <code>mainfont: "Libertinus Serif"</code></li>
+</ul></li>
+<li><code>monofont</code> (string) - Font family for code [<a href="https://quarto.org/docs/reference/formats/html.html#fonts">Quarto</a>]
+<ul>
+<li>Example: <code>monofont: "Monacy"</code></li>
+<li>Note: Currently does not work (<a href="https://github.com/quarto-dev/quarto-cli/issues/12890">Quarto issue</a>)</li>
+</ul></li>
+<li><code>linkcolor</code> (string) - Color for hyperlinks [<a href="https://quarto.org/docs/output-formats/html-themes.html#basic-options">Quarto</a>, <a href="https://typst.app/docs/reference/visualize/color/">Typst</a>]
+<ul>
+<li>Example: <code>linkcolor: "blue"</code> or <code>linkcolor: "#0066cc"</code></li>
+</ul></li>
+<li><code>font-paths</code> (array) - Additional font search directories [<a href="https://quarto.org/docs/output-formats/typst.html">Quarto</a>]
+<ul>
+<li>Example: <code>font-paths: ["myfonts"]</code></li>
+</ul></li>
+</ul>
+</section>
+<section id="language-localization" class="level3">
+<h3 class="anchored" data-anchor-id="language-localization">Language &amp; localization</h3>
+<ul>
+<li><code>lang</code> (string) - Document language [<a href="https://quarto.org/docs/authoring/language.html">Quarto</a>]
+<ul>
+<li>Example: <code>lang: "en"</code> or <code>lang: "de"</code></li>
+</ul></li>
+<li><code>region</code> (string) - Document region [<a href="https://quarto.org/docs/authoring/language.html">Quarto</a>]
+<ul>
+<li>Example: <code>region: "US"</code> or <code>region: "GB"</code></li>
+</ul></li>
+</ul>
+</section>
+<section id="figures" class="level3">
+<h3 class="anchored" data-anchor-id="figures">Figures</h3>
+<ul>
+<li><code>fig-format</code> (string) - Figure output format [<a href="https://quarto.org/docs/computations/execution-options.html#figure-format">Quarto</a>]
+<ul>
+<li>Example: <code>fig-format: "svg"</code> or <code>fig-format: "png"</code></li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="quarto-typst-options" class="level2">
+<h2 class="anchored" data-anchor-id="quarto-typst-options">Quarto Typst options</h2>
+<p><em>These work in Quarto’s Typst output formats but may not work in HTML, Word, etc.</em></p>
+<section id="page-layout" class="level3">
+<h3 class="anchored" data-anchor-id="page-layout">Page layout</h3>
+<ul>
+<li><code>papersize</code> (string) - Page size specification [<a href="https://quarto.org/docs/output-formats/typst.html">Quarto</a>]
+<ul>
+<li>Example: <code>papersize: a4</code></li>
+</ul></li>
+<li><code>margin</code> (object/string) - Page margins [<a href="https://quarto.org/docs/output-formats/typst.html">Quarto</a>]
+<ul>
+<li>Example: <code>margin: {x: 2.8cm, y: 2.6cm}</code></li>
+</ul></li>
+<li><code>columns</code> (integer) - Number of content columns [<a href="https://quarto.org/docs/output-formats/typst.html">Quarto</a>]
+<ul>
+<li>Example: <code>columns: 2</code></li>
+</ul></li>
+<li><code>page-numbering</code> (string) - Page numbering pattern [<a href="https://typst.app/docs/reference/model/page/#parameters-numbering">Typst</a>]
+<ul>
+<li>Example: <code>page-numbering: "1"</code> or <code>page-numbering: "i"</code></li>
+</ul></li>
+</ul>
+</section>
+<section id="section-numbering" class="level3">
+<h3 class="anchored" data-anchor-id="section-numbering">Section numbering</h3>
+<ul>
+<li><code>section-numbering</code> (string) - Section numbering pattern [<a href="https://quarto.org/docs/output-formats/typst.html">Quarto</a>]
+<ul>
+<li>Example: <code>section-numbering: "1.1.a"</code> or <code>section-numbering: "1.A.a"</code></li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="advanced-typst-formatting" class="level2">
+<h2 class="anchored" data-anchor-id="advanced-typst-formatting">Advanced Typst formatting</h2>
+<p><em>These are native Typst variables exposed through the extension</em></p>
+<ul>
+<li><code>line-number</code> (boolean) - Enable line numbers [<a href="https://typst.app/docs/reference/model/par/#parameters-numbering">Typst</a>]
+<ul>
+<li>Example: <code>line-number: true</code></li>
+</ul></li>
+<li><code>leading</code> (string) - Line height/spacing between lines [<a href="https://typst.app/docs/reference/model/par/#parameters-leading">Typst</a>]
+<ul>
+<li>Example: <code>leading: "0.5em"</code></li>
+</ul></li>
+<li><code>spacing</code> (string) - Vertical spacing between paragraphs [<a href="https://typst.app/docs/reference/model/par/#parameters-spacing">Typst</a>]
+<ul>
+<li>Example: <code>spacing: "0.6em"</code></li>
+</ul></li>
+<li><code>first-line-indent</code> (string) - Indentation for paragraph first lines [<a href="https://typst.app/docs/reference/model/par/#parameters-first-line-indent">Typst</a>]
+<ul>
+<li>Example: <code>first-line-indent: "1.8em"</code></li>
+</ul></li>
+<li><code>all</code> (boolean) - Whether to indent all paragraphs (including first in section) [<a href="https://typst.app/docs/reference/model/par/#parameters-first-line-indent">Typst</a>]
+<ul>
+<li>Example: <code>all: false</code></li>
+</ul></li>
+<li><code>col-gutter</code> (string) - Horizontal spacing between columns [<a href="https://typst.app/docs/reference/layout/columns/">Typst</a>]
+<ul>
+<li>Example: <code>col-gutter: "4.2%"</code> or <code>col-gutter: "2em"</code></li>
+</ul></li>
+<li><code>toc-indent</code> (string) - TOC indentation [<a href="https://typst.app/docs/reference/model/outline/">Typst</a>]
+<ul>
+<li>Example: <code>toc-indent: "1.5em"</code></li>
+</ul></li>
+</ul>
+</section>
+<section id="preprint-typst-extension-options" class="level2">
+<h2 class="anchored" data-anchor-id="preprint-typst-extension-options"><em>preprint-typst</em> extension options</h2>
+<p><em>These are custom features specific to this extension</em></p>
+<ul>
+<li><code>running-head</code> (string) - Short title text displayed in page headers
+<ul>
+<li>Example: <code>running-head: "Short Title"</code></li>
+</ul></li>
+<li><code>authornote</code> (string) - Text appearing after corresponding author information
+<ul>
+<li>Example: <code>authornote: "Author affiliations and contact"</code></li>
+</ul></li>
+<li><code>wordcount</code> (boolean) - Display word count below abstract
+<ul>
+<li>Example: <code>wordcount: true</code></li>
+</ul></li>
+<li><code>theme-jou</code> (boolean) - Apply journal theme with 2-column layout and compact spacing
+<ul>
+<li>Example: <code>theme-jou: true</code></li>
+</ul></li>
+<li><code>functions</code> (array) - Enable Typst functions in divs [<a href="https://github.com/christopherkenny/typst-function">typst-function</a>]
+<ul>
+<li>Example: <code>functions: ["place", "appendix"]</code></li>
+</ul></li>
+</ul>
+<p>When starting a new project that uses the <em>quarto-preprint</em> template (<code>quarto use template mvuorre/quarto-preprint</code>), many useful options already have default values you can build on. See Quarto’s Typst <a href="https://quarto.org/docs/output-formats/typst.html">documentation</a> for standard options and Typst <a href="https://typst.app/docs">documentation</a> for styling details.</p>
+</section>
+</section>
+<section id="example-content" class="level1">
+<h1>Example content</h1>
+<p>Below, we highlight some useful Quarto content features to show how they work with the <em>preprint-typst</em> output format.</p>
+<section id="floats" class="level2">
+<h2 class="anchored" data-anchor-id="floats">Floats</h2>
+<section id="tables" class="level3">
+<h3 class="anchored" data-anchor-id="tables">Tables</h3>
+<p><a href="#lst-r" class="quarto-xref">Listing&nbsp;1</a> shows an example R <span class="citation" data-cites="rcoreteamLanguageEnvironmentStatistical2025">(<a href="#ref-rcoreteamLanguageEnvironmentStatistical2025" role="doc-biblioref">R Core Team, 2025</a>)</span> code snippet for creating tables (<a href="#tbl-example" class="quarto-xref">Table&nbsp;1</a>) with the tinytable R package <span class="citation" data-cites="tinytable">(<a href="#ref-tinytable" role="doc-biblioref">Arel-Bundock, 2025</a>)</span>.</p>
+<div class="cell">
+<div id="lst-r" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-r-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listing&nbsp;1: R code example.
+</figcaption>
+<div aria-describedby="lst-r-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tinytable)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tt</span>(mtcars[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</figure>
+</div>
+<div id="tbl-example" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-example-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1: Information on various cars.
+</figcaption>
+<div aria-describedby="tbl-example-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<!-- preamble start -->
+
+    <script>
+
+      function styleCell_cqaw8xhk6jle8hade7h2(i, j, css_id) {
+          var table = document.getElementById("tinytable_cqaw8xhk6jle8hade7h2");
+          var cell = table.querySelector(`[data-row="${i}"][data-col="${j}"]`);
+          if (cell) {
+              console.log(`Styling cell at (${i}, ${j}) with class ${css_id}`);
+              cell.classList.add(css_id);
+          } else {
+              console.warn(`Cell at (${i}, ${j}) not found.`);
+          }
+      }
+      function insertSpanRow(i, colspan, content) {
+        var table = document.getElementById('tinytable_cqaw8xhk6jle8hade7h2');
+        // Find the row with data-row attribute matching i
+        var targetRow = table.querySelector(`tr [data-row="${i}"]`).closest('tr');
+        var newRow = table.insertRow(targetRow.rowIndex);
+        var newCell = newRow.insertCell(0);
+        newCell.setAttribute("colspan", colspan);
+        newCell.setAttribute("data-col", "0");
+        newCell.setAttribute("data-row", i - 1);
+        // newCell.innerText = content;
+        // this may be unsafe, but innerText does not interpret <br>
+        newCell.innerHTML = content;
+      }
+      function spanCell_cqaw8xhk6jle8hade7h2(i, j, rowspan, colspan) {
+        var table = document.getElementById("tinytable_cqaw8xhk6jle8hade7h2");
+        const targetCell = table.querySelector(`[data-row="${i}"][data-col="${j}"]`);
+        if (!targetCell) {
+          console.warn(`Cell at (${i}, ${j}) not found.`);
+        }
+
+        // Get all cells that need to be removed
+        const cellsToRemove = [];
+        for (let r = 0; r < rowspan; r++) {
+          for (let c = 0; c < colspan; c++) {
+            if (r === 0 && c === 0) continue; // Skip the target cell
+            const cell = table.querySelector(`[data-row="${i + r}"][data-col="${j + c}"]`);
+            if (cell) {
+              cellsToRemove.push(cell);
+            }
+          }
+        }
+
+        // Remove all cells
+        cellsToRemove.forEach(cell => cell.remove());
+
+        // Set rowspan and colspan of the target cell if it exists
+        if (targetCell) {
+          targetCell.rowSpan = rowspan;
+          targetCell.colSpan = colspan;
+        }
+      }
+      // tinytable span after
+      window.addEventListener('load', function () {
+          var cellsToStyle = [
+            // tinytable style arrays after
+          { positions: [ { i: '3', j: 0 }, { i: '3', j: 1 }, { i: '3', j: 2 }, { i: '3', j: 3 }, { i: '3', j: 4 },  ], css_id: 'tinytable_css_5vnhsw95xx17rtnn7469',}, 
+          { positions: [ { i: '0', j: 0 }, { i: '0', j: 1 }, { i: '0', j: 2 }, { i: '0', j: 3 }, { i: '0', j: 4 },  ], css_id: 'tinytable_css_q0j57glkz9lefd1sxbge',}, 
+          ];
+
+          // Loop over the arrays to style the cells
+          cellsToStyle.forEach(function (group) {
+              group.positions.forEach(function (cell) {
+                  styleCell_cqaw8xhk6jle8hade7h2(cell.i, cell.j, group.css_id);
+              });
+          });
+      });
+    </script>
+
+    <style>
+      /* tinytable css entries after */
+      .table td.tinytable_css_5vnhsw95xx17rtnn7469, .table th.tinytable_css_5vnhsw95xx17rtnn7469 { border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_q0j57glkz9lefd1sxbge, .table th.tinytable_css_q0j57glkz9lefd1sxbge { border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+    </style>
+    <div class="container">
+      <table class="table table-borderless" id="tinytable_cqaw8xhk6jle8hade7h2" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+        <thead>
+        
+              <tr>
+                <th scope="col" data-row="0" data-col="0">mpg</th>
+                <th scope="col" data-row="0" data-col="1">cyl</th>
+                <th scope="col" data-row="0" data-col="2">disp</th>
+                <th scope="col" data-row="0" data-col="3">hp</th>
+                <th scope="col" data-row="0" data-col="4">drat</th>
+              </tr>
+        </thead>
+        
+        <tbody>
+                <tr>
+                  <td data-row="1" data-col="0">21.0</td>
+                  <td data-row="1" data-col="1">6</td>
+                  <td data-row="1" data-col="2">160</td>
+                  <td data-row="1" data-col="3">110</td>
+                  <td data-row="1" data-col="4">3.90</td>
+                </tr>
+                <tr>
+                  <td data-row="2" data-col="0">21.0</td>
+                  <td data-row="2" data-col="1">6</td>
+                  <td data-row="2" data-col="2">160</td>
+                  <td data-row="2" data-col="3">110</td>
+                  <td data-row="2" data-col="4">3.90</td>
+                </tr>
+                <tr>
+                  <td data-row="3" data-col="0">22.8</td>
+                  <td data-row="3" data-col="1">4</td>
+                  <td data-row="3" data-col="2">108</td>
+                  <td data-row="3" data-col="3">93</td>
+                  <td data-row="3" data-col="4">3.85</td>
+                </tr>
+        </tbody>
+      </table>
+    </div>
+<!-- hack to avoid NA insertion in last line -->
+</div>
+</div>
+</figure>
+</div>
+</div>
+</section>
+<section id="figures-1" class="level3">
+<h3 class="anchored" data-anchor-id="figures-1">Figures</h3>
+<p>Figures are centered by default.</p>
+<div id="fig-1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<p><img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aCA9ICI0MDAiIGhlaWdodCA9ICIyMDAiIHhtbG5zID0gImh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94ID0gIjAgMCA0MDAgMjAwIj48cmVjdCB3aWR0aCA9ICI0MDAiIGhlaWdodCA9ICIyMDAiIGZpbGwgPSAiI2RkZCIgLz48dGV4dCB4ID0gIjUwJSIgeSA9ICI1MCUiIGZvbnQtZmFtaWx5ID0gInNhbnMtc2VyaWYiIGZvbnQtc2l6ZSA9ICIyMCIgZmlsbCA9ICIjMDAwIiB0ZXh0LWFuY2hvciA9ICJtaWRkbGUiPjQwMCB4IDIwMDwvdGV4dD48L3N2Zz4=" class="img-fluid figure-img"></p>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Example figure.
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-1" class="quarto-xref">Figure&nbsp;1</a> is a figure.</p>
+</section>
+<section id="full-width-content" class="level3">
+<h3 class="anchored" data-anchor-id="full-width-content">Full-width content</h3>
+<p>You can also include page-wide figures (or any other content) in documents that have more than one column. See <a href="#fig-2" class="quarto-xref">Figure&nbsp;2</a> for an example. First, include</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">functions</span><span class="kw">:</span><span class="at"> place</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>in the document’s YAML. Then, wrap your figure in a Quarto div<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> like this:</p>
+<pre><code>::: {.place arguments='auto, scope: "parent", float: true'}
+Everything here will span the whole page.
+:::</code></pre>
+<p>The above uses the Typst’s <code>place()</code><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> function through the typst-function<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> Quarto extension to place the div’s content in <code>"parent"</code> scope (the document page is the column’s parent) and must specify that Typst should treat the content as a float. <code>auto</code> indicates where the figure should be on the page, and can be either <code>auto</code>, <code>bottom</code>, or <code>top</code>. (Note <code>auto</code> and <code>bottom</code> can make the figure appear below footnotes.)</p>
+<div class="place" data-arguments="auto, scope: &quot;parent&quot;, float: true">
+<div id="fig-2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<p><img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aCA9ICI2MDAiIGhlaWdodCA9ICIxMDAiIHhtbG5zID0gImh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94ID0gIjAgMCA2MDAgMTAwIj48cmVjdCB3aWR0aCA9ICI2MDAiIGhlaWdodCA9ICIxMDAiIGZpbGwgPSAiI2RkZCIgLz48dGV4dCB4ID0gIjUwJSIgeSA9ICI1MCUiIGZvbnQtZmFtaWx5ID0gInNhbnMtc2VyaWYiIGZvbnQtc2l6ZSA9ICIxMCIgZmlsbCA9ICIjMDAwIiB0ZXh0LWFuY2hvciA9ICJtaWRkbGUiPjYwMCB4IDEwMDwvdGV4dD48L3N2Zz4=" class="img-fluid figure-img"></p>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2
+</figcaption>
+</figure>
+</div>
+</div>
+</section>
+</section>
+<section id="quarto-markdown-features" class="level2">
+<h2 class="anchored" data-anchor-id="quarto-markdown-features">Quarto markdown features</h2>
+<section id="maths" class="level3">
+<h3 class="anchored" data-anchor-id="maths">Maths</h3>
+<p>LaTeX math notation is automatically converted to Typst and as such works just fine either inline (<span class="math inline">\(y_i = \alpha + \beta x_i + \epsilon_i\)</span>) or in display mode (<a href="#eq-1" class="quarto-xref">Equation&nbsp;1</a>).</p>
+<p><span id="eq-1"><span class="math display">\[
+f(x \mid \mu, \sigma^2) = \frac{1}{\sqrt{2\pi \sigma^2}} \exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)
+\tag{1}\]</span></span></p>
+</section>
+<section id="block-quotes" class="level3">
+<h3 class="anchored" data-anchor-id="block-quotes">Block quotes</h3>
+<p>To insert a block quote, prepend a paragraph with <code>&gt;</code>:</p>
+<blockquote class="blockquote">
+<p>A quote: “<em>Elit ullamcorper dignissim cras tincidunt lobortis feugiat vivamus at.</em>”</p>
+</blockquote>
+</section>
+<section id="callouts" class="level3">
+<h3 class="anchored" data-anchor-id="callouts">Callouts</h3>
+<p><a href="https://quarto.org/docs/authoring/callouts.html">Callout blocks</a>, such as <a href="#tip-example" class="quarto-xref">Tip&nbsp;1</a>, can be useful for highlighting content, such as one might do in a box that defines key terms, etc.</p>
+<div id="tip-example" class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note&nbsp;1: All kinds of markup
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Markdown: <code>*italics*, **bold text**, ~subscript~, ^superscript^ &amp; ~~strikethrough~~</code></p>
+<p>Renders as: <em>italics</em>, <strong>bold text</strong>, <sub>subscript</sub>, <sup>superscript</sup> &amp; <del>strikethrough</del></p>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="get-help-contribute" class="level1">
+<h1>Get help &amp; contribute</h1>
+<p>Send your comments, bug reports, and pull requests to <a href="https://github.com/mvuorre/quarto-preprint" class="uri">https://github.com/mvuorre/quarto-preprint</a>. If you’re reporting a bug, please include a reproducible example / full details of what you’re trying to do, how, and what goes wrong.</p>
+</section>
+<section id="references" class="level1">
+<h1>References</h1>
+<!-- Using Quarto's special `#refs` div allows placing the reference section anywhere in the document, for example above any potential appendices. -->
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
+<div id="ref-allaireQuarto2025" class="csl-entry" role="listitem">
+Allaire, J. J., Teague, C., Scheidegger, C., Xie, Y., Dervieux, C., &amp; Woodhull, G. (2025). <em>Quarto</em>. <a href="https://doi.org/10.5281/zenodo.5960048">https://doi.org/10.5281/zenodo.5960048</a>
+</div>
+<div id="ref-tinytable" class="csl-entry" role="listitem">
+Arel-Bundock, V. (2025). <em>Tinytable: Simple and configurable tables in ’HTML’, ’LaTeX’, ’markdown’, ’word’, ’PNG’, ’PDF’, and ’typst’ formats</em>. <a href="https://vincentarelbundock.github.io/tinytable/">https://vincentarelbundock.github.io/tinytable/</a>
+</div>
+<div id="ref-rcoreteamLanguageEnvironmentStatistical2025" class="csl-entry" role="listitem">
+R Core Team. (2025). <em>R: <span>A Language</span> and <span>Environment</span> for <span>Statistical Computing</span>. <span>Version</span> 4.4.3</em> (Version 4.4.3) [Computer software]. R Foundation for Statistical Computing. <a href="https://www.R-project.org/">https://www.R-project.org/</a>
+</div>
+</div>
+</section>
+
+
+
+
+
+<div id="quarto-appendix" class="default"><section id="appendix-a-tips-and-tricks" class="level1 appendix"><h2 class="anchored quarto-appendix-heading">Appendix A: Tips and tricks</h2><div class="quarto-appendix-contents">
+
+<p>To include and appendix (<a href="#tip-appendix" class="quarto-xref">Tip&nbsp;2</a>), place it at the end of the document and wrap all its content in an <code>.appendix</code> Quarto div:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>::: {.appendix}</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu"># Appendix: Computational details</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>Here we describe the computational details of our approach...</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>:::</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="tip-appendix" class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip&nbsp;2
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Appendices are an experimental feature. They are provided through a custom Typst function using the <a href="https://github.com/christopherkenny/typst-function/"><code>typst-function</code></a> Quarto extension, and their implementation and functionality may change as Quarto’s Typst integration matures.</p>
+</div>
+</div>
+<section id="citation-management" class="level2 unlisted">
+<h2 class="unlisted anchored" data-anchor-id="citation-management">Citation management</h2>
+<p>Quarto documents require citations in a separate .bib file. The <a href="https://vuorre.com/posts/zotero-positron-vscode/">vscode-zotero</a> VS Code plugin helps with inserting in-text citations and managing the .bib file. The plugin works in all VS Code based editors, including <a href="https://github.com/posit-dev/positron">Positron</a>.</p>
+</section>
+<section id="fonts" class="level2 unlisted">
+<h2 class="unlisted anchored" data-anchor-id="fonts">Fonts</h2>
+<p>Run <code>quarto typst fonts</code> in your terminal (not R console) to list all available fonts.</p>
+</section>
+<section id="example-appendix-content" class="level2 unlisted">
+<h2 class="unlisted anchored" data-anchor-id="example-appendix-content">Example appendix content</h2>
+<p>Appendices have appropriate float references like <a href="#fig-3" class="quarto-xref">Figure&nbsp;3</a>, <a href="#tbl-3" class="quarto-xref">Table&nbsp;2</a>, <a href="#lst-app" class="quarto-xref">Listing&nbsp;2</a>.</p>
+<div id="fig-3" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<p><img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aCA9ICIyMDAiIGhlaWdodCA9ICIxMDAiIHhtbG5zID0gImh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94ID0gIjAgMCAyMDAgMTAwIj48cmVjdCB3aWR0aCA9ICIyMDAiIGhlaWdodCA9ICIxMDAiIGZpbGwgPSAiI2RkZCIgLz48dGV4dCB4ID0gIjUwJSIgeSA9ICI1MCUiIGZvbnQtZmFtaWx5ID0gInNhbnMtc2VyaWYiIGZvbnQtc2l6ZSA9ICIxMCIgZmlsbCA9ICIjMDAwIiB0ZXh0LWFuY2hvciA9ICJtaWRkbGUiPjIwMCB4IDEwMDwvdGV4dD48L3N2Zz4=" class="img-fluid figure-img"></p>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: A gray rectangle.
+</figcaption>
+</figure>
+</div>
+<div id="tbl-3" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2: Another gray rectangle.
+</figcaption>
+<div aria-describedby="tbl-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<p><img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aCA9ICIyMDAiIGhlaWdodCA9ICIxMDAiIHhtbG5zID0gImh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94ID0gIjAgMCAyMDAgMTAwIj48cmVjdCB3aWR0aCA9ICIyMDAiIGhlaWdodCA9ICIxMDAiIGZpbGwgPSAiI2RkZCIgLz48dGV4dCB4ID0gIjUwJSIgeSA9ICI1MCUiIGZvbnQtZmFtaWx5ID0gInNhbnMtc2VyaWYiIGZvbnQtc2l6ZSA9ICIxMCIgZmlsbCA9ICIjMDAwIiB0ZXh0LWFuY2hvciA9ICJtaWRkbGUiPjIwMCB4IDEwMDwvdGV4dD48L3N2Zz4=" class="img-fluid figure-img"></p>
+</div>
+</figure>
+</div>
+<div class="cell">
+<div id="lst-app" class="r cell-code listing quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-lst figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-lst" id="lst-app-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Listing&nbsp;2: Example R code.
+</figcaption>
+<div aria-describedby="lst-app-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 1.414214</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</figure>
+</div>
+</div>
+<p>Equations (<a href="#eq-app" class="quarto-xref">Equation&nbsp;2</a>) work too but their numbering continues from main document.</p>
+<p><span id="eq-app"><span class="math display">\[
+f(x \mid \mu, \sigma^2) = \frac{1}{\sqrt{2\pi \sigma^2}} \exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)
+\tag{2}\]</span></span></p>
+</section>
+</div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p><a href="https://quarto.org/docs/authoring/markdown-basics.html#sec-divs-and-spans" class="uri">https://quarto.org/docs/authoring/markdown-basics.html#sec-divs-and-spans</a><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p><a href="https://typst.app/docs/reference/layout/place/" class="uri">https://typst.app/docs/reference/layout/place/</a><a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p><a href="https://github.com/christopherkenny/typst-function" class="uri">https://github.com/christopherkenny/typst-function</a><a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/mvuorre\.github\.io\/quarto-preprint\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/mvuorre/quarto-preprint/edit/main/manual.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/mvuorre/quarto-preprint/blob/main/manual.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/mvuorre/quarto-preprint/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
