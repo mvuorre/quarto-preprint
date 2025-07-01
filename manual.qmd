@@ -26,7 +26,6 @@ toc-title: Contents
 format:
   preprint-typst:
     wordcount: true
-    keep-typ: true
     toc-depth: 2
   html:
     theme: zephyr
@@ -36,9 +35,6 @@ format:
     other-links:
       - text: Journal theme example
         href: manual_ex2.pdf
-        icon: file-pdf
-      - text: Many authors example
-        href: manual_ex3.pdf
         icon: file-pdf
 ---
 

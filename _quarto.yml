@@ -2,11 +2,7 @@ project:
   title: "Quarto preprint"
   type: website
   output-dir: docs
-  # https://quarto.org/docs/projects/quarto-projects.html#render-targets
-  render:
-    - "*.qmd"
-    - "!template.qmd"
-    - "!ignored-dir/"
+
 website:
   repo-url: https://github.com/mvuorre/quarto-preprint
   repo-actions: [edit, source, issue]
