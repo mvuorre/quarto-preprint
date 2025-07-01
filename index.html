@@ -249,7 +249,7 @@ window.Quarto = {
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/mvuorre/quarto-preprint/edit/main/manual.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/mvuorre/quarto-preprint/blob/main/manual.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/mvuorre/quarto-preprint/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="manual.pdf"><i class="bi bi-file-pdf"></i>Typst (preprint)</a></li></ul></div><div class="quarto-other-links"><h2>Other Links</h2><ul><li><a href="manual_ex2.pdf"><i class="bi bi-file-pdf"></i>Journal theme example</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/mvuorre/quarto-preprint/edit/main/manual.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/mvuorre/quarto-preprint/blob/main/manual.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/mvuorre/quarto-preprint/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="manual.pdf"><i class="bi bi-file-pdf"></i>Typst (preprint)</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content quarto-banner-title-block" id="quarto-document-content">
@@ -566,8 +566,8 @@ Table&nbsp;1: Information on various cars.
 
     <script>
 
-      function styleCell_e1cfsa306gwabz974idr(i, j, css_id) {
-          var table = document.getElementById("tinytable_e1cfsa306gwabz974idr");
+      function styleCell_be39pmy1k22pmcmiribg(i, j, css_id) {
+          var table = document.getElementById("tinytable_be39pmy1k22pmcmiribg");
           var cell = table.querySelector(`[data-row="${i}"][data-col="${j}"]`);
           if (cell) {
               console.log(`Styling cell at (${i}, ${j}) with class ${css_id}`);
@@ -577,7 +577,7 @@ Table&nbsp;1: Information on various cars.
           }
       }
       function insertSpanRow(i, colspan, content) {
-        var table = document.getElementById('tinytable_e1cfsa306gwabz974idr');
+        var table = document.getElementById('tinytable_be39pmy1k22pmcmiribg');
         // Find the row with data-row attribute matching i
         var targetRow = table.querySelector(`tr [data-row="${i}"]`).closest('tr');
         var newRow = table.insertRow(targetRow.rowIndex);
@@ -589,8 +589,8 @@ Table&nbsp;1: Information on various cars.
         // this may be unsafe, but innerText does not interpret <br>
         newCell.innerHTML = content;
       }
-      function spanCell_e1cfsa306gwabz974idr(i, j, rowspan, colspan) {
-        var table = document.getElementById("tinytable_e1cfsa306gwabz974idr");
+      function spanCell_be39pmy1k22pmcmiribg(i, j, rowspan, colspan) {
+        var table = document.getElementById("tinytable_be39pmy1k22pmcmiribg");
         const targetCell = table.querySelector(`[data-row="${i}"][data-col="${j}"]`);
         if (!targetCell) {
           console.warn(`Cell at (${i}, ${j}) not found.`);
@@ -621,14 +621,14 @@ Table&nbsp;1: Information on various cars.
       window.addEventListener('load', function () {
           var cellsToStyle = [
             // tinytable style arrays after
-          { positions: [ { i: '3', j: 0 }, { i: '3', j: 1 }, { i: '3', j: 2 }, { i: '3', j: 3 }, { i: '3', j: 4 },  ], css_id: 'tinytable_css_7ie8no4nukp2i54d5hwl',}, 
-          { positions: [ { i: '0', j: 0 }, { i: '0', j: 1 }, { i: '0', j: 2 }, { i: '0', j: 3 }, { i: '0', j: 4 },  ], css_id: 'tinytable_css_4s3hrox1b0hmchubqa94',}, 
+          { positions: [ { i: '3', j: 0 }, { i: '3', j: 1 }, { i: '3', j: 2 }, { i: '3', j: 3 }, { i: '3', j: 4 },  ], css_id: 'tinytable_css_q990vj4se85t3ohxverv',}, 
+          { positions: [ { i: '0', j: 0 }, { i: '0', j: 1 }, { i: '0', j: 2 }, { i: '0', j: 3 }, { i: '0', j: 4 },  ], css_id: 'tinytable_css_d9gpkijt8jd4mhv6dnba',}, 
           ];
 
           // Loop over the arrays to style the cells
           cellsToStyle.forEach(function (group) {
               group.positions.forEach(function (cell) {
-                  styleCell_e1cfsa306gwabz974idr(cell.i, cell.j, group.css_id);
+                  styleCell_be39pmy1k22pmcmiribg(cell.i, cell.j, group.css_id);
               });
           });
       });
@@ -636,11 +636,11 @@ Table&nbsp;1: Information on various cars.
 
     <style>
       /* tinytable css entries after */
-      .table td.tinytable_css_7ie8no4nukp2i54d5hwl, .table th.tinytable_css_7ie8no4nukp2i54d5hwl { border-bottom: solid #d3d8dc 0.1em; }
-      .table td.tinytable_css_4s3hrox1b0hmchubqa94, .table th.tinytable_css_4s3hrox1b0hmchubqa94 { border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+      .table td.tinytable_css_q990vj4se85t3ohxverv, .table th.tinytable_css_q990vj4se85t3ohxverv { border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_d9gpkijt8jd4mhv6dnba, .table th.tinytable_css_d9gpkijt8jd4mhv6dnba { border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
     </style>
     <div class="container">
-      <table class="table table-borderless" id="tinytable_e1cfsa306gwabz974idr" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+      <table class="table table-borderless" id="tinytable_be39pmy1k22pmcmiribg" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
         <thead>
         
               <tr>
