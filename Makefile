@@ -76,7 +76,7 @@ update-version:
 release: .release.timestamp
 
 # Publish docs/ using Quarto
-publish:
+publish: clean
 	quarto publish gh-pages
 
 # Clean all intermediate files

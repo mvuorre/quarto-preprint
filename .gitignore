@@ -8,6 +8,7 @@
 *_files/
 docs/
 manual.typ
+site_libs/
 /.luarc.json
 /.quarto/
 /tests/
