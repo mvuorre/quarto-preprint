@@ -75,5 +75,117 @@
     "title": "quarto-preprint: A Quarto extension for creating PDF documents with Typst",
     "section": "Example appendix content",
     "text": "Example appendix content\nAppendices have appropriate float references like Figure 3, Table 2, Listing 2.\n\n\n\n\n\n\nFigure 3: A gray rectangle.\n\n\n\n\n\n\nTable 2: Another gray rectangle.\n\n\n\n\n\n\n\n\n\n\nListing 2: Example R code.\n\n\nsqrt(1 + 1)\n## [1] 1.414214\n\n\n\n\nEquations (Equation 2) work too but their numbering continues from main document.\n\\[\nf(x \\mid \\mu, \\sigma^2) = \\frac{1}{\\sqrt{2\\pi \\sigma^2}} \\exp\\left(-\\frac{(x-\\mu)^2}{2\\sigma^2}\\right)\n\\tag{2}\\]"
+  },
+  {
+    "objectID": "NEWS.html",
+    "href": "NEWS.html",
+    "title": "Quarto preprint",
+    "section": "",
+    "text": "Use custom definitions.typ to customize more elements\n\nhttps://quarto.org/docs/output-formats/typst-custom.html#advanced-customization\n\nFix appendix alignment from center to left\nFix figure caption alignment\nFix callout body text alignment"
+  },
+  {
+    "objectID": "NEWS.html#section",
+    "href": "NEWS.html#section",
+    "title": "Quarto preprint",
+    "section": "",
+    "text": "Use custom definitions.typ to customize more elements\n\nhttps://quarto.org/docs/output-formats/typst-custom.html#advanced-customization\n\nFix appendix alignment from center to left\nFix figure caption alignment\nFix callout body text alignment"
+  },
+  {
+    "objectID": "NEWS.html#section-1",
+    "href": "NEWS.html#section-1",
+    "title": "Quarto preprint",
+    "section": "0.18.1",
+    "text": "0.18.1\n\nFix author footnote bug"
+  },
+  {
+    "objectID": "NEWS.html#section-2",
+    "href": "NEWS.html#section-2",
+    "title": "Quarto preprint",
+    "section": "0.18.0",
+    "text": "0.18.0\n\nImplement appendices\n\nRequires using citeproc with known Typst bibliography formatting problems\n\nFix a bug where author-related footnotes didn’t show up\nRefactor codebase for improved maintainability and clarity\n\nCreate functions to format author info\nSimplify theme-jou conditional logic"
+  },
+  {
+    "objectID": "NEWS.html#section-3",
+    "href": "NEWS.html#section-3",
+    "title": "Quarto preprint",
+    "section": "0.17.0",
+    "text": "0.17.0\n\nSupport “themes” that bundle layout settings\n\ntheme-jou: true is a two-column layout with smaller margins and text"
+  },
+  {
+    "objectID": "NEWS.html#section-4",
+    "href": "NEWS.html#section-4",
+    "title": "Quarto preprint",
+    "section": "0.16.0",
+    "text": "0.16.0\n\nSupport full-width floats in two-column documents using https://github.com/christopherkenny/typst-function\nSupport line-number (true/false)"
+  },
+  {
+    "objectID": "NEWS.html#section-5",
+    "href": "NEWS.html#section-5",
+    "title": "Quarto preprint",
+    "section": "0.15.0",
+    "text": "0.15.0\nThis release brings quarto-preprint closer to parity with updates to the default Quarto Typst template."
+  },
+  {
+    "objectID": "NEWS.html#section-6",
+    "href": "NEWS.html#section-6",
+    "title": "Quarto preprint",
+    "section": "0.14.3",
+    "text": "0.14.3\n\nUpdate andrewheiss/word-count and required Quarto version"
+  },
+  {
+    "objectID": "NEWS.html#section-7",
+    "href": "NEWS.html#section-7",
+    "title": "Quarto preprint",
+    "section": "0.14.2",
+    "text": "0.14.2\n\nAdd vertical space around floats"
+  },
+  {
+    "objectID": "NEWS.html#section-8",
+    "href": "NEWS.html#section-8",
+    "title": "Quarto preprint",
+    "section": "0.14.1",
+    "text": "0.14.1\n\nRemove spurious callout captions"
+  },
+  {
+    "objectID": "NEWS.html#section-9",
+    "href": "NEWS.html#section-9",
+    "title": "Quarto preprint",
+    "section": "0.14.0",
+    "text": "0.14.0\n\nSupport equal-contributor author metadata"
+  },
+  {
+    "objectID": "NEWS.html#section-10",
+    "href": "NEWS.html#section-10",
+    "title": "Quarto preprint",
+    "section": "0.13.0",
+    "text": "0.13.0\n\nAllow more control over layout settings with YAML variables\n\nUse first-line-indent and all to control paragraph indents\n\nSmall layout improvements to level 4 & 5 headers\nDocument more YAML variables"
+  },
+  {
+    "objectID": "NEWS.html#section-11",
+    "href": "NEWS.html#section-11",
+    "title": "Quarto preprint",
+    "section": "0.12.2",
+    "text": "0.12.2\n\nFix issue with author notes"
+  },
+  {
+    "objectID": "NEWS.html#section-12",
+    "href": "NEWS.html#section-12",
+    "title": "Quarto preprint",
+    "section": "0.12.1",
+    "text": "0.12.1\n\nFix issue with citations (#23)"
+  },
+  {
+    "objectID": "NEWS.html#section-13",
+    "href": "NEWS.html#section-13",
+    "title": "Quarto preprint",
+    "section": "0.12.0",
+    "text": "0.12.0\n\nSwitch to MIT license\nAutomate releases"
+  },
+  {
+    "objectID": "NEWS.html#section-14",
+    "href": "NEWS.html#section-14",
+    "title": "Quarto preprint",
+    "section": "0.11.2",
+    "text": "0.11.2\n\nUse “categories” instead of “keywords” for Quarto HTML compatibility"
   }
 ]
