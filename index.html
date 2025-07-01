@@ -204,7 +204,7 @@ window.Quarto = {
   <div>
     <div class="abstract">
       <div class="block-title">Abstract</div>
-      <p><em>quarto-preprint</em> is a Quarto extension for creating PDF documents from markdown content with Typst. It provides one Quarto output format, <em>preprint-typst</em>, that aims to Just Work (Typst doesn’t require LaTeX installations and ships with Quarto), be fast (Typst creates PDF files very quickly), and be 100% Quarto standards compliant (write documents without worrying about formatting &amp; metadata, switch to other Quarto formatd without changing anything but the output format). Its intended uses cases are worry-free but flexible typesetting of Quarto documents to PDF, especially when users might want to easily switch to other (e.g.&nbsp;journal-specific) formats.</p>
+      <p><em>quarto-preprint</em> is a Quarto extension for creating PDF documents from markdown content with Typst. It provides one Quarto output format, <em>preprint-typst</em>, that aims to Just Work (Typst doesn’t require LaTeX installations and ships with Quarto), be fast (Typst creates PDF files very quickly), and be 100% Quarto standards compliant (write documents without worrying about formatting &amp; metadata, switch to other Quarto formatd without changing anything but the output format). <em>preprint-typst</em> builds on the standard Quarto Typst template and enables better author-affiliation handling and formatting, allowing for additional (Quarto, Typst, and custom) metadata variables, opinionated typesetting (very), improved two-column layouts, and more. Its intended uses cases are worry-free but flexible typesetting of Quarto documents to PDF, especially when users might want to easily switch to other (e.g.&nbsp;journal-specific) formats.</p>
     </div>
   </div>
   
@@ -262,7 +262,8 @@ window.Quarto = {
 <p>“An article about computational science in a scientific publication is not the scholarship itself, it is merely advertising of the scholarship. The actual scholarship is the complete software development environment and the complete set of instructions which generated the figures.” –Buckheit and Donoho (1995, paraphrasing Jon Claerbout)</p>
 </blockquote>
 <p><a href="https://quarto.org/">Quarto</a> is “An open-source scientific and technical publishing system” <span class="citation" data-cites="allaireQuarto2025">(<a href="#ref-allaireQuarto2025" role="doc-biblioref">Allaire et al., 2025</a>)</span> for writing reproducible documents that combine computations and prose written in <a href="https://quarto.org/docs/authoring/markdown-basics.html">markdown</a> into HTML, PDF, Word, and other outputs. For many R users, Quarto is a successor of <a href="https://rmarkdown.rstudio.com/">R Markdown</a> but with a broader scope and better support for different output formats and computational content in other languages.</p>
-<p><a href="https://github.com/mvuorre/quarto-preprint"><em>quarto-preprint</em></a> is a Quarto extension that provides one such output format, called <em>preprint-typst</em>. When using this format, Quarto renders your document into PDF using <a href="https://typst.app/">Typst</a>, a modern replacement for LaTeX. This document explains how to install, use and customize the output of Quarto documents created with the <em>preprint-typst</em> format. Example manuscripts using <em>preprint-typst</em> format include:</p>
+<p><a href="https://github.com/mvuorre/quarto-preprint"><em>quarto-preprint</em></a> is a Quarto extension that provides one such output format, called <em>preprint-typst</em>. When using this format, Quarto renders your document into PDF using <a href="https://typst.app/">Typst</a>, a modern replacement for LaTeX. <em>preprint-typst</em> builds on the standard Quarto Typst template and enables better author-affiliation handling and formatting, allowing for additional (Quarto, Typst, and custom) metadata variables, opinionated typesetting (very), improved two-column layouts, and more (read below).</p>
+<p>This document explains how to install, use and customize the output of Quarto documents created with the <em>preprint-typst</em> format. Example manuscripts using <em>preprint-typst</em> format include:</p>
 <ul>
 <li>Vuorre, M. (2025). Estimating Signal Detection Models with regression using the brms R package. OSF. <a href="https://doi.org/10.31234/osf.io/vtfc3_v1" class="uri">https://doi.org/10.31234/osf.io/vtfc3_v1</a></li>
 <li>Vuorre, M., Johannes, N., &amp; Przybylski, A. (2025). Three objections to a novel paradigm in social media effects research. OSF. <a href="https://doi.org/10.31234/osf.io/dpuya_v2" class="uri">https://doi.org/10.31234/osf.io/dpuya_v2</a></li>
@@ -565,8 +566,8 @@ Table&nbsp;1: Information on various cars.
 
     <script>
 
-      function styleCell_rit5uojkzhifpir6579d(i, j, css_id) {
-          var table = document.getElementById("tinytable_rit5uojkzhifpir6579d");
+      function styleCell_b4xpyg1vxz7vu6bhu6ui(i, j, css_id) {
+          var table = document.getElementById("tinytable_b4xpyg1vxz7vu6bhu6ui");
           var cell = table.querySelector(`[data-row="${i}"][data-col="${j}"]`);
           if (cell) {
               console.log(`Styling cell at (${i}, ${j}) with class ${css_id}`);
@@ -576,7 +577,7 @@ Table&nbsp;1: Information on various cars.
           }
       }
       function insertSpanRow(i, colspan, content) {
-        var table = document.getElementById('tinytable_rit5uojkzhifpir6579d');
+        var table = document.getElementById('tinytable_b4xpyg1vxz7vu6bhu6ui');
         // Find the row with data-row attribute matching i
         var targetRow = table.querySelector(`tr [data-row="${i}"]`).closest('tr');
         var newRow = table.insertRow(targetRow.rowIndex);
@@ -588,8 +589,8 @@ Table&nbsp;1: Information on various cars.
         // this may be unsafe, but innerText does not interpret <br>
         newCell.innerHTML = content;
       }
-      function spanCell_rit5uojkzhifpir6579d(i, j, rowspan, colspan) {
-        var table = document.getElementById("tinytable_rit5uojkzhifpir6579d");
+      function spanCell_b4xpyg1vxz7vu6bhu6ui(i, j, rowspan, colspan) {
+        var table = document.getElementById("tinytable_b4xpyg1vxz7vu6bhu6ui");
         const targetCell = table.querySelector(`[data-row="${i}"][data-col="${j}"]`);
         if (!targetCell) {
           console.warn(`Cell at (${i}, ${j}) not found.`);
@@ -620,14 +621,14 @@ Table&nbsp;1: Information on various cars.
       window.addEventListener('load', function () {
           var cellsToStyle = [
             // tinytable style arrays after
-          { positions: [ { i: '3', j: 0 }, { i: '3', j: 1 }, { i: '3', j: 2 }, { i: '3', j: 3 }, { i: '3', j: 4 },  ], css_id: 'tinytable_css_tfe0av8tkdb1ci8i17w3',}, 
-          { positions: [ { i: '0', j: 0 }, { i: '0', j: 1 }, { i: '0', j: 2 }, { i: '0', j: 3 }, { i: '0', j: 4 },  ], css_id: 'tinytable_css_xjoaopq8teh3ag5nzzlf',}, 
+          { positions: [ { i: '3', j: 0 }, { i: '3', j: 1 }, { i: '3', j: 2 }, { i: '3', j: 3 }, { i: '3', j: 4 },  ], css_id: 'tinytable_css_birzbgtemgmeypbmtgmi',}, 
+          { positions: [ { i: '0', j: 0 }, { i: '0', j: 1 }, { i: '0', j: 2 }, { i: '0', j: 3 }, { i: '0', j: 4 },  ], css_id: 'tinytable_css_644vt3vtdharii8jq40s',}, 
           ];
 
           // Loop over the arrays to style the cells
           cellsToStyle.forEach(function (group) {
               group.positions.forEach(function (cell) {
-                  styleCell_rit5uojkzhifpir6579d(cell.i, cell.j, group.css_id);
+                  styleCell_b4xpyg1vxz7vu6bhu6ui(cell.i, cell.j, group.css_id);
               });
           });
       });
@@ -635,11 +636,11 @@ Table&nbsp;1: Information on various cars.
 
     <style>
       /* tinytable css entries after */
-      .table td.tinytable_css_tfe0av8tkdb1ci8i17w3, .table th.tinytable_css_tfe0av8tkdb1ci8i17w3 { border-bottom: solid #d3d8dc 0.1em; }
-      .table td.tinytable_css_xjoaopq8teh3ag5nzzlf, .table th.tinytable_css_xjoaopq8teh3ag5nzzlf { border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+      .table td.tinytable_css_birzbgtemgmeypbmtgmi, .table th.tinytable_css_birzbgtemgmeypbmtgmi { border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_644vt3vtdharii8jq40s, .table th.tinytable_css_644vt3vtdharii8jq40s { border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
     </style>
     <div class="container">
-      <table class="table table-borderless" id="tinytable_rit5uojkzhifpir6579d" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+      <table class="table table-borderless" id="tinytable_b4xpyg1vxz7vu6bhu6ui" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
         <thead>
         
               <tr>
