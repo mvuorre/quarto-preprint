@@ -1,0 +1,7 @@
+project:
+  title: "Quarto preprint"
+  type: website
+  output-dir: docs
+website:
+  repo-url: https://github.com/mvuorre/quarto-preprint
+  repo-actions: [edit, source, issue]

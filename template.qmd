@@ -1,0 +1,57 @@
+---
+title: Your Title Here
+subtitle: Optional Subtitle
+running-head: Short Title
+author:
+  - name: First Author
+    email: author1@example.com
+    orcid: 0000-0000-0000-0000
+    url: https://example.com
+    corresponding: true
+    affiliation:
+      - ref: 1
+  - name: Second Author
+    affiliation:
+      - ref: 2
+affiliations:
+  - id: 1
+    name: First University
+    department: Department Name
+  - id: 2
+    name: Second University
+abstract: |
+  Your abstract goes here. This will appear prominently at the top of your document.
+categories: [keyword1, keyword2, keyword3]
+authornote: |
+  Author contributions, funding, conflicts of interest, or other notes.
+date: last-modified
+bibliography: bibliography.bib
+format:
+  preprint-typst:
+    wordcount: true
+    # Common options - uncomment (and remove 'default') to use
+    # theme-jou: true              # Journal theme (2-column)
+    # line-number: true            # Line numbering
+    # fontsize: 11pt               # Font size
+    # leading: 0.6em               # Line spacing
+    # first-line-indent: 1.8em     # Paragraph indent
+---
+
+# Introduction
+
+# Methods
+
+# Results
+
+# Discussion
+
+# References
+
+:::{#refs}
+:::
+
+::: {.appendix}
+
+# Appendix A
+
+:::

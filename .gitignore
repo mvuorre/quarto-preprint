@@ -1,0 +1,16 @@
+
+# Temporary and output files
+**/*.pdf
+*.png
+*.svg
+*.html
+*_cache/
+*_files/
+docs/
+manual.typ
+/.luarc.json
+/.quarto/
+/tests/
+.release.timestamp
+_variables.yml
+.claude/

@@ -1,0 +1,16 @@
+**/*.pdf
+*.typ
+*_cache/
+*_files/
+manual.qmd
+Makefile
+docs/
+*.png
+*.svg
+*.html
+tests/
+NEWS.md
+README.md
+.release.timestamp
+.nojekyll
+_variables.yml
