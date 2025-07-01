@@ -43,7 +43,8 @@ into PDF using [Typst](https://typst.app/), a modern replacement for
 LaTeX. *preprint-typst* builds on the standard Quarto Typst template and
 enables better author-affiliation handling and formatting, allowing for
 additional (Quarto, Typst, and custom) metadata variables, opinionated
-typesetting (very), improved two-column layouts, and more (read below).
+typesetting (very), improved two-column layouts (including full-width
+floats), appendices, and more (read below).
 
 This document explains how to install, use and customize the output of
 Quarto documents created with the *preprint-typst* format. Example
