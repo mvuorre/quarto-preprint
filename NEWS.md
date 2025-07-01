@@ -1,3 +1,10 @@
+## 1.0.0
+
+- Document all features
+  - Standard Quarto variables
+  - Variables passed to Typst
+  - *preprint-typst*-specific variables
+
 ## 0.19.0
 
 - Use custom definitions.typ to customize more elements
