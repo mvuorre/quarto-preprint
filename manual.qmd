@@ -32,10 +32,6 @@ format:
     output-file: "index.html"
     title-block-banner: true
     title-block-style: default
-    other-links:
-      - text: Journal theme example
-        href: manual_ex2.pdf
-        icon: file-pdf
 ---
 
 ::: {.content-visible when-format="gfm"}
