@@ -9,7 +9,7 @@
 <meta name="author" content="Matti Vuorre">
 <meta name="dcterms.date" content="2025-07-01">
 
-<title>quarto-preprint extension manual (v0.19.0) – Quarto preprint</title>
+<title>quarto-preprint: A Quarto extension for creating PDF documents with Typst – Quarto preprint</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -163,8 +163,7 @@ window.Quarto = {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title"><em>quarto-preprint</em> extension manual (v0.19.0)</h1>
-            <p class="subtitle lead">Testing</p>
+      <h1 class="title"><em>quarto-preprint</em>: A Quarto extension for creating PDF documents with Typst</h1>
                                 <div class="quarto-categories">
                 <div class="quarto-category">Quarto</div>
                 <div class="quarto-category">Typst</div>
@@ -242,14 +241,9 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#tables" id="toc-tables" class="nav-link" data-scroll-target="#tables">Tables</a></li>
   <li><a href="#figures-1" id="toc-figures-1" class="nav-link" data-scroll-target="#figures-1">Figures</a></li>
+  </ul></li>
   <li><a href="#full-width-content" id="toc-full-width-content" class="nav-link" data-scroll-target="#full-width-content">Full-width content</a></li>
-  </ul></li>
-  <li><a href="#quarto-markdown-features" id="toc-quarto-markdown-features" class="nav-link" data-scroll-target="#quarto-markdown-features">Quarto markdown features</a>
-  <ul class="collapse">
   <li><a href="#maths" id="toc-maths" class="nav-link" data-scroll-target="#maths">Maths</a></li>
-  <li><a href="#block-quotes" id="toc-block-quotes" class="nav-link" data-scroll-target="#block-quotes">Block quotes</a></li>
-  <li><a href="#callouts" id="toc-callouts" class="nav-link" data-scroll-target="#callouts">Callouts</a></li>
-  </ul></li>
   </ul></li>
   <li><a href="#get-help-contribute" id="toc-get-help-contribute" class="nav-link" data-scroll-target="#get-help-contribute">Get help &amp; contribute</a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
@@ -264,6 +258,9 @@ window.Quarto = {
 
 
 
+<blockquote class="blockquote">
+<p>“An article about computational science in a scientific publication is not the scholarship itself, it is merely advertising of the scholarship. The actual scholarship is the complete software development environment and the complete set of instructions which generated the figures.” –Buckheit and Donoho (1995, paraphrasing Jon Claerbout)</p>
+</blockquote>
 <p><a href="https://quarto.org/">Quarto</a> is “An open-source scientific and technical publishing system” <span class="citation" data-cites="allaireQuarto2025">(<a href="#ref-allaireQuarto2025" role="doc-biblioref">Allaire et al., 2025</a>)</span> for writing reproducible documents that combine computations and prose written in <a href="https://quarto.org/docs/authoring/markdown-basics.html">markdown</a> into HTML, PDF, Word, and other outputs. For many R users, Quarto is a successor of <a href="https://rmarkdown.rstudio.com/">R Markdown</a> but with a broader scope and better support for different output formats and computational content in other languages.</p>
 <p><a href="https://github.com/mvuorre/quarto-preprint"><em>quarto-preprint</em></a> is a Quarto extension that provides one such output format, called <em>preprint-typst</em>. When using this format, Quarto renders your document into PDF using <a href="https://typst.app/">Typst</a>, a modern replacement for LaTeX. This document explains how to install, use and customize the output of Quarto documents created with the <em>preprint-typst</em> format. Example manuscripts using <em>preprint-typst</em> format include:</p>
 <ul>
@@ -278,11 +275,11 @@ window.Quarto = {
 <p>The <code>quarto add</code> command, which you use on the command line and not the R console, creates a <code>_extensions/preprint/</code> directory in your project. The <em>preprint-typst</em> format is then ready to use in any Quarto document in that project.</p>
 <p>Second, you can start a new <a href="https://quarto.org/docs/projects/quarto-projects.html">Quarto project</a> that uses <em>quarto-preprint</em> with <code>quarto-use</code>:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> use template mvuorre/quarto-preprint</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>You will then answer a series of questions (project name etc.) and end up with a new project directory with a {project-name}.qmd file that provides a starter Quarto document template that uses the <em>preprint-typst</em> format. In addition it creates a boilerplate <a href="https://quarto.org/docs/projects/quarto-projects.html#shared-metadata">_quarto.yml</a> file where you can specify the Quarto project’s metadata, and an example bibliography.bib file.</p>
+<p>You will then answer a series of questions (project name etc.) and end up with a new project directory with a {project-name}.qmd file that provides a starter Quarto document template that uses the <em>preprint-typst</em> format. It also creates a boilerplate <a href="https://quarto.org/docs/projects/quarto-projects.html#shared-metadata">_quarto.yml</a> file where you can specify the Quarto project’s metadata, and an example bibliography.bib file.</p>
 </section>
 <section id="use-configuration" class="level1">
 <h1>Use &amp; configuration</h1>
-<p>The output of Quarto documents is configured through YAML front matter metadata. To specify an <a href="https://quarto.org/docs/output-formats/all-formats.html">output format</a> for your document, include (for example) <code>format: preprint-typst</code> in the front matter. Here is a minimal example YAML front matter that specifies a title, a table of contents, and two output formats:</p>
+<p>The output of Quarto documents is configured through YAML front matter <a href="https://quarto.org/docs/authoring/front-matter.html">metadata</a>. To specify an <a href="https://quarto.org/docs/output-formats/all-formats.html">output format</a> for your document, include (for example) <code>format: preprint-typst</code> in the front matter. Here is a minimal example YAML front matter that specifies a title, a table of contents, and two output formats:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> A document</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Top-level options apply to all formats,</span></span>
@@ -294,9 +291,10 @@ window.Quarto = {
 <span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">wordcount</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
 <span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">html</span><span class="kw">:</span></span>
 <span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">title-block-banner</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Note that many front matter variables can be specified for all output formats (such as <code>toc</code> above) or for only some of them (like <code>wordcount</code> above). To learn more about Quarto’s front matter options, see Quarto’s <a href="https://quarto.org/docs/authoring/front-matter.html">guide</a> to writing scholarly documents, and Quarto’s Typst format <a href="https://quarto.org/docs/output-formats/typst.html">documentation</a>. <em>preprint-typst</em> aims to include all standard Quarto front matter options for scholarly writing.</p>
-<p>In addition to standard Quarto front matter, <em>preprint-typst</em> supports additional fields and Typst variables, such as author notes and paragraph formatting. Below, we list available YAML configuration options roughly organized by their specificity to different Quarto output formats.</p>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="at">Document content goes here...</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Note that many front matter variables can be specified for all output formats (such as <code>toc</code> above) or for only some of them (like <code>wordcount</code> above). To learn more about Quarto’s front matter options, see Quarto’s <a href="https://quarto.org/docs/authoring/front-matter.html">guide</a> to writing scholarly documents, and Quarto’s Typst format <a href="https://quarto.org/docs/output-formats/typst.html">documentation</a>.</p>
+<p><em>preprint-typst</em> aims to include all standard Quarto front matter options for scholarly writing. In addition to standard Quarto YAML variables, <em>preprint-typst</em> supports additional fields and Typst variables, such as author notes and paragraph formatting. Below, we list available YAML configuration options roughly organized by their specificity to different Quarto output formats.</p>
 <section id="universal-quarto-options" class="level2">
 <h2 class="anchored" data-anchor-id="universal-quarto-options">Universal Quarto options</h2>
 <p><em>These work across all Quarto output formats (HTML, PDF, Word, etc.)</em></p>
@@ -354,11 +352,21 @@ window.Quarto = {
 <ul>
 <li>Example: <code>csl: https://www.zotero.org/styles/apa</code> or <code>csl: apa.csl</code></li>
 </ul></li>
-<li><code>citeproc</code> (boolean) - Use Pandoc citation processing [<a href="https://quarto.org/docs/authoring/citations.html#typst">Quarto</a>]
+<li><code>citeproc</code> (boolean; <a href="#tip-bib" class="quarto-xref">Tip&nbsp;1</a>) - Use Pandoc citation processing [<a href="https://quarto.org/docs/authoring/citations.html#typst">Quarto</a>]
 <ul>
 <li>Example: <code>citeproc: true</code></li>
 </ul></li>
 </ul>
+<div id="tip-bib" class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note&nbsp;1: Quarto, Typst, and bibliography processing
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <p>Typst has its <a href="https://quarto.org/docs/authoring/citations.html#typst">own citation processing system</a>, but by default <em>preprint-typst</em> turns it off by using <code>citeproc: true</code> to allow better bibliography customization and use of Quarto’s <a href="https://quarto.org/docs/authoring/citations.html#bibliography-generation"><code>#refs</code> div</a>. In your document, include</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># References</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -378,6 +386,8 @@ window.Quarto = {
 </ul></li>
 </ul></li>
 </ul>
+</div>
+</div>
 </section>
 <section id="typography" class="level3">
 <h3 class="anchored" data-anchor-id="typography">Typography</h3>
@@ -521,7 +531,7 @@ window.Quarto = {
 <li>Example: <code>functions: ["place", "appendix"]</code></li>
 </ul></li>
 </ul>
-<p>When starting a new project that uses the <em>quarto-preprint</em> template (<code>quarto use template mvuorre/quarto-preprint</code>), many useful options already have default values you can build on. See Quarto’s Typst <a href="https://quarto.org/docs/output-formats/typst.html">documentation</a> for standard options and Typst <a href="https://typst.app/docs">documentation</a> for styling details.</p>
+<p>When starting a new project that uses the <em>quarto-preprint</em> template (<code>quarto use template mvuorre/quarto-preprint</code>), the template Quarto file already includes some useful variables and their values. See Quarto’s Typst <a href="https://quarto.org/docs/output-formats/typst.html">documentation</a> for standard options and Typst <a href="https://typst.app/docs">documentation</a> for styling details.</p>
 </section>
 </section>
 <section id="example-content" class="level1">
@@ -555,8 +565,8 @@ Table&nbsp;1: Information on various cars.
 
     <script>
 
-      function styleCell_k7dua9kf9nuviny3u0n0(i, j, css_id) {
-          var table = document.getElementById("tinytable_k7dua9kf9nuviny3u0n0");
+      function styleCell_6g218he8xu8xuno4hj3c(i, j, css_id) {
+          var table = document.getElementById("tinytable_6g218he8xu8xuno4hj3c");
           var cell = table.querySelector(`[data-row="${i}"][data-col="${j}"]`);
           if (cell) {
               console.log(`Styling cell at (${i}, ${j}) with class ${css_id}`);
@@ -566,7 +576,7 @@ Table&nbsp;1: Information on various cars.
           }
       }
       function insertSpanRow(i, colspan, content) {
-        var table = document.getElementById('tinytable_k7dua9kf9nuviny3u0n0');
+        var table = document.getElementById('tinytable_6g218he8xu8xuno4hj3c');
         // Find the row with data-row attribute matching i
         var targetRow = table.querySelector(`tr [data-row="${i}"]`).closest('tr');
         var newRow = table.insertRow(targetRow.rowIndex);
@@ -578,8 +588,8 @@ Table&nbsp;1: Information on various cars.
         // this may be unsafe, but innerText does not interpret <br>
         newCell.innerHTML = content;
       }
-      function spanCell_k7dua9kf9nuviny3u0n0(i, j, rowspan, colspan) {
-        var table = document.getElementById("tinytable_k7dua9kf9nuviny3u0n0");
+      function spanCell_6g218he8xu8xuno4hj3c(i, j, rowspan, colspan) {
+        var table = document.getElementById("tinytable_6g218he8xu8xuno4hj3c");
         const targetCell = table.querySelector(`[data-row="${i}"][data-col="${j}"]`);
         if (!targetCell) {
           console.warn(`Cell at (${i}, ${j}) not found.`);
@@ -610,14 +620,14 @@ Table&nbsp;1: Information on various cars.
       window.addEventListener('load', function () {
           var cellsToStyle = [
             // tinytable style arrays after
-          { positions: [ { i: '3', j: 0 }, { i: '3', j: 1 }, { i: '3', j: 2 }, { i: '3', j: 3 }, { i: '3', j: 4 },  ], css_id: 'tinytable_css_yz5bp2c8z1udyhkbrkj4',}, 
-          { positions: [ { i: '0', j: 0 }, { i: '0', j: 1 }, { i: '0', j: 2 }, { i: '0', j: 3 }, { i: '0', j: 4 },  ], css_id: 'tinytable_css_45awze6sztczn697lww6',}, 
+          { positions: [ { i: '3', j: 0 }, { i: '3', j: 1 }, { i: '3', j: 2 }, { i: '3', j: 3 }, { i: '3', j: 4 },  ], css_id: 'tinytable_css_025g1nbifnjdngp70jjh',}, 
+          { positions: [ { i: '0', j: 0 }, { i: '0', j: 1 }, { i: '0', j: 2 }, { i: '0', j: 3 }, { i: '0', j: 4 },  ], css_id: 'tinytable_css_nbeaa5lvmsb9fr2pq34q',}, 
           ];
 
           // Loop over the arrays to style the cells
           cellsToStyle.forEach(function (group) {
               group.positions.forEach(function (cell) {
-                  styleCell_k7dua9kf9nuviny3u0n0(cell.i, cell.j, group.css_id);
+                  styleCell_6g218he8xu8xuno4hj3c(cell.i, cell.j, group.css_id);
               });
           });
       });
@@ -625,11 +635,11 @@ Table&nbsp;1: Information on various cars.
 
     <style>
       /* tinytable css entries after */
-      .table td.tinytable_css_yz5bp2c8z1udyhkbrkj4, .table th.tinytable_css_yz5bp2c8z1udyhkbrkj4 { border-bottom: solid #d3d8dc 0.1em; }
-      .table td.tinytable_css_45awze6sztczn697lww6, .table th.tinytable_css_45awze6sztczn697lww6 { border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+      .table td.tinytable_css_025g1nbifnjdngp70jjh, .table th.tinytable_css_025g1nbifnjdngp70jjh { border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_nbeaa5lvmsb9fr2pq34q, .table th.tinytable_css_nbeaa5lvmsb9fr2pq34q { border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
     </style>
     <div class="container">
-      <table class="table table-borderless" id="tinytable_k7dua9kf9nuviny3u0n0" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+      <table class="table table-borderless" id="tinytable_6g218he8xu8xuno4hj3c" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
         <thead>
         
               <tr>
@@ -688,15 +698,16 @@ Figure&nbsp;1: Example figure.
 </div>
 <p><a href="#fig-1" class="quarto-xref">Figure&nbsp;1</a> is a figure.</p>
 </section>
-<section id="full-width-content" class="level3">
-<h3 class="anchored" data-anchor-id="full-width-content">Full-width content</h3>
+</section>
+<section id="full-width-content" class="level2">
+<h2 class="anchored" data-anchor-id="full-width-content">Full-width content</h2>
 <p>You can also include page-wide figures (or any other content) in documents that have more than one column. See <a href="#fig-2" class="quarto-xref">Figure&nbsp;2</a> for an example. First, include</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">functions</span><span class="kw">:</span><span class="at"> place</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>in the document’s YAML. Then, wrap your figure in a Quarto div<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> like this:</p>
+<p>in the document’s YAML. Then, wrap your figure in a <a href="https://quarto.org/docs/authoring/markdown-basics.html#sec-divs-and-spans">Quarto div</a> like this:</p>
 <pre><code>::: {.place arguments='auto, scope: "parent", float: true'}
 Everything here will span the whole page.
 :::</code></pre>
-<p>The above uses the Typst’s <code>place()</code><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> function through the typst-function<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> Quarto extension to place the div’s content in <code>"parent"</code> scope (the document page is the column’s parent) and must specify that Typst should treat the content as a float. <code>auto</code> indicates where the figure should be on the page, and can be either <code>auto</code>, <code>bottom</code>, or <code>top</code>. (Note <code>auto</code> and <code>bottom</code> can make the figure appear below footnotes.)</p>
+<p>The above uses the Typst’s <a href="https://typst.app/docs/reference/layout/place/"><code>place()</code> function</a> through the <a href="https://github.com/christopherkenny/typst-function">typst-function</a> Quarto extension to place the div’s content in <code>"parent"</code> scope (the document page is the column’s parent) and must specify that Typst should treat the content as a float. <code>auto</code> indicates where the figure should be on the page, and can be either <code>auto</code>, <code>bottom</code>, or <code>top</code>. (Note <code>auto</code> and <code>bottom</code> can make the figure appear below footnotes.)</p>
 <div class="place" data-arguments="auto, scope: &quot;parent&quot;, float: true">
 <div id="fig-2" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -710,41 +721,12 @@ Figure&nbsp;2
 </div>
 </div>
 </section>
-</section>
-<section id="quarto-markdown-features" class="level2">
-<h2 class="anchored" data-anchor-id="quarto-markdown-features">Quarto markdown features</h2>
-<section id="maths" class="level3">
-<h3 class="anchored" data-anchor-id="maths">Maths</h3>
+<section id="maths" class="level2">
+<h2 class="anchored" data-anchor-id="maths">Maths</h2>
 <p>LaTeX math notation is automatically converted to Typst and as such works just fine either inline (<span class="math inline">\(y_i = \alpha + \beta x_i + \epsilon_i\)</span>) or in display mode (<a href="#eq-1" class="quarto-xref">Equation&nbsp;1</a>).</p>
 <p><span id="eq-1"><span class="math display">\[
 f(x \mid \mu, \sigma^2) = \frac{1}{\sqrt{2\pi \sigma^2}} \exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)
 \tag{1}\]</span></span></p>
-</section>
-<section id="block-quotes" class="level3">
-<h3 class="anchored" data-anchor-id="block-quotes">Block quotes</h3>
-<p>To insert a block quote, prepend a paragraph with <code>&gt;</code>:</p>
-<blockquote class="blockquote">
-<p>A quote: “<em>Elit ullamcorper dignissim cras tincidunt lobortis feugiat vivamus at.</em>”</p>
-</blockquote>
-</section>
-<section id="callouts" class="level3">
-<h3 class="anchored" data-anchor-id="callouts">Callouts</h3>
-<p><a href="https://quarto.org/docs/authoring/callouts.html">Callout blocks</a>, such as <a href="#tip-example" class="quarto-xref">Tip&nbsp;1</a>, can be useful for highlighting content, such as one might do in a box that defines key terms, etc.</p>
-<div id="tip-example" class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note&nbsp;1: All kinds of markup
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Markdown: <code>*italics*, **bold text**, ~subscript~, ^superscript^ &amp; ~~strikethrough~~</code></p>
-<p>Renders as: <em>italics</em>, <strong>bold text</strong>, <sub>subscript</sub>, <sup>superscript</sup> &amp; <del>strikethrough</del></p>
-</div>
-</div>
-</section>
 </section>
 </section>
 <section id="get-help-contribute" class="level1">
@@ -766,7 +748,6 @@ R Core Team. (2025). <em>R: <span>A Language</span> and <span>Environment</span>
 </div>
 </div>
 </section>
-
 
 
 
@@ -840,14 +821,7 @@ Listing&nbsp;2: Example R code.
 f(x \mid \mu, \sigma^2) = \frac{1}{\sqrt{2\pi \sigma^2}} \exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)
 \tag{2}\]</span></span></p>
 </section>
-</div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
-
-<ol>
-<li id="fn1"><p><a href="https://quarto.org/docs/authoring/markdown-basics.html#sec-divs-and-spans" class="uri">https://quarto.org/docs/authoring/markdown-basics.html#sec-divs-and-spans</a><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p><a href="https://typst.app/docs/reference/layout/place/" class="uri">https://typst.app/docs/reference/layout/place/</a><a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p><a href="https://github.com/christopherkenny/typst-function" class="uri">https://github.com/christopherkenny/typst-function</a><a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
-</section></div></main> <!-- /main -->
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
