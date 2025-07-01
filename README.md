@@ -18,6 +18,8 @@ Matti Vuorre
 
 <!-- README.md is automatically generated from manual.qmd -->
 
+**[Example *preprint-typst* document](https://vuorre.com/quarto-preprint/manual.pdf)**.
+
 > “An article about computational science in a scientific publication is not the scholarship itself, it is merely advertising of the scholarship. The actual scholarship is the complete software development environment and the complete set of instructions which generated the figures.” –Buckheit and Donoho (1995, paraphrasing Jon Claerbout)
 
 [Quarto](https://quarto.org/) is “An open-source scientific and technical publishing system” (Allaire et al., 2025) for writing reproducible documents that combine computations and prose written in [markdown](https://quarto.org/docs/authoring/markdown-basics.html) into HTML, PDF, Word, and other outputs. For many R users, Quarto is a successor of [R Markdown](https://rmarkdown.rstudio.com/) but with a broader scope and better support for different output formats and computational content in other languages.

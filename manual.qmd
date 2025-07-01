@@ -40,7 +40,9 @@ format:
 
 ::: {.content-visible when-format="gfm"}
 <!-- README.md is automatically generated from manual.qmd -->
+**[Example *preprint-typst* document](https://vuorre.com/quarto-preprint/manual.pdf)**.
 :::
+
 
 >"An article about computational science in a scientific publication is not the scholarship itself, it is merely advertising of the scholarship. The actual scholarship is the complete software development environment and the complete set of instructions which generated the figures." --Buckheit and Donoho (1995, paraphrasing Jon Claerbout)
 
