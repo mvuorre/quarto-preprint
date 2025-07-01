@@ -42,7 +42,7 @@ release: .release.timestamp
 
 # Publish docs/ using Quarto
 publish: clean
-	quarto publish gh-pages
+	quarto publish gh-pages --no-prompt --no-browser
 
 # Clean all intermediate files
 clean:
