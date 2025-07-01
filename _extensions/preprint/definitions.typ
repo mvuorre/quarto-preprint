@@ -21,7 +21,6 @@
 }
 
 // Some quarto-specific definitions.
-
 #show raw.where(block: true): set block(
   fill: luma(230),
   width: 100%,
@@ -161,7 +160,7 @@
     block(inset: 1pt, width: 100%, below: 0pt, block(
       fill: background_color,
       width: 100%,
-      inset: 8pt,
+      inset: 4pt,
     )[#text(icon_color, weight: 900)[#icon] #title])
       + if (body != []) {
         block(inset: 1pt, width: 100%, block(fill: body_background_color, width: 100%, inset: 8pt, [

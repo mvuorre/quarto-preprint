@@ -50,12 +50,12 @@
   citation: none, // Not used currently
   date: none, // Not used currently
   // Layout settings
-  leading: 0.6em,
+  leading: 0.5em,
   spacing: 0.6em,
   first-line-indent: 1.8em,
   all: false,
   linkcolor: blue,
-  margin: (x: 3.2cm, y: 3cm),
+  margin: (x: 2.8cm, y: 2.6cm),
   paper: "a4",
   // Typography settings
   lang: "en",
@@ -88,11 +88,14 @@
   )
   // Link and cite colors
   show link: set text(fill: linkcolor)
-  show cite: set text(fill: linkcolor)
+  show cite: set text(fill: linkcolor) // No effect when `citeproc: true`
 
   // Customize Typst bibliography (no effect if using citeproc)
   set bibliography(title: bibliography-title, style: bibliographystyle)
   show bibliography: set par(spacing: spacing, leading: leading)
+
+  // Space around lists
+  show list: set block(inset: (left: spacing * 2, right: spacing * 2, top: spacing / 2, bottom: spacing / 2))
 
   /* Improved figure display */
   // Add space above and below
@@ -143,16 +146,16 @@
 
   // Headers
   set heading(numbering: sectionnumbering)
-  show heading.where(level: 1): it => block(width: 100%, below: 1em, above: 1.25em)[
+  show heading.where(level: 1): it => block(width: 100%, below: 0.8em, above: 1em)[
     #set align(center)
     #set text(size: fontsize * 1.1, weight: "bold")
     #it
   ]
-  show heading.where(level: 2): it => block(width: 100%, below: 1em, above: 1.25em)[
+  show heading.where(level: 2): it => block(width: 100%, below: 0.8em, above: 1em)[
     #set text(size: fontsize * 1.05)
     #it
   ]
-  show heading.where(level: 3): it => block(width: 100%, below: 0.8em, above: 1.2em)[
+  show heading.where(level: 3): it => block(width: 100%, below: 0.6em, above: 0.8em)[
     #set text(size: fontsize, style: "italic")
     #it
   ]

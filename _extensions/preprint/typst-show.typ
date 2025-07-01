@@ -53,6 +53,9 @@ $if(mainfont)$
 $elseif(brand.typography.base.family)$
   font: $brand.typography.base.family$,
 $endif$
+$if(number-sections)$
+  sectionnumbering: "1.1.1.1.",
+$endif$
 $if(section-numbering)$
   sectionnumbering: "$section-numbering$",
 $endif$
@@ -118,7 +121,7 @@ $endif$
 // Theme-based settings - simplified conditional logic
 $if(theme-jou)$
   // Journal theme: compact 2-column layout
-  margin: $if(margin)$($for(margin/pairs)$$margin.key$: $margin.value$,$endfor$)$else$(x: 2cm, y: 3cm)$endif$,
+  margin: $if(margin)$($for(margin/pairs)$$margin.key$: $margin.value$,$endfor$)$else$(x: 2.2cm, y: 2.6cm)$endif$,
   fontsize: $if(fontsize)$$fontsize$$else$10pt$endif$,
   cols: $if(columns)$$columns$$else$2$endif$,
 $else$

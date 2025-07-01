@@ -2,13 +2,15 @@
 *.typ
 *_cache/
 *_files/
-index.qmd
+manual.qmd
 Makefile
 docs/
-_quarto.yml
 *.png
 *.svg
 *.html
 tests/
 NEWS.md
+README.md
 .release.timestamp
+.nojekyll
+_variables.yml

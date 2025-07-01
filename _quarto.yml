@@ -1,7 +1,7 @@
 project:
   title: "Quarto preprint"
-  render:
-    - index.qmd
-
-execute:
-  cache: true
+  type: website
+  output-dir: docs
+website:
+  repo-url: https://github.com/mvuorre/quarto-preprint
+  repo-actions: [edit, source, issue]

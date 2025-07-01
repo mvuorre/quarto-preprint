@@ -6,8 +6,11 @@
 *.html
 *_cache/
 *_files/
-index.typ
+docs/
+manual.typ
 /.luarc.json
 /.quarto/
 /tests/
 .release.timestamp
+_variables.yml
+.claude/
