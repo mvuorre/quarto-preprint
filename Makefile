@@ -8,7 +8,7 @@ render: $(TARGET) _extensions/preprint/typst-show.typ _extensions/preprint/typst
 	# Render PDF and HTML to docs/
 	quarto render $<
 	# Render README.md to root
-	quarto render $< --to gfm --output README.md --output-dir . -M toc-depth:2
+	quarto render $< --to gfm --output README.md --output-dir . -M toc-depth:2 -M wrap:none
 	# Render additional preprint-typst examples
 	quarto render $< --to preprint-typst -M theme-jou:true --output manual_ex2.pdf
 
