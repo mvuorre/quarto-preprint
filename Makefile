@@ -32,7 +32,7 @@ update-version:
 	yq -i ".extension-version = \"$$VERSION\"" _variables.yml; \
 
 # Create a GitHub release
-.release.timestamp: manual.pdf NEWS.md _extensions/preprint/_extension.yml
+.release.timestamp: render NEWS.md _extensions/preprint/_extension.yml
 	@VERSION=$$(yq '.version' _extensions/preprint/_extension.yml); \
 	CHANGELOG=$$(awk '/^## '$$VERSION'$$/{flag=1; next} /^## [0-9]/{flag=0} flag' NEWS.md); \
 	gh release create v$$VERSION --title "v$$VERSION" --notes "$$CHANGELOG" $<
