@@ -15,7 +15,7 @@ affiliations:
     name: Tilburg University
     department: Department of Social Psychology
 abstract: |
-  *quarto-preprint* is a Quarto extension for creating PDF documents from markdown content with Typst. It provides one Quarto output format, *preprint-typst*, that aims to Just Work (Typst doesn't require LaTeX installations and ships with Quarto), be fast (Typst creates PDF files very quickly), and be 100% Quarto standards compliant (write documents without worrying about formatting & metadata, switch to other Quarto formatd without changing anything but the output format). Its intended uses cases are worry-free but flexible typesetting of Quarto documents to PDF, especially when users might want to easily switch to other (e.g. journal-specific) formats.
+  *quarto-preprint* is a Quarto extension for creating PDF documents from markdown content with Typst. It provides one Quarto output format, *preprint-typst*, that aims to Just Work (Typst doesn't require LaTeX installations and ships with Quarto), be fast (Typst creates PDF files very quickly), and be 100% Quarto standards compliant (write documents without worrying about formatting & metadata, switch to other Quarto formatd without changing anything but the output format). *preprint-typst* builds on the standard Quarto Typst template and enables better author-affiliation handling and formatting, allowing for additional (Quarto, Typst, and custom) metadata variables, opinionated typesetting (very), improved two-column layouts, and more. Its intended uses cases are worry-free but flexible typesetting of Quarto documents to PDF, especially when users might want to easily switch to other (e.g. journal-specific) formats.
 categories: [Quarto, Typst, extension, typesetting, preprint]
 date: "`r Sys.Date()`"
 bibliography: bibliography.bib
@@ -46,7 +46,9 @@ format:
 
 [Quarto](https://quarto.org/) is "An open-source scientific and technical publishing system" [@allaireQuarto2025] for writing reproducible documents that combine computations and prose written in [markdown](https://quarto.org/docs/authoring/markdown-basics.html) into HTML, PDF, Word, and other outputs. For many R users, Quarto is a successor of [R Markdown](https://rmarkdown.rstudio.com/) but with a broader scope and better support for different output formats and computational content in other languages.
 
-[*quarto-preprint*](https://github.com/mvuorre/quarto-preprint) is a Quarto extension that provides one such output format, called *preprint-typst*. When using this format, Quarto renders your document into PDF using [Typst](https://typst.app/), a modern replacement for LaTeX. This document explains how to install, use and customize the output of Quarto documents created with the *preprint-typst* format. Example manuscripts using *preprint-typst* format include:
+[*quarto-preprint*](https://github.com/mvuorre/quarto-preprint) is a Quarto extension that provides one such output format, called *preprint-typst*. When using this format, Quarto renders your document into PDF using [Typst](https://typst.app/), a modern replacement for LaTeX. *preprint-typst* builds on the standard Quarto Typst template and enables better author-affiliation handling and formatting, allowing for additional (Quarto, Typst, and custom) metadata variables, opinionated typesetting (very), improved two-column layouts, and more (read below).
+
+This document explains how to install, use and customize the output of Quarto documents created with the *preprint-typst* format. Example manuscripts using *preprint-typst* format include:
 
 - Vuorre, M. (2025). Estimating Signal Detection Models with regression using the brms R package. OSF. <https://doi.org/10.31234/osf.io/vtfc3_v1>
 - Vuorre, M., Johannes, N., & Przybylski, A. (2025). Three objections to a novel paradigm in social media effects research. OSF. <https://doi.org/10.31234/osf.io/dpuya_v2>
