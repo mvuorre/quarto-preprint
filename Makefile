@@ -35,7 +35,7 @@ update-version:
 .release.timestamp: render NEWS.md _extensions/preprint/_extension.yml
 	@VERSION=$$(yq '.version' _extensions/preprint/_extension.yml); \
 	CHANGELOG=$$(awk '/^## '$$VERSION'$$/{flag=1; next} /^## [0-9]/{flag=0} flag' NEWS.md); \
-	gh release create v$$VERSION --title "v$$VERSION" --notes "$$CHANGELOG" $<
+	gh release create v$$VERSION --title "v$$VERSION" --notes "$$CHANGELOG" docs/manual.pdf
 	@touch .release.timestamp
 
 release: .release.timestamp
