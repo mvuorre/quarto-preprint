@@ -94,8 +94,14 @@
   set bibliography(title: bibliography-title, style: bibliographystyle)
   show bibliography: set par(spacing: spacing, leading: leading)
 
-  // Space around lists
-  show list: set block(inset: (left: spacing * 2, right: spacing * 2, top: spacing / 2, bottom: spacing / 2))
+  // List spacing
+  show list: it => {
+    // Space between list items
+    set par(leading: 0.48em)
+    // Space around whole list
+    set block(spacing: spacing * 1.2, inset: (left: first-line-indent, right: first-line-indent))
+    it
+  }
 
   /* Improved figure display */
   // Add space above and below
