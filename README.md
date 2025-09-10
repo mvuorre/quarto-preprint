@@ -1,7 +1,8 @@
 # *quarto-preprint*: A Quarto extension for creating PDF documents with Typst
 Matti Vuorre
-2025-07-01
+2025-09-10
 
+- [Requirements](#requirements)
 - [Install](#install)
 - [Use & configuration](#use--configuration)
   - [Universal Quarto options](#universal-quarto-options)
@@ -14,7 +15,8 @@ Matti Vuorre
   - [Maths](#maths)
 - [Get help & contribute](#get-help--contribute)
 - [References](#references)
-- [Appendix A: Tips and tricks](#appendix-a-tips-and-tricks)
+- [Appendix A: Appendices](#appendix-a-appendices)
+- [Appendix B: Tips and tricks](#appendix-b-tips-and-tricks)
 
 <!-- README.md is automatically generated from manual.qmd -->
 
@@ -31,6 +33,12 @@ This document explains how to install, use and customize the output of Quarto do
 - Vuorre, M. (2025). Estimating Signal Detection Models with regression using the brms R package. OSF. <https://doi.org/10.31234/osf.io/vtfc3_v1>
 - Vuorre, M., Johannes, N., & Przybylski, A. (2025). Three objections to a novel paradigm in social media effects research. OSF. <https://doi.org/10.31234/osf.io/dpuya_v2>
 - Vuorre, M., Kay, M., & Bolger, N. (2024). Communicating causal effect heterogeneity. OSF. <https://doi.org/10.31234/osf.io/mwg4f>
+
+# Requirements
+
+- Computer
+- [Quarto](https://quarto.org/) 1.7.29 or newer
+- [Font Awesome](https://fontawesome.com/download) 7.0 or newer (for ORCID logo)
 
 # Install
 
@@ -252,7 +260,7 @@ Table 1: Information on various cars.
 
 ### Figures
 
-Figures are centered by default.
+Figures (e.g. <a href="#fig-1" class="quarto-xref">Figure 1</a>) are centered by default.
 
 <div id="fig-1">
 
@@ -262,11 +270,9 @@ Figure 1: Example figure.
 
 </div>
 
-<a href="#fig-1" class="quarto-xref">Figure 1</a> is a figure.
-
 ## Full-width content
 
-You can also include page-wide figures (or any other content) in documents that have more than one column. See <a href="#fig-2" class="quarto-xref">Figure 2</a> for an example. First, include
+You can include page-wide figures (or any other content) in documents that have more than one column. See <a href="#fig-2" class="quarto-xref">Figure 2</a> for an example. First, include
 
 ``` yaml
 functions: place
@@ -284,9 +290,9 @@ The above uses the Typst’s [`place()` function](https://typst.app/docs/referen
 
 <div id="fig-2">
 
-![](data:image/svg+xml;base64,PHN2ZyB3aWR0aCA9ICI2MDAiIGhlaWdodCA9ICIxMDAiIHhtbG5zID0gImh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94ID0gIjAgMCA2MDAgMTAwIj48cmVjdCB3aWR0aCA9ICI2MDAiIGhlaWdodCA9ICIxMDAiIGZpbGwgPSAiI2RkZCIgLz48dGV4dCB4ID0gIjUwJSIgeSA9ICI1MCUiIGZvbnQtZmFtaWx5ID0gInNhbnMtc2VyaWYiIGZvbnQtc2l6ZSA9ICIxMCIgZmlsbCA9ICIjMDAwIiB0ZXh0LWFuY2hvciA9ICJtaWRkbGUiPjYwMCB4IDEwMDwvdGV4dD48L3N2Zz4=)
+![](data:image/svg+xml;base64,PHN2ZyB3aWR0aCA9ICI0MDAiIGhlaWdodCA9ICIyMDAiIHhtbG5zID0gImh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94ID0gIjAgMCA0MDAgMjAwIj48cmVjdCB3aWR0aCA9ICI0MDAiIGhlaWdodCA9ICIyMDAiIGZpbGwgPSAiI2RkZCIgLz48dGV4dCB4ID0gIjUwJSIgeSA9ICI1MCUiIGZvbnQtZmFtaWx5ID0gInNhbnMtc2VyaWYiIGZvbnQtc2l6ZSA9ICIyMCIgZmlsbCA9ICIjMDAwIiB0ZXh0LWFuY2hvciA9ICJtaWRkbGUiPjQwMCB4IDIwMDwvdGV4dD48L3N2Zz4=)
 
-Figure 2
+Figure 2: A full-width figure.
 
 </div>
 
@@ -330,32 +336,17 @@ R Core Team. (2025). *R: A Language and Environment for Statistical Computing. V
 
 </div>
 
-<div class="appendix">
+# Appendix A: Appendices
 
-# Appendix A: Tips and tricks
+To include an appendix (<a href="#tip-appendix" class="quarto-xref">Tip 2</a>), include the following [raw Typst](https://quarto.org/docs/output-formats/typst.html#raw-typst) block in your Quarto document, followed by your appendix content:
 
-To include and appendix (<a href="#tip-appendix" class="quarto-xref">Tip 2</a>), place it at the end of the document and wrap all its content in an `.appendix` Quarto div:
+    ```{=typst}
+    #show: appendix.with()
+    ```
 
-``` md
-::: {.appendix}
-# Appendix: Computational details
-Here we describe the computational details of our approach...
-:::
-```
+    # Appendix A: Example stuff {.appendix}
 
-> [!TIP]
->
-> Appendices are an experimental feature. They are provided through a custom Typst function using the [`typst-function`](https://github.com/christopherkenny/typst-function/) Quarto extension, and their implementation and functionality may change as Quarto’s Typst integration matures.
-
-## Citation management
-
-Quarto documents require citations in a separate .bib file. The [vscode-zotero](https://vuorre.com/posts/zotero-positron-vscode/) VS Code plugin helps with inserting in-text citations and managing the .bib file. The plugin works in all VS Code based editors, including [Positron](https://github.com/posit-dev/positron).
-
-## Fonts
-
-Run `quarto typst fonts` in your terminal (not R console) to list all available fonts.
-
-## Example appendix content
+    Text goes here.
 
 Appendices have appropriate float references like <a href="#fig-3" class="quarto-xref">Figure 3</a>, <a href="#tbl-3" class="quarto-xref">Table 2</a>, <a href="#lst-app" class="quarto-xref">Listing 2</a>.
 
@@ -392,4 +383,22 @@ Equations (<a href="#eq-app" class="quarto-xref">Equation 2</a>) work too but t
 f(x \mid \mu, \sigma^2) = \frac{1}{\sqrt{2\pi \sigma^2}} \exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)
  \qquad(2)$$</span>
 
-</div>
+> [!TIP]
+>
+> Appendices are an experimental feature. They are provided through a custom Typst function, and their implementation and functionality may change as Quarto’s Typst integration matures.
+>
+> The `appendix()` function allows changing counter prefixes, numbering, and the number of columns:
+>
+>     ```{=typst}
+>     #show: appendix.with(prefix: "B", columns: 2, numbering: "A.a.")
+>     ```
+
+# Appendix B: Tips and tricks
+
+## Citation management
+
+Quarto documents require citations in a separate .bib file. The [vscode-zotero](https://vuorre.com/posts/zotero-positron-vscode/) VS Code plugin helps with inserting in-text citations and managing the .bib file. The plugin works in all VS Code based editors, including [Positron](https://github.com/posit-dev/positron).
+
+## Fonts
+
+Run `quarto typst fonts` in your terminal (not R console) to list all available fonts.

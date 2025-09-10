@@ -7,6 +7,7 @@ TARGET := manual.qmd
 render: $(TARGET) _extensions/preprint/typst-show.typ _extensions/preprint/typst-template.typ update-version
 	# Render PDF and HTML to docs/
 	quarto render $<
+	quarto render $< --to preprint-typst --output manual-jou.pdf -M wordcount:true -M theme-jou:true
 	# Render README.md to root
 	quarto render $< --to gfm --output README.md --output-dir . -M toc-depth:2 -M wrap:none
 

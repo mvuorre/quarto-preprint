@@ -1,3 +1,17 @@
+## 1.1.0
+
+Appendices are now created by prepending them with, rather than wrapping in, a Typst function. This enables appendices to spread across pages. To create an appendix, use the `appendix.with()` function in a raw Typst block. For example:
+
+````
+```{=typst}
+#show: appendix.with()
+```
+
+# Appendix A: Example stuff {.appendix}
+
+Text goes here.
+````
+
 ## 1.0.0
 
 - Document all features

@@ -26,12 +26,16 @@ toc-title: Contents
 format:
   preprint-typst:
     wordcount: true
-    toc-depth: 2
+    toc-depth: 1
   html:
     theme: zephyr
     output-file: "index.html"
     title-block-banner: true
     title-block-style: default
+    format-links:
+      - text: Typst (two-column theme)
+        href: manual-jou.pdf
+        icon: file-pdf
 ---
 
 ::: {.content-visible when-format="gfm"}
@@ -253,17 +257,15 @@ tt(mtcars[1:3, 1:5])
 
 ### Figures
 
-Figures are centered by default.
+Figures (e.g. @fig-1) are centered by default.
 
 ::: {#fig-1 fig-cap="Example figure."}
 {{< placeholder 400 200 format=svg >}}
 :::
 
-@fig-1 is a figure.
-
 ## Full-width content
 
-You can also include page-wide figures (or any other content) in documents that have more than one column. See @fig-2 for an example. First, include
+You can include page-wide figures (or any other content) in documents that have more than one column. See @fig-2 for an example. First, include
 
 ```yaml
 functions: place
@@ -280,8 +282,8 @@ Everything here will span the whole page.
 The above uses the Typst's [`place()` function](https://typst.app/docs/reference/layout/place/) through the [typst-function](https://github.com/christopherkenny/typst-function) Quarto extension to place the div's content in `"parent"` scope (the document page is the column's parent) and must specify that Typst should treat the content as a float. `auto` indicates where the figure should be on the page, and can be either `auto`, `bottom`, or `top`. (Note `auto` and `bottom` can make the figure appear below footnotes.)
 
 :::: {.place arguments='auto, scope: "parent", float: true'}
-::: {#fig-2}
-{{< placeholder 600 100 format=svg >}}
+::: {#fig-2 fig-cap="A full-width figure."}
+{{< placeholder 400 200 format=svg >}}
 :::
 ::::
 
@@ -304,32 +306,23 @@ Send your comments, bug reports, and pull requests to <https://github.com/mvuorr
 :::{#refs}
 :::
 
-::: {.appendix}
-
-# Appendix A: Tips and tricks
-
-To include and appendix (@tip-appendix), place it at the end of the document and wrap all its content in an `.appendix` Quarto div:
-
-```md
-::: {.appendix}
-# Appendix: Computational details
-Here we describe the computational details of our approach...
-:::
+```{=typst}
+#show: appendix.with()
 ```
 
-::: {#tip-appendix .callout-tip}
-Appendices are an experimental feature. They are provided through a custom Typst function using the [`typst-function`](https://github.com/christopherkenny/typst-function/) Quarto extension, and their implementation and functionality may change as Quarto's Typst integration matures.
-:::
+# Appendix A: Appendices {.appendix}
 
-## Citation management {.unlisted}
+To include an appendix (@tip-appendix), include the following [raw Typst](https://quarto.org/docs/output-formats/typst.html#raw-typst) block in your Quarto document, followed by your appendix content:
 
-Quarto documents require citations in a separate .bib file. The [vscode-zotero](https://vuorre.com/posts/zotero-positron-vscode/) VS Code plugin helps with inserting in-text citations and managing the .bib file. The plugin works in all VS Code based editors, including [Positron](https://github.com/posit-dev/positron).
+````
+```{=typst}
+#show: appendix.with()
+```
 
-## Fonts {.unlisted}
+# Appendix A: Example stuff {.appendix}
 
-Run `quarto typst fonts` in your terminal (not R console) to list all available fonts.
-
-## Example appendix content {.unlisted}
+Text goes here.
+````
 
 Appendices have appropriate float references like @fig-3, @tbl-3, @lst-app.
 
@@ -355,4 +348,29 @@ $$
 f(x \mid \mu, \sigma^2) = \frac{1}{\sqrt{2\pi \sigma^2}} \exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)
 $$ {#eq-app}
 
+::: {#tip-appendix .callout-tip}
+Appendices are an experimental feature. They are provided through a custom Typst function, and their implementation and functionality may change as Quarto's Typst integration matures.
+
+The `appendix()` function allows changing counter prefixes, numbering, and the number of columns:
+
+````
+```{=typst}
+#show: appendix.with(prefix: "B", columns: 2, numbering: "A.a.")
+```
+````
+
 :::
+
+```{=typst}
+#show: appendix.with(prefix: "B")
+```
+
+# Appendix B: Tips and tricks {.appendix}
+
+## Citation management {.unlisted .appendix}
+
+Quarto documents require citations in a separate .bib file. The [vscode-zotero](https://vuorre.com/posts/zotero-positron-vscode/) VS Code plugin helps with inserting in-text citations and managing the .bib file. The plugin works in all VS Code based editors, including [Positron](https://github.com/posit-dev/positron).
+
+## Fonts {.unlisted .appendix}
+
+Run `quarto typst fonts` in your terminal (not R console) to list all available fonts.

@@ -4,12 +4,13 @@
 #import "@preview/fontawesome:0.6.0": *
 #import "@preview/wordometer:0.1.5": total-words, word-count
 
-// Appendix function, use with YAML
-// functions: [place, appendix]
-// And wrap appendix in a {.appendix} div
-#let appendix(content) = {
+// Appendix function. To use, include in .qmd before appendix header
+// ```{=typst}
+// #show: appendix.with(prefix: "A")
+// ```
+#let appendix(prefix: "A", columns: 1, numbering: none, doc) = {
   pagebreak()
-  set heading(numbering: none)
+  set heading(numbering: numbering)
   // Reset counters
   // TODO: Programmatically reset all (callout) counters
   // TODO: Reset equation and other counters
@@ -25,14 +26,12 @@
 
   // Figure & Table Numbering
   set figure(numbering: it => {
-    [A.#it]
+    [#prefix#it]
   })
-  place(auto, scope: "parent", float: true, {
-    set align(left)
-    content
-  })
-}
+  set page(columns: columns)
 
+  doc
+}
 
 #let preprint(
   // Document metadata
