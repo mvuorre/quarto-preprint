@@ -83,8 +83,8 @@
   set document(
     title: if title != none { title } else { none },
     author: if authors != none { authors.map(a => str(a.name.text)) } else { () },
-    description: abstract,
-    keywords: categories.text,
+    description: if abstract != none { abstract } else { none },
+    keywords: if categories != none { categories.text } else { "" },
   )
   // Link and cite colors
   show link: set text(fill: linkcolor)
