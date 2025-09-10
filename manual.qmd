@@ -52,6 +52,12 @@ This document explains how to install, use and customize the output of Quarto do
 - Vuorre, M., Johannes, N., & Przybylski, A. (2025). Three objections to a novel paradigm in social media effects research. OSF. <https://doi.org/10.31234/osf.io/dpuya_v2>
 - Vuorre, M., Kay, M., & Bolger, N. (2024). Communicating causal effect heterogeneity. OSF. <https://doi.org/10.31234/osf.io/mwg4f>
 
+# Requirements
+
+- Computer
+- [Quarto](https://quarto.org/) 1.7.29 or newer
+- [Font Awesome](https://fontawesome.com/download) 7.0 or newer (for ORCID logo)
+
 # Install
 
 You can use this Quarto extension in two ways. First, you can add it to an existing project with

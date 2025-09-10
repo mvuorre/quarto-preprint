@@ -1,10 +1,8 @@
-// Quarto Preprint Template for Typst
-// A scholarly document template providing academic paper formatting
-// Supports multi-column layouts, author metadata, and bibliographies
+// Quarto Typst template
 
 // Imports
-#import "@preview/fontawesome:0.5.0": *
-#import "@preview/wordometer:0.1.4": total-words, word-count
+#import "@preview/fontawesome:0.6.0": *
+#import "@preview/wordometer:0.1.5": total-words, word-count
 
 // Appendix function, use with YAML
 // functions: [place, appendix]
