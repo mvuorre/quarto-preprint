@@ -1,5 +1,7 @@
 ## 1.1.0
 
+### Appendices
+
 Appendices are now created by prepending them with, rather than wrapping in, a Typst function. This enables appendices to spread across pages. To create an appendix, use the `appendix.with()` function in a raw Typst block. For example:
 
 ````
@@ -11,6 +13,10 @@ Appendices are now created by prepending them with, rather than wrapping in, a T
 
 Text goes here.
 ````
+
+### Other changes
+
+- Remove deprecated `blockquote()` from definitions.typ.
 
 ## 1.0.0
 
