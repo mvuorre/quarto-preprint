@@ -15,3 +15,5 @@ site_libs/
 .release.timestamp
 _variables.yml
 .claude/
+
+**/*.quarto_ipynb
