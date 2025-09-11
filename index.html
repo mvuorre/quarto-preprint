@@ -250,8 +250,9 @@ window.Quarto = {
   <li><a href="#get-help-contribute" id="toc-get-help-contribute" class="nav-link" data-scroll-target="#get-help-contribute">Get help &amp; contribute</a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   
+  
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/mvuorre/quarto-preprint/edit/main/manual.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/mvuorre/quarto-preprint/blob/main/manual.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/mvuorre/quarto-preprint/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="manual.pdf"><i class="bi bi-file-pdf"></i>Typst (preprint)</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/mvuorre/quarto-preprint/edit/main/manual.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/mvuorre/quarto-preprint/blob/main/manual.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/mvuorre/quarto-preprint/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="manual-jou.pdf"><i class="bi bi-file-pdf"></i>Typst (two-column theme)</a></li><li><a href="manual.pdf"><i class="bi bi-file-pdf"></i>Typst (preprint)</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content quarto-banner-title-block" id="quarto-document-content">
@@ -576,8 +577,8 @@ Table&nbsp;1: Information on various cars.
 
     <script>
 
-      function styleCell_7wvqays9x0o9c70c9mh4(i, j, css_id) {
-          var table = document.getElementById("tinytable_7wvqays9x0o9c70c9mh4");
+      function styleCell_l0bmbd184wr3w1o2vuj0(i, j, css_id) {
+          var table = document.getElementById("tinytable_l0bmbd184wr3w1o2vuj0");
           var cell = table.rows[i]?.cells[j];  // Safe navigation to avoid errors
           if (cell) {
               console.log(`Styling cell at (${i}, ${j}) with class ${css_id}`);
@@ -587,7 +588,7 @@ Table&nbsp;1: Information on various cars.
           }
       }
       function insertSpanRow(i, colspan, content) {
-        var table = document.getElementById('tinytable_7wvqays9x0o9c70c9mh4');
+        var table = document.getElementById('tinytable_l0bmbd184wr3w1o2vuj0');
         var newRow = table.insertRow(i);
         var newCell = newRow.insertCell(0);
         newCell.setAttribute("colspan", colspan);
@@ -595,8 +596,8 @@ Table&nbsp;1: Information on various cars.
         // this may be unsafe, but innerText does not interpret <br>
         newCell.innerHTML = content;
       }
-      function spanCell_7wvqays9x0o9c70c9mh4(i, j, rowspan, colspan) {
-        var table = document.getElementById("tinytable_7wvqays9x0o9c70c9mh4");
+      function spanCell_l0bmbd184wr3w1o2vuj0(i, j, rowspan, colspan) {
+        var table = document.getElementById("tinytable_l0bmbd184wr3w1o2vuj0");
         const targetRow = table.rows[i];
         const targetCell = targetRow.cells[j];
         for (let r = 0; r < rowspan; r++) {
@@ -626,14 +627,14 @@ Table&nbsp;1: Information on various cars.
       window.addEventListener('load', function () {
           var cellsToStyle = [
             // tinytable style arrays after
-          { positions: [ { i: 3, j: 0 }, { i: 3, j: 1 }, { i: 3, j: 2 }, { i: 3, j: 3 }, { i: 3, j: 4 },  ], css_id: 'tinytable_css_habazhbq1m01ag4sakyn',}, 
-          { positions: [ { i: 0, j: 0 }, { i: 0, j: 1 }, { i: 0, j: 2 }, { i: 0, j: 3 }, { i: 0, j: 4 },  ], css_id: 'tinytable_css_fxjkkp4nov6e4fxdvwo6',}, 
+          { positions: [ { i: 3, j: 0 }, { i: 3, j: 1 }, { i: 3, j: 2 }, { i: 3, j: 3 }, { i: 3, j: 4 },  ], css_id: 'tinytable_css_uexg6zoyie885l8hbkio',}, 
+          { positions: [ { i: 0, j: 0 }, { i: 0, j: 1 }, { i: 0, j: 2 }, { i: 0, j: 3 }, { i: 0, j: 4 },  ], css_id: 'tinytable_css_u5bh0tf6ual540j60qtx',}, 
           ];
 
           // Loop over the arrays to style the cells
           cellsToStyle.forEach(function (group) {
               group.positions.forEach(function (cell) {
-                  styleCell_7wvqays9x0o9c70c9mh4(cell.i, cell.j, group.css_id);
+                  styleCell_l0bmbd184wr3w1o2vuj0(cell.i, cell.j, group.css_id);
               });
           });
       });
@@ -641,11 +642,11 @@ Table&nbsp;1: Information on various cars.
 
     <style>
       /* tinytable css entries after */
-      .table td.tinytable_css_habazhbq1m01ag4sakyn, .table th.tinytable_css_habazhbq1m01ag4sakyn { border-bottom: solid #d3d8dc 0.1em; }
-      .table td.tinytable_css_fxjkkp4nov6e4fxdvwo6, .table th.tinytable_css_fxjkkp4nov6e4fxdvwo6 { border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+      .table td.tinytable_css_uexg6zoyie885l8hbkio, .table th.tinytable_css_uexg6zoyie885l8hbkio { border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_u5bh0tf6ual540j60qtx, .table th.tinytable_css_u5bh0tf6ual540j60qtx { border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
     </style>
     <div class="container">
-      <table class="table table-borderless" id="tinytable_7wvqays9x0o9c70c9mh4" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+      <table class="table table-borderless" id="tinytable_l0bmbd184wr3w1o2vuj0" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
         <thead>
         
               <tr>
@@ -691,7 +692,7 @@ Table&nbsp;1: Information on various cars.
 </section>
 <section id="figures-1" class="level3">
 <h3 class="anchored" data-anchor-id="figures-1">Figures</h3>
-<p>Figures are centered by default.</p>
+<p>Figures (e.g. <a href="#fig-1" class="quarto-xref">Figure&nbsp;1</a>) are centered by default.</p>
 <div id="fig-1" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -702,12 +703,11 @@ Figure&nbsp;1: Example figure.
 </figcaption>
 </figure>
 </div>
-<p><a href="#fig-1" class="quarto-xref">Figure&nbsp;1</a> is a figure.</p>
 </section>
 </section>
 <section id="full-width-content" class="level2">
 <h2 class="anchored" data-anchor-id="full-width-content">Full-width content</h2>
-<p>You can also include page-wide figures (or any other content) in documents that have more than one column. See <a href="#fig-2" class="quarto-xref">Figure&nbsp;2</a> for an example. First, include</p>
+<p>You can include page-wide figures (or any other content) in documents that have more than one column. See <a href="#fig-2" class="quarto-xref">Figure&nbsp;2</a> for an example. First, include</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">functions</span><span class="kw">:</span><span class="at"> place</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>in the document’s YAML. Then, wrap your figure in a <a href="https://quarto.org/docs/authoring/markdown-basics.html#sec-divs-and-spans">Quarto div</a> like this:</p>
 <pre><code>::: {.place arguments='auto, scope: "parent", float: true'}
@@ -718,10 +718,10 @@ Everything here will span the whole page.
 <div id="fig-2" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<p><img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aCA9ICI2MDAiIGhlaWdodCA9ICIxMDAiIHhtbG5zID0gImh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94ID0gIjAgMCA2MDAgMTAwIj48cmVjdCB3aWR0aCA9ICI2MDAiIGhlaWdodCA9ICIxMDAiIGZpbGwgPSAiI2RkZCIgLz48dGV4dCB4ID0gIjUwJSIgeSA9ICI1MCUiIGZvbnQtZmFtaWx5ID0gInNhbnMtc2VyaWYiIGZvbnQtc2l6ZSA9ICIxMCIgZmlsbCA9ICIjMDAwIiB0ZXh0LWFuY2hvciA9ICJtaWRkbGUiPjYwMCB4IDEwMDwvdGV4dD48L3N2Zz4=" class="img-fluid figure-img"></p>
+<p><img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aCA9ICI0MDAiIGhlaWdodCA9ICIyMDAiIHhtbG5zID0gImh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94ID0gIjAgMCA0MDAgMjAwIj48cmVjdCB3aWR0aCA9ICI0MDAiIGhlaWdodCA9ICIyMDAiIGZpbGwgPSAiI2RkZCIgLz48dGV4dCB4ID0gIjUwJSIgeSA9ICI1MCUiIGZvbnQtZmFtaWx5ID0gInNhbnMtc2VyaWYiIGZvbnQtc2l6ZSA9ICIyMCIgZmlsbCA9ICIjMDAwIiB0ZXh0LWFuY2hvciA9ICJtaWRkbGUiPjQwMCB4IDIwMDwvdGV4dD48L3N2Zz4=" class="img-fluid figure-img"></p>
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;2
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: A full-width figure.
 </figcaption>
 </figure>
 </div>
@@ -757,37 +757,16 @@ R Core Team. (2025). <em>R: <span>A Language</span> and <span>Environment</span>
 
 
 
+<div id="quarto-appendix" class="default"><section id="appendix-a-appendices" class="level1 appendix"><h2 class="anchored quarto-appendix-heading">Appendix A: Appendices</h2><div class="quarto-appendix-contents">
 
-<div id="quarto-appendix" class="default"><section id="appendix-a-tips-and-tricks" class="level1 appendix"><h2 class="anchored quarto-appendix-heading">Appendix A: Tips and tricks</h2><div class="quarto-appendix-contents">
+<p>To include an appendix (<a href="#tip-appendix" class="quarto-xref">Tip&nbsp;2</a>), include the following <a href="https://quarto.org/docs/output-formats/typst.html#raw-typst">raw Typst</a> block in your Quarto document, followed by your appendix content:</p>
+<pre><code>```{=typst}
+#show: appendix.with()
+```
 
-<p>To include and appendix (<a href="#tip-appendix" class="quarto-xref">Tip&nbsp;2</a>), place it at the end of the document and wrap all its content in an <code>.appendix</code> Quarto div:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>::: {.appendix}</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu"># Appendix: Computational details</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>Here we describe the computational details of our approach...</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div id="tip-appendix" class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Tip&nbsp;2
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Appendices are an experimental feature. They are provided through a custom Typst function using the <a href="https://github.com/christopherkenny/typst-function/"><code>typst-function</code></a> Quarto extension, and their implementation and functionality may change as Quarto’s Typst integration matures.</p>
-</div>
-</div>
-<section id="citation-management" class="level2 unlisted">
-<h2 class="unlisted anchored" data-anchor-id="citation-management">Citation management</h2>
-<p>Quarto documents require citations in a separate .bib file. The <a href="https://vuorre.com/posts/zotero-positron-vscode/">vscode-zotero</a> VS Code plugin helps with inserting in-text citations and managing the .bib file. The plugin works in all VS Code based editors, including <a href="https://github.com/posit-dev/positron">Positron</a>.</p>
-</section>
-<section id="fonts" class="level2 unlisted">
-<h2 class="unlisted anchored" data-anchor-id="fonts">Fonts</h2>
-<p>Run <code>quarto typst fonts</code> in your terminal (not R console) to list all available fonts.</p>
-</section>
-<section id="example-appendix-content" class="level2 unlisted">
-<h2 class="unlisted anchored" data-anchor-id="example-appendix-content">Example appendix content</h2>
+# Appendix A: Example stuff {.appendix}
+
+Text goes here.</code></pre>
 <p>Appendices have appropriate float references like <a href="#fig-3" class="quarto-xref">Figure&nbsp;3</a>, <a href="#tbl-3" class="quarto-xref">Table&nbsp;2</a>, <a href="#lst-app" class="quarto-xref">Listing&nbsp;2</a>.</p>
 <div id="fig-3" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -826,7 +805,35 @@ Listing&nbsp;2: Example R code.
 <p><span id="eq-app"><span class="math display">\[
 f(x \mid \mu, \sigma^2) = \frac{1}{\sqrt{2\pi \sigma^2}} \exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)
 \tag{2}\]</span></span></p>
-</section>
+<div id="tip-appendix" class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip&nbsp;2
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Appendices are an experimental feature. They are provided through a custom Typst function, and their implementation and functionality may change as Quarto’s Typst integration matures.</p>
+<p>The <code>appendix()</code> function allows changing counter prefixes, numbering, and the number of columns:</p>
+<pre><code>```{=typst}
+#show: appendix.with(prefix: "B", columns: 2, numbering: "A.a.")
+```</code></pre>
+</div>
+</div>
+</div></section><section id="appendix-b-tips-and-tricks" class="level1 appendix"><h2 class="anchored quarto-appendix-heading">Appendix B: Tips and tricks</h2><div class="quarto-appendix-contents">
+
+
+
+</div></section><section id="citation-management" class="level2 unlisted appendix"><h2 class="anchored quarto-appendix-heading">Citation management</h2><div class="quarto-appendix-contents">
+
+<p>Quarto documents require citations in a separate .bib file. The <a href="https://vuorre.com/posts/zotero-positron-vscode/">vscode-zotero</a> VS Code plugin helps with inserting in-text citations and managing the .bib file. The plugin works in all VS Code based editors, including <a href="https://github.com/posit-dev/positron">Positron</a>.</p>
+</div></section><section id="fonts" class="level2 unlisted appendix"><h2 class="anchored quarto-appendix-heading">Fonts</h2><div class="quarto-appendix-contents">
+
+<p>Run <code>quarto typst fonts</code> in your terminal (not R console) to list all available fonts.</p>
+
+
 </div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
