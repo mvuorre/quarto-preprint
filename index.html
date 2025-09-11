@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.32">
+<meta name="generator" content="quarto-1.8.24">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Matti Vuorre">
-<meta name="dcterms.date" content="2025-07-02">
+<meta name="dcterms.date" content="2025-09-11">
 
 <title>quarto-preprint: A Quarto extension for creating PDF documents with Typst – Quarto preprint</title>
 <style>
@@ -88,14 +88,15 @@ div.csl-indent {
 <meta name="quarto:offset" content="./">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-a612748d1b9edfb70068d8f8d296748d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-a25750924116104412f7a457768fb952.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -138,7 +139,7 @@ const typesetMath = (el) => {
     var macros = [];
     for (var i = 0; i < mathElements.length; i++) {
       var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
         window.katex.render(texText.data, mathElements[i], {
           displayMode: mathElements[i].classList.contains('display'),
           throwOnError: false,
@@ -194,7 +195,7 @@ window.Quarto = {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">July 2, 2025</p>
+        <p class="date">September 11, 2025</p>
       </div>
     </div>
     
@@ -216,7 +217,8 @@ window.Quarto = {
     <h2 id="toc-title">Contents</h2>
    
   <ul>
-  <li><a href="#install" id="toc-install" class="nav-link active" data-scroll-target="#install">Install</a></li>
+  <li><a href="#requirements" id="toc-requirements" class="nav-link active" data-scroll-target="#requirements">Requirements</a></li>
+  <li><a href="#install" id="toc-install" class="nav-link" data-scroll-target="#install">Install</a></li>
   <li><a href="#use-configuration" id="toc-use-configuration" class="nav-link" data-scroll-target="#use-configuration">Use &amp; configuration</a>
   <ul class="collapse">
   <li><a href="#universal-quarto-options" id="toc-universal-quarto-options" class="nav-link" data-scroll-target="#universal-quarto-options">Universal Quarto options</a>
@@ -269,19 +271,27 @@ window.Quarto = {
 <li>Vuorre, M., Johannes, N., &amp; Przybylski, A. (2025). Three objections to a novel paradigm in social media effects research. OSF. <a href="https://doi.org/10.31234/osf.io/dpuya_v2" class="uri">https://doi.org/10.31234/osf.io/dpuya_v2</a></li>
 <li>Vuorre, M., Kay, M., &amp; Bolger, N. (2024). Communicating causal effect heterogeneity. OSF. <a href="https://doi.org/10.31234/osf.io/mwg4f" class="uri">https://doi.org/10.31234/osf.io/mwg4f</a></li>
 </ul>
+<section id="requirements" class="level1">
+<h1>Requirements</h1>
+<ul>
+<li>Computer</li>
+<li><a href="https://quarto.org/">Quarto</a> 1.7.29 or newer</li>
+<li><a href="https://fontawesome.com/download">Font Awesome</a> 7.0 or newer (for ORCID logo)</li>
+</ul>
+</section>
 <section id="install" class="level1">
 <h1>Install</h1>
 <p>You can use this Quarto extension in two ways. First, you can add it to an existing project with</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode zsh code-with-copy"><code class="sourceCode zsh"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> add mvuorre/quarto-preprint</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode zsh code-with-copy"><code class="sourceCode zsh"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> add mvuorre/quarto-preprint</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>The <code>quarto add</code> command, which you use on the command line and not the R console, creates a <code>_extensions/preprint/</code> directory in your project. The <em>preprint-typst</em> format is then ready to use in any Quarto document in that project.</p>
 <p>Second, you can start a new <a href="https://quarto.org/docs/projects/quarto-projects.html">Quarto project</a> that uses <em>quarto-preprint</em> with <code>quarto-use</code>:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> use template mvuorre/quarto-preprint</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> use template mvuorre/quarto-preprint</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>You will then answer a series of questions (project name etc.) and end up with a new project directory with a {project-name}.qmd file that provides a starter Quarto document template that uses the <em>preprint-typst</em> format. It also creates a boilerplate <a href="https://quarto.org/docs/projects/quarto-projects.html#shared-metadata">_quarto.yml</a> file where you can specify the Quarto project’s metadata, and an example bibliography.bib file.</p>
 </section>
 <section id="use-configuration" class="level1">
 <h1>Use &amp; configuration</h1>
 <p>The output of Quarto documents is configured through YAML front matter <a href="https://quarto.org/docs/authoring/front-matter.html">metadata</a>. To specify an <a href="https://quarto.org/docs/output-formats/all-formats.html">output format</a> for your document, include (for example) <code>format: preprint-typst</code> in the front matter. Here is a minimal example YAML front matter that specifies a title, a table of contents, and two output formats:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> A document</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Top-level options apply to all formats,</span></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># such as this table of contents</span></span>
@@ -293,7 +303,7 @@ window.Quarto = {
 <span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">html</span><span class="kw">:</span></span>
 <span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">title-block-banner</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
 <span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="at">Document content goes here...</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="at">Document content goes here...</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Note that many front matter variables can be specified for all output formats (such as <code>toc</code> above) or for only some of them (like <code>wordcount</code> above). To learn more about Quarto’s front matter options, see Quarto’s <a href="https://quarto.org/docs/authoring/front-matter.html">guide</a> to writing scholarly documents, and Quarto’s Typst format <a href="https://quarto.org/docs/output-formats/typst.html">documentation</a>.</p>
 <p><em>preprint-typst</em> aims to include all standard Quarto front matter options for scholarly writing. In addition to standard Quarto YAML variables, <em>preprint-typst</em> supports additional fields and Typst variables, such as author notes and paragraph formatting. Below, we list available YAML configuration options roughly organized by their specificity to different Quarto output formats.</p>
 <section id="universal-quarto-options" class="level2">
@@ -369,10 +379,10 @@ Note&nbsp;1: Quarto, Typst, and bibliography processing
 </div>
 <div class="callout-body-container callout-body">
 <p>Typst has its <a href="https://quarto.org/docs/authoring/citations.html#typst">own citation processing system</a>, but by default <em>preprint-typst</em> turns it off by using <code>citeproc: true</code> to allow better bibliography customization and use of Quarto’s <a href="https://quarto.org/docs/authoring/citations.html#bibliography-generation"><code>#refs</code> div</a>. In your document, include</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># References</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># References</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>::: {#refs}</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>:::</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>to display the bibliography section anywhere in the document. Read more at Quarto’s <a href="https://quarto.org/docs/authoring/citations.html#typst">citations documentation</a>.</p>
 <ul>
 <li>When citeproc is off (<code>citeproc: false</code>)
@@ -550,8 +560,8 @@ Note&nbsp;1: Quarto, Typst, and bibliography processing
 Listing&nbsp;1: R code example.
 </figcaption>
 <div aria-describedby="lst-r-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tinytable)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tt</span>(mtcars[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tinytable)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tt</span>(mtcars[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </figure>
 </div>
@@ -566,8 +576,8 @@ Table&nbsp;1: Information on various cars.
 
     <script>
 
-      function styleCell_7cr0vz8otpur69ozhgse(i, j, css_id) {
-          var table = document.getElementById("tinytable_7cr0vz8otpur69ozhgse");
+      function styleCell_7wvqays9x0o9c70c9mh4(i, j, css_id) {
+          var table = document.getElementById("tinytable_7wvqays9x0o9c70c9mh4");
           var cell = table.rows[i]?.cells[j];  // Safe navigation to avoid errors
           if (cell) {
               console.log(`Styling cell at (${i}, ${j}) with class ${css_id}`);
@@ -577,7 +587,7 @@ Table&nbsp;1: Information on various cars.
           }
       }
       function insertSpanRow(i, colspan, content) {
-        var table = document.getElementById('tinytable_7cr0vz8otpur69ozhgse');
+        var table = document.getElementById('tinytable_7wvqays9x0o9c70c9mh4');
         var newRow = table.insertRow(i);
         var newCell = newRow.insertCell(0);
         newCell.setAttribute("colspan", colspan);
@@ -585,8 +595,8 @@ Table&nbsp;1: Information on various cars.
         // this may be unsafe, but innerText does not interpret <br>
         newCell.innerHTML = content;
       }
-      function spanCell_7cr0vz8otpur69ozhgse(i, j, rowspan, colspan) {
-        var table = document.getElementById("tinytable_7cr0vz8otpur69ozhgse");
+      function spanCell_7wvqays9x0o9c70c9mh4(i, j, rowspan, colspan) {
+        var table = document.getElementById("tinytable_7wvqays9x0o9c70c9mh4");
         const targetRow = table.rows[i];
         const targetCell = targetRow.cells[j];
         for (let r = 0; r < rowspan; r++) {
@@ -616,14 +626,14 @@ Table&nbsp;1: Information on various cars.
       window.addEventListener('load', function () {
           var cellsToStyle = [
             // tinytable style arrays after
-          { positions: [ { i: 3, j: 0 }, { i: 3, j: 1 }, { i: 3, j: 2 }, { i: 3, j: 3 }, { i: 3, j: 4 },  ], css_id: 'tinytable_css_x1r0zf0cofttdgtmi6ly',}, 
-          { positions: [ { i: 0, j: 0 }, { i: 0, j: 1 }, { i: 0, j: 2 }, { i: 0, j: 3 }, { i: 0, j: 4 },  ], css_id: 'tinytable_css_xfywx5tdb5hk1dohva9t',}, 
+          { positions: [ { i: 3, j: 0 }, { i: 3, j: 1 }, { i: 3, j: 2 }, { i: 3, j: 3 }, { i: 3, j: 4 },  ], css_id: 'tinytable_css_habazhbq1m01ag4sakyn',}, 
+          { positions: [ { i: 0, j: 0 }, { i: 0, j: 1 }, { i: 0, j: 2 }, { i: 0, j: 3 }, { i: 0, j: 4 },  ], css_id: 'tinytable_css_fxjkkp4nov6e4fxdvwo6',}, 
           ];
 
           // Loop over the arrays to style the cells
           cellsToStyle.forEach(function (group) {
               group.positions.forEach(function (cell) {
-                  styleCell_7cr0vz8otpur69ozhgse(cell.i, cell.j, group.css_id);
+                  styleCell_7wvqays9x0o9c70c9mh4(cell.i, cell.j, group.css_id);
               });
           });
       });
@@ -631,11 +641,11 @@ Table&nbsp;1: Information on various cars.
 
     <style>
       /* tinytable css entries after */
-      .table td.tinytable_css_x1r0zf0cofttdgtmi6ly, .table th.tinytable_css_x1r0zf0cofttdgtmi6ly { border-bottom: solid #d3d8dc 0.1em; }
-      .table td.tinytable_css_xfywx5tdb5hk1dohva9t, .table th.tinytable_css_xfywx5tdb5hk1dohva9t { border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+      .table td.tinytable_css_habazhbq1m01ag4sakyn, .table th.tinytable_css_habazhbq1m01ag4sakyn { border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_fxjkkp4nov6e4fxdvwo6, .table th.tinytable_css_fxjkkp4nov6e4fxdvwo6 { border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
     </style>
     <div class="container">
-      <table class="table table-borderless" id="tinytable_7cr0vz8otpur69ozhgse" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+      <table class="table table-borderless" id="tinytable_7wvqays9x0o9c70c9mh4" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
         <thead>
         
               <tr>
@@ -698,7 +708,7 @@ Figure&nbsp;1: Example figure.
 <section id="full-width-content" class="level2">
 <h2 class="anchored" data-anchor-id="full-width-content">Full-width content</h2>
 <p>You can also include page-wide figures (or any other content) in documents that have more than one column. See <a href="#fig-2" class="quarto-xref">Figure&nbsp;2</a> for an example. First, include</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">functions</span><span class="kw">:</span><span class="at"> place</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">functions</span><span class="kw">:</span><span class="at"> place</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>in the document’s YAML. Then, wrap your figure in a <a href="https://quarto.org/docs/authoring/markdown-basics.html#sec-divs-and-spans">Quarto div</a> like this:</p>
 <pre><code>::: {.place arguments='auto, scope: "parent", float: true'}
 Everything here will span the whole page.
@@ -751,10 +761,10 @@ R Core Team. (2025). <em>R: <span>A Language</span> and <span>Environment</span>
 <div id="quarto-appendix" class="default"><section id="appendix-a-tips-and-tricks" class="level1 appendix"><h2 class="anchored quarto-appendix-heading">Appendix A: Tips and tricks</h2><div class="quarto-appendix-contents">
 
 <p>To include and appendix (<a href="#tip-appendix" class="quarto-xref">Tip&nbsp;2</a>), place it at the end of the document and wrap all its content in an <code>.appendix</code> Quarto div:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>::: {.appendix}</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>::: {.appendix}</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu"># Appendix: Computational details</span></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>Here we describe the computational details of our approach...</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>:::</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div id="tip-appendix" class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -806,8 +816,8 @@ Table&nbsp;2: Another gray rectangle.
 Listing&nbsp;2: Example R code.
 </figcaption>
 <div aria-describedby="lst-app-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span>)</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 1.414214</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 1.414214</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </figure>
 </div>
@@ -869,13 +879,14 @@ f(x \mid \mu, \sigma^2) = \frac{1}{\sqrt{2\pi \sigma^2}} \exp\left(-\frac{(x-\mu
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy
