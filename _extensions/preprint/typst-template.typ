@@ -248,7 +248,7 @@
     }
 
     /* Abstract and metadata section */
-    block(inset: (top: 1em, bottom: 0em, left: 2.4em, right: 2.4em))[
+    block(inset: (top: 1em, bottom: if toc { 0em } else { 2em }, left: 2.4em, right: 2.4em))[
       #set text(size: 0.92em)
       #set par(first-line-indent: 0em)
       #if abstract != none {
@@ -258,7 +258,7 @@
         block()[#v(0.4em)#text(style: "italic")[Keywords:] #categories]
       }
       #if wordcount == true {
-        block(inset: (bottom: if toc { 0em } else { 2em }))[#text(style: "italic")[Words:] #total-words]
+        block()[#text(style: "italic")[Words:] #total-words]
       }
     ]
 
