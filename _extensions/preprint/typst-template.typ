@@ -1,7 +1,7 @@
 // Quarto Typst template
 
 // Imports
-#import "@preview/fontawesome:0.6.0": *
+#import "@preview/fontawesome:0.5.0": *
 #import "@preview/wordometer:0.1.5": total-words, word-count
 
 // Appendix function. To use, include in .qmd before appendix header
