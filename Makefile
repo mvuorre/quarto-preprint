@@ -37,4 +37,4 @@ publish: $(TARGET) _extensions/preprint/typst-show.typ _extensions/preprint/typs
 
 # Clean all intermediate files
 clean:
-	rm -rf *.pdf *.typ *.png *_cache/ *_files/ tests/ .quarto
+	rm -rf *.pdf *.typ *.png *_cache/ *_files/ tests/ docs/ .quarto
