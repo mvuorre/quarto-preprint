@@ -41,6 +41,7 @@ release: .release.timestamp
 
 # Publish docs/ using Quarto
 publish: clean
+	quarto render $(TARGET) --to preprint-typst --output-dir . --output manual-jou.pdf -M wordcount:true -M theme-jou:true
 	quarto publish gh-pages --no-prompt --no-browser
 
 # Clean all intermediate files

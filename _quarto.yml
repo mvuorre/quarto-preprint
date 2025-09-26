@@ -1,6 +1,10 @@
 project:
   title: "Quarto preprint"
   type: website
+  render:
+    - manual.qmd
+  resources:
+    - manual-jou.pdf
   output-dir: docs
 
 website:
