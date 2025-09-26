@@ -5,7 +5,6 @@ project:
     - manual.qmd
   resources:
     - manual-jou.pdf
-  output-dir: docs
 
 website:
   repo-url: https://github.com/mvuorre/quarto-preprint

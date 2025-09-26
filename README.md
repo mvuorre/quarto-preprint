@@ -1,6 +1,5 @@
 # *quarto-preprint*: A Quarto extension for creating PDF documents with Typst
 Matti Vuorre
-2025-09-10
 
 - [Requirements](#requirements)
 - [Install](#install)

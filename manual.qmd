@@ -17,7 +17,6 @@ affiliations:
 abstract: |
   *quarto-preprint* is a Quarto extension for creating PDF documents from markdown content with Typst. It provides one Quarto output format, *preprint-typst*, that aims to Just Work (Typst doesn't require LaTeX installations and ships with Quarto), be fast (Typst creates PDF files very quickly), and be 100% Quarto standards compliant (write documents without worrying about formatting & metadata, switch to other Quarto formatd without changing anything but the output format). *preprint-typst* builds on the standard Quarto Typst template and enables separated author-affiliation formatting, additional (Quarto, Typst, and custom) metadata variables, opinionated typesetting, improved two-column layouts (including full-width floats), appendices, and more. Its intended use cases are worry-free but flexible typesetting of Quarto documents to PDF, especially when users might want to easily switch to other (e.g. journal-specific) formats.
 categories: [Quarto, Typst, extension, typesetting, preprint]
-date: "`r Sys.Date()`"
 bibliography: bibliography.bib
 csl: https://www.zotero.org/styles/apa
 authornote: "Created with Quarto `r quarto::quarto_version()` and *preprint-typst* {{< var extension-version >}} on `r Sys.Date()`."
@@ -25,9 +24,11 @@ toc: true
 toc-title: Contents
 format:
   preprint-typst:
+    date: "`r Sys.Date()`"
     wordcount: true
     toc-depth: 1
   html:
+    date: "`r Sys.Date()`"
     theme: zephyr
     output-file: "index.html"
     title-block-banner: true
