@@ -1,3 +1,5 @@
+#import "_extensions/preprint/lib/preprint.typ": preprint, appendix
+
 #show: doc => preprint(
 // Default Quarto template variables
 $if(title)$
@@ -118,17 +120,23 @@ $endif$
 $if(bibliography-title)$
   bibliography-title: [$bibliography-title$],
 $endif$
-// Theme-based settings - simplified conditional logic
-$if(theme-jou)$
-  // Journal theme: compact 2-column layout
-  margin: $if(margin)$($for(margin/pairs)$$margin.key$: $margin.value$,$endfor$)$else$(x: 2.2cm, y: 2.6cm)$endif$,
-  fontsize: $if(fontsize)$$fontsize$$else$10pt$endif$,
-  cols: $if(columns)$$columns$$else$2$endif$,
-$else$
-  // Default theme: single-column layout
-  $if(margin)$margin: ($for(margin/pairs)$$margin.key$: $margin.value$,$endfor$),$endif$
-  $if(fontsize)$fontsize: $fontsize$,$elseif(brand.typography.base.size)$fontsize: $brand.typography.base.size$,$endif$
-  cols: $if(columns)$$columns$$else$1$endif$,
+// Theme system (unified for standalone and Quarto)
+$if(theme)$
+  theme: "$theme$",
+$elseif(theme-jou)$
+  theme: "jou",
+$endif$
+// Explicit overrides (optional)
+$if(margin)$
+  margin: ($for(margin/pairs)$$margin.key$: $margin.value$,$endfor$),
+$endif$
+$if(fontsize)$
+  fontsize: $fontsize$,
+$elseif(brand.typography.base.size)$
+  fontsize: $brand.typography.base.size$,
+$endif$
+$if(columns)$
+  cols: $columns$,
 $endif$
   doc,
 )
