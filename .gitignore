@@ -15,5 +15,6 @@ site_libs/
 .release.timestamp
 _variables.yml
 .claude/
+REFACTOR.md
 
 **/*.quarto_ipynb
