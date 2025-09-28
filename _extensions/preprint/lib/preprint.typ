@@ -9,25 +9,25 @@
 // #show: appendix.with(prefix: "A")
 #let appendix(prefix: "A", columns: 1, numbering: none, doc) = {
   pagebreak()
-  set heading(numbering: numbering)
-  // Reset counters
-  // TODO: Programmatically reset all (callout) counters
-  // TODO: Reset equation and other counters
-  counter(heading).update(0)
-  counter(figure.where(kind: "quarto-float-fig")).update(0)
-  counter(figure.where(kind: "quarto-float-tbl")).update(0)
-  counter(figure.where(kind: "quarto-float-lst")).update(0)
-  counter(figure.where(kind: "quarto-callout-Note")).update(0)
-  counter(figure.where(kind: "quarto-callout-Warning")).update(0)
-  counter(figure.where(kind: "quarto-callout-Important")).update(0)
-  counter(figure.where(kind: "quarto-callout-Tip")).update(0)
-  counter(figure.where(kind: "quarto-callout-Caution")).update(0)
+  set page(columns: columns)
 
-  // Figure & Table Numbering
+  // Numberings
+  set heading(numbering: (..nums) => {
+    let levels = nums.pos()
+    [#prefix#levels.map(str).join(".").]
+  })
   set figure(numbering: it => {
     [#prefix#it]
   })
-  set page(columns: columns)
+  set math.equation(numbering: it => {
+    [(#prefix#it)]
+  })
+
+  // Reset counters
+  counter(heading).update(0)
+  counter(figure.where(kind: image)).update(0)
+  counter(figure.where(kind: table)).update(0)
+  counter(math.equation).update(0)
 
   doc
 }
@@ -66,6 +66,7 @@
   sectionnumbering: none,
   pagenumbering: "1",
   linenumbering: none,
+  mathnumbering: "(1)",
   toc: false,
   toc_title: none,
   toc_depth: none,
@@ -113,6 +114,9 @@
     set block(spacing: spacing * 1.2, inset: (left: first-line-indent, right: first-line-indent))
     it
   }
+
+  // Number equations
+  set math.equation(numbering: mathnumbering)
 
   /* Improved figure display */
   // Add space above and below

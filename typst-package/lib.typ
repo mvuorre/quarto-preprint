@@ -8,26 +8,37 @@
 // Appendix function. To use, include in .typ before appendix header
 // #show: appendix.with(prefix: "A")
 #let appendix(prefix: "A", columns: 1, numbering: none, doc) = {
-  pagebreak()
-  set heading(numbering: numbering)
-  // Reset counters
-  // TODO: Programmatically reset all (callout) counters
-  // TODO: Reset equation and other counters
-  counter(heading).update(0)
-  counter(figure.where(kind: "quarto-float-fig")).update(0)
-  counter(figure.where(kind: "quarto-float-tbl")).update(0)
-  counter(figure.where(kind: "quarto-float-lst")).update(0)
-  counter(figure.where(kind: "quarto-callout-Note")).update(0)
-  counter(figure.where(kind: "quarto-callout-Warning")).update(0)
-  counter(figure.where(kind: "quarto-callout-Important")).update(0)
-  counter(figure.where(kind: "quarto-callout-Tip")).update(0)
-  counter(figure.where(kind: "quarto-callout-Caution")).update(0)
-
-  // Figure & Table Numbering
-  set figure(numbering: it => {
-    [#prefix#it]
-  })
   set page(columns: columns)
+
+  // Add pagebreak before each level 1 heading in appendices and reset counters
+  show heading.where(level: 1): it => {
+    pagebreak(weak: true)
+    counter(figure.where(kind: image)).update(0)
+    counter(figure.where(kind: table)).update(0)
+    counter(math.equation).update(0)
+    it
+  }
+
+  // Numberings
+  set heading(supplement: [Appendix], numbering: (..nums) => {
+    let levels = nums.pos()
+    [#prefix#levels.map(str).join(".")]
+  })
+  // Hide level 2+ headings from TOC in appendices
+  set heading(outlined: false)
+  show heading.where(level: 1): set heading(outlined: true)
+
+  set figure(numbering: it => {
+    let h = context counter(heading).get().first()
+    [#prefix#h.#it]
+  })
+  set math.equation(numbering: it => {
+    let h = context counter(heading).get().first()
+    [(#prefix#h.#it)]
+  })
+
+  // Reset heading counter
+  counter(heading).update(0)
 
   doc
 }
@@ -66,6 +77,7 @@
   sectionnumbering: none,
   pagenumbering: "1",
   linenumbering: none,
+  mathnumbering: "(1)",
   toc: false,
   toc_title: none,
   toc_depth: none,
@@ -113,6 +125,9 @@
     set block(spacing: spacing * 1.2, inset: (left: first-line-indent, right: first-line-indent))
     it
   }
+
+  // Number equations
+  set math.equation(numbering: mathnumbering)
 
   /* Improved figure display */
   // Add space above and below
