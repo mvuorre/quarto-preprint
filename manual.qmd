@@ -311,7 +311,7 @@ Send your comments, bug reports, and pull requests to <https://github.com/mvuorr
 #show: appendix.with()
 ```
 
-# Appendix A: Appendices {.appendix}
+# Appendices {.appendix}
 
 To include an appendix (@tip-appendix), include the following [raw Typst](https://quarto.org/docs/output-formats/typst.html#raw-typst) block in your Quarto document, followed by your appendix content:
 
@@ -320,7 +320,7 @@ To include an appendix (@tip-appendix), include the following [raw Typst](https:
 #show: appendix.with()
 ```
 
-# Appendix A: Example stuff {.appendix}
+# Example stuff {.appendix}
 
 Text goes here.
 ````
@@ -352,21 +352,11 @@ $$ {#eq-app}
 ::: {#tip-appendix .callout-tip}
 Appendices are an experimental feature. They are provided through a custom Typst function, and their implementation and functionality may change as Quarto's Typst integration matures.
 
-The `appendix()` function allows changing counter prefixes, numbering, and the number of columns:
-
-````
-```{=typst}
-#show: appendix.with(prefix: "B", columns: 2, numbering: "A.a.")
-```
-````
-
 :::
 
-```{=typst}
-#show: appendix.with(prefix: "B")
-```
+# Tips and tricks {.appendix}
 
-# Appendix B: Tips and tricks {.appendix}
+If there are multiple appendices, do not include more than one call to `appendix.with()`. Appendices are automatically numbered with "A.<appendix-number>".
 
 ## Citation management {.unlisted .appendix}
 
