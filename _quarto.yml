@@ -10,6 +10,9 @@ project:
     - example-jou.pdf
   output-dir: docs
 
+execute:
+  freeze: auto
+
 website:
   repo-url: https://github.com/mvuorre/quarto-preprint
   repo-actions: [edit, source, issue]

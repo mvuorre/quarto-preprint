@@ -3,6 +3,7 @@
 *_cache/
 *_files/
 *_libs/
+_freeze/
 example.qmd
 index.qmd
 Makefile

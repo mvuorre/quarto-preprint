@@ -5,11 +5,9 @@ EXAMPLE := example.qmd
 # Tests
 test-use:
 	mkdir -p tests/use && cd tests/use && quarto use template ../../. --no-prompt
-	ls tests/use
 
 test-add:
 	mkdir -p tests/add && cd tests && quarto create project default add --no-prompt --no-open && cd add && quarto add ../../. --no-prompt
-	ls tests/add
 
 sync-typst:
 	mkdir -p _extensions/preprint/typst/
