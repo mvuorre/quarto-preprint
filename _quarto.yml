@@ -3,12 +3,35 @@ project:
   type: website
   render:
     - index.qmd
-    - example.qmd
+    - example-default.qmd
+    - example-jou.qmd
   resources:
     - example.html
     - example.pdf
     - example-jou.pdf
   output-dir: docs
+
+format:
+  html:
+    theme: zephyr
+    title-block-banner: true
+    title-block-style: default
+    language:
+      other-links-title: Links
+    format-links: false
+    other-links:
+      - text: Documentation
+        href: index.html
+        icon: filetype-html
+      - text: Example PDF
+        href: example.pdf
+        icon: filetype-pdf
+      - text: Example Journal theme PDF
+        href: example-jou.pdf
+        icon: filetype-pdf
+      - text: Example HTML
+        href: example.html
+        icon: filetype-html
 
 execute:
   freeze: auto

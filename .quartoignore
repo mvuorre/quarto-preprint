@@ -4,7 +4,7 @@
 *_files/
 *_libs/
 _freeze/
-example.qmd
+example*
 index.qmd
 Makefile
 docs/
@@ -14,7 +14,5 @@ docs/
 tests/
 NEWS.md
 README.md
-.nojekyll
-_variables.yml
 # Standalone Typst package
 typst/

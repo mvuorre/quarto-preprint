@@ -1,0 +1,38 @@
+---
+title: "Example `preprint-typst` Document: Academic Writing with Quarto and Typst"
+running-head: "Quarto-Typst Example"
+author:
+  - name: Matti Vuorre
+    email: mjvuorre@uvt.nl
+    orcid: 0000-0001-5052-066X
+    url: https://www.tilburguniversity.edu/staff/m-j-vuorre
+    corresponding: true
+    equal-contributor: true
+    affiliation:
+      - ref: 1
+  - name: Example Author
+    email: author@example.edu
+    orcid: 0000-0002-0000-0000
+    equal-contributor: true
+    affiliation:
+      - ref: 2
+affiliations:
+  - id: 1
+    name: Tilburg University
+    department: Department of Social Psychology
+  - id: 2
+    name: Example University
+    department: Department of Examples
+abstract: |
+  {{< lipsum 1 >}}
+categories: [Quarto, Typst, example, academic writing]
+bibliography: bibliography.bib
+csl: https://www.zotero.org/styles/apa
+authornote: |
+  Created with Quarto `r quarto::quarto_version()` and *preprint-typst* `r yaml::read_yaml('_extensions/preprint/_extension.yml')$version` on `r Sys.Date()`.
+toc: true
+toc-title: Contents
+date: "`r Sys.Date()`"
+knitr:
+  opts_chunk:
+    echo: false
