@@ -1,11 +1,11 @@
 project:
   title: "Quarto preprint"
-  type: website
+  type: default
   render:
     - index.qmd
     - example.qmd
   resources:
-    - index.html
+    - example.html
     - example.pdf
     - example-jou.pdf
   output-dir: docs

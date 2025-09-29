@@ -31,7 +31,7 @@ csl: https://www.zotero.org/styles/apa
 authornote: "Created with Quarto `r quarto::quarto_version()` and *preprint-typst* {{< var extension-version >}} on `r Sys.Date()`."
 toc: true
 toc-title: Contents
-monofont: "Monaspace Krypton"
+monofont: "Monaspace Neon"
 date: "`r Sys.Date()`"
 knitr:
   opts_chunk:
@@ -40,10 +40,9 @@ format:
   preprint-typst:
     wordcount: true
     toc-depth: 1
-    keep-typ: true
   html:
-    theme: zephyr
     output-file: "example.html"
+    theme: zephyr
     title-block-banner: true
     title-block-style: default
     language:
