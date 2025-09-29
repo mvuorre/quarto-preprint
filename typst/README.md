@@ -5,6 +5,7 @@ A standalone Typst template for academic preprints and papers.
 ## Usage
 
 ```typst
+// Note not yet released in the preview package repo; copy locally and modify
 #import "@preview/preprint:1.1.0": preprint, appendix
 
 #show: preprint.with(
@@ -42,4 +43,4 @@ Your content here.
 
 ## Examples
 
-See the `examples/` directory for complete usage examples.
+See `example.typ`.

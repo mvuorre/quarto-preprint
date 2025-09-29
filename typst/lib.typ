@@ -70,6 +70,7 @@
   lang: "en",
   region: "US",
   font: ("Libertinus Serif", "Times", "Times New Roman", "Arial"),
+  monofont: "Dejavu Sans Mono",
   fontsize: 11pt,
   title-size: 1.5em,
   subtitle-size: 1.25em,
@@ -175,6 +176,8 @@
     font: font,
     size: fontsize,
   )
+  // Code font
+  show raw: set text(font: monofont)
 
   // Headers
   set heading(numbering: sectionnumbering)
@@ -309,9 +312,3 @@
   /* Document content */
   doc
 }
-
-// Remove gridlines from tables
-#set table(
-  inset: 6pt,
-  stroke: none,
-)

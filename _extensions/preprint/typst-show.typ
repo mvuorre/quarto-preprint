@@ -1,5 +1,3 @@
-#import "_extensions/preprint/lib/preprint.typ": preprint, appendix
-
 #show: doc => preprint(
 // Default Quarto template variables
 $if(title)$
@@ -54,6 +52,9 @@ $if(mainfont)$
   font: ("$mainfont$",),
 $elseif(brand.typography.base.family)$
   font: $brand.typography.base.family$,
+$endif$
+$if(monofont)$
+  monofont: "$monofont$",
 $endif$
 $if(number-sections)$
   sectionnumbering: "1.1.1.1.",

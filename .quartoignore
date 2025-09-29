@@ -2,7 +2,9 @@
 *.typ
 *_cache/
 *_files/
-manual.qmd
+*_libs/
+example.qmd
+index.qmd
 Makefile
 docs/
 *.png
@@ -11,6 +13,7 @@ docs/
 tests/
 NEWS.md
 README.md
-.release.timestamp
 .nojekyll
 _variables.yml
+# Standalone Typst package
+typst/

@@ -8,26 +8,37 @@
 // Appendix function. To use, include in .typ before appendix header
 // #show: appendix.with(prefix: "A")
 #let appendix(prefix: "A", columns: 1, numbering: none, doc) = {
-  pagebreak()
   set page(columns: columns)
 
+  // Add pagebreak before each level 1 heading in appendices and reset counters
+  show heading.where(level: 1): it => {
+    pagebreak(weak: true)
+    counter(figure.where(kind: image)).update(0)
+    counter(figure.where(kind: table)).update(0)
+    counter(math.equation).update(0)
+    it
+  }
+
   // Numberings
-  set heading(numbering: (..nums) => {
+  set heading(supplement: [Appendix], numbering: (..nums) => {
     let levels = nums.pos()
-    [#prefix#levels.map(str).join(".").]
+    [#prefix#levels.map(str).join(".")]
   })
+  // Hide level 2+ headings from TOC in appendices
+  set heading(outlined: false)
+  show heading.where(level: 1): set heading(outlined: true)
+
   set figure(numbering: it => {
-    [#prefix#it]
+    let h = context counter(heading).get().first()
+    [#prefix#h.#it]
   })
   set math.equation(numbering: it => {
-    [(#prefix#it)]
+    let h = context counter(heading).get().first()
+    [(#prefix#h.#it)]
   })
 
-  // Reset counters
+  // Reset heading counter
   counter(heading).update(0)
-  counter(figure.where(kind: image)).update(0)
-  counter(figure.where(kind: table)).update(0)
-  counter(math.equation).update(0)
 
   doc
 }
@@ -59,6 +70,7 @@
   lang: "en",
   region: "US",
   font: ("Libertinus Serif", "Times", "Times New Roman", "Arial"),
+  monofont: "Dejavu Sans Mono",
   fontsize: 11pt,
   title-size: 1.5em,
   subtitle-size: 1.25em,
@@ -164,6 +176,8 @@
     font: font,
     size: fontsize,
   )
+  // Code font
+  show raw: set text(font: monofont)
 
   // Headers
   set heading(numbering: sectionnumbering)
@@ -298,9 +312,3 @@
   /* Document content */
   doc
 }
-
-// Remove gridlines from tables
-#set table(
-  inset: 6pt,
-  stroke: none,
-)

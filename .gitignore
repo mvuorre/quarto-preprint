@@ -7,14 +7,12 @@
 *_cache/
 *_files/
 docs/
-manual.typ
+example.typ
 site_libs/
 /.luarc.json
 /.quarto/
 /tests/
-.release.timestamp
 _variables.yml
 .claude/
-REFACTOR.md
 
 **/*.quarto_ipynb

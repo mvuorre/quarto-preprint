@@ -23,13 +23,13 @@ abstract: |
   Your abstract goes here. This will appear prominently at the top of your document.
 categories: [keyword1, keyword2, keyword3]
 authornote: |
-  Author contributions, funding, conflicts of interest, or other notes.
+  Author notes go here.
 date: last-modified
 bibliography: bibliography.bib
 format:
   preprint-typst:
     wordcount: true
-    # Common options - uncomment (and remove 'default') to use
+    # Common options - uncomment to use
     # theme-jou: true              # Journal theme (2-column)
     # line-number: true            # Line numbering
     # fontsize: 11pt               # Font size
@@ -52,6 +52,6 @@ format:
 
 ::: {.appendix}
 
-# Appendix A
+# More details go here
 
 :::

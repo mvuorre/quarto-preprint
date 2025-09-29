@@ -1,0 +1,187 @@
+---
+title: "Example `preprint-typst` Document: Academic Writing with Quarto and Typst"
+running-head: "Quarto-Typst Example"
+author:
+  - name: Matti Vuorre
+    email: mjvuorre@uvt.nl
+    orcid: 0000-0001-5052-066X
+    url: https://www.tilburguniversity.edu/staff/m-j-vuorre
+    corresponding: true
+    equal-contributor: true
+    affiliation:
+      - ref: 1
+  - name: Example Author
+    email: author@example.edu
+    orcid: 0000-0002-0000-0000
+    equal-contributor: true
+    affiliation:
+      - ref: 2
+affiliations:
+  - id: 1
+    name: Tilburg University
+    department: Department of Social Psychology
+  - id: 2
+    name: Example University
+    department: Department of Examples
+abstract: |
+  {{< lipsum 1 >}}
+categories: [Quarto, Typst, example, academic writing]
+bibliography: bibliography.bib
+csl: https://www.zotero.org/styles/apa
+authornote: "Created with Quarto `r quarto::quarto_version()` and *preprint-typst* {{< var extension-version >}} on `r Sys.Date()`."
+toc: true
+toc-title: Contents
+monofont: "Monaspace Krypton"
+date: "`r Sys.Date()`"
+knitr:
+  opts_chunk:
+    echo: false
+format:
+  preprint-typst:
+    wordcount: true
+    toc-depth: 1
+    keep-typ: true
+  html:
+    theme: zephyr
+    output-file: "example.html"
+    title-block-banner: true
+    title-block-style: default
+    language:
+      other-links-title: Links
+    format-links: false
+    other-links:
+      - text: Documentation
+        href: index.html
+        icon: filetype-html
+      - text: Example PDF
+        href: example.pdf
+        icon: filetype-pdf
+      - text: Example Journal theme PDF
+        href: example-jou.pdf
+        icon: filetype-pdf
+      - text: Example HTML
+        href: example.html
+        icon: filetype-html
+---
+
+> "An article about computational science in a scientific publication is not the scholarship itself, it is merely advertising of the scholarship. The actual scholarship is the complete software development environment and the complete set of instructions which generated the figures."
+>--Buckheit and Donoho (1995, paraphrasing Jon Claerbout)
+
+# Introduction
+
+[Quarto](https://quarto.org/) is "An open-source scientific and technical publishing system" [@allaireQuarto2025] for writing reproducible documents that combine computations and prose written in [markdown](https://quarto.org/docs/authoring/markdown-basics.html) into HTML, PDF, Word, and other outputs. For many R users, Quarto is a successor of [R Markdown](https://rmarkdown.rstudio.com/) but with a broader scope and better support for different output formats and computational content in other languages.
+
+[*quarto-preprint*](https://github.com/mvuorre/quarto-preprint) is a Quarto extension that provides the ***preprint-typst*** output format. When using this format, Quarto renders your document into PDF using [Typst](https://typst.app/), a modern replacement for LaTeX. *preprint-typst* builds on the standard Quarto Typst template and enables separated author-affiliation formatting, additional metadata variables for scholarly writing, opinionated but customizable typesetting, improved two-column layouts (including full-width floats), appendices, and more. In addition, *preprint-typst* aims to
+
+- Be **fast**: Typst creates PDF files very quickly
+- **Just Work**: No LaTeX installation required (Typst ships with Quarto)
+- Be **100% Quarto compatible**: Switch between output formats without changing content
+- Have **rich features**: Separated author-affiliation formatting, two-column layouts, full-width floats, appendices
+
+# Example content
+
+## Code
+
+Code (@lst-code) font can be specified with the `monofont` variable.
+
+```{r}
+#| label: code-example
+#| lst-label: lst-code
+#| lst-cap: Creating a `data.frame` in R
+#| echo: true
+
+data <- data.frame(
+  Category = c("Type A", "Type B", "Type C"),
+  Count = c(15, 23, 8),
+  Percentage = c("35%", "54%", "19%")
+)
+```
+
+## Tables
+
+@tbl-example is a simple table. I recommend using the [tinytable](https://github.com/vincentarelbundock/tinytable) package for tables, but `knitr::kable()` works well for basic tables.
+
+```{r}
+#| label: tbl-example
+#| tbl-cap: An example table.
+
+library(tinytable)
+
+tt(data)
+```
+
+## Figures
+
+@fig-example is an example table.
+
+::: {#fig-example fig-cap="Example figure."}
+{{< placeholder 400 200 format=svg >}}
+:::
+
+## Mathematical content
+
+LaTeX math is probably the safest option since it is displayed in other output formats, but also automatically converted to Typst by [pandoc](https://pandoc.org/). A regression equation is shown in @eq-regression
+
+$$
+\mathbf{Y} = \mathbf{X}\boldsymbol{\beta} + \boldsymbol{\epsilon}
+$$ {#eq-regression}
+
+Where $\mathbf{Y}$ is the response vector, $\mathbf{X}$ is the design matrix, and $\boldsymbol{\beta}$ represents coefficients.
+
+## Full-Width Content
+
+In two-column documents, you can create full-width content using the `place` function. This figure (@fig-wide) spans the full page width:
+
+:::: {.place arguments='auto, scope: "parent", float: true'}
+::: {#fig-wide fig-cap="Example of full-width content spanning multiple columns"}
+{{< placeholder 600 200 format=svg >}}
+:::
+::::
+
+# Discussion
+
+{{< lipsum 1 >}}
+
+# References
+
+::: {#refs}
+:::
+
+```{=typst}
+#show: appendix.with()
+```
+
+# Example Appendix {.appendix}
+
+{{< lipsum 1 >}}
+
+## Tables in Appendices {.appendix}
+
+Appendix cross-referenced content like @tbl-appendix, @fig-appendix, and @eq-appendix are numbered separately.
+
+```{r}
+#| label: tbl-appendix
+#| tbl-cap: "Example appendix table"
+#| echo: false
+
+appendix_data <- data.frame(
+  Item = c("Alpha", "Beta", "Gamma"),
+  Value = c(1.23, 4.56, 7.89)
+)
+
+tt(appendix_data)
+```
+
+::: {#fig-appendix fig-cap="Example appendix figure"}
+{{< placeholder 300 150 format=svg >}}
+:::
+
+$$
+\hat{\boldsymbol{\beta}} = (\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T\mathbf{Y}
+$$ {#eq-appendix}
+
+# Second Appendix {.appendix}
+
+This is a second appendix.
+
+{{< lipsum 1 >}}

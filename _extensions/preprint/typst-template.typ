@@ -1,9 +1,8 @@
 // Quarto Typst template
-// Now imports from standalone package
 
-#import "_extensions/preprint/lib/preprint.typ": preprint, appendix
+#import "_extensions/preprint/typst/preprint.typ": appendix, preprint
 
-// Remove gridlines from tables
+// Remove gridlines from basic (e.g. `knitr::kable()`) tables
 #set table(
   inset: 6pt,
   stroke: none,
