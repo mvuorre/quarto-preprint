@@ -11,7 +11,7 @@
 
 # Overview
 
-**[Example PDF](example.pdf) • [Journal theme PDF](example-jou.pdf) • [Online documentation](index.html)**
+**[Example PDF](https://vuorre.com/quarto-preprint/example.pdf) • [Journal theme PDF](https://vuorre.com/quarto-preprint/example-jou.pdf) • [Online documentation](https://vuorre.com/quarto-preprint/index.html)**
 
 > “An article about computational science in a scientific publication is not the scholarship itself, it is merely advertising of the scholarship. The actual scholarship is the complete software development environment and the complete set of instructions which generated the figures.”
 >
