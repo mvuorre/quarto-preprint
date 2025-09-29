@@ -1,16 +1,9 @@
-all: render
-
-render: prepare clean
+all: _extensions/preprint/typst/preprint.typ
 	quarto render
-
-prepare: _extensions/preprint/typst/preprint.typ README.md
 
 _extensions/preprint/typst/preprint.typ: typst/lib.typ
 	mkdir -p _extensions/preprint/typst/
 	cp $< $@
-
-README.md: index.qmd
-	quarto render $< --to gfm --output $@ --output-dir . -M toc-depth:1 -M wrap:none
 
 # Tests
 test-use:

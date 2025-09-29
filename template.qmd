@@ -30,7 +30,7 @@ format:
   preprint-typst:
     wordcount: true
     # Common options - uncomment to use
-    # theme-jou: true              # Journal theme (2-column)
+    # theme: jou                   # Journal theme (2-column)
     # line-number: true            # Line numbering
     # fontsize: 11pt               # Font size
     # leading: 0.6em               # Line spacing
@@ -50,8 +50,7 @@ format:
 :::{#refs}
 :::
 
-::: {.appendix}
-
-# More details go here
-
-:::
+```{=typst}
+#show: appendix.with()
+```
+# Appendix content here

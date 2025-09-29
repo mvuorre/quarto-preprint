@@ -1,9 +1,0 @@
-{{< include example-frontmatter.qmd >}}
-format:
-  preprint-typst:
-    output-file: "example-jou.pdf"
-    wordcount: true
-    theme: jou
----
-
-{{< include example-content.qmd >}}
