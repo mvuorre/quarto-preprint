@@ -39,7 +39,7 @@
     "href": "example.html#full-width-content",
     "title": "Example preprint-typst Document: Academic Writing with Quarto and Typst",
     "section": "Full-Width Content",
-    "text": "Full-Width Content\nIn two-column documents, you can create full-width content using the place function. This figure (Figure 2) spans the full page width:\n\n\n\n\n\n\n\nFigure 2: Example of full-width content spanning multiple columns"
+    "text": "Full-Width Content\nIn two-column documents, you can create full-width content using the place function. Figure 2 spans the full page width.\n\n\n\n\n\n\n\nFigure 2: Example of full-width content spanning multiple columns"
   },
   {
     "objectID": "example.html#tables-in-appendices",
