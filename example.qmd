@@ -129,7 +129,7 @@ Where $\mathbf{Y}$ is the response vector, $\mathbf{X}$ is the design matrix, an
 
 ## Full-Width Content
 
-In two-column documents, you can create full-width content using the `place` function. This figure (@fig-wide) spans the full page width:
+In two-column documents, you can create full-width content using the `place` function. @fig-wide spans the full page width.
 
 :::: {.place arguments='auto, scope: "parent", float: true'}
 ::: {#fig-wide fig-cap="Example of full-width content spanning multiple columns"}
