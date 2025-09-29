@@ -39,6 +39,7 @@ example: $(EXAMPLE) update-version
 
 readme: $(INDEX)
 	quarto render $< --to gfm --output README.md --output-dir . -M toc-depth:1 -M wrap:none
+	rm search.json
 
 # Render website to docs/ including example docs
 render: example readme

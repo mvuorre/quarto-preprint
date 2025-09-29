@@ -1,6 +1,6 @@
 project:
   title: "Quarto preprint"
-  type: default
+  type: website
   render:
     - index.qmd
     - example.qmd
