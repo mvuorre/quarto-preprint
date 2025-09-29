@@ -1,72 +1,121 @@
 [
   {
+    "objectID": "example.html",
+    "href": "example.html",
+    "title": "Example preprint-typst Document: Academic Writing with Quarto and Typst",
+    "section": "",
+    "text": "“An article about computational science in a scientific publication is not the scholarship itself, it is merely advertising of the scholarship. The actual scholarship is the complete software development environment and the complete set of instructions which generated the figures.” –Buckheit and Donoho (1995, paraphrasing Jon Claerbout)"
+  },
+  {
+    "objectID": "example.html#code",
+    "href": "example.html#code",
+    "title": "Example preprint-typst Document: Academic Writing with Quarto and Typst",
+    "section": "Code",
+    "text": "Code\nCode (Listing 1) font can be specified with the monofont variable.\n\n\n\n\nListing 1: Creating a data.frame in R\n\n\ndata &lt;- data.frame(\n  Category = c(\"Type A\", \"Type B\", \"Type C\"),\n  Count = c(15, 23, 8),\n  Percentage = c(\"35%\", \"54%\", \"19%\")\n)"
+  },
+  {
+    "objectID": "example.html#tables",
+    "href": "example.html#tables",
+    "title": "Example preprint-typst Document: Academic Writing with Quarto and Typst",
+    "section": "Tables",
+    "text": "Tables\nTable 1 is a simple table. I recommend using the tinytable package for tables, but knitr::kable() works well for basic tables.\n\n\n\n\nTable 1: An example table.\n\n\n\n\n\n    \n\n    \n    \n      \n        \n        \n              \n                Category\n                Count\n                Percentage\n              \n        \n        \n        \n                \n                  Type A\n                  15\n                  35%\n                \n                \n                  Type B\n                  23\n                  54%\n                \n                \n                  Type C\n                  8\n                  19%"
+  },
+  {
+    "objectID": "example.html#figures",
+    "href": "example.html#figures",
+    "title": "Example preprint-typst Document: Academic Writing with Quarto and Typst",
+    "section": "Figures",
+    "text": "Figures\nFigure 1 is an example table.\n\n\n\n\n\n\nFigure 1: Example figure."
+  },
+  {
+    "objectID": "example.html#mathematical-content",
+    "href": "example.html#mathematical-content",
+    "title": "Example preprint-typst Document: Academic Writing with Quarto and Typst",
+    "section": "Mathematical content",
+    "text": "Mathematical content\nLaTeX math is probably the safest option since it is displayed in other output formats, but also automatically converted to Typst by pandoc. A regression equation is shown in Equation 1\n\\[\n\\mathbf{Y} = \\mathbf{X}\\boldsymbol{\\beta} + \\boldsymbol{\\epsilon}\n\\tag{1}\\]\nWhere \\(\\mathbf{Y}\\) is the response vector, \\(\\mathbf{X}\\) is the design matrix, and \\(\\boldsymbol{\\beta}\\) represents coefficients."
+  },
+  {
+    "objectID": "example.html#full-width-content",
+    "href": "example.html#full-width-content",
+    "title": "Example preprint-typst Document: Academic Writing with Quarto and Typst",
+    "section": "Full-Width Content",
+    "text": "Full-Width Content\nIn two-column documents, you can create full-width content using the place function. This figure (Figure 2) spans the full page width:\n\n\n\n\n\n\n\nFigure 2: Example of full-width content spanning multiple columns"
+  },
+  {
+    "objectID": "example.html#tables-in-appendices",
+    "href": "example.html#tables-in-appendices",
+    "title": "Example preprint-typst Document: Academic Writing with Quarto and Typst",
+    "section": "Tables in Appendices",
+    "text": "Tables in Appendices\n\nAppendix cross-referenced content like Table 2, Figure 3, and Equation 2 are numbered separately.\n\n\n\n\nTable 2: Example appendix table\n\n\n\n\n\n    \n\n    \n    \n      \n        \n        \n              \n                Item\n                Value\n              \n        \n        \n        \n                \n                  Alpha\n                  1.23\n                \n                \n                  Beta\n                  4.56\n                \n                \n                  Gamma\n                  7.89\n                \n        \n      \n    \n\n\n\n\n\n\n\n\n\n\n\n\nFigure 3: Example appendix figure\n\n\n\n\\[\n\\hat{\\boldsymbol{\\beta}} = (\\mathbf{X}^T\\mathbf{X})^{-1}\\mathbf{X}^T\\mathbf{Y}\n\\tag{2}\\]"
+  },
+  {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "quarto-preprint: A Quarto extension for creating PDF documents with Typst",
+    "title": "quarto-preprint",
     "section": "",
-    "text": "“An article about computational science in a scientific publication is not the scholarship itself, it is merely advertising of the scholarship. The actual scholarship is the complete software development environment and the complete set of instructions which generated the figures.” –Buckheit and Donoho (1995, paraphrasing Jon Claerbout)\nQuarto is “An open-source scientific and technical publishing system” (Allaire et al., 2025) for writing reproducible documents that combine computations and prose written in markdown into HTML, PDF, Word, and other outputs. For many R users, Quarto is a successor of R Markdown but with a broader scope and better support for different output formats and computational content in other languages.\nquarto-preprint is a Quarto extension that provides one such output format, called preprint-typst. When using this format, Quarto renders your document into PDF using Typst, a modern replacement for LaTeX. preprint-typst builds on the standard Quarto Typst template and enables separated author-affiliation formatting, additional (Quarto, Typst, and custom) metadata variables, opinionated typesetting, improved two-column layouts (including full-width floats), appendices, and more (read below).\nThis document explains how to install, use and customize the output of Quarto documents created with the preprint-typst format. Example manuscripts using preprint-typst format include:"
+    "text": "Example PDF • Journal theme PDF • Online documentation\n\n“An article about computational science in a scientific publication is not the scholarship itself, it is merely advertising of the scholarship. The actual scholarship is the complete software development environment and the complete set of instructions which generated the figures.”\n–Buckheit and Donoho (1995, paraphrasing Jon Claerbout)\n\nQuarto is “An open-source scientific and technical publishing system” (Allaire et al. 2025) for writing reproducible documents that combine computations and prose written in markdown into HTML, PDF, Word, and other outputs. For many R users, Quarto is a successor of R Markdown but with a broader scope and better support for different output formats and computational content in other languages.\nquarto-preprint is a Quarto extension that provides the preprint-typst output format. When using this format, Quarto renders your document into PDF using Typst, a modern replacement for LaTeX. preprint-typst builds on the standard Quarto Typst template and enables separated author-affiliation formatting, additional metadata variables for scholarly writing, opinionated but customizable typesetting, improved two-column layouts (including full-width floats), appendices, and more. In addition, preprint-typst aims to\n\nBe fast: Typst creates PDF files very quickly\nJust Work: No LaTeX installation required (Typst ships with Quarto)\nBe 100% Quarto compatible: Switch between output formats without changing content\nHave rich features: Separated author-affiliation formatting, two-column layouts, full-width floats, appendices"
   },
   {
-    "objectID": "index.html#universal-quarto-options",
-    "href": "index.html#universal-quarto-options",
-    "title": "quarto-preprint: A Quarto extension for creating PDF documents with Typst",
-    "section": "Universal Quarto options",
-    "text": "Universal Quarto options\nThese work across all Quarto output formats (HTML, PDF, Word, etc.)\n\nDocument information\n\ntitle (string) - Document title [Documentation: Quarto]\n\nExample: title: \"My Paper\"\n\nauthor (string/array) - Author details with name, affiliation, email, etc. [Quarto]\naffiliations (array) - Author affiliations with id, name, department [Quarto]\nsubtitle (string) - Document subtitle [Quarto]\n\nExample: subtitle: \"A Study\"\n\nabstract (string) - Document abstract [Quarto]\n\nExample: abstract: \"This study...\"\n\ncategories (array) - Keywords/categories for the document [Quarto]\n\nExample: categories: [\"science\", \"study\"]\n\ndate (string) - Publication date [Quarto]\n\nExample: date: \"2024-01-01\"\n\ntoc (boolean) - Include table of contents [Quarto]\n\nExample: toc: true\n\ntoc-title (string) - Customize TOC title [Quarto]\n\nExample: toc-title: \"Contents\"\n\ntoc-depth (integer) - Number of heading levels in TOC [Quarto]\n\nExample: toc-depth: 2\n\nnumber-sections (boolean) - Number section headings [Quarto]\n\nExample: number-sections: true\n\n\n\n\nBibliography & citations\n\nbibliography (string/array) - Bibliography file [Quarto]\n\nExample: bibliography: \"bibliography.bib\"\n\ncsl (string) - Citation Style Language file or URL [Quarto]\n\nExample: csl: https://www.zotero.org/styles/apa or csl: apa.csl\n\nciteproc (boolean; Tip 1) - Use Pandoc citation processing [Quarto]\n\nExample: citeproc: true\n\n\n\n\n\n\n\n\nNote 1: Quarto, Typst, and bibliography processing\n\n\n\nTypst has its own citation processing system, but by default preprint-typst turns it off by using citeproc: true to allow better bibliography customization and use of Quarto’s #refs div. In your document, include\n# References\n\n::: {#refs}\n:::\nto display the bibliography section anywhere in the document. Read more at Quarto’s citations documentation.\n\nWhen citeproc is off (citeproc: false)\n\nbibliography-title (string) - Bibliography section title\n\nExample: bibliography-title: \"References\"\n\nbibliographystyle (string) - Citation style [Quarto, Typst]\n\nExample: bibliographystyle: \"apa\"\n\n\n\n\n\n\n\nTypography\n\nfontsize (string) - Base font size for document text [Quarto]\n\nExample: fontsize: \"11pt\"\n\nmainfont (string) - Main document font [Quarto]\n\nExample: mainfont: \"Libertinus Serif\"\n\nmonofont (string) - Font family for code [Quarto]\n\nExample: monofont: \"Monacy\"\nNote: Currently does not work (Quarto issue)\n\nlinkcolor (string) - Color for hyperlinks [Quarto, Typst]\n\nExample: linkcolor: \"blue\" or linkcolor: \"#0066cc\"\n\nfont-paths (array) - Additional font search directories [Quarto]\n\nExample: font-paths: [\"myfonts\"]\n\n\n\n\nLanguage & localization\n\nlang (string) - Document language [Quarto]\n\nExample: lang: \"en\" or lang: \"de\"\n\nregion (string) - Document region [Quarto]\n\nExample: region: \"US\" or region: \"GB\"\n\n\n\n\nFigures\n\nfig-format (string) - Figure output format [Quarto]\n\nExample: fig-format: \"svg\" or fig-format: \"png\""
+    "objectID": "index.html#add-to-existing-quarto-project",
+    "href": "index.html#add-to-existing-quarto-project",
+    "title": "quarto-preprint",
+    "section": "Add to existing Quarto project",
+    "text": "Add to existing Quarto project\nquarto add mvuorre/quarto-preprint\nThis creates a _extensions/preprint/ directory in your project. The preprint-typst format is then ready to use."
   },
   {
-    "objectID": "index.html#quarto-typst-options",
-    "href": "index.html#quarto-typst-options",
-    "title": "quarto-preprint: A Quarto extension for creating PDF documents with Typst",
-    "section": "Quarto Typst options",
-    "text": "Quarto Typst options\nThese work in Quarto’s Typst output formats but may not work in HTML, Word, etc.\n\nPage layout\n\npapersize (string) - Page size specification [Quarto]\n\nExample: papersize: a4\n\nmargin (object/string) - Page margins [Quarto]\n\nExample: margin: {x: 2.8cm, y: 2.6cm}\n\ncolumns (integer) - Number of content columns [Quarto]\n\nExample: columns: 2\n\npage-numbering (string) - Page numbering pattern [Typst]\n\nExample: page-numbering: \"1\" or page-numbering: \"i\"\n\n\n\n\nSection numbering\n\nsection-numbering (string) - Section numbering pattern [Quarto]\n\nExample: section-numbering: \"1.1.a\" or section-numbering: \"1.A.a\""
+    "objectID": "index.html#start-new-quarto-project",
+    "href": "index.html#start-new-quarto-project",
+    "title": "quarto-preprint",
+    "section": "Start new Quarto project",
+    "text": "Start new Quarto project\nquarto use template mvuorre/quarto-preprint\nThis creates a new project directory with a starter document, _quarto.yml configuration file, and example bibliography.bib file.\nNote that quarto-preprint is the name of the Quarto extension, and preprint-typst is the name of the Quarto output format."
   },
   {
-    "objectID": "index.html#advanced-typst-formatting",
-    "href": "index.html#advanced-typst-formatting",
-    "title": "quarto-preprint: A Quarto extension for creating PDF documents with Typst",
-    "section": "Advanced Typst formatting",
-    "text": "Advanced Typst formatting\nThese are native Typst variables exposed through the extension\n\nline-number (boolean) - Enable line numbers [Typst]\n\nExample: line-number: true\n\nleading (string) - Line height/spacing between lines [Typst]\n\nExample: leading: \"0.5em\"\n\nspacing (string) - Vertical spacing between paragraphs [Typst]\n\nExample: spacing: \"0.6em\"\n\nfirst-line-indent (string) - Indentation for paragraph first lines [Typst]\n\nExample: first-line-indent: \"1.8em\"\n\nall (boolean) - Whether to indent all paragraphs (including first in section) [Typst]\n\nExample: all: false\n\ncol-gutter (string) - Horizontal spacing between columns [Typst]\n\nExample: col-gutter: \"4.2%\" or col-gutter: \"2em\"\n\ntoc-indent (string) - TOC indentation [Typst]\n\nExample: toc-indent: \"1.5em\""
+    "objectID": "index.html#typography",
+    "href": "index.html#typography",
+    "title": "quarto-preprint",
+    "section": "Typography",
+    "text": "Typography\n\nmonofont (string) - Font family for code [Quarto]\n\nExample: monofont: \"Monacy\"\n\nlinkcolor (string) - Color for hyperlinks [Quarto, Typst]\n\nExample: linkcolor: \"blue\" or linkcolor: \"#0066cc\""
+  },
+  {
+    "objectID": "index.html#layout",
+    "href": "index.html#layout",
+    "title": "quarto-preprint",
+    "section": "Layout",
+    "text": "Layout\n\nline-number (boolean) - Enable line numbers [Typst]\n\nExample: line-number: true\nThis is simplified to a boolean instead of allowing custom numbering as per Typst.\n\nleading (string) - Line height/spacing between lines [Typst]\n\nExample: leading: \"0.5em\"\n\nspacing (string) - Vertical spacing between paragraphs [Typst]\n\nExample: spacing: \"0.6em\"\n\nfirst-line-indent (string) - Indentation for paragraph first lines [Typst]\n\nExample: first-line-indent: \"1.8em\"\n\nall (boolean) - Whether to indent all paragraphs (including first in section) [Typst]\n\nExample: all: false\n\ncol-gutter (string) - Horizontal spacing between columns [Typst]\n\nExample: col-gutter: \"4.2%\" or col-gutter: \"2em\""
+  },
+  {
+    "objectID": "index.html#language",
+    "href": "index.html#language",
+    "title": "quarto-preprint",
+    "section": "Language",
+    "text": "Language\n\nlang (string) - Document language [Quarto, Typst]\n\nExample: lang: \"en\" or lang: \"de\"\n\nregion (string) - Document region [Quarto, Typst]\n\nExample: region: \"US\" or region: \"GB\""
   },
   {
     "objectID": "index.html#preprint-typst-extension-options",
     "href": "index.html#preprint-typst-extension-options",
-    "title": "quarto-preprint: A Quarto extension for creating PDF documents with Typst",
+    "title": "quarto-preprint",
     "section": "preprint-typst extension options",
-    "text": "preprint-typst extension options\nThese are custom features specific to this extension\n\nrunning-head (string) - Short title text displayed in page headers\n\nExample: running-head: \"Short Title\"\n\nauthornote (string) - Text appearing after corresponding author information\n\nExample: authornote: \"Author affiliations and contact\"\n\nwordcount (boolean) - Display word count below abstract\n\nExample: wordcount: true\n\ntheme-jou (boolean) - Apply journal theme with 2-column layout and compact spacing\n\nExample: theme-jou: true\n\nfunctions (array) - Enable Typst functions in divs [typst-function]\n\nExample: functions: [\"place\", \"appendix\"]\n\n\nWhen starting a new project that uses the quarto-preprint template (quarto use template mvuorre/quarto-preprint), the template Quarto file already includes some useful variables and their values. See Quarto’s Typst documentation for standard options and Typst documentation for styling details."
+    "text": "preprint-typst extension options\npreprint-typst enables these custom variables for Typst output:\n\nrunning-head (string) - Short title text displayed in page headers\n\nExample: running-head: \"Short Title\"\n\nauthornote (string) - Text appearing after corresponding author information\n\nExample: authornote: \"Author affiliations and contact\"\n\nwordcount (boolean) - Display word count below abstract\n\nExample: wordcount: true\n\ntheme (string) - Select a theme (“default”, “jou”)\n\nExample: theme: jou creates an optimized two-column layout\n\nfunctions (array) - Enable Typst functions in Quarto divs [typst-function]\n\nExample: functions: [\"place\"]"
   },
   {
-    "objectID": "index.html#floats",
-    "href": "index.html#floats",
-    "title": "quarto-preprint: A Quarto extension for creating PDF documents with Typst",
-    "section": "Floats",
-    "text": "Floats\n\nTables\nListing 1 shows an example R (R Core Team, 2025) code snippet for creating tables (Table 1) with the tinytable R package (Arel-Bundock, 2025).\n\n\n\n\nListing 1: R code example.\n\n\nlibrary(tinytable)\ntt(mtcars[1:3, 1:5])\n\n\n\n\n\n\nTable 1: Information on various cars.\n\n\n\n\n\n    \n\n    \n    \n      \n        \n        \n              \n                mpg\n                cyl\n                disp\n                hp\n                drat\n              \n        \n        \n        \n                \n                  21.0\n                  6\n                  160\n                  110\n                  3.90\n                \n                \n                  21.0\n                  6\n                  160\n                  110\n                  3.90\n                \n                \n                  22.8\n                  4\n                  108\n                  93\n                  3.85\n                \n        \n      \n    \n\n\n\n\n\n\n\n\nFigures\nFigures (e.g. Figure 1) are centered by default.\n\n\n\n\n\n\nFigure 1: Example figure."
+    "objectID": "index.html#bibliography-citations",
+    "href": "index.html#bibliography-citations",
+    "title": "quarto-preprint",
+    "section": "Bibliography & citations",
+    "text": "Bibliography & citations\nTypst has its own citation processing system, but by default preprint-typst turns it off by using citeproc: true to allow better bibliography customization and use of Quarto’s #refs div. In your document, include\n# References\n\n::: {#refs}\n:::\nto display the bibliography section anywhere in the document (for example, before any appendices).\n\nCitation management\nQuarto documents require citations in a separate .bib file. The vscode-zotero VS Code plugin helps with inserting in-text citations and managing the .bib file. The plugin works in all VS Code based editors, including Positron."
   },
   {
     "objectID": "index.html#full-width-content",
     "href": "index.html#full-width-content",
-    "title": "quarto-preprint: A Quarto extension for creating PDF documents with Typst",
+    "title": "quarto-preprint",
     "section": "Full-width content",
-    "text": "Full-width content\nYou can include page-wide figures (or any other content) in documents that have more than one column. See Figure 2 for an example. First, include\nfunctions: place\nin the document’s YAML. Then, wrap your figure in a Quarto div like this:\n::: {.place arguments='auto, scope: \"parent\", float: true'}\nEverything here will span the whole page.\n:::\nThe above uses the Typst’s place() function through the typst-function Quarto extension to place the div’s content in \"parent\" scope (the document page is the column’s parent) and must specify that Typst should treat the content as a float. auto indicates where the figure should be on the page, and can be either auto, bottom, or top. (Note auto and bottom can make the figure appear below footnotes.)\n\n\n\n\n\n\n\nFigure 2: A full-width figure."
+    "text": "Full-width content\nYou can include page-wide figures (or any other content) in documents that have more than one column. To do so, wrap the content in a Quarto div like this:\n::: {.place arguments='auto, scope: \"parent\", float: true'}\nAny content here will span the whole page.\n:::\nThe above uses the Typst’s place() function through the typst-function Quarto extension to place the div’s content in \"parent\" scope (the document page is the column’s parent) and must specify that Typst should treat the content as a float. auto indicates where the figure should be on the page, and can be either auto, bottom, or top. (Note auto and bottom can make the figure appear below footnotes.)\nNote: The function only takes effect in Typst documents, other formats (e.g. HTML) will display the content with no extra formatting."
   },
   {
-    "objectID": "index.html#maths",
-    "href": "index.html#maths",
-    "title": "quarto-preprint: A Quarto extension for creating PDF documents with Typst",
-    "section": "Maths",
-    "text": "Maths\nLaTeX math notation is automatically converted to Typst and as such works just fine either inline (\\(y_i = \\alpha + \\beta x_i + \\epsilon_i\\)) or in display mode (Equation 1).\n\\[\nf(x \\mid \\mu, \\sigma^2) = \\frac{1}{\\sqrt{2\\pi \\sigma^2}} \\exp\\left(-\\frac{(x-\\mu)^2}{2\\sigma^2}\\right)\n\\tag{1}\\]"
-  },
-  {
-    "objectID": "index.html#citation-management",
-    "href": "index.html#citation-management",
-    "title": "quarto-preprint: A Quarto extension for creating PDF documents with Typst",
-    "section": "Citation management",
-    "text": "Citation management\n\nQuarto documents require citations in a separate .bib file. The vscode-zotero VS Code plugin helps with inserting in-text citations and managing the .bib file. The plugin works in all VS Code based editors, including Positron."
-  },
-  {
-    "objectID": "index.html#fonts",
-    "href": "index.html#fonts",
-    "title": "quarto-preprint: A Quarto extension for creating PDF documents with Typst",
-    "section": "Fonts",
-    "text": "Fonts\n\nRun quarto typst fonts in your terminal (not R console) to list all available fonts."
+    "objectID": "index.html#appendices",
+    "href": "index.html#appendices",
+    "title": "quarto-preprint",
+    "section": "Appendices",
+    "text": "Appendices\nTo include an appendix, include the following raw Typst block in your Quarto document, followed by your appendix content:\n```{=typst}\n#show: appendix.with()\n```\n\n# Appendix title\n\nAppendix content.\nNote: If you want the appendix to appear as an appendix in HTML output as well, add the .appendix class to the headings. Appendices are an experimental feature. They are provided through a custom Typst function, and their implementation and functionality may change as Quarto’s Typst integration matures."
   }
 ]
