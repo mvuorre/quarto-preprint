@@ -1,9 +1,5 @@
 
 # Temporary and output files
-**/*.pdf
-*.png
-*.svg
-*.html
 *_cache/
 *_files/
 docs/
