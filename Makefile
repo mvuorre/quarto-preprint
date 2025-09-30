@@ -1,6 +1,6 @@
-.PHONY: all test-use test-add deps release clean
+.PHONY: all examples test-use test-add deps release clean
 
-all: _extensions/preprint/typst/preprint.typ
+all: _extensions/preprint/typst/preprint.typ examples
 
 _extensions/preprint/typst/preprint.typ: typst/lib.typ
 	mkdir -p _extensions/preprint/typst/
