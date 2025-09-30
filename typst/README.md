@@ -1,6 +1,6 @@
 # Preprint Typst Package
 
-A standalone Typst template for academic preprints and papers.
+A standalone Typst template for academic preprints and papers. Intended to be used with the `preprint-typst` Quarto format (so may include Quarto-specific features.)
 
 ## Usage
 
