@@ -92,7 +92,7 @@
 ) = {
   // Theme configurations
   let themes = (
-    jou: (margin: (x: 2.2cm, y: 2.6cm), fontsize: 10pt, cols: 2),
+    jou: (margin: (x: 2cm, y: 2.6cm), fontsize: 10pt, cols: 2),
   )
 
   // Apply theme if it exists
@@ -105,9 +105,9 @@
 
   /* Document settings */
   set document(
-    title: if title != none { title } else { none },
+    title: title,
     author: if authors != none { authors.map(a => str(a.name.text)) } else { () },
-    description: if abstract != none { abstract } else { none },
+    description: abstract,
     keywords: if categories != none { categories.text } else { "" },
   )
   // Link and cite colors
