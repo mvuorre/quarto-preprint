@@ -1,12 +1,2 @@
 project:
   title: "Quarto preprint"
-  type: website
-  post-render: mv docs/README.md README.md # Move README.md to root
-  output-dir: docs
-
-execute:
-  freeze: auto
-
-website:
-  repo-url: https://github.com/mvuorre/quarto-preprint
-  repo-actions: [edit, source, issue]

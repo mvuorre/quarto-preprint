@@ -4,9 +4,11 @@
 *_files/
 *_libs/
 _freeze/
-example*
+examples/
+example.qmd
 index.qmd
 Makefile
+bibliography-example.bib
 docs/
 *.png
 *.svg

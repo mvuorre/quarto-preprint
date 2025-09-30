@@ -1,9 +1,33 @@
+.PHONY: all test-use test-add deps release clean
+
 all: _extensions/preprint/typst/preprint.typ
-	quarto render
 
 _extensions/preprint/typst/preprint.typ: typst/lib.typ
 	mkdir -p _extensions/preprint/typst/
 	cp $< $@
+
+# Generate example PDFs and PNG previews
+examples/example.pdf: example.qmd
+	mkdir -p examples
+	quarto render $< -M line-number:true --output-dir examples --output example.pdf --to preprint-typst
+
+examples/example-jou.pdf: example.qmd
+	mkdir -p examples
+	quarto render $< -M theme:jou --output-dir examples --output example-jou.pdf --to preprint-typst
+
+examples/example.png: examples/example.pdf
+	pdftoppm -png -singlefile -r 100 $< examples/example
+
+examples/example-jou.png: examples/example-jou.pdf
+	pdftoppm -png -singlefile -r 100 $< examples/example-jou
+
+examples/example-jou-p2.png: examples/example-jou.pdf
+	pdftoppm -png -f 2 -l 2 -singlefile -r 100 $< examples/example-jou-p2
+
+examples/example-jou-p3.png: examples/example-jou.pdf
+	pdftoppm -png -f 3 -l 3 -singlefile -r 100 $< examples/example-jou-p3
+
+examples: examples/example.png examples/example-jou.png examples/example-jou-p2.png examples/example-jou-p3.png
 
 # Tests
 test-use:
@@ -24,4 +48,4 @@ release: NEWS.md _extensions/preprint/_extension.yml
 
 # Clean all intermediate files
 clean:
-	rm -rf *.pdf *.typ *.png *.html *_cache/ *_files/ *_libs/ tests/ docs/ .quarto
+	rm -rf *.pdf *.typ *.png *.html *_cache/ *_files/ *_libs/ tests/ docs/ .quarto examples/ _freeze/

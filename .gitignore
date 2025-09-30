@@ -14,5 +14,6 @@ site_libs/
 /tests/
 _variables.yml
 .claude/
+_freeze/
 
 **/*.quarto_ipynb
