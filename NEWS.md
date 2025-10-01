@@ -1,5 +1,9 @@
 ## 1.2.0
 
+- Easter egg!
+
+## 1.2.0
+
 - Refactor to include a standalone Typst template
 - Improve documentation
 - Improve appendix function
