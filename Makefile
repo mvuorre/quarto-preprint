@@ -15,6 +15,11 @@ examples/example-jou.pdf: example.qmd
 	mkdir -p examples
 	quarto render $< -M theme:jou --output-dir examples --output example-jou.pdf --to preprint-typst
 
+# Easter egg
+examples/example-dracula.pdf: example.qmd
+	mkdir -p examples
+	quarto render $< -M theme:dracula --output-dir examples --output example-dracula.pdf --to preprint-typst
+
 examples/example.png: examples/example.pdf
 	pdftoppm -png -singlefile -r 100 $< examples/example
 
@@ -27,7 +32,7 @@ examples/example-jou-p2.png: examples/example-jou.pdf
 examples/example-jou-p3.png: examples/example-jou.pdf
 	pdftoppm -png -f 3 -l 3 -singlefile -r 100 $< examples/example-jou-p3
 
-examples: examples/example.png examples/example-jou.png examples/example-jou-p2.png examples/example-jou-p3.png
+examples: examples/example.png examples/example-jou.png examples/example-jou-p2.png examples/example-jou-p3.png examples/example-dracula.pdf _extensions/preprint/typst/preprint.typ
 
 # Tests
 test-use:
