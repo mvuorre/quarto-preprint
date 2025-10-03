@@ -3,8 +3,7 @@
 all: _extensions/preprint/typst/preprint.typ examples
 
 _extensions/preprint/typst/preprint.typ: typst/lib.typ
-	mkdir -p _extensions/preprint/typst/
-	cp $< $@
+	cat typst/lib.typ > _extensions/preprint/typst-template.typ
 
 # Generate example PDFs and PNG previews
 examples/example.pdf: example.qmd
@@ -35,11 +34,11 @@ examples/example-jou-p3.png: examples/example-jou.pdf
 examples: examples/example.png examples/example-jou.png examples/example-jou-p2.png examples/example-jou-p3.png examples/example-dracula.pdf _extensions/preprint/typst/preprint.typ
 
 # Tests
-test-use:
-	mkdir -p tests/use && cd tests/use && quarto use template ../../. --no-prompt
+test-local: clean
+	mkdir -p tests/local && cd tests/local && quarto use template ../../. --no-prompt && quarto render
 
-test-add:
-	mkdir -p tests/add && cd tests && quarto create project default add --no-prompt --no-open && cd add && quarto add ../../. --no-prompt
+test-remote: clean
+	mkdir -p tests/remote && cd tests/remote && quarto use template mvuorre/quarto-preprint --no-prompt && quarto render
 
 # Update dependencies
 deps:
