@@ -1,6 +1,6 @@
 ## 1.3.1
 
-- Fix critical bug (#48)
+- Fix critical bug (#48) (thanks @martinfleis)
 
 ## 1.3.0
 
