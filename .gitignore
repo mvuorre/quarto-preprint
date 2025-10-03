@@ -3,7 +3,6 @@
 *_cache/
 *_files/
 docs/
-example.typ
 examples/example-dracula.pdf
 site_libs/
 /.luarc.json
