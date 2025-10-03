@@ -1,5 +1,4 @@
 // Standalone Typst preprint template
-// Extracted from quarto-preprint extension
 
 // Imports
 #import "@preview/fontawesome:0.5.0": *
@@ -346,8 +345,10 @@
       ]
     }
   })
+
   // Word count with wordometer package
   show: word-count.with(exclude: (<refs>))
+
   /* Document content */
   doc
 }
