@@ -1,3 +1,7 @@
+## Unreleased
+
+- Improve `jou` theme typography and layout: tighter margins, increased column gutter, adjusted line spacing and paragraph spacing, reduced first-line indent for better two-column readability
+
 ## 1.3.1
 
 - Fix critical bug (#48) (thanks @martinfleis)

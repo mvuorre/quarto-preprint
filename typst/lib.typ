@@ -96,7 +96,15 @@
 ) = {
   // Theme configurations
   let themes = (
-    jou: (margin: (x: 2cm, y: 2.6cm), fontsize: 10pt, cols: 2),
+    jou: (
+      margin: (x: 1.8cm, y: 2.5cm), 
+      fontsize: 10pt, 
+      cols: 2,
+      col-gutter: 5%,
+      leading: 0.55em,
+      spacing: 0.65em,
+      first-line-indent: 1.5em,
+    ),
     dracula: (
       backgroundcolor: rgb("#282A36"),
       fontcolor: rgb("#F8F8F2"),
@@ -113,6 +121,10 @@
     margin = config.at("margin", default: margin)
     fontsize = config.at("fontsize", default: fontsize)
     cols = config.at("cols", default: cols)
+    col-gutter = config.at("col-gutter", default: col-gutter)
+    leading = config.at("leading", default: leading)
+    spacing = config.at("spacing", default: spacing)
+    first-line-indent = config.at("first-line-indent", default: first-line-indent)
     linkcolor = config.at("linkcolor", default: linkcolor)
     fontcolor = config.at("fontcolor", default: fontcolor)
     backgroundcolor = config.at("backgroundcolor", default: backgroundcolor)

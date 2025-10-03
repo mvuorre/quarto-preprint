@@ -76,7 +76,7 @@ Front matter variables can be shared across output formats (such as `toc` above)
 - `wordcount` (boolean) - Display word count below abstract
   - Example: `wordcount: true`
 - `theme` (string) - Select a theme (“default”, “jou”)
-  - Example: `theme: jou` creates an optimized two-column layout
+  - Example: `theme: jou` creates an optimized two-column journal layout with improved typography (tighter margins, smaller font, adjusted spacing and leading, wider column gutter)
 - `functions` (array) - Enable Typst functions in Quarto divs \[[typst-function](https://github.com/christopherkenny/typst-function)\]
   - Example: `functions: ["place"]`
 
