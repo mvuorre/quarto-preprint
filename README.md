@@ -75,10 +75,12 @@ Front matter variables can be shared across output formats (such as `toc` above)
   - Example: `authornote: "Author affiliations and contact"`
 - `wordcount` (boolean) - Display word count below abstract
   - Example: `wordcount: true`
-- `theme` (string) - Select a theme (“default”, “jou”)
+- `theme` (string) - Select a theme ("default", "jou")
   - Example: `theme: jou` creates an optimized two-column layout
 - `functions` (array) - Enable Typst functions in Quarto divs \[[typst-function](https://github.com/christopherkenny/typst-function)\]
   - Example: `functions: ["place"]`
+- `corresponding-text` (string) - How to refer to corresponding authors (default: "Send correspondence to:")
+  - Example: `corresponding-text: "Corresponding authors:"` displays as "Corresponding authors: Name, email."
 
 ## Typography
 

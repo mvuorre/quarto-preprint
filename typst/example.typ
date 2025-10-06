@@ -26,6 +26,7 @@
     (id: "1", name: "Tilburg University", department: "Department of Social Psychology"),
     (id: "2", name: "Test University", department: "Test Department"),
   ),
+  corresponding-text: "Corresponding authors:",
   abstract: [#lorem(25)],
   categories: [test, typst, package],
   sectionnumbering: "1.",

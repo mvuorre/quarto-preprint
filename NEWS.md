@@ -1,3 +1,8 @@
+## 1.4.0
+
+- Fix author information and authornote footnotes ([#50](https://github.com/mvuorre/quarto-preprint/issues/50))
+- Support `corresponding-text` ([#40](https://github.com/mvuorre/quarto-preprint/issues/40))
+
 ## 1.3.1
 
 - Fix critical bug (#48) (thanks @martinfleis)
