@@ -87,7 +87,7 @@ tt(data)
 
 ## Figures
 
-@fig-example is an example table.
+@fig-example is an example figure.
 
 ::: {#fig-example fig-cap="Example figure."}
 {{< placeholder 400 200 format=svg >}}
