@@ -6,16 +6,16 @@ _extensions/preprint/typst/preprint.typ: typst/lib.typ
 	cat typst/lib.typ > _extensions/preprint/typst-template.typ
 
 # Generate example PDFs and PNG previews
-examples/example.pdf: example.qmd
+examples/example.pdf: example.qmd _extensions/preprint/typst/preprint.typ
 	mkdir -p examples
 	quarto render $< -M line-number:true --output-dir examples --output example.pdf --to preprint-typst
 
-examples/example-jou.pdf: example.qmd
+examples/example-jou.pdf: example.qmd _extensions/preprint/typst/preprint.typ
 	mkdir -p examples
 	quarto render $< -M theme:jou --output-dir examples --output example-jou.pdf --to preprint-typst
 
 # Easter egg
-examples/example-dracula.pdf: example.qmd
+examples/example-dracula.pdf: example.qmd _extensions/preprint/typst/preprint.typ
 	mkdir -p examples
 	quarto render $< -M theme:dracula --output-dir examples --output example-dracula.pdf --to preprint-typst
 

@@ -245,37 +245,77 @@
     it.body + [.],
   ))
 
-  // Construct author display
+  // Helper for unnumbered footnotes
+  let footnote_non_numbered(body) = {
+    footnote(numbering: _ => [], body)
+    counter(footnote).update(n => if n > 0 { n - 1 } else { 0 })
+  }
+
+  // Collect author metadata once
+  let corresponding_authors = if authors != none {
+    authors.filter(a => (a.keys().contains("corresponding") and a.at("corresponding") == true))
+  } else { () }
+
+  let equal_authors = if authors != none {
+    authors.filter(a => (
+      a.keys().contains("equal-contributor") and a.at("equal-contributor") == true
+    ))
+  } else { () }
+
+  // Find first author indices for each footnote type
+  let first_corresponding_idx = if corresponding_authors.len() > 0 {
+    authors.position(a => corresponding_authors.contains(a))
+  } else { none }
+
+  let first_equal_idx = if equal_authors.len() > 1 {
+    authors.position(a => equal_authors.contains(a))
+  } else { none }
+
+  // Construct author display with inline footnotes
   let author_display = if authors != none {
-    authors
-      .map(a => {
+    let result = authors
+      .enumerate()
+      .map(((idx, a)) => {
         let parts = (a.name,)
         if authors.len() > 1 { parts.push(super(a.affiliation)) }
-        let equal_authors = authors.filter(auth => (
-          auth.keys().contains("equal-contributor") and auth.at("equal-contributor") == true
-        ))
-        if a.keys().contains("equal-contributor") and a.at("equal-contributor") == true and equal_authors.len() > 1 {
-          parts.push(super[§])
-        }
-        if a.keys().contains("corresponding") {
-          parts.push(footnote(numbering: "*")[
-            Send correspondence to: #a.name, #a.email.
-            #if equal_authors.len() > 1 [
-              #super[§]#equal_authors.map(auth => auth.name).join(", ", last: " & ") contributed equally to this work.
-            ]
-            #if authornote != none [#authornote]
+
+        // Add correspondence footnote to first corresponding author
+        if corresponding_authors.contains(a) and idx == first_corresponding_idx {
+          parts.push(footnote(numbering: _ => "*")[
+            Send correspondence to: #corresponding_authors.map(a => [#a.name, #a.email]).join(", ", last: " & ").
           ])
+        } else if corresponding_authors.contains(a) {
+          parts.push(super("*"))
         }
-        if a.keys().contains("orcid") { parts.push(link(a.orcid, fa-orcid(fill: rgb("a6ce39"), size: 0.8em))) }
+
+        // Add equal contributor footnote to first equal contributor
+        if equal_authors.len() > 1 and equal_authors.contains(a) and idx == first_equal_idx {
+          parts.push(footnote(numbering: _ => "†")[
+            #equal_authors.map(a => a.name).join(", ", last: " & ") contributed equally to this work.
+          ])
+        } else if equal_authors.len() > 1 and equal_authors.contains(a) {
+          parts.push(super("†"))
+        }
+
+        if a.keys().contains("orcid") {
+          parts.push(link(a.orcid, fa-orcid(fill: rgb("a6ce39"), size: 0.8em)))
+        }
         parts.join()
       })
       .join(", ", last: " & ")
+
+    // Add author note as unnumbered footnote (if provided)
+    if authornote != none {
+      result + footnote_non_numbered(authornote)
+    } else {
+      result
+    }
   } else { none }
 
   // Hack: Include authors outside of "scope: parent" to ensure footnotes show
   if author_display != none {
     hide(author_display)
-    counter(footnote).update(n => n - 1)
+    counter(footnote).update(n => if n > 0 { n - 1 } else { 0 })
     v(-2.4em)
   }
 
@@ -298,7 +338,7 @@
 
     if author_display != none {
       align(center)[
-        #block(width: 100%, above: 2.5em, below: 0em)[
+        #block(width: 100%, above: 2em, below: 0em)[
           #text(weight: "regular", size: subtitle-size)[#author_display]
         ]
       ]
@@ -317,7 +357,7 @@
     }
 
     /* Abstract and metadata section */
-    block(inset: (top: 1em, bottom: if toc { 0em } else { 2em }, left: 2.4em, right: 2.4em))[
+    block(inset: (bottom: if toc { 0em } else { 2em }, left: 2.4em, right: 2.4em))[
       #set text(size: 0.92em)
       #set par(first-line-indent: 0em)
       #if abstract != none {
