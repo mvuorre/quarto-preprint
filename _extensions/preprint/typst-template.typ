@@ -57,6 +57,7 @@
   authornote: none,
   citation: none, // Not used currently
   date: none, // Not used currently
+  corresponding-text: "Send correspondence to:",
   // Layout settings (can override theme defaults)
   leading: 0.5em,
   spacing: 0.6em,
@@ -282,7 +283,7 @@
         // Add correspondence footnote to first corresponding author
         if corresponding_authors.contains(a) and idx == first_corresponding_idx {
           parts.push(footnote(numbering: _ => "*")[
-            Send correspondence to: #corresponding_authors.map(a => [#a.name, #a.email]).join(", ", last: " & ").
+            #corresponding-text #corresponding_authors.map(a => [#a.name, #a.email]).join(", ", last: " & ").
           ])
         } else if corresponding_authors.contains(a) {
           parts.push(super("*"))

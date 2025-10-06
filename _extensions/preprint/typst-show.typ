@@ -118,6 +118,9 @@ $endif$
 $if(authornote)$
   authornote: [$authornote$],
 $endif$
+$if(corresponding-text)$
+  corresponding-text: [$corresponding-text$],
+$endif$
 // Use categories or keywords
 $if(categories)$
   categories: [$for(categories)$$it$$sep$, $endfor$],
