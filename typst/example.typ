@@ -1,7 +1,7 @@
 #import "lib.typ": appendix, preprint
 
 #show: preprint.with(
-  theme: "default",
+  theme: "jou",
   title: [Test Document],
   subtitle: [Standalone Typst Package Test],
   authors: (
@@ -76,6 +76,8 @@ This is an example *Typst* document using the _Typst template_ for the `quarto-p
 
 == Equation
 
+#lorem(50)
+
 See @eq-1.
 
 $ pi h (D^2 - d^2) / 4 $<eq-1>
@@ -91,6 +93,29 @@ data <- data.frame(
   Percentage = c("35%", "54%", "19%")
 )
 ```
+
+#lorem(100)
+
+== Full-width content
+
+When the document is laid out in multiple columns, use `#place()` to make content span the entire page (see @fig-test-fw).
+
+#place(top, scope: "parent", float: true)[
+
+  = A full-width section
+  #lorem(20)
+  #figure(
+    rect(
+      width: 80%,
+      height: 60pt,
+      fill: gradient.linear(..color.map.rainbow),
+    ),
+    caption: [A test figure that spans the whole page in multiple-column documents.],
+  ) <fig-test-fw>
+  #lorem(30)
+  == A full-width subsection
+  #lorem(20)
+]
 
 == Appendices
 

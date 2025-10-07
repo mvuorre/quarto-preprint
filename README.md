@@ -136,12 +136,26 @@ Quarto documents require citations in a separate .bib file. The [vscode-zotero](
 You can include page-wide figures (or any other content) in documents that have more than one column. To do so, wrap the content in a [Quarto div](https://quarto.org/docs/authoring/markdown-basics.html#sec-divs-and-spans) like this:
 
 ``` md
-::: {.place arguments='auto, scope: "parent", float: true'}
+::: {.place arguments='top, scope: "parent", float: true'}
 Any content here will span the whole page.
 :::
 ```
 
-The above uses the Typst’s [`place()` function](https://typst.app/docs/reference/layout/place/) through the [typst-function](https://github.com/christopherkenny/typst-function) Quarto extension to place the div’s content in `"parent"` scope (the document page is the column’s parent) and must specify that Typst should treat the content as a float. `auto` indicates where the figure should be on the page, and can be either `auto`, `bottom`, or `top`. (Note `auto` and `bottom` can make the figure appear below footnotes.)
+The above uses the Typst’s [`place()` function](https://typst.app/docs/reference/layout/place/) through the [typst-function](https://github.com/christopherkenny/typst-function) Quarto extension to place the div’s content in `"parent"` scope (the document page is the column’s parent) and must specify that Typst should treat the content as a float. The first argument `top` specifies that the content should be placed on the top of the page; use `bottom` to place it on the bottom.
+
+Since this feature uses a Quarto div, if you want to include further divs inside this div, use more colons. For example:
+
+```md
+:::: {.place arguments='top, scope: "parent", float: true'}
+
+::: {#fig-wide fig-cap="Full-width figure"}
+{{< placeholder 600 200 format=svg >}}
+:::
+
+Other full-width content. Note linebreaks here (between the colons and content) are important.
+
+::::
+```
 
 Note: The function only takes effect in Typst documents, other formats (e.g. HTML) will display the content with no extra formatting.
 
