@@ -1,3 +1,8 @@
+## 1.4.1
+
+- Don't set default `citeproc: true`
+  - This may affect previous uses of the template. To fix, include `citeproc: true` in your YAML configuration
+
 ## 1.4.0
 
 - Fix author information and authornote footnotes ([#50](https://github.com/mvuorre/quarto-preprint/issues/50))
