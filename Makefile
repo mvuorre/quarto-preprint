@@ -52,4 +52,4 @@ release: NEWS.md _extensions/preprint/_extension.yml
 
 # Clean all intermediate files
 clean:
-	rm -rf *.pdf *.typ *.png *.html *_cache/ *_files/ *_libs/ tests/ docs/ .quarto examples/ _freeze/
+	rm -rf *.pdf *.typ *.png *.html *_cache/ *_files/ *_libs/ tests/local/ docs/ .quarto examples/ _freeze/

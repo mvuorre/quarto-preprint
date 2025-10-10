@@ -26,6 +26,7 @@ affiliations:
 abstract: |
   {{< lipsum 1 >}}
 categories: [Quarto, Typst, example, academic writing]
+citeproc: true
 bibliography: bibliography.bib
 csl: https://www.zotero.org/styles/apa
 authornote: |

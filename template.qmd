@@ -29,6 +29,7 @@ bibliography: bibliography.bib
 format:
   preprint-typst:
     wordcount: true
+    citeproc: true
     # Common options - uncomment to use
     # theme: jou                   # Journal theme (2-column)
     # line-number: true            # Line numbering

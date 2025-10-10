@@ -81,6 +81,9 @@ Front matter variables can be shared across output formats (such as `toc` above)
   - Example: `functions: ["place"]`
 - `corresponding-text` (string) - How to refer to corresponding authors (default: "Send correspondence to:")
   - Example: `corresponding-text: "Corresponding authors:"` displays as "Corresponding authors: Name, email."
+- `bibliography-title` (string) - Title of bibliography section [[Typst](https://typst.app/docs/reference/model/bibliography/#parameters-title), [Quarto](https://quarto.org/docs/output-formats/typst.html#bibliography)]
+  - Only works when using Typst's own citation processing system
+  - Example: `bibliography-title: Works cited`
 
 ## Typography
 
@@ -114,7 +117,13 @@ Front matter variables can be shared across output formats (such as `toc` above)
 
 ## Bibliography & citations
 
-Typst has its [own citation processing system](https://quarto.org/docs/authoring/citations.html#typst), but by default *preprint-typst* turns it off by using `citeproc: true` to allow better bibliography customization and use of Quarto’s [`#refs` div](https://quarto.org/docs/authoring/citations.html#bibliography-generation). In your document, include
+### Using Typst's own citation processing
+
+Typst has its [own citation processing system](https://quarto.org/docs/authoring/citations.html#typst), whose behavior you can customize with [`bibliography-title`](https://typst.app/docs/reference/model/bibliography/#parameters-title), [`bibliographystyle`](https://typst.app/docs/reference/model/bibliography/#parameters-style).
+
+### Using Pandoc (recommended)
+
+However, to allow better bibliography customization via the [`csl`](https://quarto.org/docs/output-formats/typst.html#bibliography) YAML variable, and use of Quarto’s [`#refs` div](https://quarto.org/docs/authoring/citations.html#bibliography-generation), you must use Pandoc's citation processing with `citeproc: true`. When `citeproc: true`, you can load a CSL file directly from an URL, and add the References section anywhere in your document (e.g. before any appendices) using Quarto’s [`#refs` div]:
 
 ``` md
 # References
@@ -124,6 +133,15 @@ Typst has its [own citation processing system](https://quarto.org/docs/authoring
 ```
 
 to display the bibliography section anywhere in the document (for example, before any appendices).
+
+**Note**. There is currently a bug in Typst whereby some CSL styles aren't properly applied (<https://github.com/typst/typst/issues/2639>). For example, the APA style lacks hanging indents. Until this is fixed in Typst, you can customize the display of the references section by [including custom Typst code](https://quarto.org/docs/output-formats/typst.html#includes) that targets any <refs> blocks in the document. For example, to add hanging indents, write:
+
+```yaml
+format:
+  preprint-typst:
+    include-before-body:
+      - text: "#show <refs>: set par(hanging-indent: 1.4em)"
+```
 
 ### Citation management
 
