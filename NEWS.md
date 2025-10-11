@@ -1,3 +1,7 @@
+## 1.4.2
+
+- Fix counter resetting in appendices
+
 ## 1.4.1
 
 - Don't set default `citeproc: true`

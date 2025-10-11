@@ -12,6 +12,19 @@
   // Add pagebreak before each level 1 heading in appendices and reset counters
   show heading.where(level: 1): it => {
     pagebreak(weak: true)
+    // Reset figure counters for Quarto-specific kinds
+    counter(figure.where(kind: "quarto-float-fig")).update(0)
+    counter(figure.where(kind: "quarto-float-tbl")).update(0)
+    counter(figure.where(kind: "quarto-float-lst")).update(0)
+
+    // Reset callout counters (for each callout type used)
+    counter(figure.where(kind: "quarto-callout-Note")).update(0)
+    counter(figure.where(kind: "quarto-callout-Warning")).update(0)
+    counter(figure.where(kind: "quarto-callout-Tip")).update(0)
+    counter(figure.where(kind: "quarto-callout-Important")).update(0)
+    counter(figure.where(kind: "quarto-callout-Caution")).update(0)
+
+    // Reset generic counters
     counter(figure.where(kind: image)).update(0)
     counter(figure.where(kind: table)).update(0)
     counter(math.equation).update(0)
