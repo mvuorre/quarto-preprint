@@ -39,6 +39,12 @@
 
 This is an example *Typst* document using the _Typst template_ for the `quarto-preprint` Quarto @allaireQuarto2025 extension.
 
+#quote(block: true)[
+  #lorem(10)
+
+  ---Source
+]
+
 #lorem(20)
 
 == Subsection

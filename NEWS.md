@@ -1,6 +1,7 @@
 ## 1.4.3
 
 - Add space around math blocks
+- Reduce space around block quotes
 
 ## 1.4.2
 

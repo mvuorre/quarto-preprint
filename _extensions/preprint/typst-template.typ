@@ -167,6 +167,11 @@
   // Add space around math blocks
   show math.equation.where(block: true): set block(spacing: spacing * 1.6)
 
+  // Define space around block quotes
+  show quote.where(block: true): set block(spacing: spacing * 1.8)
+  // Don't indent anything in block quotes
+  show quote.where(block: true): set par(first-line-indent: 0em)
+
   /* Improved figure display */
   // Add space above and below
   show figure: f => { [#v(leading) #f #v(leading) ] }
