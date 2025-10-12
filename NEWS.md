@@ -1,3 +1,7 @@
+## 1.4.3
+
+- Add space around math blocks
+
 ## 1.4.2
 
 - Fix counter resetting in appendices
