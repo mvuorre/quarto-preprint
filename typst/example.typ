@@ -76,11 +76,16 @@ This is an example *Typst* document using the _Typst template_ for the `quarto-p
 
 == Equation
 
-#lorem(50)
+#lorem(30)
 
-See @eq-1.
+An example equation is show in @eq-1.
 
-$ pi h (D^2 - d^2) / 4 $<eq-1>
+$
+  pi h (D^2 - d^2) / 4, \
+  1 + 1 = 2
+$<eq-1>
+
+This line helps to show how much spacing there is around equations
 
 == Code
 

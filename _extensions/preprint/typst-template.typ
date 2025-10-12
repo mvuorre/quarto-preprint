@@ -155,12 +155,17 @@
     // Space between list items
     set par(leading: 0.48em)
     // Space around whole list
-    set block(spacing: spacing * 1.2, inset: (left: first-line-indent, right: first-line-indent))
+    set block(
+      spacing: spacing * 1.2,
+      inset: (left: first-line-indent, right: first-line-indent),
+    )
     it
   }
 
   // Number equations
   set math.equation(numbering: mathnumbering)
+  // Add space around math blocks
+  show math.equation.where(block: true): set block(spacing: spacing * 1.6)
 
   /* Improved figure display */
   // Add space above and below
