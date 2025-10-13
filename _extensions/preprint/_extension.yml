@@ -22,3 +22,4 @@ contributes:
       abstract-title: ""
       filters:
         - _extensions/kapsner/authors-block/authors-block.lua
+        - _extensions/kapsner/authors-block/author-footnote.lua

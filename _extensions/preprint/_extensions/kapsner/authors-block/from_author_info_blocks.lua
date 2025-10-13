@@ -29,15 +29,10 @@ local List = require 'pandoc.List'
 local utils = require 'pandoc.utils'
 local stringify = utils.stringify
 
--- taken from https://github.com/pandoc/lua-filters/blob/1660794b991c3553968beb993f5aabb99b317584/author-info-blocks/author-info-blocks.lua
-local default_marks
+-- Simplified for docx-only use
 local default_marks = {
-  corresponding_author = FORMAT == 'latex'
-    and {pandoc.RawInline('latex', '*')}
-    or {pandoc.Str '✉'},
-  equal_contributor = FORMAT == 'latex'
-    and {pandoc.RawInline('latex', '$\\dagger{}$')}
-    or {pandoc.Str '*'},
+  corresponding_author = {pandoc.Str '*'},
+  equal_contributor = {pandoc.Str '†'},
 }
 M.default_marks = default_marks
 
@@ -50,16 +45,14 @@ local function is_equal_contributor(author)
   return nil
 end
 
--- taken from https://github.com/pandoc/lua-filters/blob/1660794b991c3553968beb993f5aabb99b317584/author-info-blocks/author-info-blocks.lua
 --- Create equal contributors note.
 local function create_equal_contributors_block(authors, mark)
   local has_equal_contribs = List:new(authors):find_if(is_equal_contributor)
   if not has_equal_contribs then
     return nil
   end
+  -- Don't include superscript in text - it will be the footnote number
   local contributors = {
-    pandoc.Superscript(mark'equal_contributor'),
-    pandoc.Space(),
     pandoc.Str 'These authors contributed equally to this work.'
   }
   return List:new{pandoc.Para(contributors)}
@@ -111,9 +104,8 @@ local function create_correspondence_blocks(authors, mark)
   if #corresponding_authors == 0 then
     return nil
   end
+  -- Don't include superscript - it will be the footnote number
   local correspondence = List:new{
-    pandoc.Superscript(mark'corresponding_author'),
-    pandoc.Space(),
     pandoc.Str'Correspondence:',
     pandoc.Space()
   }
@@ -147,15 +139,10 @@ local function author_inline_generator (get_mark)
     if is_corresponding_author(author) then
       author_marks[#author_marks + 1] = get_mark 'corresponding_author'
     end
-    -- modified by @kapsner
-    if FORMAT:match 'latex' then
-      author.name.literal[#author.name.literal + 1] = pandoc.Superscript(intercalate(author_marks, {pandoc.Str ','}))
-      return author
-    else
-      local res = List.clone(author.name.literal)
-      res[#res + 1] = pandoc.Superscript(intercalate(author_marks, {pandoc.Str ','}))
-      return res
-    end
+    -- Simplified for docx-only use
+    local res = List.clone(author.name.literal)
+    res[#res + 1] = pandoc.Superscript(intercalate(author_marks, {pandoc.Str ','}))
+    return res
   end
 end
 M.author_inline_generator = author_inline_generator
