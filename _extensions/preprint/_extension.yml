@@ -15,3 +15,10 @@ contributes:
         - definitions.typ
       filters:
         - _extensions/christopherkenny/typst-function/typst-function.lua
+    docx:
+      reference-doc: reference.docx
+      toc: false
+      number-sections: true
+      abstract-title: ""
+      filters:
+        - _extensions/kapsner/authors-block/authors-block.lua
