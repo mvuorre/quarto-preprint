@@ -30,7 +30,7 @@ citeproc: true
 bibliography: bibliography.bib
 csl: https://www.zotero.org/styles/apa
 authornote: |
-  Created with Quarto `r quarto::quarto_version()` and *preprint-typst* `r yaml::read_yaml('_extensions/preprint/_extension.yml')$version` on `r Sys.Date()`.
+  Created with Quarto {{< version >}} and *preprint-typst* `r yaml::read_yaml('_extensions/preprint/_extension.yml')$version` on `r Sys.Date()`.
 date: "`r Sys.Date()`"
 knitr:
   opts_chunk:
