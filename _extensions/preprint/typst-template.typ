@@ -87,7 +87,7 @@
   // Typography settings
   lang: "en",
   region: "US",
-  font: ("Libertinus Serif", "Times", "Times New Roman", "Arial"),
+  font: "libertinus serif",
   monofont: "Dejavu Sans Mono",
   fontsize: 11pt,
   title-size: 1.5em,

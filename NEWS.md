@@ -2,6 +2,7 @@
 
 - Add space around math blocks
 - Reduce space around block quotes
+- Suggest only one font included in Typst
 
 ## 1.4.2
 
