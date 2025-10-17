@@ -34,8 +34,11 @@ examples/example-jou-p3.png: examples/example-jou.pdf
 examples: examples/example.png examples/example-jou.png examples/example-jou-p2.png examples/example-jou-p3.png examples/example-dracula.pdf _extensions/preprint/typst-template.typ
 
 # Tests
-test-local: clean
+test-local-use: clean
 	mkdir -p tests/local && cd tests/local && quarto use template ../../. --no-prompt && quarto render
+
+test-local-add: clean
+	mkdir -p tests/local/add && cd tests/local && quarto create project default add --no-prompt --no-open && cd add && quarto add ../../../. --no-prompt
 
 test-remote: clean
 	mkdir -p tests/remote && cd tests/remote && quarto use template mvuorre/quarto-preprint --no-prompt && quarto render
