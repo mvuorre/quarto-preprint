@@ -44,6 +44,12 @@ format:
 
 # Results
 
+:::: {.place arguments='top, scope: "parent", float: true'}
+
+Full page width content goes here.
+
+::::
+
 # Discussion
 
 # References
