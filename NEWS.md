@@ -3,6 +3,7 @@
 - Add space around math blocks
 - Reduce space around block quotes
 - Suggest only one font included in Typst
+- Include page-width content example in template document
 
 ## 1.4.2
 
