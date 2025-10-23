@@ -35,7 +35,7 @@ examples: examples/example.png examples/example-jou.png examples/example-jou-p2.
 
 # Tests
 test-local-use: clean
-	mkdir -p tests/local && cd tests/local && quarto use template ../../. --no-prompt && quarto render
+	mkdir -p tests/local/use && cd tests/local/use && quarto use template ../../../. --no-prompt && quarto render
 
 test-local-add: clean
 	mkdir -p tests/local/add && cd tests/local && quarto create project default add --no-prompt --no-open && cd add && quarto add ../../../. --no-prompt
