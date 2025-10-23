@@ -123,7 +123,7 @@ Typst has its [own citation processing system](https://quarto.org/docs/authoring
 
 ### Using Pandoc (recommended)
 
-However, to allow better bibliography customization via the [`csl`](https://quarto.org/docs/output-formats/typst.html#bibliography) YAML variable, and use of Quarto’s [`#refs` div](https://quarto.org/docs/authoring/citations.html#bibliography-generation), you must use Pandoc's citation processing with `citeproc: true`. When `citeproc: true`, you can load a CSL file directly from an URL, and add the References section anywhere in your document (e.g. before any appendices) using Quarto’s [`#refs` div]:
+However, to allow better bibliography customization via the [`csl`](https://quarto.org/docs/output-formats/typst.html#bibliography) YAML variable, and use of Quarto’s [`#refs` div](https://quarto.org/docs/authoring/citations.html#bibliography-generation), you must use Pandoc's citation processing with `citeproc: true`. When `citeproc: true`, you can load a CSL file directly from an URL, and add the References section anywhere in your document (e.g. before any appendices) using Quarto’s `#refs` div:
 
 ``` md
 # References
