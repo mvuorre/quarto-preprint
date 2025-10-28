@@ -8,7 +8,6 @@ examples/
 example.qmd
 index.qmd
 Makefile
-bibliography-example.bib
 docs/
 *.png
 *.svg
@@ -16,5 +15,3 @@ docs/
 tests/
 NEWS.md
 README.md
-# Standalone Typst package
-typst/

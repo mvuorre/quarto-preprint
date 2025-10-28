@@ -10,7 +10,7 @@ contributes:
       functions: [place]
       template: template.typ
       template-partials:
-        - typst-template.typ
+        - typst/typst-template.typ
         - typst-show.typ
         - definitions.typ
       filters:
