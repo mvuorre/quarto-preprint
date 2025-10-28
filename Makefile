@@ -1,21 +1,18 @@
-.PHONY: all examples test-use test-add deps release clean
+.PHONY: all examples deps release clean
 
-all: _extensions/preprint/typst-template.typ examples
-
-_extensions/preprint/typst-template.typ: typst/lib.typ
-	cat typst/lib.typ > _extensions/preprint/typst-template.typ
+all: examples
 
 # Generate example PDFs and PNG previews
-examples/example.pdf: example.qmd _extensions/preprint/typst-template.typ
+examples/example.pdf: example.qmd
 	mkdir -p examples
 	quarto render $< -M line-number:true --output-dir examples --output example.pdf --to preprint-typst
 
-examples/example-jou.pdf: example.qmd _extensions/preprint/typst-template.typ
+examples/example-jou.pdf: example.qmd
 	mkdir -p examples
 	quarto render $< -M theme:jou --output-dir examples --output example-jou.pdf --to preprint-typst
 
 # Easter egg
-examples/example-dracula.pdf: example.qmd _extensions/preprint/typst-template.typ
+examples/example-dracula.pdf: example.qmd
 	mkdir -p examples
 	quarto render $< -M theme:dracula --output-dir examples --output example-dracula.pdf --to preprint-typst
 
@@ -31,7 +28,7 @@ examples/example-jou-p2.png: examples/example-jou.pdf
 examples/example-jou-p3.png: examples/example-jou.pdf
 	pdftoppm -png -f 3 -l 3 -singlefile -r 100 $< examples/example-jou-p3
 
-examples: examples/example.png examples/example-jou.png examples/example-jou-p2.png examples/example-jou-p3.png examples/example-dracula.pdf _extensions/preprint/typst-template.typ
+examples: examples/example.png examples/example-jou.png examples/example-jou-p2.png examples/example-jou-p3.png examples/example-dracula.pdf _extensions/preprint/typst/typst-template.typ
 
 # Tests
 test-local-use: clean

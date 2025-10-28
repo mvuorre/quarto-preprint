@@ -1,4 +1,4 @@
-#import "lib.typ": appendix, preprint
+#import "typst-template.typ": appendix, preprint
 
 #show: preprint.with(
   theme: "jou",
