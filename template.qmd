@@ -26,6 +26,7 @@ authornote: |
   Author notes go here.
 date: last-modified
 bibliography: bibliography.bib
+csl: https://www.zotero.org/styles/apa
 format:
   preprint-typst:
     wordcount: true
