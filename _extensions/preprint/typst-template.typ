@@ -74,7 +74,6 @@
   date: none,
   corresponding-text: "Send correspondence to:",
   // Layout settings (can override theme defaults)
-  leading: 0.5em,
   spacing: 0.6em,
   first-line-indent: 1.8em,
   all: false,
@@ -92,10 +91,17 @@
   lang: "en",
   region: "US",
   font: "libertinus serif",
-  monofont: "Dejavu Sans Mono",
+  codefont: none,
   fontsize: 11pt,
   title-size: 1.5em,
   subtitle-size: 1.25em,
+  heading-family: none,
+  heading-weight: "bold",
+  heading-style: "normal",
+  heading-color: none,
+  heading-line-height: none,
+  mathfont: none,
+  linestretch: 10 / 13,
   // Structure settings
   sectionnumbering: none,
   pagenumbering: "1",
@@ -142,10 +148,12 @@
   /* Document settings */
   set document(
     title: title,
-    author: if authors != none { authors.map(a => str(a.name.text)) } else { () },
     description: abstract,
     keywords: if categories != none { categories.text } else { "" },
   )
+  set document(
+    author: authors.map(author => content-to-string(author.name)).join(", ", last: " & "),
+  ) if authors != none and authors != ()
   // Link and cite colors
   show link: set text(fill: linkcolor)
   // citecolor has no effect if `citeproc: true`
@@ -161,7 +169,7 @@
 
   // Customize Typst bibliography (no effect if using citeproc)
   set bibliography(title: bibliography-title, style: bibliographystyle)
-  show bibliography: set par(spacing: spacing, leading: leading)
+  show bibliography: set par(spacing: spacing, leading: linestretch * 0.65em)
 
   // List spacing
   show list: it => {
@@ -187,7 +195,7 @@
 
   /* Improved figure display */
   // Add space above and below
-  show figure: f => { [#v(leading) #f #v(leading) ] }
+  show figure: f => { [#v(linestretch * 0.65em) #f #v(linestretch * 0.65em) ] }
   // Set block width to align caption to page/column
   // Target figure only as could otherwise mess with table formatting
   show figure.where(kind: "quarto-float-fig"): set block(width: 100%)
@@ -222,17 +230,16 @@
   /* Typography settings */
 
   // Paragraph settings
-  set par(justify: true, leading: leading, spacing: spacing, first-line-indent: (amount: first-line-indent, all: all))
+  set par(justify: true, leading: linestretch * 0.65em, spacing: spacing, first-line-indent: (
+    amount: first-line-indent,
+    all: all,
+  ))
   set par.line(numbering: linenumbering)
 
   // Text settings
-  set text(
-    lang: lang,
-    region: region,
-    font: font,
-    size: fontsize,
-    fill: fontcolor,
-  )
+  set text(lang: lang, region: region, size: fontsize, fill: fontcolor)
+  set text(font: font) if font != none
+  show math.equation: set text(font: mathfont) if mathfont != none
   // Strong/bold text
   show strong: it => {
     if strongcolor != none {
@@ -242,14 +249,7 @@
     }
   }
   // Code font
-  show raw: set text(font: monofont)
-  show raw.where(block: true): it => {
-    if monobackgroundcolor != none {
-      block(fill: monobackgroundcolor, width: 100%, inset: 8pt, radius: 2pt, it)
-    } else {
-      block(fill: luma(230), width: 100%, inset: 8pt, radius: 2pt, it)
-    }
-  }
+  show raw: set text(font: codefont) if codefont != none
 
   // Headers
   set heading(numbering: sectionnumbering)
