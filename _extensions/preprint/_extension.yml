@@ -8,10 +8,8 @@ contributes:
   formats:
     typst:
       functions: [place]
-      template: template.typ
       template-partials:
         - typst-template.typ
         - typst-show.typ
-        - definitions.typ
       filters:
         - _extensions/christopherkenny/typst-function/typst-function.lua
