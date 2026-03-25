@@ -1,9 +1,0 @@
-[package]
-name = "preprint"
-version = "1.1.0"
-entrypoint = "typst-template.typ"
-authors = ["Matti Vuorre"]
-license = "MIT"
-description = "Academic preprint template for Typst"
-repository = "https://github.com/mvuorre/quarto-preprint"
-keywords = ["template", "academic", "preprint", "paper"]
