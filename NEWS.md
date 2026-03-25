@@ -1,8 +1,21 @@
-## 1.4.4
+## 1.5.0
 
-In progress
+### Breaking changes
+
+- Rename `monofont` to `codefont`
+- Remove `leading`; use `linestretch`
+
+### Other changes
 
 - Clean source (remove independent Typst package)
+- Include [new Quarto variables](https://quarto.org/docs/blog/posts/2026-03-24-1.9-release/#improvements-to-typst-support):
+  - `thanks`
+  - `mathfont`
+  - `codefont`
+  - `linestretch`
+  - `citecolor`
+  - `filecolor`
+- Support some Quarto brand variables
 
 ## 1.4.3
 
