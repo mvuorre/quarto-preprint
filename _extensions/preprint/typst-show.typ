@@ -65,6 +65,15 @@ $if(section-numbering)$
 $endif$
   pagenumbering: $if(page-numbering)$"$page-numbering$"$else$none$endif$,
   linenumbering: $if(line-number)$"1"$else$none$endif$,
+$if(linkcolor)$
+  linkcolor: $linkcolor$,
+$endif$
+$if(citecolor)$
+  citecolor: $citecolor$,
+$endif$
+$if(filecolor)$
+  filecolor: $filecolor$,
+$endif$
 $if(toc)$
   toc: $toc$,
 $endif$
@@ -89,9 +98,6 @@ $if(first-line-indent)$
 $endif$
 $if(all)$
   all: $all$,
-$endif$
-$if(linkcolor)$
-  linkcolor: $linkcolor$,
 $endif$
 $if(fontcolor)$
   fontcolor: $fontcolor$,
