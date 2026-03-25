@@ -78,6 +78,8 @@
   first-line-indent: 1.8em,
   all: false,
   linkcolor: blue,
+  citecolor: none,
+  filecolor: none,
   fontcolor: black,
   backgroundcolor: white,
   monobackgroundcolor: none,
@@ -145,7 +147,16 @@
   )
   // Link and cite colors
   show link: set text(fill: linkcolor)
-  show cite: set text(fill: linkcolor) // No effect when `citeproc: true`
+  // citecolor has no effect if `citeproc: true`
+  show cite: set text(fill: if citecolor != none { citecolor } else { linkcolor })
+  show ref: set text(fill: citecolor) if citecolor != none
+  show link: this => {
+    if filecolor != none and type(this.dest) == label {
+      text(this, fill: filecolor)
+    } else {
+      text(this)
+    }
+  }
 
   // Customize Typst bibliography (no effect if using citeproc)
   set bibliography(title: bibliography-title, style: bibliographystyle)
