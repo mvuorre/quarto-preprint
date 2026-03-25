@@ -64,6 +64,9 @@ $endif$
 $if(section-numbering)$
   sectionnumbering: "$section-numbering$",
 $endif$
+$if(thanks)$
+  thanks: [$thanks$],
+$endif$
   pagenumbering: $if(page-numbering)$"$page-numbering$"$else$none$endif$,
   linenumbering: $if(line-number)$"1"$else$none$endif$,
 $if(linkcolor)$

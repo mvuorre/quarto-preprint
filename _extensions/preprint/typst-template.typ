@@ -66,6 +66,7 @@
   affiliations: none,
   abstract-title: none,
   abstract: none,
+  thanks: none,
   categories: none,
   wordcount: none,
   authornote: none,
@@ -306,6 +307,14 @@
   let first_equal_idx = if equal_authors.len() > 1 {
     authors.position(a => equal_authors.contains(a))
   } else { none }
+
+  let combined_authornote = if authornote != none and thanks != none {
+    [#authornote #h(0.5em) #thanks]
+  } else if authornote != none {
+    authornote
+  } else {
+    thanks
+  }
 
   // Construct author display with inline footnotes
   let author_display = if authors != none {
