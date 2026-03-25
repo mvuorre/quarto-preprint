@@ -58,7 +58,7 @@ format:
 
 ## Code
 
-Code (@lst-code) font can be specified with the `monofont` variable.
+Code (@lst-code) font can be specified with the `codefont` variable.
 
 ```{r}
 #| label: code-example

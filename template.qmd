@@ -35,7 +35,7 @@ format:
     # theme: jou                   # Journal theme (2-column)
     # line-number: true            # Line numbering
     # fontsize: 11pt               # Font size
-    # leading: 0.6em               # Line spacing
+    # linestretch: 1.1             # Line spacing
     # first-line-indent: 1.8em     # Paragraph indent
 ---
 

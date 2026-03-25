@@ -87,18 +87,24 @@ Front matter variables can be shared across output formats (such as `toc` above)
 
 ## Typography
 
-- `monofont` (string) - Font family for code \[[Quarto](https://quarto.org/docs/reference/formats/html.html#fonts)\]
-  - Example: `monofont: "Monacy"`
+- `mathfont` (string) - Font family for equations \[[Quarto](https://quarto.org/docs/output-formats/typst.html)\]
+  - Example: `mathfont: "New Computer Modern Math"`
+- `codefont` (string) - Font family for code \[[Quarto](https://quarto.org/docs/output-formats/typst.html)\]
+  - Example: `codefont: "Monacy"`
 - `linkcolor` (string) - Color for hyperlinks \[[Quarto](https://quarto.org/docs/output-formats/html-themes.html#basic-options), [Typst](https://typst.app/docs/reference/visualize/color/)\]
   - Example: `linkcolor: "blue"` or `linkcolor: "#0066cc"`
+- `citecolor` (string) - Color for citations and cross-references when Typst handles them \[[Quarto](https://quarto.org/docs/output-formats/typst.html)\]
+  - Example: `citecolor: "#0066cc"`
+- `filecolor` (string) - Color for internal label links \[[Quarto](https://quarto.org/docs/output-formats/typst.html)\]
+  - Example: `filecolor: "#444444"`
 
 ## Layout
 
 - `line-number` (boolean) - Enable line numbers \[[Typst](https://typst.app/docs/reference/model/par/#definitions-line-numbering)\]
   - Example: `line-number: true`
   - This is simplified to a boolean instead of allowing custom numbering as per Typst.
-- `leading` (string) - Line height/spacing between lines \[[Typst](https://typst.app/docs/reference/model/par/#parameters-leading)\]
-  - Example: `leading: "0.5em"`
+- `linestretch` (number) - Multiplier for line spacing \[[Quarto](https://quarto.org/docs/output-formats/typst.html), [Typst](https://typst.app/docs/reference/model/par/#parameters-leading)\]
+  - Example: `linestretch: 1.1`
 - `spacing` (string) - Vertical spacing between paragraphs \[[Typst](https://typst.app/docs/reference/model/par/#parameters-spacing)\]
   - Example: `spacing: "0.6em"`
 - `first-line-indent` (string) - Indentation for paragraph first lines \[[Typst](https://typst.app/docs/reference/model/par/#parameters-first-line-indent)\]
