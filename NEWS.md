@@ -1,3 +1,9 @@
+## 1.4.4
+
+In progress
+
+- Clean source (remove independent Typst package)
+
 ## 1.4.3
 
 - Add space around math blocks

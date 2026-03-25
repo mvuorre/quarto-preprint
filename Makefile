@@ -28,7 +28,7 @@ examples/example-jou-p2.png: examples/example-jou.pdf
 examples/example-jou-p3.png: examples/example-jou.pdf
 	pdftoppm -png -f 3 -l 3 -singlefile -r 100 $< examples/example-jou-p3
 
-examples: examples/example.png examples/example-jou.png examples/example-jou-p2.png examples/example-jou-p3.png examples/example-dracula.pdf _extensions/preprint/typst/typst-template.typ
+examples: examples/example.png examples/example-jou.png examples/example-jou-p2.png examples/example-jou-p3.png examples/example-dracula.pdf _extensions/preprint/typst-template.typ
 
 # Tests
 test-local-use: clean
