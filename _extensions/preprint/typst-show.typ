@@ -25,12 +25,13 @@ $if(by-author)$
 $endif$
 $if(affiliations)$
   affiliations: (
-    $for(affiliations)$(
+$for(affiliations)$
+    (
       id: "$it.id$",
       name: "$it.name$",
-      $if(it.department)$department: "$it.department$"$endif$
+      $if(it.department)$department: "$it.department$",$endif$
     ),
-    $endfor$
+$endfor$
   ),
 $endif$
 $if(date)$
