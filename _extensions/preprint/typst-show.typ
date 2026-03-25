@@ -44,6 +44,7 @@ $if(region)$
 $endif$
 $if(abstract)$
   abstract: [$abstract$],
+  abstract-title: "$labels.abstract$",
 $endif$
 $if(papersize)$
   paper: "$papersize$",

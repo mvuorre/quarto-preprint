@@ -64,6 +64,7 @@
   subtitle: none,
   authors: (),
   affiliations: none,
+  abstract-title: none,
   abstract: none,
   categories: none,
   wordcount: none,
@@ -385,6 +386,9 @@
       #set text(size: 0.92em)
       #set par(first-line-indent: 0em)
       #if abstract != none {
+          if abstract-title != none {
+            block()[#text(weight: "semibold")[#abstract-title] #h(1em) #abstract]
+          } else {
         abstract
       }
       #if categories != none {
