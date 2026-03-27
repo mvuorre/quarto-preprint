@@ -1,3 +1,8 @@
+## 1.5.1
+
+- Hide the abstract title by default
+- Add `hide-abstract-title: false` to show abstract label
+
 ## 1.5.0
 
 ### Breaking changes
