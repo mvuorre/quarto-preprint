@@ -61,19 +61,25 @@
   )
 
   if is-box {
+    let box-title-fill = luma(238)
     let box-title-block = block(
-      fill: luma(238),
+      fill: box-title-fill,
       width: 100%,
       inset: 8pt,
       new_title_content,
     )
     let box-body = block(inset: 1pt, width: 100%, below: 0pt, box-title-block)
     if old_callout.body.children.len() > 1 {
-      box-body += old_callout.body.children.at(1)
+      let old_body_block = old_callout.body.children.at(1)
+      box-body += block(
+        inset: (top: 0pt, bottom: 1pt, left: 1pt, right: 1pt),
+        width: 100%,
+        old_body_block.body,
+      )
     }
     align(left, block(
       breakable: false,
-      fill: luma(248),
+      fill: box-title-fill,
       stroke: (paint: luma(170), thickness: 0.5pt, cap: "round"),
       width: 100%,
       radius: 0pt,
