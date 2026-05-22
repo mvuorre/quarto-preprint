@@ -27,7 +27,7 @@ A Quarto extension for creating PDF documents with Typst
 
 ## Add to existing Quarto project
 
-``` bash
+```bash
 quarto add mvuorre/quarto-preprint
 ```
 
@@ -35,7 +35,7 @@ This creates a `_extensions/preprint/` directory in your project. The *preprint-
 
 ## Start new Quarto project
 
-``` bash
+```bash
 quarto use template mvuorre/quarto-preprint
 ```
 
@@ -47,7 +47,7 @@ Note that *quarto-preprint* is the name of the Quarto extension, and *preprint-t
 
 Quarto document output is configured through YAML front matter [metadata](https://quarto.org/docs/authoring/front-matter.html). To use *preprint-typst* as the [output format](https://quarto.org/docs/output-formats/all-formats.html), include `format: preprint-typst` in the front matter. Here is a minimal example that specifies a title, a table of contents, and two output formats:
 
-``` yaml
+```yaml
 ---
 title: "My Paper"
 toc: true
@@ -133,7 +133,7 @@ Typst has its [own citation processing system](https://quarto.org/docs/authoring
 
 However, to allow better bibliography customization via the [`csl`](https://quarto.org/docs/output-formats/typst.html#bibliography) YAML variable, and use of Quarto’s [`#refs` div](https://quarto.org/docs/authoring/citations.html#bibliography-generation), you must use Pandoc's citation processing with `citeproc: true`. When `citeproc: true`, you can load a CSL file directly from an URL, and add the References section anywhere in your document (e.g. before any appendices) using Quarto’s `#refs` div:
 
-``` md
+```md
 # References
 
 ::: {#refs}
@@ -157,11 +157,24 @@ Quarto documents require citations in a separate .bib file. The [vscode-zotero](
 
 # Extra features
 
+## Boxes
+
+In `preprint-typst`, [Quarto note callouts](https://quarto.org/docs/authoring/callouts.html) render as understated grayscale boxes and `@nte-*` references are labeled as boxes.
+
+```md
+::: {#nte-boxes .callout-note icon=false}
+## This is a box
+Use `icon=false` to show the box without an icon.
+:::
+
+See @nte-boxes.
+```
+
 ## Full-width content
 
 You can include page-wide figures (or any other content) in documents that have more than one column. To do so, wrap the content in a [Quarto div](https://quarto.org/docs/authoring/markdown-basics.html#sec-divs-and-spans) like this:
 
-``` md
+```md
 ::: {.place arguments='top, scope: "parent", float: true'}
 Any content here will span the whole page.
 :::
@@ -189,7 +202,7 @@ Note: The function only takes effect in Typst documents, other formats (e.g. HT
 
 To include an appendix, include the following [raw Typst](https://quarto.org/docs/output-formats/typst.html#raw-typst) block in your Quarto document, followed by your appendix content:
 
-```` md
+````md
 ```{=typst}
 #show: appendix.with()
 ```

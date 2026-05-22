@@ -18,6 +18,7 @@
     counter(figure.where(kind: "quarto-float-lst")).update(0)
 
     // Reset callout counters (for each callout type used)
+    counter(figure.where(kind: "quarto-callout-Box")).update(0)
     counter(figure.where(kind: "quarto-callout-Note")).update(0)
     counter(figure.where(kind: "quarto-callout-Warning")).update(0)
     counter(figure.where(kind: "quarto-callout-Tip")).update(0)

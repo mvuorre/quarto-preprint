@@ -11,5 +11,4 @@ site_libs/
 _variables.yml
 .claude/
 _freeze/
-
 **/*.quarto_ipynb

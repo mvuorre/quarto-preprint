@@ -9,6 +9,9 @@ contributes:
     typst:
       hide-abstract-title: true
       functions: [place]
+      include-in-header:
+        # Override "Note" Quarto callouts with simplified "Boxes"
+        - typst-callouts.typ
       template-partials:
         - typst-template.typ
         - typst-show.typ
