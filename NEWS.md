@@ -1,3 +1,20 @@
+## 1.6.0
+
+### Implement Boxes
+
+Use 
+
+```md
+::: {#nte-boxes .callout-note icon=false}
+## This is a box
+Use `icon=false` to show the box without an icon.
+:::
+
+See @nte-boxes.
+```
+
+To display and cross-reference a "Box" commonly used to highlight content in academic articles. The implementation hijacks the standard "note"-type Quarto callout, so is directly interoperable with other formats and does not affect them, which will render the boxes as standard "note" callouts.
+
 ## 1.5.1
 
 - Hide the abstract title by default

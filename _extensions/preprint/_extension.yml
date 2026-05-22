@@ -2,7 +2,7 @@ title: Preprint
 authors:
   - name: Matti Vuorre
     orcid: 0000-0001-5052-066X
-version: 1.5.1
+version: 1.6.0
 quarto-required: ">=1.9.36"
 contributes:
   formats:
