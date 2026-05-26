@@ -81,11 +81,6 @@
   linkcolor: blue,
   citecolor: none,
   filecolor: none,
-  fontcolor: black,
-  backgroundcolor: white,
-  monobackgroundcolor: none,
-  headingcolor: none,
-  strongcolor: none,
   margin: (x: 2.8cm, y: 2.6cm),
   paper: "a4",
   // Typography settings
@@ -119,31 +114,11 @@
   bibliographystyle: "apa",
   doc,
 ) = {
-  // Theme configurations
-  let themes = (
-    jou: (margin: (x: 2cm, y: 2.6cm), fontsize: 10pt, cols: 2),
-    dracula: (
-      backgroundcolor: rgb("#282A36"),
-      fontcolor: rgb("#F8F8F2"),
-      linkcolor: rgb("#FF5555"),
-      monobackgroundcolor: rgb("#44475A"),
-      headingcolor: rgb("#BD93F9"),
-      strongcolor: rgb("#50FA7B"),
-    ),
-  )
-
-  // Apply theme if it exists
-  if theme in themes {
-    let config = themes.at(theme)
-    margin = config.at("margin", default: margin)
-    fontsize = config.at("fontsize", default: fontsize)
-    cols = config.at("cols", default: cols)
-    linkcolor = config.at("linkcolor", default: linkcolor)
-    fontcolor = config.at("fontcolor", default: fontcolor)
-    backgroundcolor = config.at("backgroundcolor", default: backgroundcolor)
-    monobackgroundcolor = config.at("monobackgroundcolor", default: monobackgroundcolor)
-    headingcolor = config.at("headingcolor", default: headingcolor)
-    strongcolor = config.at("strongcolor", default: strongcolor)
+  // Apply journal theme defaults
+  if theme == "jou" {
+    margin = (x: 2cm, y: 2.6cm)
+    fontsize = 10pt
+    cols = 2
   }
 
   /* Document settings */
@@ -224,7 +199,6 @@
       ]
     },
     footer-descent: 10%,
-    fill: backgroundcolor,
   )
   set columns(gutter: col-gutter)
 
@@ -238,25 +212,14 @@
   set par.line(numbering: linenumbering)
 
   // Text settings
-  set text(lang: lang, region: region, size: fontsize, fill: fontcolor)
+  set text(lang: lang, region: region, size: fontsize)
   set text(font: font) if font != none
   show math.equation: set text(font: mathfont) if mathfont != none
-  // Strong/bold text
-  show strong: it => {
-    if strongcolor != none {
-      text(fill: strongcolor, it)
-    } else {
-      it
-    }
-  }
   // Code font
   show raw: set text(font: codefont) if codefont != none
 
   // Headers
   set heading(numbering: sectionnumbering)
-  if headingcolor != none {
-    show heading: set text(fill: headingcolor)
-  }
   show heading.where(level: 1): it => block(width: 100%, below: 0.8em, above: 1em)[
     #set align(center)
     #set text(size: fontsize * 1.1, weight: "bold")

@@ -135,21 +135,6 @@ $endif$
 $if(all)$
   all: $all$,
 $endif$
-$if(fontcolor)$
-  fontcolor: $fontcolor$,
-$endif$
-$if(backgroundcolor)$
-  backgroundcolor: $backgroundcolor$,
-$endif$
-$if(monobackgroundcolor)$
-  monobackgroundcolor: $monobackgroundcolor$,
-$endif$
-$if(headingcolor)$
-  headingcolor: $headingcolor$,
-$endif$
-$if(strongcolor)$
-  strongcolor: $strongcolor$,
-$endif$
 $if(citation)$
   citation: (
     type: "$citation.type$",
