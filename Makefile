@@ -3,11 +3,11 @@
 all: examples
 
 # Generate example PDFs and PNG previews
-examples/example.pdf: example.qmd
+examples/example.pdf: example.qmd _extensions/preprint/typst-template.typ
 	mkdir -p examples
 	quarto render $< --to preprint-typst --output-dir examples
 
-examples/example-jou.pdf: example.qmd
+examples/example-jou.pdf: example.qmd _extensions/preprint/typst-template.typ
 	mkdir -p examples
 	quarto render $< -M theme:jou --output-dir examples --output example-jou.pdf --to preprint-typst
 
@@ -23,7 +23,7 @@ examples/example-jou-p2.png: examples/example-jou.pdf
 examples/example-jou-p3.png: examples/example-jou.pdf
 	pdftoppm -png -f 3 -l 3 -singlefile -r 100 $< examples/example-jou-p3
 
-examples: examples/example.png examples/example-jou.png examples/example-jou-p2.png examples/example-jou-p3.png _extensions/preprint/typst-template.typ
+examples: examples/example.png examples/example-jou.png examples/example-jou-p2.png examples/example-jou-p3.png
 
 # Tests
 test-local-use: clean
