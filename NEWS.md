@@ -1,3 +1,9 @@
+## 1.6.1
+
+Bundle typst packages to enable offline use:
+- Drop typst/fontawesome dependency and use inline ORCID logo SVG instead
+- Bundle typst/wordometer
+
 ## 1.6.0
 
 ### Implement Boxes
