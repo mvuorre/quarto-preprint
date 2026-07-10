@@ -1,3 +1,9 @@
+## 1.6.2
+
+- Enable citations within author notes
+- Remove apa.csl URL from example and template (renders without internet connection)
+- Improvements to test and example rendering workflow
+
 ## 1.6.1
 
 Bundle typst packages to enable offline use:
