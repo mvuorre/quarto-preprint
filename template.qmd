@@ -26,17 +26,11 @@ authornote: |
   Author notes go here.
 date: last-modified
 bibliography: bibliography.bib
-csl: https://www.zotero.org/styles/apa
 format:
   preprint-typst:
     wordcount: true
-    citeproc: true
-    # Common options - uncomment to use
-    # theme: jou                   # Journal theme (2-column)
-    # line-number: true            # Line numbering
-    # fontsize: 11pt               # Font size
-    # linestretch: 1.1             # Line spacing
-    # first-line-indent: 1.8em     # Paragraph indent
+    include-before-body:
+      - text: "#show <refs>: set par(hanging-indent: 1.4em)"
 ---
 
 # Introduction

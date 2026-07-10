@@ -28,7 +28,6 @@ abstract: |
 categories: [Quarto, Typst, example, academic writing]
 citeproc: true
 bibliography: bibliography.bib
-csl: https://www.zotero.org/styles/apa
 authornote: |
   Created with Quarto {{< version >}} and *preprint-typst* `r yaml::read_yaml('_extensions/preprint/_extension.yml')$version` on `r Sys.Date()`.
 date: "`r Sys.Date()`"
@@ -38,10 +37,12 @@ knitr:
 format:
   preprint-typst:
     wordcount: true
+    include-before-body:
+      - text: "#show <refs>: set par(hanging-indent: 1.4em)"
 ---
 
 > "An article about computational science in a scientific publication is not the scholarship itself, it is merely advertising of the scholarship. The actual scholarship is the complete software development environment and the complete set of instructions which generated the figures."
->--Buckheit and Donoho (1995, paraphrasing Jon Claerbout)
+>--Buckheit and Donoho [-@buckheitWaveLabReproducibleResearch1995, paraphrasing Jon Claerbout]
 
 # Introduction
 
