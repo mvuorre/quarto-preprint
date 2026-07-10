@@ -1,0 +1,70 @@
+---
+title: Quarto callouts and boxes
+format:
+  preprint-typst:
+    keep-typ: true
+  html:
+    default
+---
+
+This smoke case checks the default callouts with icons: @nte-box-default,
+@wrn-warning-default, @imp-important-default, @cau-caution-default, and
+@tip-tip-default.
+
+It also checks simple callouts without icons: @nte-box-simple,
+@wrn-warning-simple, @imp-important-simple, @cau-caution-simple, and
+@tip-tip-simple.
+
+# Default Callouts
+
+::: {#nte-box-default .callout-note}
+## Box with default icon
+The note callout is rendered and cross-referenced as a box.
+:::
+
+::: {#wrn-warning-default .callout-warning}
+## Warning with default icon
+The warning callout keeps its warning label.
+:::
+
+::: {#imp-important-default .callout-important}
+## Important with default icon
+The important callout keeps its important label.
+:::
+
+::: {#cau-caution-default .callout-caution}
+## Caution with default icon
+The caution callout keeps its caution label.
+:::
+
+::: {#tip-tip-default .callout-tip}
+## Tip with default icon
+The tip callout keeps its tip label.
+:::
+
+# Simple Iconless Callouts
+
+::: {#nte-box-simple .callout-note appearance="simple" icon=false}
+## Box without icon
+The simple note callout is rendered and cross-referenced as a box.
+:::
+
+::: {#wrn-warning-simple .callout-warning appearance="simple" icon=false}
+## Warning without icon
+The simple warning callout keeps its warning label.
+:::
+
+::: {#imp-important-simple .callout-important appearance="simple" icon=false}
+## Important without icon
+The simple important callout keeps its important label.
+:::
+
+::: {#cau-caution-simple .callout-caution appearance="simple" icon=false}
+## Caution without icon
+The simple caution callout keeps its caution label.
+:::
+
+::: {#tip-tip-simple .callout-tip appearance="simple" icon=false}
+## Tip without icon
+The simple tip callout keeps its tip label.
+:::

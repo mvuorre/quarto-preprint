@@ -1,0 +1,51 @@
+---
+title: Lots of text to test layout. Including lots of text in the very long title. Multiple words.
+keywords: [one, two, three]
+author:
+  - name: Matti Vuorre
+    corresponding: true
+    orcid: 0000-0001-5052-066X
+    email: mjvuorre@uvt.nl
+    affiliations:
+      - ref: 2
+affiliations:
+  - id: 2
+    name: Tilburg University
+    department: Department of Social Psychology
+format:
+  preprint-typst:
+    include-before-body:
+      - text: "#show <refs>: set par(hanging-indent: 1.4em)"
+    theme: jou
+    keep-typ: true
+    citeproc: true
+    wordcount: true
+---
+
+```{r}
+#| echo: false
+
+x <- rnorm(10)
+```
+
+---
+abstract: |
+  {{< lipsum 1 >}}
+---
+
+# Introduction
+
+{{< lipsum 3 >}}
+
+## Detail
+
+{{< lipsum 1 >}}
+
+# Method
+
+{{< lipsum 5 >}}
+
+# References
+
+::: {#refs}
+:::

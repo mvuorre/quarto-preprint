@@ -1,31 +1,24 @@
-.PHONY: all examples deps release clean
+.PHONY: all examples test test-local-use test-local-add test-remote deps release clean
 
 all: examples
 
-# Generate example PDFs and PNG previews
-examples/example.pdf: example.qmd _extensions/preprint/typst-template.typ
+# Generate example PDFs and PNG previews. Always rebuilds.
+examples:
 	mkdir -p examples
-	quarto render $< --to preprint-typst --output-dir examples
+	quarto render example.qmd --to preprint-typst --output-dir examples
+	quarto render example.qmd --to preprint-typst -M theme:jou --output-dir examples --output example-jou.pdf
+	pdftoppm -png -singlefile -r 100 examples/example.pdf examples/example
+	pdftoppm -png -singlefile -r 100 examples/example-jou.pdf examples/example-jou
+	pdftoppm -png -f 2 -l 2 -singlefile -r 100 examples/example-jou.pdf examples/example-jou-p2
+	pdftoppm -png -f 3 -l 3 -singlefile -r 100 examples/example-jou.pdf examples/example-jou-p3
 
-examples/example-jou.pdf: example.qmd _extensions/preprint/typst-template.typ
-	mkdir -p examples
-	quarto render $< -M theme:jou --output-dir examples --output example-jou.pdf --to preprint-typst
+# Tests: render every tests/*/index.qmd; fail on first error.
+TESTS := $(wildcard tests/*/index.qmd)
 
-examples/example.png: examples/example.pdf
-	pdftoppm -png -singlefile -r 100 $< examples/example
+test:
+	@for f in $(TESTS); do echo "== $$f"; quarto render $$f || exit 1; done
 
-examples/example-jou.png: examples/example-jou.pdf
-	pdftoppm -png -singlefile -r 100 $< examples/example-jou
-
-examples/example-jou-p2.png: examples/example-jou.pdf
-	pdftoppm -png -f 2 -l 2 -singlefile -r 100 $< examples/example-jou-p2
-
-examples/example-jou-p3.png: examples/example-jou.pdf
-	pdftoppm -png -f 3 -l 3 -singlefile -r 100 $< examples/example-jou-p3
-
-examples: examples/example.png examples/example-jou.png examples/example-jou-p2.png examples/example-jou-p3.png
-
-# Tests
+# Installation smoke tests
 test-local-use: clean
 	mkdir -p tests/local/use && cd tests/local/use && quarto use template ../../../. --no-prompt && quarto render
 
@@ -52,4 +45,5 @@ release: examples NEWS.md _extensions/preprint/_extension.yml
 
 # Clean all intermediate files
 clean:
-	rm -rf *.pdf *.typ *.png *.html *_cache/ *_files/ *_libs/ tests/local/ docs/ .quarto examples/ _freeze/
+	rm -rf *.pdf *.typ *.png *.html *_cache/ *_files/ *_libs/ docs/ .quarto examples/ _freeze/
+	rm -rf tests/local/ tests/remote/ tests/*/*.pdf tests/*/*.typ tests/*/*.html tests/*/index_files/

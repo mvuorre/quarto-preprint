@@ -1,0 +1,19 @@
+---
+title: Do citations work in author notes?
+author:
+  - name: Matti Vuorre
+    corresponding: true
+    orcid: 0000-0001-5052-066X
+    email: mjvuorre@uvt.nl
+    affiliations:
+      - ref: 1
+affiliations:
+  - id: 1
+    name: Tilburg University
+    department: Department of Social Psychology
+authornote: Citation [@rcoreteamLanguageEnvironmentStatistical2025]
+bibliography: ../../bibliography.bib
+format: preprint-typst
+---
+
+Citations don't work in author notes, but do work in text body [@rcoreteamLanguageEnvironmentStatistical2025]. I think this is a Quarto feature.

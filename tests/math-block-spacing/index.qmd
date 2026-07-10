@@ -1,0 +1,19 @@
+---
+title: Appropriate space around math blocks
+format:
+  preprint-typst:
+    include-before-body:
+      - text: "#show math.equation.where(block: true): set block(spacing: 1em)"
+    theme: default
+    keep-typ: true
+    citeproc: true
+    number-sections: true
+---
+
+The fundamental equation is shown in @eq-basic.
+
+$$
+E = mc^2
+$$ {#eq-basic}
+
+This is an important equation as you all will know.

@@ -1,0 +1,143 @@
+---
+title: Lots of numbering to test appendix numbering
+bibliography: ../../bibliography.bib
+format:
+  preprint-typst:
+    include-before-body:
+      - text: "#show <refs>: set par(hanging-indent: 1.4em)"
+    theme: default
+    keep-typ: true
+    citeproc: true
+    number-sections: true
+---
+
+# Introduction {#sec-intro}
+
+See @sec-results for results [@allaireQuarto2025].
+
+## Background
+
+The fundamental equation is shown in @eq-basic:
+
+$$
+E = mc^2
+$$ {#eq-basic}
+
+We also reference @fig-sample, @lst-code, and @tip-main.
+
+::: {#fig-sample}
+{{< placeholder 400 200 format=svg >}}
+
+Sample figure in main text
+:::
+
+```{#lst-code .python lst-cap="Sample code listing"}
+def hello():
+    return "world"
+```
+
+::: {#tip-main .callout-note}
+## Main Note
+This is a numbered callout in the main text.
+:::
+
+# Results {#sec-results}
+
+See @tbl-results.
+
+| Variable | Coefficient | SE |
+|----------|-------------|-----|
+| X1       | 0.45        | 0.12|
+| X2       | -0.32       | 0.08|
+
+: Results table {#tbl-results}
+
+# References
+
+::: {#refs}
+:::
+
+```{=typst}
+#show: appendix.with()
+```
+
+
+# Supplementary Analysis {#sec-app-analysis}
+
+Detailed analysis referenced from @sec-results. See @eq-app-detailed:
+
+$$
+\sigma^2 = \frac{1}{n-1}\sum_{i=1}^{n}(x_i - \bar{x})^2
+$$ {#eq-app-detailed}
+
+See @fig-app-diagram and @lst-app-code.
+
+::: {#fig-app-diagram}
+{{< placeholder 300 150 format=svg >}}
+
+Appendix figure A
+:::
+
+```{#lst-app-code .python lst-cap="Supplementary code"}
+import numpy as np
+x = np.random.normal(0, 1, 100)
+```
+
+::: {#tip-app .callout-note}
+## Appendix Note
+Supplementary note in appendix.
+:::
+
+# Additional Results {#sec-app-results}
+
+Cross-reference to @sec-results and @eq-basic from main text.
+
+Extended model in @eq-app-extended:
+
+$$
+y_{ij} = \mu + \alpha_i + \beta_j + \epsilon_{ij}
+$$ {#eq-app-extended}
+
+See @fig-app-extended and @tbl-app-data.
+
+::: {#fig-app-extended}
+{{< placeholder 320 180 format=svg >}}
+
+Extended analysis figure
+:::
+
+| Trial | Value | Error |
+|-------|-------|-------|
+| 1     | 12.3  | 0.5   |
+| 2     | 11.8  | 0.4   |
+
+: Supplementary data {#tbl-app-data}
+
+```{#lst-app-analysis .r lst-cap="Extended analysis code"}
+fit <- aov(value ~ trial, data = supplementary)
+TukeyHSD(fit)
+```
+
+::: {#tip-app .callout-warning}
+## Limitation
+Limitation of supplementary analysis.
+:::
+
+# Sensitivity Analysis {#sec-app-sensitivity}
+
+References @sec-intro and @eq-basic. Sensitivity equation in @eq-app-sensitivity:
+
+$$
+\frac{\partial y}{\partial x} = \beta_1
+$$ {#eq-app-sensitivity}
+
+::: {#fig-app-sensitivity}
+{{< placeholder 280 160 format=svg >}}
+
+Sensitivity analysis plot
+:::
+
+::: {#tip-app .callout-tip}
+## Interpretation
+Interpretation of sensitivity results.
+:::

@@ -1,0 +1,27 @@
+---
+title: References to test bibliography formatting
+bibliography: ../../bibliography.bib
+format:
+  preprint-typst:
+    section-numbering: "1."
+    include-before-body:
+      - text: "#show <refs>: set par(hanging-indent: 1.4em)"
+    theme: jou
+    keep-typ: true
+    citeproc: true
+---
+
+This sentence refers to works [@rcoreteamLanguageEnvironmentStatistical2025; @allaireQuarto2025; @tinytable]. This one cites @allaireQuarto2025 in text, and this one cites two works again [@rcoreteamLanguageEnvironmentStatistical2025; @tinytable].
+
+{{< lipsum 1 >}}
+
+>A Quote
+>
+>---Source
+
+{{< lipsum 1 >}}
+
+# References
+
+::: {#refs}
+:::
