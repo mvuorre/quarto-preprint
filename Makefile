@@ -39,11 +39,16 @@ test-remote: clean
 deps:
 	quarto add christopherkenny/typst-function --embed preprint --no-prompt
 
-# Create a GitHub release if new version is specified
-release: NEWS.md _extensions/preprint/_extension.yml
+# Create a GitHub release if new version is specified.
+# Rendered examples are attached as release assets (not tracked in git);
+# README embeds them via releases/latest/download/ URLs.
+release: examples NEWS.md _extensions/preprint/_extension.yml
 	@VERSION=$$(yq '.version' _extensions/preprint/_extension.yml); \
 	CHANGELOG=$$(awk '/^## '$$VERSION'$$/{flag=1; next} /^## [0-9]/{flag=0} flag' NEWS.md); \
-	gh release create v$$VERSION --title "v$$VERSION" --notes "$$CHANGELOG"
+	gh release create v$$VERSION --title "v$$VERSION" --notes "$$CHANGELOG" \
+		examples/example.pdf examples/example.png \
+		examples/example-jou.pdf examples/example-jou.png \
+		examples/example-jou-p2.png examples/example-jou-p3.png
 
 # Clean all intermediate files
 clean:

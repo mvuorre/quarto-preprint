@@ -3,7 +3,7 @@
 *_cache/
 *_files/
 docs/
-examples/example-dracula.pdf
+examples/
 site_libs/
 /.luarc.json
 /.quarto/

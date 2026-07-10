@@ -6,7 +6,7 @@ A Quarto extension for creating PDF documents with Typst
 
 | Default output | `theme: jou` output | Full-width content | Single-column appendices |
 |:--:|:--:|:--:|:--:|
-| [![](examples/example.png)](examples/example.pdf) | [![](examples/example-jou.png)](examples/example-jou.pdf) | [![](examples/example-jou-p2.png)](examples/example-jou.pdf#page=2) | [![](examples/example-jou-p3.png)](examples/example-jou.pdf#page=3) |
+| [![](https://github.com/mvuorre/quarto-preprint/releases/latest/download/example.png)](https://github.com/mvuorre/quarto-preprint/releases/latest/download/example.pdf) | [![](https://github.com/mvuorre/quarto-preprint/releases/latest/download/example-jou.png)](https://github.com/mvuorre/quarto-preprint/releases/latest/download/example-jou.pdf) | [![](https://github.com/mvuorre/quarto-preprint/releases/latest/download/example-jou-p2.png)](https://github.com/mvuorre/quarto-preprint/releases/latest/download/example-jou.pdf) | [![](https://github.com/mvuorre/quarto-preprint/releases/latest/download/example-jou-p3.png)](https://github.com/mvuorre/quarto-preprint/releases/latest/download/example-jou.pdf) |
 
 # Overview
 
