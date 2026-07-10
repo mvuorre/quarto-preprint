@@ -293,8 +293,18 @@
     thanks
   }
 
-  // Construct author display with inline footnotes
-  let author_display = if authors != none {
+  // Construct author display with inline footnotes.
+  //
+  // Typst cannot render footnotes inside a floating placement: the note body
+  // is laid out in isolation and silently dropped (typst/typst#5765), and if
+  // it contains a citation, compilation fails with "cannot format citation in
+  // isolation". The title block below lives in place(scope: "parent",
+  // float: true), so the author line is built in two variants:
+  //   - real_footnotes: true — real footnote elements; emitted hidden in
+  //     normal document flow so the note text actually renders
+  //   - real_footnotes: false — superscript markers only; shown inside the
+  //     floating title block
+  let make_author_display(real_footnotes) = if authors != none {
     let result = authors
       .enumerate()
       .map(((idx, a)) => {
@@ -302,21 +312,25 @@
         if authors.len() > 1 { parts.push(super(a.affiliation)) }
 
         // Add correspondence footnote to first corresponding author
-        if corresponding_authors.contains(a) and idx == first_corresponding_idx {
-          parts.push(footnote(numbering: _ => "*")[
-            #corresponding-text #corresponding_authors.map(a => [#a.name, #a.email]).join(", ", last: " & ").
-          ])
-        } else if corresponding_authors.contains(a) {
-          parts.push(super("*"))
+        if corresponding_authors.contains(a) {
+          if real_footnotes and idx == first_corresponding_idx {
+            parts.push(footnote(numbering: _ => "*")[
+              #corresponding-text #corresponding_authors.map(a => [#a.name, #a.email]).join(", ", last: " & ").
+            ])
+          } else {
+            parts.push(super("*"))
+          }
         }
 
         // Add equal contributor footnote to first equal contributor
-        if equal_authors.len() > 1 and equal_authors.contains(a) and idx == first_equal_idx {
-          parts.push(footnote(numbering: _ => "†")[
-            #equal_authors.map(a => a.name).join(", ", last: " & ") contributed equally to this work.
-          ])
-        } else if equal_authors.len() > 1 and equal_authors.contains(a) {
-          parts.push(super("†"))
+        if equal_authors.len() > 1 and equal_authors.contains(a) {
+          if real_footnotes and idx == first_equal_idx {
+            parts.push(footnote(numbering: _ => "†")[
+              #equal_authors.map(a => a.name).join(", ", last: " & ") contributed equally to this work.
+            ])
+          } else {
+            parts.push(super("†"))
+          }
         }
 
         if a.keys().contains("orcid") {
@@ -327,16 +341,20 @@
       .join(", ", last: " & ")
 
     // Keep all note-like metadata on the same brittle footnote path.
-    if combined_authornote != none {
+    // The author note has no visible marker, so the marker-only variant
+    // omits it entirely.
+    if real_footnotes and combined_authornote != none {
       result + footnote_non_numbered(combined_authornote)
     } else {
       result
     }
   } else { none }
 
+  let author_display = make_author_display(false)
+
   // Hack: Include authors outside of "scope: parent" to ensure footnotes show
   if author_display != none {
-    hide(author_display)
+    hide(make_author_display(true))
     counter(footnote).update(n => if n > 0 { n - 1 } else { 0 })
     v(-2.4em)
   }
