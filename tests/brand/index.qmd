@@ -1,0 +1,44 @@
+---
+title: Brand support test with long title to see where logo is placed
+author:
+  - name: Matti Vuorre
+    corresponding: true
+    orcid: 0000-0001-5052-066X
+    email: mjvuorre@uvt.nl
+    affiliations:
+      - ref: 1
+affiliations:
+  - id: 1
+    name: Tilburg University
+abstract: |
+  This document tests brand.yml support: colors (primary, foreground, background), typography (base, headings, monospace), and logo.
+brand: _brand.yml
+format:
+  preprint-typst:
+    keep-typ: true
+    logo:
+      location: right-top
+      padding-right: 0.15in
+---
+
+# Heading one
+
+Body text should use the brand base family and size, on the brand background color with the brand foreground color. Links such as <https://quarto.org> should use the brand primary color and be underlined.
+
+## Heading two
+
+Headings should use the brand headings family, weight, and color.
+
+Inline code like `x <- 1` uses the brand monospace family. A block:
+
+```r
+mean(rnorm(10))
+```
+
+### Heading three
+
+Level three heading.
+
+#### Heading four
+
+Level four heading.

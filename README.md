@@ -100,6 +100,20 @@ Front matter variables can be shared across output formats (such as `toc` above)
 - `filecolor` (string) - Color for internal label links \[[Quarto](https://quarto.org/docs/output-formats/typst.html)\]
   - Example: `filecolor: "#444444"`
 
+## Branding
+
+*preprint-typst* supports Quarto's [brand.yml](https://quarto.org/docs/authoring/brand.html) (`_brand.yml`) to the same extent as Quarto's built-in Typst format. Explicit document metadata (e.g. `mainfont`, `fontsize`, `linkcolor`) takes precedence over brand settings.
+
+Note that Quarto's logo default placing and size renders the logo over the title. Use Quarto's [logo options](https://quarto.org/docs/output-formats/typst.html#logo-position) to fix the logo's placement, e.g.
+
+```yml
+format:
+  preprint-typst:
+    logo:
+      location: right-top
+      padding-right: 0.15in
+```
+
 ## Layout
 
 - `line-number` (boolean) - Enable line numbers \[[Typst](https://typst.app/docs/reference/model/par/#definitions-line-numbering)\]

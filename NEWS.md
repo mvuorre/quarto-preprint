@@ -1,3 +1,7 @@
+## 1.6.3
+
+[brand.yml](https://quarto.org/docs/authoring/brand.html) is now supported (#57) to the same extent as in Quarto's native Typst format
+
 ## 1.6.2
 
 - Enable citations within author notes

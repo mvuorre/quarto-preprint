@@ -235,7 +235,7 @@
   set heading(numbering: sectionnumbering)
   show heading.where(level: 1): it => block(width: 100%, below: 0.8em, above: 1em)[
     #set align(center)
-    #set text(size: fontsize * 1.1, weight: "bold")
+    #set text(size: fontsize * 1.1, weight: heading-weight)
     #it
   ]
   show heading.where(level: 2): it => block(width: 100%, below: 0.8em, above: 1em)[
@@ -249,12 +249,12 @@
   // Level 4 & 5 headers are in paragraph
   show heading.where(level: 4): it => box(inset: (top: 0em, bottom: 0em, left: 0em, right: 0.1em), text(
     size: 1em,
-    weight: "bold",
+    weight: heading-weight,
     it.body + [.],
   ))
   show heading.where(level: 5): it => box(inset: (top: 0em, bottom: 0em, left: 0em, right: 0.1em), text(
     size: 1em,
-    weight: "bold",
+    weight: heading-weight,
     style: "italic",
     it.body + [.],
   ))

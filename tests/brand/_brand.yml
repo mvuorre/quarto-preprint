@@ -1,0 +1,28 @@
+color:
+  palette:
+    burgundy: "#800020"
+  primary: burgundy
+  foreground: "#222233"
+  background: "#FDFBF7"
+typography:
+  base:
+    family: Helvetica
+    size: 12pt
+  headings:
+    family: Georgia
+    weight: 600
+    style: normal
+    color: primary
+  monospace:
+    family: Courier New
+  monospace-block:
+    color: "#500050"
+    background-color: "#EEEEDD"
+  link:
+    decoration: underline
+logo:
+  images:
+    placeholder:
+      path: logo.png
+      alt: Placeholder logo
+  medium: placeholder
