@@ -1,6 +1,6 @@
 # quarto-preprint
 
-A Quarto extension for creating PDF documents with Typst
+A [Quarto](https://quarto.org/) extension for creating PDF documents with [Typst](https://typst.app/docs).
 
 # Examples
 
@@ -16,12 +16,14 @@ A Quarto extension for creating PDF documents with Typst
 
 [Quarto](https://quarto.org/) is "An open-source scientific and technical publishing system" for writing reproducible documents that combine computations and prose written in [markdown](https://quarto.org/docs/authoring/markdown-basics.html) into HTML, PDF, Word, and other outputs. For many R users, Quarto is a successor of [R Markdown](https://rmarkdown.rstudio.com/) but with a broader scope and better support for different output formats and computational content in other languages.
 
-[*quarto-preprint*](https://github.com/mvuorre/quarto-preprint) is a Quarto extension that provides the ***preprint-typst*** output format. When using this format, Quarto renders your document into PDF using [Typst](https://typst.app/), a modern replacement for LaTeX. *preprint-typst* builds on the standard Quarto Typst template and enables separated author-affiliation formatting, additional metadata variables for scholarly writing, opinionated but customizable typesetting, improved two-column layouts (including full-width floats), appendices, and more. In addition, *preprint-typst* aims to
+[*quarto-preprint*](https://github.com/mvuorre/quarto-preprint) is a Quarto [extension](https://quarto.org/docs/extensions/) that provides the ***preprint-typst*** output format. When using this format, Quarto renders your document into PDF using [Typst](https://typst.app/), a modern replacement for LaTeX. *preprint-typst* builds on the standard [Quarto Typst template](https://quarto.org/docs/output-formats/typst.html) and enables separated author-affiliation formatting, additional metadata variables for scholarly writing, opinionated but customizable typesetting, improved two-column layouts (including full-width floats), appendices, and more. In addition, *preprint-typst* aims to
 
 - Be **fast**: Typst creates PDF files very quickly
 - **Just Work**: No LaTeX installation required (Typst ships with Quarto)
 - Be **100% Quarto compatible**: Switch between output formats without changing content
 - Have **rich features**: Separated author-affiliation formatting, two-column layouts, full-width floats, appendices
+
+Note that *quarto-preprint* is the name of the Quarto extension, and *preprint-typst* is the name of the Quarto output format.
 
 # Installation
 
@@ -41,7 +43,13 @@ quarto use template mvuorre/quarto-preprint
 
 This creates a new project directory with a starter document, [\_quarto.yml](https://quarto.org/docs/projects/quarto-projects.html#shared-metadata) configuration file, and example bibliography.bib file.
 
-Note that *quarto-preprint* is the name of the Quarto extension, and *preprint-typst* is the name of the Quarto output format.
+## Updating
+
+When you are in a project that already uses this extension, you can update the extension with
+
+```bash
+quarto update extension mvuorre/quarto-preprint
+```
 
 # Configuration
 
