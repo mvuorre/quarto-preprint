@@ -1,6 +1,10 @@
+## 1.6.4
+
+- Fix first-line indent in first para if no heading: The hidden author line is created so that author footnotes no longer form a paragraph before the body
+
 ## 1.6.3
 
-[brand.yml](https://quarto.org/docs/authoring/brand.html) is now supported (#57) to the same extent as in Quarto's native Typst format
+- [brand.yml](https://quarto.org/docs/authoring/brand.html) is now supported (#57) to the same extent as in Quarto's native Typst format
 
 ## 1.6.2
 

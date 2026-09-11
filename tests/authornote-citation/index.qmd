@@ -16,4 +16,4 @@ bibliography: ../../bibliography.bib
 format: preprint-typst
 ---
 
-Citations don't work in author notes, but do work in text body [@rcoreteamLanguageEnvironmentStatistical2025]. I think this is a Quarto feature.
+Citations work in author notes and in text body [@rcoreteamLanguageEnvironmentStatistical2025].

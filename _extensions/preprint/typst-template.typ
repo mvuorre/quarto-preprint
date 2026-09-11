@@ -352,11 +352,13 @@
 
   let author_display = make_author_display(false)
 
-  // Hack: Include authors outside of "scope: parent" to ensure footnotes show
+  // Hack: Include authors outside of "scope: parent" to ensure footnotes show.
+  // Wrapped in a non-floating place() so it occupies no space in the flow and,
+  // unlike bare inline content, does not form a paragraph: otherwise the first
+  // body paragraph would count as "consecutive" and get a first-line indent.
   if author_display != none {
-    hide(make_author_display(true))
+    place(hide(make_author_display(true)))
     counter(footnote).update(n => if n > 0 { n - 1 } else { 0 })
-    v(-2.4em)
   }
 
   let has-front-matter = (

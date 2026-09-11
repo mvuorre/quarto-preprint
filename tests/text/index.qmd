@@ -33,8 +33,6 @@ abstract: |
   {{< lipsum 1 >}}
 ---
 
-# Introduction
-
 {{< lipsum 3 >}}
 
 ## Detail

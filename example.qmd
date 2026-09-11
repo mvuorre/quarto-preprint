@@ -44,8 +44,6 @@ format:
 > "An article about computational science in a scientific publication is not the scholarship itself, it is merely advertising of the scholarship. The actual scholarship is the complete software development environment and the complete set of instructions which generated the figures."
 >--Buckheit and Donoho [-@buckheitWaveLabReproducibleResearch1995, paraphrasing Jon Claerbout]
 
-# Introduction
-
 [Quarto](https://quarto.org/) is "An open-source scientific and technical publishing system" [@allaireQuarto2025] for writing reproducible documents that combine computations and prose written in [markdown](https://quarto.org/docs/authoring/markdown-basics.html) into HTML, PDF, Word, and other outputs. For many R users, Quarto is a successor of [R Markdown](https://rmarkdown.rstudio.com/) but with a broader scope and better support for different output formats and computational content in other languages.
 
 [*quarto-preprint*](https://github.com/mvuorre/quarto-preprint) is a Quarto extension that provides the ***preprint-typst*** output format. When using this format, Quarto renders your document into PDF using [Typst](https://typst.app/), a modern replacement for LaTeX. *preprint-typst* builds on the standard Quarto Typst template and enables separated author-affiliation formatting, additional metadata variables for scholarly writing, opinionated but customizable typesetting, improved two-column layouts (including full-width floats), appendices, and more. In addition, *preprint-typst* aims to
