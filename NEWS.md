@@ -1,6 +1,11 @@
+## 1.6.5
+
+- Correspondence, equal-contribution, author note and thanks are now rendered as a single footnote paragraph on the title page
+- Don't superscript corresponding author footnote symbol ("*")
+
 ## 1.6.4
 
-- Fix first-line indent in first para if no heading: The hidden author line is created so that author footnotes no longer form a paragraph before the body
+- Fix first-line indent in first paragraph if no heading: The hidden author line is created so that author footnotes no longer form a paragraph before the body
 
 ## 1.6.3
 
