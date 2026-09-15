@@ -278,7 +278,7 @@
       .map(a => {
         let parts = (a.name,)
         if authors.len() > 1 { parts.push(super(a.affiliation)) }
-        if corresponding_authors.contains(a) { parts.push(super("*")) }
+        if corresponding_authors.contains(a) { parts.push("*") }
         if equal_authors.contains(a) { parts.push(super("†")) }
         if a.keys().contains("orcid") { parts.push(link(a.orcid, fa-orcid())) }
         parts.join()
@@ -290,7 +290,7 @@
   // thanks, all in a single unnumbered footnote paragraph.
   let title_note = (
     if corresponding_authors.len() > 0 [
-      #super("*")#corresponding-text #corresponding_authors.map(a => [#a.name, #a.email]).join(", ", last: " & ").
+      \*#corresponding-text #corresponding_authors.map(a => [#a.name, #a.email]).join(", ", last: " & ").
     ],
     if equal_authors.len() > 0 [
       #super("†")#equal_authors.map(a => a.name).join(", ", last: " & ") contributed equally to this work.
