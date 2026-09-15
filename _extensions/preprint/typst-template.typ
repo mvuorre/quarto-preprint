@@ -215,6 +215,9 @@
   )
   set columns(gutter: col-gutter)
 
+  // Don't indent footnote text
+  set footnote.entry(indent: 0em)
+
   /* Typography settings */
 
   // Paragraph settings
