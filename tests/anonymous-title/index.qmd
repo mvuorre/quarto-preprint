@@ -1,0 +1,17 @@
+---
+title: A long anonymous preprint title that wraps onto multiple lines to check the spacing before the abstract
+abstract: |
+  This abstract must appear below the title with a clear gap even when neither
+  an author nor a date is supplied. Its first line must not overlap the final
+  line of a title or subtitle.
+keywords: [anonymous, layout]
+format:
+  preprint-typst:
+    keep-typ: true
+---
+
+The first body paragraph follows the abstract and keywords.
+
+# Introduction
+
+This document checks the title block without author or date metadata.

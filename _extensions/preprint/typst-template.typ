@@ -273,7 +273,7 @@
   } else { () }
 
   // Author line: name, affiliation number(s), note markers, ORCID
-  let author_display = if authors != none {
+  let author_display = if authors != none and authors != () {
     authors
       .map(a => {
         let parts = (a.name,)
@@ -374,7 +374,16 @@
       }
 
       /* Abstract and metadata section */
-      block(inset: (bottom: if toc { 0em } else { 2em }, left: 2.4em, right: 2.4em))[
+      // Affiliations and date provide their own bottom spacing. Otherwise,
+      // separate a populated metadata section from the title or author line.
+      let metadata-top-inset = if (
+        (title != none or subtitle != none or author_display != none)
+          and (abstract != none or categories != none or wordcount == true)
+          and affiliations == none and date == none
+      ) {
+        2em
+      } else { 0em }
+      block(inset: (top: metadata-top-inset, bottom: if toc { 0em } else { 2em }, left: 2.4em, right: 2.4em))[
         #set text(size: 0.92em)
         #set par(first-line-indent: 0em)
         #if abstract != none {
