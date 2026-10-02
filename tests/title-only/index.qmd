@@ -1,0 +1,12 @@
+---
+title: A long anonymous preprint title that wraps onto multiple lines without an abstract or other metadata
+format:
+  preprint-typst:
+    keep-typ: true
+---
+
+This first body paragraph should keep its existing spacing below the title.
+
+# Introduction
+
+There is no abstract, author, date, keywords, or word count in this document.
