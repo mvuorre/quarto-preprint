@@ -238,4 +238,4 @@ Note: If you want the appendix to appear as an [appendix in HTML output](https:/
 
 # Get help & contribute
 
-Send your comments, bug reports, and pull requests to <https://github.com/mvuorre/quarto-preprint>. If you’re reporting a bug, please include a reproducible example / full details of what you’re trying to do, how, and what goes wrong.
+Send your comments, bug reports, and pull requests to <https://github.com/mvuorre/quarto-preprint>. If you're reporting a bug, please include a reproducible example / full details of what you’re trying to do, how, and what goes wrong. If you want to submit an improvement, please submit an issue before submitting a pull request.

@@ -357,7 +357,7 @@
 
       if affiliations != none {
         align(center)[
-          #block(width: 100%, above: 1em, below: if date != none { 1em } else { 2em })[
+          #block(width: 100%, above: 1em, below: 0em)[
             #text(weight: "regular", size: 1.1em)[
               #for a in affiliations [
                 #if authors.len() > 1 [#super[#a.id]]#a.name#if a.keys().contains("department") [, #a.department] \
@@ -368,22 +368,17 @@
       }
 
       if date != none {
-        align(center)[#block(inset: 1em)[
+        align(center)[#block(above: 2em, below: 0em)[
           #date
         ]]
       }
 
       /* Abstract and metadata section */
-      // Affiliations and date provide their own bottom spacing. Otherwise,
-      // separate a populated metadata section from the title or author line.
-      let metadata-top-inset = if (
-        (title != none or subtitle != none or author_display != none)
-          and (abstract != none or categories != none or wordcount == true)
-          and affiliations == none and date == none
-      ) {
-        2em
-      } else { 0em }
-      block(inset: (top: metadata-top-inset, bottom: if toc { 0em } else { 2em }, left: 2.4em, right: 2.4em))[
+      v(2em, weak: true)
+      block(
+        below: 2em,
+        inset: (bottom: 1em, left: 2.4em, right: 2.4em),
+      )[
         #set text(size: 0.92em)
         #set par(first-line-indent: 0em)
         #if abstract != none {
@@ -403,7 +398,9 @@
 
       // Table of contents
       if toc {
-        block(inset: (top: 1em, bottom: 2em, left: 2.4em, right: 2.4em))[
+        block(
+          inset: (bottom: 2em, left: 2.4em, right: 2.4em),
+        )[
           #outline(
             title: toc_title,
             depth: toc_depth,
