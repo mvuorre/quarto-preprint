@@ -1,143 +1,120 @@
 ---
-title: Lots of numbering to test appendix numbering
-bibliography: ../../bibliography.bib
+title: Appendix & numbering tests
 format:
   preprint-typst:
-    include-before-body:
-      - text: "#show <refs>: set par(hanging-indent: 1.4em)"
-    theme: default
     keep-typ: true
-    citeproc: true
     number-sections: true
 ---
 
-# Introduction {#sec-intro}
+# Main {#sec-main}
 
-See @sec-results for results [@allaireQuarto2025].
+Each reference should match the value after the colon.
 
-## Background
+References to main content
 
-The fundamental equation is shown in @eq-basic:
+- @sec-main: Section 1
+- @eq-main: Equation 1
+- @fig-main: Figure 1
+- @tbl-main: Table 1
+- @lst-main: Listing 1
+- @nte-main: Box 1
+
+References to appendix content
+
+- @sec-app: Appendix A
+- @sec-app2: Appendix B
+- @eq-app: Equation 2 (<https://github.com/mvuorre/quarto-preprint/issues/46>)
+- @fig-app: Figure A1
+- @tbl-app: Table A1
+- @lst-app: Listing A1
+- @nte-app: Box 2 (<https://github.com/mvuorre/quarto-preprint/issues/46>)
+- @fig-app2: Figure B1
 
 $$
-E = mc^2
-$$ {#eq-basic}
+a = b
+$$ {#eq-main}
 
-We also reference @fig-sample, @lst-code, and @tip-main.
+::: {#fig-main}
+{{< placeholder 300 150 format=svg >}}
 
-::: {#fig-sample}
-{{< placeholder 400 200 format=svg >}}
-
-Sample figure in main text
+Main figure
 :::
 
-```{#lst-code .python lst-cap="Sample code listing"}
-def hello():
-    return "world"
+| A | B |
+|---|---|
+| 1 | 2 |
+
+: Main table {#tbl-main}
+
+```{#lst-main .python lst-cap="Main listing"}
+x = 1
 ```
 
-::: {#tip-main .callout-note}
-## Main Note
-This is a numbered callout in the main text.
+::: {#nte-main .callout-note}
+## Main note
+Main callout.
 :::
 
-# Results {#sec-results}
-
-See @tbl-results.
-
-| Variable | Coefficient | SE |
-|----------|-------------|-----|
-| X1       | 0.45        | 0.12|
-| X2       | -0.32       | 0.08|
-
-: Results table {#tbl-results}
-
-# References
-
-::: {#refs}
-:::
 
 ```{=typst}
 #show: appendix.with()
 ```
 
+# Supplementary analysis {#sec-app}
 
-# Supplementary Analysis {#sec-app-analysis}
+Each reference should match the value after the colon.
 
-Detailed analysis referenced from @sec-results. See @eq-app-detailed:
+References to main content
+
+- @sec-main: Section 1
+- @eq-main: Equation 1
+- @fig-main: Figure 1
+- @tbl-main: Table 1
+- @lst-main: Listing 1
+- @nte-main: Box 1
+
+References to appendix content
+
+- @sec-app: Appendix A
+- @sec-app2: Appendix B
+- @eq-app: Equation 2
+- @fig-app: Figure A1
+- @tbl-app: Table A1
+- @lst-app: Listing A1
+- @nte-app: Box 2
+- @fig-app2: Figure B1
 
 $$
-\sigma^2 = \frac{1}{n-1}\sum_{i=1}^{n}(x_i - \bar{x})^2
-$$ {#eq-app-detailed}
+c = d
+$$ {#eq-app}
 
-See @fig-app-diagram and @lst-app-code.
-
-::: {#fig-app-diagram}
+::: {#fig-app}
 {{< placeholder 300 150 format=svg >}}
 
-Appendix figure A
+Appendix figure
 :::
 
-```{#lst-app-code .python lst-cap="Supplementary code"}
-import numpy as np
-x = np.random.normal(0, 1, 100)
+| C | D |
+|---|---|
+| 3 | 4 |
+
+: Appendix table {#tbl-app}
+
+```{#lst-app .python lst-cap="Appendix listing"}
+y = 2
 ```
 
-::: {#tip-app .callout-note}
-## Appendix Note
-Supplementary note in appendix.
+::: {#nte-app .callout-note}
+## Appendix note
+Appendix callout.
 :::
 
-# Additional Results {#sec-app-results}
+# Appendix {#sec-app2}
 
-Cross-reference to @sec-results and @eq-basic from main text.
+A heading titled just "Appendix" should render as "Appendix B" (no title).
 
-Extended model in @eq-app-extended:
+::: {#fig-app2}
+{{< placeholder 300 150 format=svg >}}
 
-$$
-y_{ij} = \mu + \alpha_i + \beta_j + \epsilon_{ij}
-$$ {#eq-app-extended}
-
-See @fig-app-extended and @tbl-app-data.
-
-::: {#fig-app-extended}
-{{< placeholder 320 180 format=svg >}}
-
-Extended analysis figure
-:::
-
-| Trial | Value | Error |
-|-------|-------|-------|
-| 1     | 12.3  | 0.5   |
-| 2     | 11.8  | 0.4   |
-
-: Supplementary data {#tbl-app-data}
-
-```{#lst-app-analysis .r lst-cap="Extended analysis code"}
-fit <- aov(value ~ trial, data = supplementary)
-TukeyHSD(fit)
-```
-
-::: {#tip-app .callout-warning}
-## Limitation
-Limitation of supplementary analysis.
-:::
-
-# Sensitivity Analysis {#sec-app-sensitivity}
-
-References @sec-intro and @eq-basic. Sensitivity equation in @eq-app-sensitivity:
-
-$$
-\frac{\partial y}{\partial x} = \beta_1
-$$ {#eq-app-sensitivity}
-
-::: {#fig-app-sensitivity}
-{{< placeholder 280 160 format=svg >}}
-
-Sensitivity analysis plot
-:::
-
-::: {#tip-app .callout-tip}
-## Interpretation
-Interpretation of sensitivity results.
+Second appendix figure
 :::

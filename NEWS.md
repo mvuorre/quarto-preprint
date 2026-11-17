@@ -1,3 +1,7 @@
+## TBD
+
+- Improve Appendix numberings and headings
+
 ## 1.6.5
 
 - Correspondence, equal-contribution, author note and thanks are now rendered as a single footnote paragraph on the title page

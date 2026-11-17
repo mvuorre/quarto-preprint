@@ -17,9 +17,18 @@
   ),
 )
 
+// True from the point where appendix() is applied onwards
+#let preprint-appendix = state("preprint-appendix", false)
+
 // Appendix function. To use, include in .typ before appendix header
-// #show: appendix.with(prefix: "A")
+// #show: appendix.with()
+// Appendices are lettered (Appendix A, B, ...), and figures, tables, and
+// listings are numbered within each appendix (A1, A2, B1, ...). Callouts and
+// equations continue the main text numbering because Quarto hardcodes their
+// numbering.
+// `prefix` and `numbering` are ignored and kept for backwards compatibility.
 #let appendix(prefix: "A", columns: 1, numbering: none, doc) = {
+  preprint-appendix.update(true)
   set page(columns: columns)
 
   // Add pagebreak before each level 1 heading in appendices and reset counters
@@ -30,38 +39,20 @@
     counter(figure.where(kind: "quarto-float-tbl")).update(0)
     counter(figure.where(kind: "quarto-float-lst")).update(0)
 
-    // Reset callout counters (for each callout type used)
-    counter(figure.where(kind: "quarto-callout-Box")).update(0)
-    counter(figure.where(kind: "quarto-callout-Note")).update(0)
-    counter(figure.where(kind: "quarto-callout-Warning")).update(0)
-    counter(figure.where(kind: "quarto-callout-Tip")).update(0)
-    counter(figure.where(kind: "quarto-callout-Important")).update(0)
-    counter(figure.where(kind: "quarto-callout-Caution")).update(0)
-
     // Reset generic counters
     counter(figure.where(kind: image)).update(0)
     counter(figure.where(kind: table)).update(0)
-    counter(math.equation).update(0)
     it
   }
 
-  // Numberings
-  set heading(supplement: [Appendix], numbering: (..nums) => {
-    let levels = nums.pos()
-    [#prefix#levels.map(str).join(".")]
-  })
+  // Numberings: appendices are lettered (A, B, ...), subsections A.1, A.1.1
+  set heading(supplement: [Appendix], numbering: "A.1")
   // Hide level 2+ headings from TOC in appendices
   set heading(outlined: false)
   show heading.where(level: 1): set heading(outlined: true)
 
-  set figure(numbering: it => {
-    let h = context counter(heading).get().first()
-    [#prefix#h.#it]
-  })
-  set math.equation(numbering: it => {
-    let h = context counter(heading).get().first()
-    [(#prefix#h.#it)]
-  })
+  // Figures, tables, listings: appendix letter + number (A1, A2, B1, ...)
+  set figure(numbering: n => std.numbering("A", counter(heading).get().first()) + str(n))
 
   // Reset heading counter
   counter(heading).update(0)
@@ -239,7 +230,11 @@
   show heading.where(level: 1): it => block(width: 100%, below: 0.8em, above: 1em)[
     #set align(center)
     #set text(size: fontsize * 1.1, weight: heading-weight)
-    #it
+    #context if preprint-appendix.get() and it.numbering != none {
+      // "Appendix A: Title", or just "Appendix A" when the title is "Appendix"
+      let label = [Appendix #counter(heading).display(it.numbering)]
+      if it.body.has("text") and it.body.text == "Appendix" { label } else [#label: #it.body]
+    } else { it }
   ]
   show heading.where(level: 2): it => block(width: 100%, below: 0.8em, above: 1em)[
     #set text(size: fontsize * 1.05)
@@ -249,6 +244,17 @@
     #set text(size: fontsize, style: "italic")
     #it
   ]
+  // Quarto passes supplement: [Section] to all heading refs; use "Appendix"
+  // for appendix headings (e.g. "Appendix A", "Appendix A.1")
+  show ref: it => {
+    let el = it.element
+    if (
+      el != none and el.func() == heading and it.supplement != [Appendix]
+        and preprint-appendix.at(el.location())
+    ) {
+      ref(it.target, supplement: [Appendix])
+    } else { it }
+  }
   // Level 4 & 5 headers are in paragraph
   show heading.where(level: 4): it => box(inset: (top: 0em, bottom: 0em, left: 0em, right: 0.1em), text(
     size: 1em,
