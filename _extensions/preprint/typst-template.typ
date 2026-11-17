@@ -151,17 +151,13 @@
   set bibliography(title: bibliography-title, style: bibliographystyle)
   show bibliography: set par(spacing: spacing, leading: linestretch * 0.65em)
 
-  // List spacing
-  show list: it => {
-    // Space between list items
-    set par(leading: 0.48em)
-    // Space around whole list
-    set block(
-      spacing: spacing * 1.2,
-      inset: (left: first-line-indent, right: first-line-indent),
-    )
-    it
-  }
+  // Lists: bulleted and numbered lists share one style
+  set list(indent: first-line-indent / 2, body-indent: 0.5em)
+  set enum(indent: first-line-indent / 2, body-indent: 0.5em)
+  // Space around whole lists
+  show selector(list).or(enum): set block(above: spacing * 1.6, below: spacing * 1.6)
+  // No first-line indent for paragraphs inside list items
+  show selector(list).or(enum).or(terms): set par(first-line-indent: 0em)
 
   // Number equations
   set math.equation(numbering: mathnumbering)
@@ -249,8 +245,7 @@
   show ref: it => {
     let el = it.element
     if (
-      el != none and el.func() == heading and it.supplement != [Appendix]
-        and preprint-appendix.at(el.location())
+      el != none and el.func() == heading and it.supplement != [Appendix] and preprint-appendix.at(el.location())
     ) {
       ref(it.target, supplement: [Appendix])
     } else { it }
