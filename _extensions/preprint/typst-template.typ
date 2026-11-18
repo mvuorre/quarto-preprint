@@ -48,7 +48,7 @@
   }
 }
 
-// Word count ("Words:" in the front matter) of the main text's prose,
+// Word count (shown in the front matter) of the main text's prose,
 // including headings and footnotes. Not counted: code, tables, figures and
 // their captions, equations, citations and references, and appendices.
 // wordometer reads the content before show rules run, so preprint() adds the
@@ -58,10 +58,11 @@
 
 // Appendix function. To use, include in .typ before the first appendix heading:
 // #show: appendix.with()
-// Appendices are lettered (Appendix A, B, ...). Figures, tables, listings,
+// Appendices are lettered (Appendix A, B, ...), with `supplement` as the label
+// (default: Quarto's translated "Appendix"). Figures, tables, listings,
 // equations, and callouts are numbered within each appendix (A1, A2, B1, ...)
 // by the numbering functions in numbering.typ.
-#let appendix(columns: 1, doc) = {
+#let appendix(columns: 1, supplement: [$quarto.language.crossref-apx-prefix$], doc) = {
   preprint-appendix.update(true)
   preprint-words.update(n => n - count-words(doc))
   set page(columns: columns)
@@ -79,7 +80,7 @@
   }
 
   // Appendices are lettered (A, B, ...), subsections A.1, A.1.1
-  set heading(supplement: [Appendix], numbering: "A.1")
+  set heading(supplement: supplement, numbering: "A.1")
   // Only level 1 appendix headings in the TOC
   set heading(outlined: false)
   show heading.where(level: 1): set heading(outlined: true)
@@ -91,10 +92,10 @@
 }
 
 // Appendix heading text: "Appendix A: Title", or "Appendix A" for a heading
-// titled just "Appendix". Used in the body and in the TOC.
+// titled just "Appendix" (the heading's supplement). Used in the body and TOC.
 #let appendix-title(h) = {
-  let label = [Appendix #numbering(h.numbering, ..counter(heading).at(h.location()))]
-  if h.body == [Appendix] { label } else [#label: #h.body]
+  let label = [#h.supplement #numbering(h.numbering, ..counter(heading).at(h.location()))]
+  if h.body == h.supplement { label } else [#label: #h.body]
 }
 
 $if(highlighting-definitions)$
@@ -132,7 +133,12 @@ $endif$
   wordcount: none,
   authornote: none,
   date: none,
-  corresponding-text: "Send correspondence to:",
+  correspondence-text: [Send correspondence to:],
+  // {0} is replaced by the equally contributing authors' names
+  equal-contribution-text: [{0} contributed equally to this work.],
+  // Front-matter labels; Quarto passes translated ones
+  keywords-title: [Keywords],
+  words-title: [Words],
   // Layout settings (can override theme defaults)
   spacing: 0.6em,
   first-line-indent: 1.8em,
@@ -315,10 +321,10 @@ $endif$
     let el = it.element
     if el == none { return it }
     let loc = el.location()
-    if el.func() == heading and it.supplement != [Appendix] and preprint-appendix.at(loc) {
-      // Quarto passes supplement: [Section] to all heading refs; use
-      // "Appendix" for appendix headings ("Appendix A", "Appendix A.1")
-      ref(it.target, supplement: [Appendix])
+    if el.func() == heading and preprint-appendix.at(loc) and it.supplement != el.supplement {
+      // Quarto passes supplement: [Section] to all heading refs; use the
+      // appendix heading's own ("Appendix A", "Appendix A.1")
+      ref(it.target, supplement: el.supplement)
     } else if el.func() == math.equation and el.numbering != none {
       // Typst drops the parentheses of a numbering pattern like "(1)" in
       // references, but not of a function like equation-numbering
@@ -379,13 +385,16 @@ $endif$
   // thanks, all in a single unnumbered footnote paragraph.
   let title_note = (
     if corresponding_authors.len() > 0 [
-      \*#corresponding-text #corresponding_authors.map(a => {
+      \*#correspondence-text #corresponding_authors.map(a => {
         if "email" in a [#a.name, #a.email] else { a.name }
       }).join(", ", last: " & ").
     ],
-    if equal_authors.len() > 0 [
-      #super("†")#equal_authors.map(a => a.name).join(", ", last: " & ") contributed equally to this work.
-    ],
+    if equal_authors.len() > 0 {
+      let parts = content-to-string(equal-contribution-text).split("{0}")
+      assert(parts.len() == 2, message: "preprint-equal-contribution must contain {0} once, for the author names")
+      let (before, after) = parts
+      [#super("†")#before#equal_authors.map(a => a.name).join(", ", last: " & ")#after]
+    },
     authornote,
     thanks,
   ).filter(x => x != none)
@@ -475,10 +484,10 @@ $endif$
           }
         }
         #if categories != none {
-          block()[#v(0.4em)#text(style: "italic")[Keywords:] #categories]
+          block()[#v(0.4em)#text(style: "italic")[#keywords-title:] #categories]
         }
         #if wordcount == true {
-          block()[#text(style: "italic")[Words:] #context preprint-words.final()]
+          block()[#text(style: "italic")[#words-title:] #context preprint-words.final()]
         }
       ]
     })

@@ -138,15 +138,16 @@ $endif$
 $if(authornote)$
   authornote: [$authornote$],
 $endif$
-$if(corresponding-text)$
-  corresponding-text: [$corresponding-text$],
-$endif$
+  correspondence-text: [$quarto.language.preprint-correspondence$],
+  equal-contribution-text: [$quarto.language.preprint-equal-contribution$],
 // Use categories or keywords
 $if(categories)$
   categories: [$for(categories)$$it$$sep$, $endfor$],
 $elseif(keywords)$
   categories: [$for(keywords)$$it$$sep$, $endfor$],
 $endif$
+  keywords-title: [$quarto.language.title-block-keywords$],
+  words-title: [$quarto.language.preprint-words$],
 $if(wordcount)$
   wordcount: $wordcount$,
 $endif$

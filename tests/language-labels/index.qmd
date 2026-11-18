@@ -1,0 +1,40 @@
+---
+title: Translated labels
+lang: de
+author:
+  - name: Erste Autorin
+    email: erste@example.org
+    corresponding: true
+    equal-contributor: true
+  - name: Zweiter Autor
+    equal-contributor: true
+abstract: Labels follow the document language.
+keywords: [eins, zwei]
+toc: true
+number-sections: true
+# Labels without a Quarto translation are set with `language:`
+language:
+  preprint-words: Wörter
+  preprint-correspondence: "Korrespondenz an:"
+  preprint-equal-contribution: "{0} haben gleichermaßen beigetragen."
+format:
+  preprint-typst:
+    keep-typ: true
+    wordcount: true
+---
+
+# Einleitung
+
+Expected: "Schlüsselwörter:" and "Wörter:" in the front matter, the title-page note "Korrespondenz an: Erste Autorin, erste\@example.org. †Erste Autorin & Zweiter Autor haben gleichermaßen beigetragen.", "Anhang A: Methoden" and "Anhang B" in the body and TOC, and these references: @sec-methoden is "Anhang A", @sec-anhang is "Anhang B".
+
+```{=typst}
+#show: appendix.with()
+```
+
+# Methoden {#sec-methoden}
+
+Text.
+
+# Anhang {#sec-anhang}
+
+A heading titled just "Anhang" renders as "Anhang B".

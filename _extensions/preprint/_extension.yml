@@ -10,11 +10,16 @@ contributes:
       hide-abstract-title: true
       # No callout icons by default; `icon=true` on a callout turns one back on
       callout-icon: false
-      # Note callouts are labelled "Box" (see typst-callouts.typ)
       language:
+        # Note callouts are labelled "Box" (see typst-callouts.typ)
         callout-note-title: Box
         crossref-nte-prefix: Box
         crossref-note-prefix: Box
+        # Labels without a Quarto translation (documents can set `language:`).
+        # {0} is replaced by the author names.
+        preprint-words: Words
+        preprint-correspondence: "Send correspondence to:"
+        preprint-equal-contribution: "{0} contributed equally to this work."
       functions: [place]
       include-before-body:
         # Render note callouts as grayscale "Boxes". 
