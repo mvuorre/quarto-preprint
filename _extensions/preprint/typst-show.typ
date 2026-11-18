@@ -82,9 +82,6 @@ $if(brand.typography.headings.line-height)$
   heading-line-height: $brand.typography.headings.line-height$,
 $endif$
 $endif$
-$if(number-sections)$
-  sectionnumbering: "1.1.1.1.",
-$endif$
 $if(section-numbering)$
   sectionnumbering: "$section-numbering$",
 $endif$
@@ -138,14 +135,6 @@ $endif$
 $if(all)$
   all: $all$,
 $endif$
-$if(citation)$
-  citation: (
-    type: "$citation.type$",
-    container-title: "$citation.container-title$",
-    doi: "$citation.doi$",
-    url: "$citation.url$"
-  ),
-$endif$
 $if(authornote)$
   authornote: [$authornote$],
 $endif$
@@ -170,11 +159,8 @@ $endif$
 $if(bibliography-title)$
   bibliography-title: [$bibliography-title$],
 $endif$
-// Theme system (unified for standalone and Quarto)
 $if(theme)$
   theme: "$theme$",
-$elseif(theme-jou)$
-  theme: "jou",
 $endif$
 // Explicit overrides (optional)
 $if(margin)$

@@ -9,6 +9,7 @@
 - Affiliation names and departments keep special characters and markup
 - Title block, headings, and code blocks are no longer justified
 - The starter template uses `citeproc: true`, so references appear in the References section
+- Remove the legacy `theme-jou: true` option (use `theme: jou`) and the ignored `prefix` and `numbering` arguments of `appendix()`
 
 ## 1.6.5
 

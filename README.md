@@ -129,6 +129,8 @@ format:
   - Example: `line-number: true`
   - This is simplified to a boolean instead of allowing custom numbering as per Typst.
 - `linestretch` (number) - Multiplier for line spacing \[[Quarto](https://quarto.org/docs/output-formats/typst.html), [Typst](https://typst.app/docs/reference/model/par/#parameters-leading)\]
+  - Multiplies Typst's default leading (0.65em), same as Quarto. 
+  - The default is 10/13 (0.5em leading); `1` would be Typst's default, looser spacing
   - Example: `linestretch: 1.1`
 - `spacing` (string) - Vertical spacing between paragraphs \[[Typst](https://typst.app/docs/reference/model/par/#parameters-spacing)\]
   - Example: `spacing: "0.6em"`

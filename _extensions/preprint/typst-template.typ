@@ -57,8 +57,7 @@
 // listings are numbered within each appendix (A1, A2, B1, ...). Callouts and
 // equations continue the main text numbering because Quarto hardcodes their
 // numbering.
-// `prefix` and `numbering` are ignored and kept for backwards compatibility.
-#let appendix(prefix: "A", columns: 1, numbering: none, doc) = {
+#let appendix(columns: 1, doc) = {
   preprint-appendix.update(true)
   set page(columns: columns)
 
@@ -125,7 +124,6 @@ $endif$
   categories: none,
   wordcount: none,
   authornote: none,
-  citation: none, // Not used currently
   date: none,
   corresponding-text: "Send correspondence to:",
   // Layout settings (can override theme defaults)
@@ -151,6 +149,7 @@ $endif$
   heading-color: none,
   heading-line-height: none,
   mathfont: none,
+  // Multiplies Typst's default leading (0.65em)
   linestretch: 10 / 13,
   // Structure settings
   sectionnumbering: none,
@@ -178,6 +177,11 @@ $endif$
   citecolor = to-color(citecolor)
   filecolor = to-color(filecolor)
 
+  // Shared spacing values
+  let leading = linestretch * 0.65em
+  let block-gap = spacing * 1.6 // around lists and display maths
+  let front-inset = 2.4em // left and right inset of the abstract and TOC
+
   /* Document settings */
   set document(
     title: title,
@@ -203,27 +207,26 @@ $endif$
 
   // Customize Typst bibliography (no effect if using citeproc)
   set bibliography(title: bibliography-title, style: bibliographystyle)
-  show bibliography: set par(spacing: spacing, leading: linestretch * 0.65em)
 
   // Lists: bulleted and numbered lists share one style
   set list(indent: first-line-indent / 2, body-indent: 0.5em)
   set enum(indent: first-line-indent / 2, body-indent: 0.5em)
   // Space around whole lists
-  show selector(list).or(enum): set block(above: spacing * 1.6, below: spacing * 1.6)
+  show selector(list).or(enum): set block(spacing: block-gap)
   // No first-line indent for paragraphs inside list items
   show selector(list).or(enum).or(terms): set par(first-line-indent: 0em)
 
   // Add space around math blocks
-  show math.equation.where(block: true): set block(spacing: spacing * 1.6)
+  show math.equation.where(block: true): set block(spacing: block-gap)
 
-  // Define space around block quotes
+  // Space around block quotes, slightly more than around other blocks
   show quote.where(block: true): set block(spacing: spacing * 1.8)
   // Don't indent anything in block quotes
   show quote.where(block: true): set par(first-line-indent: 0em)
 
   /* Improved figure display */
   // Add space above and below
-  show figure: f => { [#v(linestretch * 0.65em) #f #v(linestretch * 0.65em) ] }
+  show figure: f => { [#v(leading) #f #v(leading) ] }
   // Set block width to align caption to page/column
   // Target figure only as could otherwise mess with table formatting
   show figure.where(kind: "quarto-float-fig"): set block(width: 100%)
@@ -254,7 +257,6 @@ $endif$
         )
       }
     },
-    footer-descent: 10%,
   )
   set columns(gutter: col-gutter)
 
@@ -264,7 +266,7 @@ $endif$
   /* Typography settings */
 
   // Paragraph settings
-  set par(justify: true, leading: linestretch * 0.65em, spacing: spacing, first-line-indent: (
+  set par(justify: true, leading: leading, spacing: spacing, first-line-indent: (
     amount: first-line-indent,
     all: all,
   ))
@@ -442,9 +444,9 @@ $endif$
       v(2em, weak: true)
       block(
         below: 2em,
-        inset: (bottom: 1em, left: 2.4em, right: 2.4em),
+        inset: (bottom: 1em, x: front-inset),
       )[
-        #set text(size: 0.92em)
+        #set text(size: 0.92em) // slightly smaller than body text
         #set par(first-line-indent: 0em)
         #if abstract != none {
           if abstract-title != none {
@@ -464,7 +466,7 @@ $endif$
       // Table of contents
       if toc {
         block(
-          inset: (bottom: 2em, left: 2.4em, right: 2.4em),
+          inset: (bottom: 2em, x: front-inset),
         )[
           #outline(
             title: toc_title,
