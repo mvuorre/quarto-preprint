@@ -12,4 +12,8 @@ format:
 
 # Introduction {#sec-intro}
 
-An external [link](https://quarto.org) should be blue (#0066cc), an internal [link](#sec-intro) green, and the cross-reference @sec-intro red.
+An external [link](https://quarto.org) should be blue (#0066cc), an internal [link](#sec-intro) green, and the cross-references @sec-intro and @eq-x red.
+
+$$
+x = y
+$$ {#eq-x}

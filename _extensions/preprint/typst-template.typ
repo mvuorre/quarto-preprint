@@ -48,46 +48,44 @@
   }
 }
 
-// True from the point where appendix() is applied onwards
-#let preprint-appendix = state("preprint-appendix", false)
-
-// Appendix function. To use, include in .typ before appendix header
+// Appendix function. To use, include in .typ before the first appendix heading:
 // #show: appendix.with()
-// Appendices are lettered (Appendix A, B, ...), and figures, tables, and
-// listings are numbered within each appendix (A1, A2, B1, ...). Callouts and
-// equations continue the main text numbering because Quarto hardcodes their
-// numbering.
+// Appendices are lettered (Appendix A, B, ...). Figures, tables, listings,
+// equations, and callouts are numbered within each appendix (A1, A2, B1, ...)
+// by the numbering functions in numbering.typ.
 #let appendix(columns: 1, doc) = {
   preprint-appendix.update(true)
   set page(columns: columns)
 
-  // Add pagebreak before each level 1 heading in appendices and reset counters
+  // Each appendix starts on a new page and restarts numbering. Resetting
+  // every figure kind in the document covers floats, listings, callouts,
+  // and custom cross-reference kinds.
   show heading.where(level: 1): it => {
     pagebreak(weak: true)
-    // Reset figure counters for Quarto-specific kinds
-    counter(figure.where(kind: "quarto-float-fig")).update(0)
-    counter(figure.where(kind: "quarto-float-tbl")).update(0)
-    counter(figure.where(kind: "quarto-float-lst")).update(0)
-
-    // Reset generic counters
-    counter(figure.where(kind: image)).update(0)
-    counter(figure.where(kind: table)).update(0)
+    counter(math.equation).update(0)
+    context for kind in query(figure).map(f => f.kind).dedup() {
+      counter(figure.where(kind: kind)).update(0)
+    }
     it
   }
 
-  // Numberings: appendices are lettered (A, B, ...), subsections A.1, A.1.1
+  // Appendices are lettered (A, B, ...), subsections A.1, A.1.1
   set heading(supplement: [Appendix], numbering: "A.1")
-  // Hide level 2+ headings from TOC in appendices
+  // Only level 1 appendix headings in the TOC
   set heading(outlined: false)
   show heading.where(level: 1): set heading(outlined: true)
-
-  // Figures, tables, listings: appendix letter + number (A1, A2, B1, ...)
-  set figure(numbering: n => std.numbering("A", counter(heading).get().first()) + str(n))
-
-  // Reset heading counter
   counter(heading).update(0)
 
+  set figure(numbering: figure-numbering)
+
   doc
+}
+
+// Appendix heading text: "Appendix A: Title", or "Appendix A" for a heading
+// titled just "Appendix". Used in the body and in the TOC.
+#let appendix-title(h) = {
+  let label = [Appendix #numbering(h.numbering, ..counter(heading).at(h.location()))]
+  if h.body == [Appendix] { label } else [#label: #h.body]
 }
 
 $if(highlighting-definitions)$
@@ -192,18 +190,19 @@ $endif$
   set document(
     author: authors.map(author => content-to-string(author.name)).join(", ", last: " & "),
   ) if authors != none and authors != ()
-  // Link and cite colors
-  show link: set text(fill: linkcolor)
+  // Link colours. Links to labels (internal links) use filecolor if set.
+  // Links to locations are made by this template (appendix TOC entries and
+  // equation references) and stay uncoloured, like Typst's own TOC entries
+  // and references.
+  show link: it => {
+    let fill = if type(it.dest) == location { none } else if type(it.dest) == label and filecolor != none {
+      filecolor
+    } else { linkcolor }
+    if fill == none { it } else { text(fill: fill, it) }
+  }
   // citecolor has no effect if `citeproc: true`
   show cite: set text(fill: if citecolor != none { citecolor } else { linkcolor })
   show ref: set text(fill: citecolor) if citecolor != none
-  show link: this => {
-    if filecolor != none and type(this.dest) == label {
-      text(this, fill: filecolor)
-    } else {
-      text(this)
-    }
-  }
 
   // Customize Typst bibliography (no effect if using citeproc)
   set bibliography(title: bibliography-title, style: bibliographystyle)
@@ -288,11 +287,7 @@ $endif$
   show heading.where(level: 1): it => block(width: 100%, below: 0.8em, above: 1em)[
     #set align(center)
     #set text(size: fontsize * 1.1, weight: heading-weight)
-    #context if preprint-appendix.get() and it.numbering != none {
-      // "Appendix A: Title", or just "Appendix A" when the title is "Appendix"
-      let label = [Appendix #counter(heading).display(it.numbering)]
-      if it.body.has("text") and it.body.text == "Appendix" { label } else [#label: #it.body]
-    } else { it }
+    #context if preprint-appendix.get() and it.numbering != none { appendix-title(it) } else { it }
   ]
   show heading.where(level: 2): it => block(width: 100%, below: 0.8em, above: 1em)[
     #set text(size: fontsize * 1.05)
@@ -302,15 +297,27 @@ $endif$
     #set text(size: fontsize, style: "italic")
     #it
   ]
-  // Quarto passes supplement: [Section] to all heading refs; use "Appendix"
-  // for appendix headings (e.g. "Appendix A", "Appendix A.1")
+  // These rules are global because the main text and TOC refer to appendices
   show ref: it => {
     let el = it.element
-    if (
-      el != none and el.func() == heading and it.supplement != [Appendix] and preprint-appendix.at(el.location())
-    ) {
+    if el == none { return it }
+    let loc = el.location()
+    if el.func() == heading and it.supplement != [Appendix] and preprint-appendix.at(loc) {
+      // Quarto passes supplement: [Section] to all heading refs; use
+      // "Appendix" for appendix headings ("Appendix A", "Appendix A.1")
       ref(it.target, supplement: [Appendix])
+    } else if el.func() == math.equation and el.numbering != none {
+      // Typst drops the parentheses of a numbering pattern like "(1)" in
+      // references, but not of a function like equation-numbering
+      let supplement = if it.supplement == auto { el.supplement } else { it.supplement }
+      link(loc, [#supplement~#appendix-number(loc, "1", ..counter(math.equation).at(loc))])
     } else { it }
+  }
+  // TOC entries for appendices read as in the body ("Appendix A: Title")
+  show outline.entry.where(level: 1): it => {
+    let el = it.element
+    if el.func() != heading or not preprint-appendix.at(el.location()) { return it }
+    link(el.location(), it.indented(none, [#appendix-title(el) #box(width: 1fr, it.fill) #it.page()]))
   }
   // Level 4 & 5 headers are in paragraph
   show heading.where(level: 4): it => box(inset: (top: 0em, bottom: 0em, left: 0em, right: 0.1em), text(

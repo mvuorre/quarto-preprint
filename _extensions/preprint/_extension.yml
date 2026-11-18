@@ -20,6 +20,8 @@ contributes:
         # Render note callouts as grayscale "Boxes". 
         - typst-callouts.typ
       template-partials:
+        # Appendix-aware numbering (see numbering.typ)
+        - numbering.typ
         - typst-template.typ
         - typst-show.typ
       filters:

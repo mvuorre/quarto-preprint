@@ -237,7 +237,7 @@ To include an appendix, include the following [raw Typst](https://quarto.org/doc
 Appendix content.
 ````
 
-(The heading above would render as "Appendix A: Appendix title". A heading titled `# Appendix` renders as "Appendix A". Figures, tables, and listings are numbered separately within each appendix, e.g. "Figure A1". Callouts and equations continue the main text numbering [see <https://github.com/mvuorre/quarto-preprint/issues/46>].)
+(The heading above would render as "Appendix A: Appendix title". A heading titled `# Appendix` renders as "Appendix A". Figures, tables, listings, equations, and callouts are numbered separately within each appendix, e.g. "Figure A1", "Figure A1a", "Equation A1", "Box A1".)
 
 Note: If you want the appendix to appear as an [appendix in HTML output](https://quarto.org/docs/authoring/appendices.html) as well, add the `.appendix` class to the headings. Appendices are an experimental feature. They are provided through a custom Typst function, and their implementation and functionality may change as Quarto’s Typst integration matures.
 

@@ -14,6 +14,9 @@
 - Fix & simplify callouts
   - All note callouts, not only cross-referenced ones, render as grayscale boxes labelled "Box". The implementation no longer copies Quarto's callout code, so it is robust to Quarto updates
 - Callouts have no icons by default (Quarto's `callout-icon: false`); use `icon=true` on a callout, or `callout-icon: true` in the document, to show them
+- Equations, callouts, and subfigures are numbered within appendices ("Equation A1", "Box A1", "Figure A1a") (#46), as are custom cross-reference kinds
+- Appendix TOC entries read as in the body ("Appendix A: Title")
+- Figures between `appendix()` and the first appendix heading no longer get the number "01"
 
 ## 1.6.5
 
