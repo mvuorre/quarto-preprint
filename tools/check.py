@@ -23,6 +23,7 @@ import argparse
 import datetime
 import html
 import io
+import os
 import re
 import shutil
 import subprocess
@@ -213,13 +214,20 @@ def main() -> int:
 
     report = run / "report.html"
     write_report(report, header, results)
-    print(f"\n{header}")
+    lines = []
     for name, r in results.items():
         for line in r["notes"] + [f"FAIL {f}" for f in r["failures"]] + [f"WARN {w}" for w in r["warnings"]]:
-            print(f"{name}: {line}")
+            lines.append(f"{name}: {line}")
         if r["changes"]:
-            print(f"{name}: changed pages {', '.join(str(c['page']) for c in r['changes'])}")
-    print(f"Report: {report.relative_to(REPO)}")
+            lines.append(f"{name}: changed pages {', '.join(str(c['page']) for c in r['changes'])}")
+    print(f"\n{header}", *lines, f"Report: {report.relative_to(REPO)}", sep="\n")
+
+    # On GitHub Actions, also show the list on the run's summary page
+    if summary := os.environ.get("GITHUB_STEP_SUMMARY"):
+        items = "\n".join(f"- {html.escape(line, quote=False)}" for line in lines) or "All expectations met; no warnings or changes."
+        with open(summary, "a") as f:
+            f.write(f"## Test results\n\n{header}\n\n{items}\n\n"
+                    "Page images are in `report.html` in the `test-report` artifact below.\n")
     return 1 if any(r["failures"] for r in results.values()) else 0
 
 

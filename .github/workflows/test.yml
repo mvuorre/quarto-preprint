@@ -1,0 +1,39 @@
+# Run `make test` on every pull request: render the test documents from the PR and
+# from its base branch, check their expectations, and compare every page.
+# Failures and changed pages are listed on the run's summary page; the full
+# report.html with page images is attached as the `test-report` artifact.
+name: Test
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: test-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # the comparison needs the base branch's commits
+
+      - uses: quarto-dev/quarto-actions/setup@v2
+        with:
+          version: 1.11.9  # pinned so a Quarto release does not show up as page changes
+
+      - uses: astral-sh/setup-uv@v6
+
+      - name: Render and compare with the base branch
+        run: make test REF=origin/${{ github.base_ref || 'main' }}
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: test-report
+          path: |
+            _build/*/report.html
+            _build/*/pages/
+          if-no-files-found: ignore
