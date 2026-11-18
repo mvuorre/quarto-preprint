@@ -230,18 +230,17 @@ $endif$
   /* Improved figure display */
   // Add space above and below
   show figure: f => { [#v(leading) #f #v(leading) ] }
-  // Set block width to align caption to page/column
-  // Target figure only as could otherwise mess with table formatting
-  show figure.where(kind: "quarto-float-fig"): set block(width: 100%)
-  // Left-align captions and italicize "Figure X."
-  show figure.caption: it => {
+  // Captions start at the column edge and have an italic "Figure 1." label.
+  // The full-width block keeps a short caption of a narrow table or figure
+  // from sitting at its (centred) edge.
+  show figure.caption: it => block(width: 100%, {
     set align(left)
     set par(first-line-indent: 0em)
     if it.numbering != none [
       #emph([#it.supplement #context it.counter.display(it.numbering).])
     ]
     it.body
-  }
+  })
 
   /* Page layout settings */
   // With Quarto's margin layout, page.typ has already set the margins
