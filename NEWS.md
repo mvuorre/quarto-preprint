@@ -11,6 +11,9 @@
 - The starter template uses `citeproc: true`, so references appear in the References section
 - Remove the legacy `theme-jou: true` option (use `theme: jou`) and the ignored `prefix` and `numbering` arguments of `appendix()`
 - Long TOCs continue to the next page instead of overprinting the bottom of page 1; TOC follows the title block in normal flow (same as Quarto's Typst format)
+- Fix & simplify callouts
+  - All note callouts, not only cross-referenced ones, render as grayscale boxes labelled "Box". The implementation no longer copies Quarto's callout code, so it is robust to Quarto updates
+- Callouts have no icons by default (Quarto's `callout-icon: false`); use `icon=true` on a callout, or `callout-icon: true` in the document, to show them
 
 ## 1.6.5
 

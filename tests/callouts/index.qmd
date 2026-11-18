@@ -7,7 +7,7 @@ format:
     default
 ---
 
-This smoke case checks the default callouts with icons: @nte-box-default,
+This smoke case checks the default callouts, which have no icons: @nte-box-default,
 @wrn-warning-default, @imp-important-default, @cau-caution-default, and
 @tip-tip-default.
 
@@ -18,28 +18,32 @@ It also checks simple callouts without icons: @nte-box-simple,
 # Default Callouts
 
 ::: {#nte-box-default .callout-note}
-## Box with default icon
+## Box by default
 The note callout is rendered and cross-referenced as a box.
 :::
 
 ::: {#wrn-warning-default .callout-warning}
-## Warning with default icon
+## Warning by default
 The warning callout keeps its warning label.
 :::
 
 ::: {#imp-important-default .callout-important}
-## Important with default icon
+## Important by default
 The important callout keeps its important label.
 :::
 
 ::: {#cau-caution-default .callout-caution}
-## Caution with default icon
+## Caution by default
 The caution callout keeps its caution label.
 :::
 
 ::: {#tip-tip-default .callout-tip}
-## Tip with default icon
+## Tip by default
 The tip callout keeps its tip label.
+:::
+
+::: {.callout-note}
+A plain note without a cross-reference id or title is also a grayscale box, titled "Box".
 :::
 
 # Simple Iconless Callouts
@@ -67,4 +71,14 @@ The simple caution callout keeps its caution label.
 ::: {#tip-tip-simple .callout-tip appearance="simple" icon=false}
 ## Tip without icon
 The simple tip callout keeps its tip label.
+:::
+
+# Explicit Icons
+
+::: {.callout-note icon=true}
+A box with an explicit `icon=true` has a gray icon.
+:::
+
+::: {.callout-warning icon=true}
+A warning with an explicit `icon=true` has its usual icon.
 :::

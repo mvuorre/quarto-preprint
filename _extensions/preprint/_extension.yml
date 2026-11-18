@@ -8,9 +8,16 @@ contributes:
   formats:
     typst:
       hide-abstract-title: true
+      # No callout icons by default; `icon=true` on a callout turns one back on
+      callout-icon: false
+      # Note callouts are labelled "Box" (see typst-callouts.typ)
+      language:
+        callout-note-title: Box
+        crossref-nte-prefix: Box
+        crossref-note-prefix: Box
       functions: [place]
-      include-in-header:
-        # Override "Note" Quarto callouts with simplified "Boxes"
+      include-before-body:
+        # Render note callouts as grayscale "Boxes". 
         - typst-callouts.typ
       template-partials:
         - typst-template.typ

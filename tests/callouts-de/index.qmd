@@ -1,0 +1,23 @@
+---
+title: Callouts in German
+# Notes are "Box" (extension language strings win); other callouts keep German labels
+lang: de
+format:
+  preprint-typst:
+    keep-typ: true
+---
+
+::: {#nte-d .callout-note}
+## Titel
+Text.
+:::
+
+::: {.callout-note}
+Ohne Titel.
+:::
+
+::: {.callout-tip}
+Tipp.
+:::
+
+Siehe @nte-d.

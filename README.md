@@ -184,12 +184,12 @@ Quarto documents require citations in a separate .bib file. The [vscode-zotero](
 
 ## Boxes
 
-In `preprint-typst`, [Quarto note callouts](https://quarto.org/docs/authoring/callouts.html) render as understated grayscale boxes and `@nte-*` references are labeled as boxes.
+In `preprint-typst`, [Quarto note callouts](https://quarto.org/docs/authoring/callouts.html) render as understated grayscale boxes labelled "Box" ("Box 1" when cross-referenced with an `#nte-` id). Other callout types keep Quarto's styling. To use a different label, set Quarto's [language](https://quarto.org/docs/authoring/language.html) strings `callout-note-title`, `crossref-nte-prefix`, and `crossref-note-prefix`.
 
 ```md
-::: {#nte-boxes .callout-note icon=false}
+::: {#nte-boxes .callout-note}
 ## This is a box
-Use `icon=false` to show the box without an icon.
+Boxes, like all callouts, have no icon by default. Use `icon=true` to show one.
 :::
 
 See @nte-boxes.
