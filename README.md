@@ -140,6 +140,8 @@ format:
   - Example: `all: false`
 - `col-gutter` (string) - Horizontal spacing between columns \[[Typst](https://typst.app/docs/reference/layout/columns/#parameters-gutter)\]
   - Example: `col-gutter: "4.2%"` or `col-gutter: "2em"`
+- [Margin content](https://quarto.org/docs/output-formats/typst.html#margin-layout) works as in Quarto's Typst format.
+  - **Note:** any margin content, even a single `.column-margin` div or `reference-location: margin`, switches the document to one column, also with `theme: jou`. Set `columns: 2` explicitly to keep two (narrow) columns.
 
 ## Language
 

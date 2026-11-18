@@ -132,6 +132,8 @@ $endif$
   citecolor: none,
   filecolor: none,
   margin: auto,
+  // True when Quarto's margin layout (margin notes) manages the margins
+  margin-layout: false,
   paper: "a4",
   // Typography settings
   lang: "en",
@@ -169,7 +171,9 @@ $endif$
   let theme-defaults = themes.at(theme)
   if margin == auto { margin = theme-defaults.margin }
   if fontsize == auto { fontsize = theme-defaults.fontsize }
-  if cols == auto { cols = theme-defaults.cols }
+  // Margin content defaults to one column: next to a margin, two columns
+  // are very narrow (explicit `columns: 2` still wins)
+  if cols == auto { cols = if margin-layout { 1 } else { theme-defaults.cols } }
 
   linkcolor = to-color(linkcolor)
   citecolor = to-color(citecolor)
@@ -240,9 +244,10 @@ $endif$
   }
 
   /* Page layout settings */
+  // With Quarto's margin layout, page.typ has already set the margins
+  set page(margin: margin) if not margin-layout
   set page(
     paper: paper,
-    margin: margin,
     numbering: none,
     columns: cols,
     header-ascent: 50%,

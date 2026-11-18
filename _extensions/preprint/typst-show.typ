@@ -163,7 +163,10 @@ $if(theme)$
   theme: "$theme$",
 $endif$
 // Explicit overrides (optional)
-$if(margin)$
+$if(margin-geometry)$
+  // Margin notes: Quarto's page.typ sets the margins (marginalia.setup)
+  margin-layout: true,
+$elseif(margin)$
   margin: ($for(margin/pairs)$$margin.key$: $margin.value$,$endfor$),
 $endif$
 $if(columns)$
