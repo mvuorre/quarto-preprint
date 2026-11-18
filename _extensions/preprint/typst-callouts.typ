@@ -8,7 +8,9 @@
 // Quarto's callout() (definitions.typ) receives colours but not the callout
 // type, so note callouts are recognised by Quarto's note colour, or by the
 // brand primary colour that replaces it when a brand is used. If Quarto
-// changes its note colour, notes fall back to Quarto's own style.
+// changes its note colour, notes fall back to Quarto's own style; a brand
+// whose primary colour is also its warning, danger, or success colour makes
+// those callouts boxes too.
 //
 // We wrap Quarto's callout() rather than copy it: Quarto's callout figure show
 // rule takes its output apart and relies on its structure. This file is
@@ -16,7 +18,7 @@
 // defined after the header includes. Written against Quarto 1.11.
 
 #let quarto-callout = callout
-#let note-icon-colors = (rgb("#0758E5"), brand-color.at("primary", default: none))
+#let note-icon-colors = (rgb("#0758E5"), brand-color.at("primary", default: none)).filter(c => c != none)
 
 #let callout(..args) = {
   if args.named().at("icon_color", default: none) in note-icon-colors {

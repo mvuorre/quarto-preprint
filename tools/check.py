@@ -79,7 +79,7 @@ def render_all(root: Path, label: str) -> dict[str, dict]:
             "qmd": root / doc,
             "pdf": pdf if ok else None,
             "log": None if ok else log[-2000:],
-            "warnings": sorted({m.strip() for m in re.findall(r"^\s*(?:warning:|WARN).*$", log, re.M)}),
+            "warnings": sorted({m.strip() for m in re.findall(r"(?:warning:|WARN).*", log)}),
         }
     return results
 

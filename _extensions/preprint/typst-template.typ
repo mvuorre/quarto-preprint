@@ -19,40 +19,17 @@
   ),
 )
 
-// Colour options arrive from Quarto metadata as content, e.g. [\#0066cc] or
-// [blue]. Convert hex codes and Typst's named colours to colour values;
-// values that already are colours (e.g. brand colours) pass through.
-#let named-colors = (
-  black: black,
-  gray: gray,
-  silver: silver,
-  white: white,
-  navy: navy,
-  blue: blue,
-  aqua: aqua,
-  teal: teal,
-  eastern: eastern,
-  purple: purple,
-  fuchsia: fuchsia,
-  maroon: maroon,
-  red: red,
-  orange: orange,
-  yellow: yellow,
-  olive: olive,
-  green: green,
-  lime: lime,
-)
-#let to-color(c) = {
-  if c == none or type(c) == color { return c }
-  let s = content-to-string(c).trim()
-  if s in named-colors { named-colors.at(s) } else if s.starts-with("#") { rgb(s) } else {
-    panic("unknown colour " + repr(s) + ": use a hex code (\"#0066cc\") or a Typst colour name")
-  }
-}
+// Colour options are hex codes, as in Quarto's Typst format. They arrive
+// from Quarto metadata as content (e.g. [\#0066cc]); brand colours already
+// are colours.
+#let to-color(c) = if c == none or type(c) == color { c } else { rgb(content-to-string(c)) }
 
 // Word count (shown in the front matter) of the main text's prose,
 // including headings and footnotes. Not counted: code, tables, figures and
-// their captions, equations, citations and references, and appendices.
+// their captions, equations, the reference list, and appendices. Citations
+// are not counted when Typst handles them; with `citeproc: true` they are
+// plain text and are counted. Callouts are counted, except cross-referenced
+// ones, which Quarto places in figures.
 // wordometer reads the content before show rules run, so preprint() adds the
 // whole document's words and appendix() subtracts its own.
 #let preprint-words = state("preprint-words", 0)

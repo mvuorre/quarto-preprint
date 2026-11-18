@@ -6,6 +6,7 @@
 - Remove the `corresponding-text` option; use the `preprint-correspondence` language label instead (e.g. `language: {preprint-correspondence: "Corresponding authors:"}`)
 - Callouts have no icons by default (Quarto's `callout-icon: false`); use `icon=true` on a callout, or `callout-icon: true` in the document, to show them
 - Unlabeled display equations are no longer numbered, so equation numbers match Quarto's HTML output
+- `linkcolor`, `citecolor`, and `filecolor` take hex codes (e.g. `"#0066cc"`), as in Quarto's Typst format; Typst colour names such as `blue` are no longer accepted
 - `theme: jou` no longer overrides explicit `fontsize`, `columns`, and `margin` settings
 - Any margin content (margin notes, `.column-margin`) makes the document one column by default, also with `theme: jou`
 - The word count (`wordcount: true`) counts only the main text's prose: code, tables, figures and captions, and appendices are no longer counted

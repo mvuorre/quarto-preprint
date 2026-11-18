@@ -78,7 +78,7 @@ data <- data.frame(
 | Type B | 23 | 54% |
 | Type C | 8 | 19% |
 
-: Main table {#tbl-example}
+: An example table. {#tbl-example}
 
 ## Figures
 
@@ -148,7 +148,7 @@ Appendix cross-referenced content like @tbl-appendix, @fig-appendix, and @eq-app
 | Beta | 4.56 |
 | Gamma | 7.89 |
 
-: Main table {#tbl-appendix}
+: Example appendix table {#tbl-appendix}
 
 ::: {#fig-appendix fig-cap="Example appendix figure"}
 {{< placeholder 300 150 format=svg >}}

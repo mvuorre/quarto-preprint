@@ -1,0 +1,18 @@
+---
+title: Typst bibliography
+bibliography: ../../bibliography.bib
+bibliography-title: Literature
+bibliographystyle: chicago-author-date
+format:
+  preprint-typst:
+    keep-typ: true
+    citeproc: false
+expect:
+  contains:
+    - "Literature"
+    - "(R Core Team 2025)"
+  absent:
+    - "References"
+---
+
+With `citeproc: false`, Typst formats the citations and the reference list [@rcoreteamLanguageEnvironmentStatistical2025]. The list has a custom title and uses the Chicago author-date style, so citations have no comma before the year. @allaireQuarto2025 is cited in text.

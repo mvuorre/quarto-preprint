@@ -83,7 +83,7 @@ Front matter variables can be shared across output formats (such as `toc` above)
   - Example: `authornote: "Author affiliations and contact"`
 - `wordcount` (boolean) - Display word count below abstract
   - Example: `wordcount: true`
-  - Counts the main text's prose, including headings and footnotes. Code, tables, figures and their captions, equations, citations, the reference list, the abstract, and appendices are not counted.
+  - Counts the main text's prose, including headings and footnotes. Code, tables, figures and their captions, equations, the reference list, the abstract, and appendices are not counted. Citations are counted with `citeproc: true`, because Pandoc writes them as plain text. Callouts are counted, except cross-referenced ones.
 - `hide-abstract-title` (boolean) - Hide the abstract heading by default; set to `false` to show Quarto's standard abstract label
   - Example: `hide-abstract-title: false`
 - `theme` (string) - Select a theme ("default", "jou")
@@ -101,11 +101,11 @@ Front matter variables can be shared across output formats (such as `toc` above)
   - Example: `mathfont: "New Computer Modern Math"`
 - `codefont` (string) - Font family for code \[[Quarto](https://quarto.org/docs/output-formats/typst.html)\]
   - Example: `codefont: "Monaco"`
-- `linkcolor` (string) - Color for hyperlinks \[[Quarto](https://quarto.org/docs/output-formats/html-themes.html#basic-options), [Typst](https://typst.app/docs/reference/visualize/color/)\]
-  - Example: `linkcolor: "blue"` or `linkcolor: "#0066cc"`
-- `citecolor` (string) - Color for citations and cross-references when Typst handles them \[[Quarto](https://quarto.org/docs/output-formats/typst.html)\]
+- `linkcolor` (hex code) - Color for hyperlinks \[[Quarto](https://quarto.org/docs/output-formats/html-themes.html#basic-options), [Typst](https://typst.app/docs/reference/visualize/color/)\]
+  - Example: `linkcolor: "#0066cc"`
+- `citecolor` (hex code) - Color for citations and cross-references when Typst handles them \[[Quarto](https://quarto.org/docs/output-formats/typst.html)\]
   - Example: `citecolor: "#0066cc"`
-- `filecolor` (string) - Color for internal label links \[[Quarto](https://quarto.org/docs/output-formats/typst.html)\]
+- `filecolor` (hex code) - Color for internal label links \[[Quarto](https://quarto.org/docs/output-formats/typst.html)\]
   - Example: `filecolor: "#444444"`
 
 ## Branding

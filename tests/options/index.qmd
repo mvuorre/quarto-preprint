@@ -1,9 +1,9 @@
 ---
 title: Options override theme defaults
-# Hex strings (escaped by Pandoc) and Typst colour names must both work
+# Colours are hex strings (escaped by Pandoc)
 linkcolor: "#0066cc"
-citecolor: red
-filecolor: "green"
+citecolor: "#cc0000"
+filecolor: "#008800"
 number-sections: true
 format:
   preprint-typst:
