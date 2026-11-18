@@ -100,7 +100,7 @@ Front matter variables can be shared across output formats (such as `toc` above)
 - `mathfont` (string) - Font family for equations \[[Quarto](https://quarto.org/docs/output-formats/typst.html)\]
   - Example: `mathfont: "New Computer Modern Math"`
 - `codefont` (string) - Font family for code \[[Quarto](https://quarto.org/docs/output-formats/typst.html)\]
-  - Example: `codefont: "Monacy"`
+  - Example: `codefont: "Monaco"`
 - `linkcolor` (string) - Color for hyperlinks \[[Quarto](https://quarto.org/docs/output-formats/html-themes.html#basic-options), [Typst](https://typst.app/docs/reference/visualize/color/)\]
   - Example: `linkcolor: "blue"` or `linkcolor: "#0066cc"`
 - `citecolor` (string) - Color for citations and cross-references when Typst handles them \[[Quarto](https://quarto.org/docs/output-formats/typst.html)\]
