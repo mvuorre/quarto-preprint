@@ -14,7 +14,7 @@ $if(by-author)$
   $for(by-author)$
       (
         name: [$it.name.literal$],
-        affiliation: [$for(it.affiliations)$$it.id$$sep$,$endfor$],
+        affiliations: ($for(it.affiliations)$[$it.id$],$endfor$),
         $if(it.attributes.corresponding)$corresponding: $it.attributes.corresponding$,$endif$
         $if(it.attributes.equal-contributor)$equal-contributor: $it.attributes.equal-contributor$,$endif$
         $if(it.orcid)$orcid: "https://orcid.org/$it.orcid$",$endif$
@@ -27,9 +27,9 @@ $if(affiliations)$
   affiliations: (
 $for(affiliations)$
     (
-      id: "$it.id$",
-      name: "$it.name$",
-      $if(it.department)$department: "$it.department$",$endif$
+      id: [$it.id$],
+      name: [$it.name$],
+      $if(it.department)$department: [$it.department$],$endif$
     ),
 $endfor$
   ),

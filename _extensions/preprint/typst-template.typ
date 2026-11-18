@@ -302,12 +302,18 @@
     if eq.len() > 1 { eq } else { () }
   } else { () }
 
+  // Affiliations are numbered in the order they are listed
+  let aff-number(id) = str(affiliations.position(a => a.id == id) + 1)
+
   // Author line: name, affiliation number(s), note markers, ORCID
   let author_display = if authors != none and authors != () {
     authors
       .map(a => {
         let parts = (a.name,)
-        if authors.len() > 1 { parts.push(super(a.affiliation)) }
+        let author-affs = a.at("affiliations", default: ())
+        if authors.len() > 1 and author-affs.len() > 0 {
+          parts.push(super(author-affs.map(aff-number).join(",")))
+        }
         if corresponding_authors.contains(a) { parts.push("*") }
         if equal_authors.contains(a) { parts.push(super("†")) }
         if a.keys().contains("orcid") { parts.push(link(a.orcid, fa-orcid())) }
