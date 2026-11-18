@@ -389,7 +389,6 @@ $endif$
       or abstract != none
       or categories != none
       or wordcount == true
-      or toc
   )
   // Centred front-matter block with the given space above. Not justified:
   // stretched word gaps look wrong in centred lines (e.g. a wrapped title)
@@ -462,20 +461,18 @@ $endif$
           block()[#text(style: "italic")[Words:] #total-words]
         }
       ]
-
-      // Table of contents
-      if toc {
-        block(
-          inset: (bottom: 2em, x: front-inset),
-        )[
-          #outline(
-            title: toc_title,
-            depth: toc_depth,
-            indent: toc_indent,
-          )
-        ]
-      }
     })
+  }
+
+  // Table of contents in normal flow, as in Quarto's template: a float cannot
+  // break across pages, so a long TOC would overflow the title float. In
+  // multi-column layouts the TOC therefore sits in the first column.
+  if toc {
+    block(above: 0em, below: 2em, inset: (x: front-inset), outline(
+      title: toc_title,
+      depth: toc_depth,
+      indent: toc_indent,
+    ))
   }
 
   // Word count with wordometer package

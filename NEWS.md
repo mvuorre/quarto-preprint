@@ -10,6 +10,7 @@
 - Title block, headings, and code blocks are no longer justified
 - The starter template uses `citeproc: true`, so references appear in the References section
 - Remove the legacy `theme-jou: true` option (use `theme: jou`) and the ignored `prefix` and `numbering` arguments of `appendix()`
+- Long TOCs continue to the next page instead of overprinting the bottom of page 1; TOC follows the title block in normal flow (same as Quarto's Typst format)
 
 ## 1.6.5
 
