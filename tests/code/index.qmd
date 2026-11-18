@@ -6,7 +6,7 @@ format:
 syntax-highlighting: github
 ---
 
-```{r}
+```r
 some_very_long_function_name <- function(the_first_long_argument = a_default_value) {
   NA
 }

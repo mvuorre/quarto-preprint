@@ -22,12 +22,6 @@ format:
     wordcount: true
 ---
 
-```{r}
-#| echo: false
-
-x <- rnorm(10)
-```
-
 ---
 abstract: |
   {{< lipsum 1 >}}
