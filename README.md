@@ -145,7 +145,7 @@ format:
   - Example: `lang: "en"` or `lang: "de"`
 - `region` (string) - Document region \[[Quarto](https://quarto.org/docs/authoring/language.html), [Typst](https://typst.app/docs/reference/text/text/#parameters-region)\]
   - Example: `region: "US"` or `region: "GB"`
-- Labels ("Appendix", "Keywords", ...) follow `lang` where Quarto has a translation. Change any label with Quarto's [`language`](https://quarto.org/docs/authoring/language.html) option. Besides Quarto's own keys (e.g. `crossref-apx-prefix`, `title-block-keywords`, and `section-title-references` for the title of Typst's reference list), *preprint-typst* uses these, which have no translations:
+- Labels ("Appendix", "Keywords", ...) follow `lang` where Quarto has a translation. Change any label with Quarto's [`language`](https://quarto.org/docs/authoring/language.html) option. Besides Quarto's own keys (e.g. `crossref-apx-prefix`, `title-block-keywords`, or `section-title-references`, which titles Typst's reference list), *preprint-typst* uses these, which have no translations:
   - `preprint-words`: word count label ("Words")
   - `preprint-correspondence`: "Send correspondence to:"
   - `preprint-equal-contribution`: "{0} contributed equally to this work.", where `{0}` is replaced by the author names
@@ -163,7 +163,7 @@ format:
 
 ### Using Typst's own citation processing
 
-Typst has its [own citation processing system](https://quarto.org/docs/authoring/citations.html#typst), whose style you can set with [`bibliographystyle`](https://typst.app/docs/reference/model/bibliography/#parameters-style) (default: `apa`) or `csl`. The reference list is titled with the language label `section-title-references` ("References").
+Typst has its [own citation processing system](https://quarto.org/docs/authoring/citations.html#typst). Set its style with [`bibliographystyle`](https://typst.app/docs/reference/model/bibliography/#parameters-style) (default: `apa`) or `csl`, and the title of its reference list with the `section-title-references` language label.
 
 ### Using Pandoc (recommended)
 

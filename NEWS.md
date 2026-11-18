@@ -4,7 +4,7 @@
 
 - Remove the legacy `theme-jou: true` option (use `theme: jou`) and the ignored `prefix` and `numbering` arguments of `appendix()`
 - Remove the `corresponding-text` option; use the `preprint-correspondence` language label instead (e.g. `language: {preprint-correspondence: "Corresponding authors:"}`)
-- Remove the `bibliography-title` option; the title of Typst's reference list follows the document language, and can be changed with Quarto's `section-title-references` language label
+- Remove the `bibliography-title` option; use the `section-title-references` language label instead. The default title of Typst's reference list now follows the document language
 - Callouts have no icons by default (Quarto's `callout-icon: false`); use `icon=true` on a callout, or `callout-icon: true` in the document, to show them
 - Unlabeled display equations are no longer numbered, so equation numbers match Quarto's HTML output
 - `linkcolor`, `citecolor`, and `filecolor` take hex codes (e.g. `"#0066cc"`), as in Quarto's Typst format; Typst colour names such as `blue` are no longer accepted
