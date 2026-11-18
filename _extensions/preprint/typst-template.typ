@@ -90,6 +90,19 @@
 
   doc
 }
+
+$if(highlighting-definitions)$
+// Workaround to fix code block justification:
+// Pandoc-highlighted code blocks are Skylighting() paragraphs of inline raw
+// text, not raw blocks, so `show raw.where(block: true)` in preprint() does
+// not reach them. Wrap Pandoc's function (defined in definitions.typ only
+// when the document has code) to keep wrapped code lines unjustified.
+#let pandoc-skylighting = Skylighting
+#let Skylighting(..args) = {
+  set par(justify: false)
+  pandoc-skylighting(..args)
+}
+$endif$
 // Layout defaults per theme. Used for any of these options that the
 // document leaves at `auto`, so explicit settings always win.
 #let themes = (
@@ -256,6 +269,10 @@
     all: all,
   ))
   set par.line(numbering: linenumbering)
+  // Justify running text only: stretched word gaps look wrong in (centred)
+  // headings and in wrapped code lines
+  show heading: set par(justify: false)
+  show raw.where(block: true): set par(justify: false)
 
   // Text settings
   set text(lang: lang, region: region, size: fontsize)
