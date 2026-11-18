@@ -1,7 +1,7 @@
 // Standalone Typst preprint template
 
 // Imports
-#import "@preview/wordometer:0.1.5": total-words, word-count
+#import "@preview/wordometer:0.1.6": word-count-of
 
 // ORCID logo
 #let fa-orcid(size: 0.8em) = box(
@@ -48,6 +48,14 @@
   }
 }
 
+// Word count ("Words:" in the front matter) of the main text's prose,
+// including headings and footnotes. Not counted: code, tables, figures and
+// their captions, equations, citations and references, and appendices.
+// wordometer reads the content before show rules run, so preprint() adds the
+// whole document's words and appendix() subtracts its own.
+#let preprint-words = state("preprint-words", 0)
+#let count-words(body) = word-count-of(body, exclude: ("raw", "table", "figure", <refs>)).words
+
 // Appendix function. To use, include in .typ before the first appendix heading:
 // #show: appendix.with()
 // Appendices are lettered (Appendix A, B, ...). Figures, tables, listings,
@@ -55,6 +63,7 @@
 // by the numbering functions in numbering.typ.
 #let appendix(columns: 1, doc) = {
   preprint-appendix.update(true)
+  preprint-words.update(n => n - count-words(doc))
   set page(columns: columns)
 
   // Each appendix starts on a new page and restarts numbering. Resetting
@@ -469,7 +478,7 @@ $endif$
           block()[#v(0.4em)#text(style: "italic")[Keywords:] #categories]
         }
         #if wordcount == true {
-          block()[#text(style: "italic")[Words:] #total-words]
+          block()[#text(style: "italic")[Words:] #context preprint-words.final()]
         }
       ]
     })
@@ -486,8 +495,7 @@ $endif$
     ))
   }
 
-  // Word count with wordometer package
-  show: word-count.with(exclude: (<refs>))
+  if wordcount == true { preprint-words.update(n => n + count-words(doc)) }
 
   /* Document content */
   doc

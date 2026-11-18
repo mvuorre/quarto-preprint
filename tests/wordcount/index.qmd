@@ -1,0 +1,42 @@
+---
+title: Word count
+abstract: The abstract is not counted.
+format:
+  preprint-typst:
+    keep-typ: true
+    wordcount: true
+---
+
+# Prose
+
+One two three four five six seven eight nine ten.
+
+```r
+code_is_not_counted <- function(x) x
+```
+
+| Tables | are | not | counted |
+|--------|-----|-----|---------|
+| a      | b   | c   | d       |
+
+: Table captions are not counted. {#tbl-x}
+
+::: {#fig-x}
+{{< placeholder 100 50 format=svg >}}
+
+Figure captions are not counted.
+:::
+
+$$
+x = y
+$$
+
+Eleven twelve.
+
+```{=typst}
+#show: appendix.with()
+```
+
+# Appendix
+
+Appendix prose is not counted either.

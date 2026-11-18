@@ -83,6 +83,7 @@ Front matter variables can be shared across output formats (such as `toc` above)
   - Example: `authornote: "Author affiliations and contact"`
 - `wordcount` (boolean) - Display word count below abstract
   - Example: `wordcount: true`
+  - Counts the main text's prose, including headings and footnotes. Code, tables, figures and their captions, equations, citations, the reference list, the abstract, and appendices are not counted.
 - `hide-abstract-title` (boolean) - Hide the abstract heading by default; set to `false` to show Quarto's standard abstract label
   - Example: `hide-abstract-title: false`
 - `theme` (string) - Select a theme ("default", "jou")

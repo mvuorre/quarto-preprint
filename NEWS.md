@@ -18,6 +18,7 @@
 - Appendix TOC entries read as in the body ("Appendix A: Title")
 - Figures between `appendix()` and the first appendix heading no longer get the number "01"
 - Quarto's margin layout (margin notes, `.column-margin`) no longer prints margin content over the body text. Any margin content makes the document one column by default, also with `theme: jou`
+- The word count (`wordcount: true`) counts only the main text's prose: code, tables, figures and captions, and appendices are no longer counted
 
 ## 1.6.5
 
