@@ -4,9 +4,13 @@ A [Quarto](https://quarto.org/) extension for creating PDF documents with [Typst
 
 # Examples
 
-| Default output | `theme: jou` output | Full-width content | Single-column appendices |
-|:--:|:--:|:--:|:--:|
-| [![](https://github.com/mvuorre/quarto-preprint/releases/latest/download/example.png)](https://github.com/mvuorre/quarto-preprint/releases/latest/download/example.pdf) | [![](https://github.com/mvuorre/quarto-preprint/releases/latest/download/example-jou.png)](https://github.com/mvuorre/quarto-preprint/releases/latest/download/example-jou.pdf) | [![](https://github.com/mvuorre/quarto-preprint/releases/latest/download/example-jou-p2.png)](https://github.com/mvuorre/quarto-preprint/releases/latest/download/example-jou.pdf) | [![](https://github.com/mvuorre/quarto-preprint/releases/latest/download/example-jou-p3.png)](https://github.com/mvuorre/quarto-preprint/releases/latest/download/example-jou.pdf) |
+| Default output | `theme: jou` output |
+|:--:|:--:|
+| [![](https://github.com/mvuorre/quarto-preprint/releases/latest/download/example.png)](https://github.com/mvuorre/quarto-preprint/releases/latest/download/example.pdf) | [![](https://github.com/mvuorre/quarto-preprint/releases/latest/download/example-jou.png)](https://github.com/mvuorre/quarto-preprint/releases/latest/download/example-jou.pdf) |
+
+| Full-width content | Single-column appendices |
+|:--:|:--:|
+| [![](https://github.com/mvuorre/quarto-preprint/releases/latest/download/example-jou-p2.png)](https://github.com/mvuorre/quarto-preprint/releases/latest/download/example-jou.pdf) | [![](https://github.com/mvuorre/quarto-preprint/releases/latest/download/example-jou-p3.png)](https://github.com/mvuorre/quarto-preprint/releases/latest/download/example-jou.pdf) |
 
 # Overview
 
@@ -150,14 +154,6 @@ format:
   - `preprint-correspondence`: "Send correspondence to:"
   - `preprint-equal-contribution`: "{0} contributed equally to this work.", where `{0}` is replaced by the author names
   - Note callouts are labelled "Box" (see [Boxes](#boxes))
-
-  ```yaml
-  lang: de
-  language:
-    preprint-words: Wörter
-    preprint-correspondence: "Korrespondenz an:"
-    preprint-equal-contribution: "{0} haben gleichermaßen beigetragen."
-  ```
 
 ## Bibliography & citations
 
