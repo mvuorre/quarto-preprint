@@ -1,10 +1,12 @@
-// Standalone Typst preprint template
+// preprint-typst: the preprint() template function and appendix().
+// Used through Quarto: it relies on Quarto's definitions.typ (e.g.
+// content-to-string, brand-color) and is a Pandoc template partial.
 
 // Imports
 #import "@preview/wordometer:0.1.6": word-count-of
 
 // ORCID logo
-#let fa-orcid(size: 0.8em) = box(
+#let orcid-icon(size: 0.8em) = box(
   height: size,
   width: size,
   image(
@@ -348,24 +350,15 @@ $endif$
     link(el.location(), it.indented(none, [#appendix-title(el) #box(width: 1fr, it.fill) #it.page()]))
   }
   // Level 4 & 5 headers are in paragraph
-  show heading.where(level: 4): it => box(inset: (top: 0em, bottom: 0em, left: 0em, right: 0.1em), text(
-    size: 1em,
-    weight: heading-weight,
-    it.body + [.],
-  ))
-  show heading.where(level: 5): it => box(inset: (top: 0em, bottom: 0em, left: 0em, right: 0.1em), text(
-    size: 1em,
-    weight: heading-weight,
-    style: "italic",
-    it.body + [.],
-  ))
+  show heading.where(level: 4): it => box(inset: (right: 0.1em), text(weight: heading-weight, it.body + [.]))
+  show heading.where(level: 5): it => box(inset: (right: 0.1em), text(weight: heading-weight, style: "italic", it.body + [.]))
 
   // Collect author metadata once
-  let corresponding_authors = if authors != none {
+  let corresponding-authors = if authors != none {
     authors.filter(a => a.at("corresponding", default: false) == true)
   } else { () }
   // Equal contribution is only meaningful when shared by 2+ authors
-  let equal_authors = if authors != none {
+  let equal-authors = if authors != none {
     let eq = authors.filter(a => a.at("equal-contributor", default: false) == true)
     if eq.len() > 1 { eq } else { () }
   } else { () }
@@ -374,7 +367,7 @@ $endif$
   let aff-number(id) = str(affiliations.position(a => a.id == id) + 1)
 
   // Author line: name, affiliation number(s), note markers, ORCID
-  let author_display = if authors != none and authors != () {
+  let author-line = if authors != none and authors != () {
     authors
       .map(a => {
         let parts = (a.name,)
@@ -382,9 +375,9 @@ $endif$
         if authors.len() > 1 and author-affs.len() > 0 {
           parts.push(super(author-affs.map(aff-number).join(",")))
         }
-        if corresponding_authors.contains(a) { parts.push("*") }
-        if equal_authors.contains(a) { parts.push(super("†")) }
-        if a.keys().contains("orcid") { parts.push(link(a.orcid, fa-orcid())) }
+        if corresponding-authors.contains(a) { parts.push("*") }
+        if equal-authors.contains(a) { parts.push(super("†")) }
+        if "orcid" in a { parts.push(link(a.orcid, orcid-icon())) }
         parts.join()
       })
       .join(", ", last: " & ")
@@ -392,17 +385,17 @@ $endif$
 
   // Title-page note: correspondence, equal contribution, author note and
   // thanks, all in a single unnumbered footnote paragraph.
-  let title_note = (
-    if corresponding_authors.len() > 0 [
-      \*#correspondence-text #corresponding_authors.map(a => {
+  let title-note = (
+    if corresponding-authors.len() > 0 [
+      \*#correspondence-text #corresponding-authors.map(a => {
         if "email" in a [#a.name, #a.email] else { a.name }
       }).join(", ", last: " & ").
     ],
-    if equal_authors.len() > 0 {
+    if equal-authors.len() > 0 {
       let parts = content-to-string(equal-contribution-text).split("{0}")
       assert(parts.len() == 2, message: "preprint-equal-contribution must contain {0} once, for the author names")
       let (before, after) = parts
-      [#super("†")#before#equal_authors.map(a => a.name).join(", ", last: " & ")#after]
+      [#super("†")#before#equal-authors.map(a => a.name).join(", ", last: " & ")#after]
     },
     authornote,
     thanks,
@@ -413,15 +406,15 @@ $endif$
   // in normal flow. Non-floating place() takes no space and does not form a
   // paragraph (keeps the first body paragraph unindented). The footnote
   // counter is reset so body footnotes start at 1.
-  if title_note.len() > 0 {
-    place(hide(footnote(numbering: _ => [], title_note.join(" "))))
+  if title-note.len() > 0 {
+    place(hide(footnote(numbering: _ => [], title-note.join(" "))))
     counter(footnote).update(0)
   }
 
   let has-front-matter = (
     title != none
       or subtitle != none
-      or author_display != none
+      or author-line != none
       or affiliations != none
       or date != none
       or abstract != none
@@ -458,8 +451,8 @@ $endif$
         centered(1em, text(weight: heading-weight, size: subtitle-size, subtitle))
       }
 
-      if author_display != none {
-        centered(2em, text(weight: "regular", size: subtitle-size, author_display))
+      if author-line != none {
+        centered(2em, text(weight: "regular", size: subtitle-size, author-line))
       }
 
       if affiliations != none {
