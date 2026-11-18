@@ -21,10 +21,24 @@
 // [blue]. Convert hex codes and Typst's named colours to colour values;
 // values that already are colours (e.g. brand colours) pass through.
 #let named-colors = (
-  black: black, gray: gray, silver: silver, white: white,
-  navy: navy, blue: blue, aqua: aqua, teal: teal, eastern: eastern,
-  purple: purple, fuchsia: fuchsia, maroon: maroon, red: red, orange: orange,
-  yellow: yellow, olive: olive, green: green, lime: lime,
+  black: black,
+  gray: gray,
+  silver: silver,
+  white: white,
+  navy: navy,
+  blue: blue,
+  aqua: aqua,
+  teal: teal,
+  eastern: eastern,
+  purple: purple,
+  fuchsia: fuchsia,
+  maroon: maroon,
+  red: red,
+  orange: orange,
+  yellow: yellow,
+  olive: olive,
+  green: green,
+  lime: lime,
 )
 #let to-color(c) = {
   if c == none or type(c) == color { return c }
