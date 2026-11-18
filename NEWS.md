@@ -21,6 +21,7 @@
 - The word count (`wordcount: true`) counts only the main text's prose: code, tables, figures and captions, and appendices are no longer counted
 - "Appendix" and "Keywords" labels follow the document language; all labels can be changed with Quarto's `language` option, including the new `preprint-words`, `preprint-correspondence`, and `preprint-equal-contribution` labels
 - Remove the `corresponding-text` option; use the `preprint-correspondence` language label instead (e.g. `language: {preprint-correspondence: "Corresponding authors:"}`)
+- Figures, tables, and callouts no longer get extra space at the top of a page or column, and consecutive ones are spaced like a figure after a paragraph
 
 ## 1.6.5
 

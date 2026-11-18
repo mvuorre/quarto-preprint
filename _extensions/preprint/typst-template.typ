@@ -243,8 +243,14 @@ $endif$
   show quote.where(block: true): set par(first-line-indent: 0em)
 
   /* Improved figure display */
-  // Add space above and below
-  show figure: f => { [#v(leading) #f #v(leading) ] }
+  // Space above and below figures (also callouts), a line more than between
+  // paragraphs. Weak, so it is dropped at the top and bottom of a page or
+  // column. (`set block(spacing: ..)` would also change blocks inside figures.)
+  show figure: f => {
+    v(spacing + leading, weak: true)
+    f
+    v(spacing + leading, weak: true)
+  }
   // Captions start at the column edge and have an italic "Figure 1." label.
   // The full-width block keeps a short caption of a narrow table or figure
   // from sitting at its (centred) edge.
