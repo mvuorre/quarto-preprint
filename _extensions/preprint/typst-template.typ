@@ -129,7 +129,6 @@
   sectionnumbering: none,
   pagenumbering: "1",
   linenumbering: none,
-  mathnumbering: "(1)",
   toc: false,
   toc_title: none,
   toc_depth: none,
@@ -187,8 +186,6 @@
   // No first-line indent for paragraphs inside list items
   show selector(list).or(enum).or(terms): set par(first-line-indent: 0em)
 
-  // Number equations
-  set math.equation(numbering: mathnumbering)
   // Add space around math blocks
   show math.equation.where(block: true): set block(spacing: spacing * 1.6)
 

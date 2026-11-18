@@ -4,6 +4,7 @@
 - Improve list formatting
 - Fix compile errors with hex colours, `page-numbering: false` in multi-page documents, corresponding authors without an email, keywords containing markup, and unnumbered figure captions
 - `theme: jou` no longer overrides explicit `fontsize`, `columns`, and `margin` settings
+- Unlabeled display equations are no longer numbered, so equation numbers match Quarto's HTML output
 - The starter template uses `citeproc: true`, so references appear in the References section
 
 ## 1.6.5
