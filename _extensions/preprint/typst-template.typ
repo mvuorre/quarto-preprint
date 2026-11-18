@@ -312,6 +312,9 @@ $endif$
   show heading.where(level: 1): it => block(width: 100%, below: 0.8em, above: 1em)[
     #set align(center)
     #set text(size: fontsize * 1.1, weight: heading-weight)
+    // Appendix headings read "Appendix A: Title". This lives here, not in
+    // appendix(): a later rule that replaced the heading would bypass this
+    // block's styling, and show-set rules would change the heading spacing.
     #context if preprint-appendix.get() and it.numbering != none { appendix-title(it) } else { it }
   ]
   show heading.where(level: 2): it => block(width: 100%, below: 0.8em, above: 1em)[
