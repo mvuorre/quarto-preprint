@@ -26,6 +26,7 @@ authornote: |
   Author notes go here.
 date: last-modified
 bibliography: bibliography.bib
+citeproc: true
 format:
   preprint-typst:
     wordcount: true
