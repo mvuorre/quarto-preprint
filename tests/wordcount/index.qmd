@@ -5,6 +5,8 @@ format:
   preprint-typst:
     keep-typ: true
     wordcount: true
+expect:
+  contains: ["Words: 13"]  # Prose heading + 12 body words
 ---
 
 # Prose

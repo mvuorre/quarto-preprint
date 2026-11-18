@@ -13,8 +13,7 @@ _freeze/
 .DS_Store
 
 # Test outputs (test sources in tests/*/index.qmd are tracked)
-/tests/local/
-/tests/remote/
+/_build/
 /tests/*/*.pdf
 /tests/*/*.typ
 /tests/*/*.html

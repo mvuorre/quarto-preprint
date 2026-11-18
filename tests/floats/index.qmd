@@ -1,0 +1,59 @@
+---
+title: Caption alignment
+format:
+  preprint-typst:
+    keep-typ: true
+syntax-highlighting: github
+---
+
+All captions should align the same way relative to the text column.
+
+::: {#fig-narrow}
+{{< placeholder 150 80 format=svg >}}
+
+A narrow figure with a caption that is long enough to wrap onto a second line of text in the column.
+:::
+
+| A | B |
+|---|---|
+| 1 | 2 |
+
+: A narrow table with a caption that is long enough to wrap onto a second line of text in the column. {#tbl-narrow}
+
+```{#lst-short .r lst-cap="A short listing with a long caption that is very long, long enough to wrap onto a second line of text."}
+x <- 1
+```
+
+Wide table:
+
+| Column one | Column two | Column three | Column four | Column five | Column six |
+|---|---|---|---|---|---|
+| a | b | c | d | e | f |
+
+: A wide table. {#tbl-wide}
+
+Short captions:
+
+::: {#fig-short}
+{{< placeholder 150 80 format=svg >}}
+
+Short figure caption.
+:::
+
+| A | B |
+|---|---|
+| 1 | 2 |
+
+: Short table caption. {#tbl-short}
+
+```{#lst-short2 .r lst-cap="Short listing caption."}
+x <- 1
+```
+
+A long code line wraps within the column:
+
+```r
+some_very_long_function_name <- function(the_first_long_argument = a_default_value) {
+  NA
+}
+```

@@ -21,11 +21,40 @@ format:
   preprint-typst:
     keep-typ: true
     wordcount: true
+expect:
+  pairs: true
+  contains:
+    - "Schlüsselwörter: eins, zwei"
+    - "Wörter:"
+    - "Korrespondenz an: Erste Autorin, erste@example.org."
+    - "†Erste Autorin & Zweiter Autor haben gleichermaßen beigetragen."
+    - "Anhang A: Methoden"
+    - "Box 1: Titel"
+    - "Tipp"
 ---
 
 # Einleitung
 
-Expected: "Schlüsselwörter:" and "Wörter:" in the front matter, the title-page note "Korrespondenz an: Erste Autorin, erste\@example.org. †Erste Autorin & Zweiter Autor haben gleichermaßen beigetragen.", "Anhang A: Methoden" and "Anhang B" in the body and TOC, and these references: @sec-methoden is "Anhang A", @sec-anhang is "Anhang B".
+The keyword, word-count, correspondence, and equal-contribution labels are in German, as are the appendix headings here and in the TOC. Each reference should match the value after the colon:
+
+- @sec-methoden: Anhang A
+- @sec-anhang: Anhang B
+- @nte-d: Box 1
+
+Notes are labelled with the extension's own term; other callouts keep Quarto's German labels.
+
+::: {#nte-d .callout-note}
+## Titel
+Text.
+:::
+
+::: {.callout-note}
+Ohne Titel.
+:::
+
+::: {.callout-tip}
+Ein Hinweis.
+:::
 
 ```{=typst}
 #show: appendix.with()

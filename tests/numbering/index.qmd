@@ -1,0 +1,181 @@
+---
+title: Appendix & numbering tests
+format:
+  preprint-typst:
+    keep-typ: true
+    number-sections: true
+toc: true
+expect:
+  pairs: true
+---
+
+# Main {#sec-main}
+
+Each reference should match the value after the colon.
+
+References to main content
+
+- @sec-main: Section 1
+- @eq-main: Equation 1
+- @fig-main: Figure 1
+- @tbl-main: Table 1
+- @lst-main: Listing 1
+- @nte-main: Box 1
+- @fig-sub-main: Figure 2
+- @fig-sub-main-a: Figure 2a
+
+References to appendix content
+
+- @sec-app: Appendix A
+- @sec-app2: Appendix B
+- @eq-app: Equation A1
+- @fig-app: Figure A1
+- @tbl-app: Table A1
+- @lst-app: Listing A1
+- @nte-app: Box A1
+- @fig-app2: Figure B1
+- @fig-sub-app: Figure A2
+- @fig-sub-app-b: Figure A2b
+- @fig-pre: Figure 3
+
+An unlabeled equation and a figure with `numbering: none` take no numbers, so the labeled ones below still start at 1:
+
+$$
+x = y
+$$
+
+```{=typst}
+#figure(rect(height: 2em), caption: [An unnumbered figure, with no label or number.], numbering: none)
+```
+
+$$
+a = b
+$$ {#eq-main}
+
+::: {#fig-main}
+{{< placeholder 300 150 format=svg >}}
+
+Main figure
+:::
+
+| A | B |
+|---|---|
+| 1 | 2 |
+
+: Main table {#tbl-main}
+
+```{#lst-main .python lst-cap="Main listing"}
+x = 1
+```
+
+::: {#nte-main .callout-note}
+## Main note
+Main callout.
+:::
+
+:::: {#fig-sub-main layout-ncol=2}
+::: {#fig-sub-main-a}
+{{< placeholder 300 150 format=svg >}}
+
+Main subfigure a
+:::
+
+::: {#fig-sub-main-b}
+{{< placeholder 300 150 format=svg >}}
+
+Main subfigure b
+:::
+
+Main figure with subfigures
+::::
+
+
+```{=typst}
+#show: appendix.with()
+```
+
+::: {#fig-pre}
+{{< placeholder 300 150 format=svg >}}
+
+A figure after `appendix()` but before the first appendix heading continues the main numbering
+:::
+
+# Supplementary analysis {#sec-app}
+
+Each reference should match the value after the colon.
+
+References to main content
+
+- @sec-main: Section 1
+- @eq-main: Equation 1
+- @fig-main: Figure 1
+- @tbl-main: Table 1
+- @lst-main: Listing 1
+- @nte-main: Box 1
+- @fig-sub-main: Figure 2
+- @fig-sub-main-a: Figure 2a
+
+References to appendix content
+
+- @sec-app: Appendix A
+- @sec-app2: Appendix B
+- @eq-app: Equation A1
+- @fig-app: Figure A1
+- @tbl-app: Table A1
+- @lst-app: Listing A1
+- @nte-app: Box A1
+- @fig-app2: Figure B1
+- @fig-sub-app: Figure A2
+- @fig-sub-app-b: Figure A2b
+- @fig-pre: Figure 3
+
+$$
+c = d
+$$ {#eq-app}
+
+::: {#fig-app}
+{{< placeholder 300 150 format=svg >}}
+
+Appendix figure
+:::
+
+| C | D |
+|---|---|
+| 3 | 4 |
+
+: Appendix table {#tbl-app}
+
+```{#lst-app .python lst-cap="Appendix listing"}
+y = 2
+```
+
+::: {#nte-app .callout-note}
+## Appendix note
+Appendix callout.
+:::
+
+:::: {#fig-sub-app layout-ncol=2}
+::: {#fig-sub-app-a}
+{{< placeholder 300 150 format=svg >}}
+
+Appendix subfigure a
+:::
+
+::: {#fig-sub-app-b}
+{{< placeholder 300 150 format=svg >}}
+
+Appendix subfigure b
+:::
+
+Appendix figure with subfigures
+::::
+
+# Appendix {#sec-app2}
+
+A heading titled just "Appendix" should render as "Appendix B" (no title).
+
+::: {#fig-app2}
+{{< placeholder 300 150 format=svg >}}
+
+Second appendix figure
+:::

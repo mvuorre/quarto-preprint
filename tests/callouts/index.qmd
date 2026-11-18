@@ -3,8 +3,6 @@ title: Quarto callouts and boxes
 format:
   preprint-typst:
     keep-typ: true
-  html:
-    default
 ---
 
 This smoke case checks the default callouts, which have no icons: @nte-box-default,

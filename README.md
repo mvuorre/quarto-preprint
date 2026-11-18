@@ -258,3 +258,7 @@ Note: If you want the appendix to appear as an [appendix in HTML output](https:/
 # Get help & contribute
 
 Send your comments, bug reports, and pull requests to <https://github.com/mvuorre/quarto-preprint>. If you're reporting a bug, please include a reproducible example / full details of what you’re trying to do, how, and what goes wrong. If you want to submit an improvement, please submit an issue before submitting a pull request.
+
+## Testing
+
+`make test` renders `example.qmd` and every `tests/*/index.qmd`, checks the `expect:` entries in their front matter, and writes `_build/<timestamp>/report.html` with any failures, warnings, and every page that changed since `main` (set another git ref with `make test REF=v1.6.0`). Requires [uv](https://docs.astral.sh/uv/).
