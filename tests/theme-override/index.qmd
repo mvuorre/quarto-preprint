@@ -1,0 +1,11 @@
+---
+title: Theme defaults are fallbacks
+format:
+  preprint-typst:
+    keep-typ: true
+    theme: jou
+    fontsize: 14pt
+    columns: 1
+---
+
+`theme: jou` sets two columns and 10pt text, but this document asks for one column and 14pt text, which must win.

@@ -86,7 +86,8 @@ Front matter variables can be shared across output formats (such as `toc` above)
 - `hide-abstract-title` (boolean) - Hide the abstract heading by default; set to `false` to show Quarto's standard abstract label
   - Example: `hide-abstract-title: false`
 - `theme` (string) - Select a theme ("default", "jou")
-  - Example: `theme: jou` creates an optimized two-column layout
+  - Example: `theme: jou` creates an optimized two-column layout (10pt text, narrower margins)
+  - Explicit `fontsize`, `columns`, and `margin` settings take precedence over the theme
 - `functions` (array) - Enable Typst functions in Quarto divs \[[typst-function](https://github.com/christopherkenny/typst-function)\]
   - Example: `functions: ["place"]`
 - `corresponding-text` (string) - How to refer to corresponding authors (default: "Send correspondence to:")

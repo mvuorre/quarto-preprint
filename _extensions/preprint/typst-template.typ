@@ -76,9 +76,15 @@
 
   doc
 }
+// Layout defaults per theme. Used for any of these options that the
+// document leaves at `auto`, so explicit settings always win.
+#let themes = (
+  default: (margin: (x: 2.8cm, y: 2.6cm), fontsize: 11pt, cols: 1),
+  jou: (margin: (x: 2cm, y: 2.6cm), fontsize: 10pt, cols: 2),
+)
 
 #let preprint(
-  // Theme (sets defaults for layout)
+  // Theme (sets defaults for margin, fontsize, and cols)
   theme: "default",
   // Document metadata
   title: none,
@@ -102,14 +108,14 @@
   linkcolor: blue,
   citecolor: none,
   filecolor: none,
-  margin: (x: 2.8cm, y: 2.6cm),
+  margin: auto,
   paper: "a4",
   // Typography settings
   lang: "en",
   region: "US",
   font: "libertinus serif",
   codefont: none,
-  fontsize: 11pt,
+  fontsize: auto,
   title-size: 1.5em,
   subtitle-size: 1.25em,
   heading-family: none,
@@ -128,19 +134,19 @@
   toc_title: none,
   toc_depth: none,
   toc_indent: 1.5em,
-  cols: 1,
+  cols: auto,
   col-gutter: 4.2%,
   // Bibliography settings (no effect if citeproc used)
   bibliography-title: "References",
   bibliographystyle: "apa",
   doc,
 ) = {
-  // Apply journal theme defaults
-  if theme == "jou" {
-    margin = (x: 2cm, y: 2.6cm)
-    fontsize = 10pt
-    cols = 2
-  }
+  // Fill unset layout options from the theme
+  assert(theme in themes, message: "unknown theme " + repr(theme) + "; use one of " + themes.keys().join(", "))
+  let theme-defaults = themes.at(theme)
+  if margin == auto { margin = theme-defaults.margin }
+  if fontsize == auto { fontsize = theme-defaults.fontsize }
+  if cols == auto { cols = theme-defaults.cols }
 
   linkcolor = to-color(linkcolor)
   citecolor = to-color(citecolor)
@@ -218,7 +224,10 @@
     header: context {
       let page-number = if pagenumbering != none { counter(page).display(pagenumbering) }
       if counter(page).get().first() > 1 and (running-head != none or page-number != none) {
-        grid(columns: (1fr, 1fr), align(left, running-head), align(right, page-number))
+        grid(
+          columns: (1fr, 1fr),
+          align(left, running-head), align(right, page-number),
+        )
       }
     },
     footer-descent: 10%,
