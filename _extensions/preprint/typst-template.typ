@@ -389,11 +389,18 @@ $endif$
       or wordcount == true
       or toc
   )
+  // Centred front-matter block with the given space above. Not justified:
+  // stretched word gaps look wrong in centred lines (e.g. a wrapped title)
+  let centered(above, body) = align(center, block(width: 100%, above: above, below: 0em, {
+    set par(justify: false)
+    body
+  }))
+
   if has-front-matter {
     // Place title, author, abstract always in one column.
     place(top, scope: "parent", float: true, {
       if title != none {
-        align(center, block(width: 100%, above: 0em, below: 0em)[
+        centered(0em)[
           #set par(leading: heading-line-height) if heading-line-height != none
           #set text(font: heading-family) if heading-family != none
           #set text(weight: heading-weight)
@@ -407,39 +414,28 @@ $endif$
               text(size: subtitle-size)[#subtitle]
             }
           )
-        ])
-      } else if subtitle != none {
-        align(center)[
-          #block(width: 100%, above: 1em, below: 0em)[
-            #text(weight: heading-weight, size: subtitle-size)[#subtitle]
-          ]
         ]
+      } else if subtitle != none {
+        centered(1em, text(weight: heading-weight, size: subtitle-size, subtitle))
       }
 
       if author_display != none {
-        align(center)[
-          #block(width: 100%, above: 2em, below: 0em)[
-            #text(weight: "regular", size: subtitle-size)[#author_display]
-          ]
-        ]
+        centered(2em, text(weight: "regular", size: subtitle-size, author_display))
       }
 
       if affiliations != none {
-        align(center)[
-          #block(width: 100%, above: 1em, below: 0em)[
-            #text(weight: "regular", size: 1.1em)[
-              #for a in affiliations [
-                #if authors.len() > 1 [#super[#a.id]]#a.name#if a.keys().contains("department") [, #a.department] \
-              ]
-            ]
-          ]
-        ]
+        centered(1em, text(weight: "regular", size: 1.1em, {
+          for (i, a) in affiliations.enumerate() {
+            if authors.len() > 1 { super(str(i + 1)) }
+            a.name
+            if "department" in a [, #a.department]
+            linebreak()
+          }
+        }))
       }
 
       if date != none {
-        align(center)[#block(above: 2em, below: 0em)[
-          #date
-        ]]
+        centered(2em, date)
       }
 
       /* Abstract and metadata section */

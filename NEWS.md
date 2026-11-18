@@ -7,6 +7,7 @@
 - Unlabeled display equations are no longer numbered, so equation numbers match Quarto's HTML output
 - Affiliations are shown as numbers in listed order instead of their ids (e.g. "aff-1")
 - Affiliation names and departments keep special characters and markup
+- Title block, headings, and code blocks are no longer justified
 - The starter template uses `citeproc: true`, so references appear in the References section
 
 ## 1.6.5
