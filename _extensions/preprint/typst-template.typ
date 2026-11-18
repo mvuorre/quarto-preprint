@@ -155,9 +155,6 @@ $endif$
   toc_indent: 1.5em,
   cols: auto,
   col-gutter: 4.2%,
-  // Bibliography settings (no effect if citeproc used)
-  bibliography-title: "References",
-  bibliographystyle: "apa",
   doc,
 ) = {
   // Fill unset layout options from the theme
@@ -202,8 +199,9 @@ $endif$
   show cite: set text(fill: if citecolor != none { citecolor } else { linkcolor })
   show ref: set text(fill: citecolor) if citecolor != none
 
-  // Customize Typst bibliography (no effect if using citeproc)
-  set bibliography(title: bibliography-title, style: bibliographystyle)
+  // Typst bibliography (no effect if using citeproc). Quarto sets
+  // `bibliographystyle` or `csl` after this, overriding the APA default.
+  set bibliography(title: [$quarto.language.section-title-references$], style: "apa")
 
   // Lists: bulleted and numbered lists share one style
   set list(indent: first-line-indent / 2, body-indent: 0.5em)

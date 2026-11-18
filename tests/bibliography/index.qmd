@@ -1,7 +1,8 @@
 ---
 title: Typst bibliography
 bibliography: ../../bibliography.bib
-bibliography-title: Literature
+language:
+  section-title-references: Literature
 bibliographystyle: chicago-author-date
 format:
   preprint-typst:

@@ -154,12 +154,6 @@ $endif$
 $if(col-gutter)$
   col-gutter: $col-gutter$,
 $endif$
-$if(bibliographystyle)$
-  bibliographystyle: "$bibliographystyle$",
-$endif$
-$if(bibliography-title)$
-  bibliography-title: [$bibliography-title$],
-$endif$
 $if(theme)$
   theme: "$theme$",
 $endif$

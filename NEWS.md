@@ -4,13 +4,14 @@
 
 - Remove the legacy `theme-jou: true` option (use `theme: jou`) and the ignored `prefix` and `numbering` arguments of `appendix()`
 - Remove the `corresponding-text` option; use the `preprint-correspondence` language label instead (e.g. `language: {preprint-correspondence: "Corresponding authors:"}`)
+- Remove the `bibliography-title` option; the title of Typst's reference list follows the document language, and can be changed with Quarto's `section-title-references` language label
 - Callouts have no icons by default (Quarto's `callout-icon: false`); use `icon=true` on a callout, or `callout-icon: true` in the document, to show them
 - Unlabeled display equations are no longer numbered, so equation numbers match Quarto's HTML output
 - `linkcolor`, `citecolor`, and `filecolor` take hex codes (e.g. `"#0066cc"`), as in Quarto's Typst format; Typst colour names such as `blue` are no longer accepted
 - `theme: jou` no longer overrides explicit `fontsize`, `columns`, and `margin` settings
 - Any margin content (margin notes, `.column-margin`) makes the document one column by default, also with `theme: jou`
 - The word count (`wordcount: true`) counts only the main text's prose: code, tables, figures and captions, and appendices are no longer counted
-- For direct users of the Typst `preprint()` function: authors' `affiliation` is now `affiliations` (an array of ids), `corresponding-text` is now `correspondence-text`, and `mathnumbering` is removed
+- For direct users of the Typst `preprint()` function: authors' `affiliation` is now `affiliations` (an array of ids), `corresponding-text` is now `correspondence-text`, and `mathnumbering`, `bibliography-title`, and `bibliographystyle` are removed
 
 ### New features
 

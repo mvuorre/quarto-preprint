@@ -91,9 +91,6 @@ Front matter variables can be shared across output formats (such as `toc` above)
   - Explicit `fontsize`, `columns`, and `margin` settings take precedence over the theme
 - `functions` (array) - Enable Typst functions in Quarto divs \[[typst-function](https://github.com/christopherkenny/typst-function)\]
   - Example: `functions: ["place"]`
-- `bibliography-title` (string) - Title of bibliography section [[Typst](https://typst.app/docs/reference/model/bibliography/#parameters-title), [Quarto](https://quarto.org/docs/output-formats/typst.html#bibliography)]
-  - Only works when using Typst's own citation processing system
-  - Example: `bibliography-title: Works cited`
 
 ## Typography
 
@@ -148,7 +145,7 @@ format:
   - Example: `lang: "en"` or `lang: "de"`
 - `region` (string) - Document region \[[Quarto](https://quarto.org/docs/authoring/language.html), [Typst](https://typst.app/docs/reference/text/text/#parameters-region)\]
   - Example: `region: "US"` or `region: "GB"`
-- Labels ("Appendix", "Keywords", ...) follow `lang` where Quarto has a translation. Change any label with Quarto's [`language`](https://quarto.org/docs/authoring/language.html) option. Besides Quarto's own keys (e.g. `crossref-apx-prefix`, `title-block-keywords`), *preprint-typst* uses these, which have no translations:
+- Labels ("Appendix", "Keywords", ...) follow `lang` where Quarto has a translation. Change any label with Quarto's [`language`](https://quarto.org/docs/authoring/language.html) option. Besides Quarto's own keys (e.g. `crossref-apx-prefix`, `title-block-keywords`, and `section-title-references` for the title of Typst's reference list), *preprint-typst* uses these, which have no translations:
   - `preprint-words`: word count label ("Words")
   - `preprint-correspondence`: "Send correspondence to:"
   - `preprint-equal-contribution`: "{0} contributed equally to this work.", where `{0}` is replaced by the author names
@@ -166,7 +163,7 @@ format:
 
 ### Using Typst's own citation processing
 
-Typst has its [own citation processing system](https://quarto.org/docs/authoring/citations.html#typst), whose behavior you can customize with [`bibliography-title`](https://typst.app/docs/reference/model/bibliography/#parameters-title), [`bibliographystyle`](https://typst.app/docs/reference/model/bibliography/#parameters-style).
+Typst has its [own citation processing system](https://quarto.org/docs/authoring/citations.html#typst), whose style you can set with [`bibliographystyle`](https://typst.app/docs/reference/model/bibliography/#parameters-style) (default: `apa`) or `csl`. The reference list is titled with the language label `section-title-references` ("References").
 
 ### Using Pandoc (recommended)
 
