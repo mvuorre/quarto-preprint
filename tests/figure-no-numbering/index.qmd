@@ -1,0 +1,10 @@
+---
+title: Unnumbered figure
+format:
+  preprint-typst:
+    keep-typ: true
+---
+
+```{=typst}
+#figure(rect(), caption: [An unnumbered figure caption, without a "Figure" label.], numbering: none)
+```

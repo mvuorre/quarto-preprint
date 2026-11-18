@@ -1,0 +1,15 @@
+---
+title: Link colours
+# Hex strings (escaped by Pandoc) and Typst colour names must both work
+linkcolor: "#0066cc"
+citecolor: red
+filecolor: "green"
+number-sections: true
+format:
+  preprint-typst:
+    keep-typ: true
+---
+
+# Introduction {#sec-intro}
+
+An external [link](https://quarto.org) should be blue (#0066cc), an internal [link](#sec-intro) green, and the cross-reference @sec-intro red.

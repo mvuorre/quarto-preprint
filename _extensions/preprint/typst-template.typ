@@ -17,6 +17,23 @@
   ),
 )
 
+// Colour options arrive from Quarto metadata as content, e.g. [\#0066cc] or
+// [blue]. Convert hex codes and Typst's named colours to colour values;
+// values that already are colours (e.g. brand colours) pass through.
+#let named-colors = (
+  black: black, gray: gray, silver: silver, white: white,
+  navy: navy, blue: blue, aqua: aqua, teal: teal, eastern: eastern,
+  purple: purple, fuchsia: fuchsia, maroon: maroon, red: red, orange: orange,
+  yellow: yellow, olive: olive, green: green, lime: lime,
+)
+#let to-color(c) = {
+  if c == none or type(c) == color { return c }
+  let s = content-to-string(c).trim()
+  if s in named-colors { named-colors.at(s) } else if s.starts-with("#") { rgb(s) } else {
+    panic("unknown colour " + repr(s) + ": use a hex code (\"#0066cc\") or a Typst colour name")
+  }
+}
+
 // True from the point where appendix() is applied onwards
 #let preprint-appendix = state("preprint-appendix", false)
 
@@ -125,11 +142,16 @@
     cols = 2
   }
 
+  linkcolor = to-color(linkcolor)
+  citecolor = to-color(citecolor)
+  filecolor = to-color(filecolor)
+
   /* Document settings */
   set document(
     title: title,
     description: abstract,
-    keywords: if categories != none { categories.text } else { "" },
+    // categories is content and may contain markup (e.g. emphasis)
+    keywords: if categories != none { content-to-string(categories) } else { () },
   )
   set document(
     author: authors.map(author => content-to-string(author.name)).join(", ", last: " & "),
@@ -176,12 +198,14 @@
   // Target figure only as could otherwise mess with table formatting
   show figure.where(kind: "quarto-float-fig"): set block(width: 100%)
   // Left-align captions and italicize "Figure X."
-  show figure.caption: it => [
-    #set align(left)
-    #set par(first-line-indent: 0em)
-    #emph([#it.supplement #context it.counter.display(it.numbering).])
-    #it.body
-  ]
+  show figure.caption: it => {
+    set align(left)
+    set par(first-line-indent: 0em)
+    if it.numbering != none [
+      #emph([#it.supplement #context it.counter.display(it.numbering).])
+    ]
+    it.body
+  }
 
   /* Page layout settings */
   set page(
@@ -190,13 +214,12 @@
     numbering: none,
     columns: cols,
     header-ascent: 50%,
+    // Running head and page number from page 2 onwards
     header: context {
-      if (counter(page).get().at(0) > 1) [
-        #grid(
-          columns: (1fr, 1fr),
-          align(left)[#running-head], align(right)[#counter(page).display(pagenumbering)],
-        )
-      ]
+      let page-number = if pagenumbering != none { counter(page).display(pagenumbering) }
+      if counter(page).get().first() > 1 and (running-head != none or page-number != none) {
+        grid(columns: (1fr, 1fr), align(left, running-head), align(right, page-number))
+      }
     },
     footer-descent: 10%,
   )
@@ -291,7 +314,9 @@
   // thanks, all in a single unnumbered footnote paragraph.
   let title_note = (
     if corresponding_authors.len() > 0 [
-      \*#corresponding-text #corresponding_authors.map(a => [#a.name, #a.email]).join(", ", last: " & ").
+      \*#corresponding-text #corresponding_authors.map(a => {
+        if "email" in a [#a.name, #a.email] else { a.name }
+      }).join(", ", last: " & ").
     ],
     if equal_authors.len() > 0 [
       #super("†")#equal_authors.map(a => a.name).join(", ", last: " & ") contributed equally to this work.

@@ -1,6 +1,8 @@
-## TBD
+## 1.6.6
 
 - Improve Appendix numberings and headings
+- Improve list formatting
+- Fix compile errors with hex colours, `page-numbering: false` in multi-page documents, corresponding authors without an email, keywords containing markup, and unnumbered figure captions
 
 ## 1.6.5
 

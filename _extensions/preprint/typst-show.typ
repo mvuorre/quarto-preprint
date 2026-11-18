@@ -105,16 +105,16 @@ $endif$
   pagenumbering: $if(page-numbering)$"$page-numbering$"$else$none$endif$,
   linenumbering: $if(line-number)$"1"$else$none$endif$,
 $if(linkcolor)$
-  linkcolor: $linkcolor$,
+  linkcolor: [$linkcolor$],
 $else$
   // brand-color is always defined by Quarto >=1.9.36 (empty dict without brand)
   linkcolor: brand-color.at("primary", default: blue),
 $endif$
 $if(citecolor)$
-  citecolor: $citecolor$,
+  citecolor: [$citecolor$],
 $endif$
 $if(filecolor)$
-  filecolor: $filecolor$,
+  filecolor: [$filecolor$],
 $endif$
 $if(toc)$
   toc: $toc$,

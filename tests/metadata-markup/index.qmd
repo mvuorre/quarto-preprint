@@ -1,0 +1,15 @@
+---
+title: Metadata edge cases
+author:
+  - name: First Author
+    corresponding: true
+  - name: Second Author
+    email: second@example.org
+    corresponding: true
+keywords: ["*Drosophila*", "R"]
+format:
+  preprint-typst:
+    keep-typ: true
+---
+
+The correspondence note should read "First Author & Second Author, second@example.org". The keywords should show *Drosophila* in italics.
