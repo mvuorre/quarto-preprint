@@ -42,7 +42,15 @@ This sentence refers to works [@rcoreteamLanguageEnvironmentStatistical2025; @al
 
 # Method
 
-{{< lipsum 5 >}}
+```{=typst}
+#lorem(60)
+```
+
+::: {#fig-example fig-cap="Example figure."}
+{{< placeholder 400 200 format=svg >}}
+:::
+
+{{< lipsum 2 >}}
 
 # References
 
