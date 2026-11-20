@@ -239,6 +239,11 @@ $endif$
     ]
     it.body
   })
+  // Float image figures to the top or bottom of their column (like LaTeX)
+  // Figs that don't fit in the space left would otherwise move to the
+  // next column and leave a gap.
+  show figure.where(kind: "quarto-float-fig"): set figure(placement: auto)
+  show figure.where(kind: "quarto-float-tbl"): set figure(placement: auto)
 
   /* Page layout settings */
   // With Quarto's margin layout, page.typ has already set the margins
@@ -326,7 +331,11 @@ $endif$
   }
   // Level 4 & 5 headers are in paragraph
   show heading.where(level: 4): it => box(inset: (right: 0.1em), text(weight: heading-weight, it.body + [.]))
-  show heading.where(level: 5): it => box(inset: (right: 0.1em), text(weight: heading-weight, style: "italic", it.body + [.]))
+  show heading.where(level: 5): it => box(inset: (right: 0.1em), text(
+    weight: heading-weight,
+    style: "italic",
+    it.body + [.],
+  ))
 
   // Collect author metadata once
   let corresponding-authors = if authors != none {

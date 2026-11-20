@@ -38,6 +38,7 @@
 - Quarto's margin layout (margin notes, `.column-margin`) no longer prints margin content over the body text
 - Table captions align to the column edge like figure captions, also when the table is narrow
 - Figures, tables, and callouts no longer get extra space at the top of a page or column, and consecutive ones are spaced like a figure after a paragraph
+- Previously figures and tables could leave empty space at end of cols or pages; ese `figure(placement: auto)` for Quarto-produced figures and tables to fix.
 
 ## 1.6.5
 
