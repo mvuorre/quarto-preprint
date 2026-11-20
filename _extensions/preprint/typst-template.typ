@@ -1,10 +1,12 @@
-// Standalone Typst preprint template
+// preprint-typst: the preprint() template function and appendix().
+// Used through Quarto: it relies on Quarto's definitions.typ (e.g.
+// content-to-string, brand-color) and is a Pandoc template partial.
 
 // Imports
-#import "@preview/wordometer:0.1.5": total-words, word-count
+#import "@preview/wordometer:0.1.6": word-count-of
 
 // ORCID logo
-#let fa-orcid(size: 0.8em) = box(
+#let orcid-icon(size: 0.8em) = box(
   height: size,
   width: size,
   image(
@@ -17,51 +19,85 @@
   ),
 )
 
-// True from the point where appendix() is applied onwards
-#let preprint-appendix = state("preprint-appendix", false)
+// Colour options are hex codes, as in Quarto's Typst format. They arrive
+// from Quarto metadata as content (e.g. [\#0066cc]); brand colours already
+// are colours.
+#let to-color(c) = if c == none or type(c) == color { c } else { rgb(content-to-string(c)) }
 
-// Appendix function. To use, include in .typ before appendix header
+// Word count (shown in the front matter) of the main text's prose,
+// including headings and footnotes. Not counted: code, tables, figures and
+// their captions, equations, the reference list, and appendices. Citations
+// are not counted when Typst handles them; with `citeproc: true` they are
+// plain text and are counted. Callouts are counted, except cross-referenced
+// ones, which Quarto places in figures.
+// wordometer reads the content before show rules run, so preprint() adds the
+// whole document's words and appendix() subtracts its own.
+#let preprint-words = state("preprint-words", 0)
+#let count-words(body) = word-count-of(body, exclude: ("raw", "table", "figure", <refs>)).words
+
+// Appendix function. To use, include in .typ before the first appendix heading:
 // #show: appendix.with()
-// Appendices are lettered (Appendix A, B, ...), and figures, tables, and
-// listings are numbered within each appendix (A1, A2, B1, ...). Callouts and
-// equations continue the main text numbering because Quarto hardcodes their
-// numbering.
-// `prefix` and `numbering` are ignored and kept for backwards compatibility.
-#let appendix(prefix: "A", columns: 1, numbering: none, doc) = {
+// Appendices are lettered (Appendix A, B, ...), with `supplement` as the label
+// (default: Quarto's translated "Appendix"). Figures, tables, listings,
+// equations, and callouts are numbered within each appendix (A1, A2, B1, ...)
+// by the numbering functions in numbering.typ.
+#let appendix(columns: 1, supplement: [$quarto.language.crossref-apx-prefix$], doc) = {
   preprint-appendix.update(true)
+  preprint-words.update(n => n - count-words(doc))
   set page(columns: columns)
 
-  // Add pagebreak before each level 1 heading in appendices and reset counters
+  // Each appendix starts on a new page and restarts numbering. Resetting
+  // every figure kind in the document covers floats, listings, callouts,
+  // and custom cross-reference kinds.
   show heading.where(level: 1): it => {
     pagebreak(weak: true)
-    // Reset figure counters for Quarto-specific kinds
-    counter(figure.where(kind: "quarto-float-fig")).update(0)
-    counter(figure.where(kind: "quarto-float-tbl")).update(0)
-    counter(figure.where(kind: "quarto-float-lst")).update(0)
-
-    // Reset generic counters
-    counter(figure.where(kind: image)).update(0)
-    counter(figure.where(kind: table)).update(0)
+    counter(math.equation).update(0)
+    context for kind in query(figure).map(f => f.kind).dedup() {
+      counter(figure.where(kind: kind)).update(0)
+    }
     it
   }
 
-  // Numberings: appendices are lettered (A, B, ...), subsections A.1, A.1.1
-  set heading(supplement: [Appendix], numbering: "A.1")
-  // Hide level 2+ headings from TOC in appendices
+  // Appendices are lettered (A, B, ...), subsections A.1, A.1.1
+  set heading(supplement: supplement, numbering: "A.1")
+  // Only level 1 appendix headings in the TOC
   set heading(outlined: false)
   show heading.where(level: 1): set heading(outlined: true)
-
-  // Figures, tables, listings: appendix letter + number (A1, A2, B1, ...)
-  set figure(numbering: n => std.numbering("A", counter(heading).get().first()) + str(n))
-
-  // Reset heading counter
   counter(heading).update(0)
+
+  set figure(numbering: figure-numbering)
 
   doc
 }
 
+// Appendix heading text: "Appendix A: Title", or "Appendix A" for a heading
+// titled just "Appendix" (the heading's supplement). Used in the body and TOC.
+#let appendix-title(h) = {
+  let label = [#h.supplement #numbering(h.numbering, ..counter(heading).at(h.location()))]
+  if h.body == h.supplement { label } else [#label: #h.body]
+}
+
+$if(highlighting-definitions)$
+// Workaround to fix code block justification:
+// Pandoc-highlighted code blocks are Skylighting() paragraphs of inline raw
+// text, not raw blocks, so `show raw.where(block: true)` in preprint() does
+// not reach them. Wrap Pandoc's function (defined in definitions.typ only
+// when the document has code) to keep wrapped code lines unjustified.
+#let pandoc-skylighting = Skylighting
+#let Skylighting(..args) = {
+  set par(justify: false)
+  pandoc-skylighting(..args)
+}
+$endif$
+// Layout defaults per theme. Used for any of these options that the
+// document leaves at `auto`, so explicit settings always win.
+#let themes = (
+  default: (margin: (x: 2.8cm, y: 2.6cm), fontsize: 11pt, cols: 1),
+  jou: (margin: (x: 2cm, y: 2.6cm), fontsize: 10pt, cols: 2),
+)
+
 #let preprint(
-  // Theme (sets defaults for layout)
+  // Theme (sets defaults for margin, fontsize, and cols)
   theme: "default",
   // Document metadata
   title: none,
@@ -75,9 +111,13 @@
   categories: none,
   wordcount: none,
   authornote: none,
-  citation: none, // Not used currently
   date: none,
-  corresponding-text: "Send correspondence to:",
+  correspondence-text: [Send correspondence to:],
+  // {0} is replaced by the equally contributing authors' names
+  equal-contribution-text: [{0} contributed equally to this work.],
+  // Front-matter labels; Quarto passes translated ones
+  keywords-title: [Keywords],
+  words-title: [Words],
   // Layout settings (can override theme defaults)
   spacing: 0.6em,
   first-line-indent: 1.8em,
@@ -85,14 +125,16 @@
   linkcolor: blue,
   citecolor: none,
   filecolor: none,
-  margin: (x: 2.8cm, y: 2.6cm),
+  margin: auto,
+  // True when Quarto's margin layout (margin notes) manages the margins
+  margin-layout: false,
   paper: "a4",
   // Typography settings
   lang: "en",
   region: "US",
   font: "libertinus serif",
   codefont: none,
-  fontsize: 11pt,
+  fontsize: auto,
   title-size: 1.5em,
   subtitle-size: 1.25em,
   heading-family: none,
@@ -101,108 +143,121 @@
   heading-color: none,
   heading-line-height: none,
   mathfont: none,
+  // Multiplies Typst's default leading (0.65em)
   linestretch: 10 / 13,
   // Structure settings
   sectionnumbering: none,
   pagenumbering: "1",
   linenumbering: none,
-  mathnumbering: "(1)",
   toc: false,
   toc_title: none,
   toc_depth: none,
   toc_indent: 1.5em,
-  cols: 1,
+  cols: auto,
   col-gutter: 4.2%,
-  // Bibliography settings (no effect if citeproc used)
-  bibliography-title: "References",
-  bibliographystyle: "apa",
   doc,
 ) = {
-  // Apply journal theme defaults
-  if theme == "jou" {
-    margin = (x: 2cm, y: 2.6cm)
-    fontsize = 10pt
-    cols = 2
-  }
+  // Fill unset layout options from the theme
+  assert(theme in themes, message: "unknown theme " + repr(theme) + "; use one of " + themes.keys().join(", "))
+  let theme-defaults = themes.at(theme)
+  if margin == auto { margin = theme-defaults.margin }
+  if fontsize == auto { fontsize = theme-defaults.fontsize }
+  // Margin content defaults to one column: next to a margin, two columns
+  // are very narrow (explicit `columns: 2` still wins)
+  if cols == auto { cols = if margin-layout { 1 } else { theme-defaults.cols } }
+
+  linkcolor = to-color(linkcolor)
+  citecolor = to-color(citecolor)
+  filecolor = to-color(filecolor)
+
+  // Shared spacing values
+  let leading = linestretch * 0.65em
+  let block-gap = spacing * 1.6 // around lists and display maths
+  let front-inset = 2.4em // left and right inset of the abstract and TOC
 
   /* Document settings */
   set document(
     title: title,
     description: abstract,
-    keywords: if categories != none { categories.text } else { "" },
+    // categories is content and may contain markup (e.g. emphasis)
+    keywords: if categories != none { content-to-string(categories) } else { () },
   )
   set document(
     author: authors.map(author => content-to-string(author.name)).join(", ", last: " & "),
   ) if authors != none and authors != ()
-  // Link and cite colors
-  show link: set text(fill: linkcolor)
+  // Link colours. Links to labels (internal links) use filecolor if set.
+  // Links to locations are made by this template (appendix TOC entries and
+  // equation references) and stay uncoloured, like Typst's own TOC entries
+  // and references.
+  show link: it => {
+    let fill = if type(it.dest) == location { none } else if type(it.dest) == label and filecolor != none {
+      filecolor
+    } else { linkcolor }
+    if fill == none { it } else { text(fill: fill, it) }
+  }
   // citecolor has no effect if `citeproc: true`
   show cite: set text(fill: if citecolor != none { citecolor } else { linkcolor })
   show ref: set text(fill: citecolor) if citecolor != none
-  show link: this => {
-    if filecolor != none and type(this.dest) == label {
-      text(this, fill: filecolor)
-    } else {
-      text(this)
-    }
-  }
 
-  // Customize Typst bibliography (no effect if using citeproc)
-  set bibliography(title: bibliography-title, style: bibliographystyle)
-  show bibliography: set par(spacing: spacing, leading: linestretch * 0.65em)
+  // Typst bibliography (no effect if using citeproc). Quarto sets
+  // `bibliographystyle` or `csl` after this, overriding the APA default.
+  set bibliography(title: [$quarto.language.section-title-references$], style: "apa")
 
-  // List spacing
-  show list: it => {
-    // Space between list items
-    set par(leading: 0.48em)
-    // Space around whole list
-    set block(
-      spacing: spacing * 1.2,
-      inset: (left: first-line-indent, right: first-line-indent),
-    )
-    it
-  }
+  // Lists: bulleted and numbered lists share one style
+  set list(indent: first-line-indent / 2, body-indent: 0.5em)
+  set enum(indent: first-line-indent / 2, body-indent: 0.5em)
+  // Space around whole lists
+  show selector(list).or(enum): set block(spacing: block-gap)
+  // No first-line indent for paragraphs inside list items
+  show selector(list).or(enum).or(terms): set par(first-line-indent: 0em)
 
-  // Number equations
-  set math.equation(numbering: mathnumbering)
   // Add space around math blocks
-  show math.equation.where(block: true): set block(spacing: spacing * 1.6)
+  show math.equation.where(block: true): set block(spacing: block-gap)
 
-  // Define space around block quotes
+  // Space around block quotes, slightly more than around other blocks
   show quote.where(block: true): set block(spacing: spacing * 1.8)
   // Don't indent anything in block quotes
   show quote.where(block: true): set par(first-line-indent: 0em)
 
   /* Improved figure display */
-  // Add space above and below
-  show figure: f => { [#v(linestretch * 0.65em) #f #v(linestretch * 0.65em) ] }
-  // Set block width to align caption to page/column
-  // Target figure only as could otherwise mess with table formatting
-  show figure.where(kind: "quarto-float-fig"): set block(width: 100%)
-  // Left-align captions and italicize "Figure X."
-  show figure.caption: it => [
-    #set align(left)
-    #set par(first-line-indent: 0em)
-    #emph([#it.supplement #context it.counter.display(it.numbering).])
-    #it.body
-  ]
+  // Space above and below figures (also callouts), a line more than between
+  // paragraphs. Weak, so it is dropped at the top and bottom of a page or
+  // column. (`set block(spacing: ..)` would also change blocks inside figures.)
+  show figure: f => {
+    v(spacing + leading, weak: true)
+    f
+    v(spacing + leading, weak: true)
+  }
+  // Captions start at the column edge and have an italic "Figure 1." label.
+  // The full-width block keeps a short caption of a narrow table or figure
+  // from sitting at its (centred) edge.
+  show figure.caption: it => block(width: 100%, {
+    set align(left)
+    set par(first-line-indent: 0em)
+    if it.numbering != none [
+      #emph([#it.supplement #context it.counter.display(it.numbering).])
+    ]
+    it.body
+  })
 
   /* Page layout settings */
+  // With Quarto's margin layout, page.typ has already set the margins
+  set page(margin: margin) if not margin-layout
   set page(
     paper: paper,
-    margin: margin,
     numbering: none,
     columns: cols,
     header-ascent: 50%,
+    // Running head and page number from page 2 onwards
     header: context {
-      if (counter(page).get().at(0) > 1) [
-        #grid(
+      let page-number = if pagenumbering != none { counter(page).display(pagenumbering) }
+      if counter(page).get().first() > 1 and (running-head != none or page-number != none) {
+        grid(
           columns: (1fr, 1fr),
-          align(left)[#running-head], align(right)[#counter(page).display(pagenumbering)],
+          align(left, running-head), align(right, page-number),
         )
-      ]
+      }
     },
-    footer-descent: 10%,
   )
   set columns(gutter: col-gutter)
 
@@ -212,11 +267,15 @@
   /* Typography settings */
 
   // Paragraph settings
-  set par(justify: true, leading: linestretch * 0.65em, spacing: spacing, first-line-indent: (
+  set par(justify: true, leading: leading, spacing: spacing, first-line-indent: (
     amount: first-line-indent,
     all: all,
   ))
   set par.line(numbering: linenumbering)
+  // Justify running text only: stretched word gaps look wrong in (centred)
+  // headings and in wrapped code lines
+  show heading: set par(justify: false)
+  show raw.where(block: true): set par(justify: false)
 
   // Text settings
   set text(lang: lang, region: region, size: fontsize)
@@ -230,11 +289,10 @@
   show heading.where(level: 1): it => block(width: 100%, below: 0.8em, above: 1em)[
     #set align(center)
     #set text(size: fontsize * 1.1, weight: heading-weight)
-    #context if preprint-appendix.get() and it.numbering != none {
-      // "Appendix A: Title", or just "Appendix A" when the title is "Appendix"
-      let label = [Appendix #counter(heading).display(it.numbering)]
-      if it.body.has("text") and it.body.text == "Appendix" { label } else [#label: #it.body]
-    } else { it }
+    // Appendix headings read "Appendix A: Title". This lives here, not in
+    // appendix(): a later rule that replaced the heading would bypass this
+    // block's styling, and show-set rules would change the heading spacing.
+    #context if preprint-appendix.get() and it.numbering != none { appendix-title(it) } else { it }
   ]
   show heading.where(level: 2): it => block(width: 100%, below: 0.8em, above: 1em)[
     #set text(size: fontsize * 1.05)
@@ -244,49 +302,57 @@
     #set text(size: fontsize, style: "italic")
     #it
   ]
-  // Quarto passes supplement: [Section] to all heading refs; use "Appendix"
-  // for appendix headings (e.g. "Appendix A", "Appendix A.1")
+  // These rules are global because the main text and TOC refer to appendices
   show ref: it => {
     let el = it.element
-    if (
-      el != none and el.func() == heading and it.supplement != [Appendix]
-        and preprint-appendix.at(el.location())
-    ) {
-      ref(it.target, supplement: [Appendix])
+    if el == none { return it }
+    let loc = el.location()
+    if el.func() == heading and preprint-appendix.at(loc) and it.supplement != el.supplement {
+      // Quarto passes supplement: [Section] to all heading refs; use the
+      // appendix heading's own ("Appendix A", "Appendix A.1")
+      ref(it.target, supplement: el.supplement)
+    } else if el.func() == math.equation and el.numbering != none {
+      // Typst drops the parentheses of a numbering pattern like "(1)" in
+      // references, but not of a function like equation-numbering
+      let supplement = if it.supplement == auto { el.supplement } else { it.supplement }
+      link(loc, [#supplement~#appendix-number(loc, "1", ..counter(math.equation).at(loc))])
     } else { it }
   }
+  // TOC entries for appendices read as in the body ("Appendix A: Title")
+  show outline.entry.where(level: 1): it => {
+    let el = it.element
+    if el.func() != heading or not preprint-appendix.at(el.location()) { return it }
+    link(el.location(), it.indented(none, [#appendix-title(el) #box(width: 1fr, it.fill) #it.page()]))
+  }
   // Level 4 & 5 headers are in paragraph
-  show heading.where(level: 4): it => box(inset: (top: 0em, bottom: 0em, left: 0em, right: 0.1em), text(
-    size: 1em,
-    weight: heading-weight,
-    it.body + [.],
-  ))
-  show heading.where(level: 5): it => box(inset: (top: 0em, bottom: 0em, left: 0em, right: 0.1em), text(
-    size: 1em,
-    weight: heading-weight,
-    style: "italic",
-    it.body + [.],
-  ))
+  show heading.where(level: 4): it => box(inset: (right: 0.1em), text(weight: heading-weight, it.body + [.]))
+  show heading.where(level: 5): it => box(inset: (right: 0.1em), text(weight: heading-weight, style: "italic", it.body + [.]))
 
   // Collect author metadata once
-  let corresponding_authors = if authors != none {
+  let corresponding-authors = if authors != none {
     authors.filter(a => a.at("corresponding", default: false) == true)
   } else { () }
   // Equal contribution is only meaningful when shared by 2+ authors
-  let equal_authors = if authors != none {
+  let equal-authors = if authors != none {
     let eq = authors.filter(a => a.at("equal-contributor", default: false) == true)
     if eq.len() > 1 { eq } else { () }
   } else { () }
 
+  // Affiliations are numbered in the order they are listed
+  let aff-number(id) = str(affiliations.position(a => a.id == id) + 1)
+
   // Author line: name, affiliation number(s), note markers, ORCID
-  let author_display = if authors != none and authors != () {
+  let author-line = if authors != none and authors != () {
     authors
       .map(a => {
         let parts = (a.name,)
-        if authors.len() > 1 { parts.push(super(a.affiliation)) }
-        if corresponding_authors.contains(a) { parts.push("*") }
-        if equal_authors.contains(a) { parts.push(super("†")) }
-        if a.keys().contains("orcid") { parts.push(link(a.orcid, fa-orcid())) }
+        let author-affs = a.at("affiliations", default: ())
+        if authors.len() > 1 and author-affs.len() > 0 {
+          parts.push(super(author-affs.map(aff-number).join(",")))
+        }
+        if corresponding-authors.contains(a) { parts.push("*") }
+        if equal-authors.contains(a) { parts.push(super("†")) }
+        if "orcid" in a { parts.push(link(a.orcid, orcid-icon())) }
         parts.join()
       })
       .join(", ", last: " & ")
@@ -294,13 +360,18 @@
 
   // Title-page note: correspondence, equal contribution, author note and
   // thanks, all in a single unnumbered footnote paragraph.
-  let title_note = (
-    if corresponding_authors.len() > 0 [
-      \*#corresponding-text #corresponding_authors.map(a => [#a.name, #a.email]).join(", ", last: " & ").
+  let title-note = (
+    if corresponding-authors.len() > 0 [
+      \*#correspondence-text #corresponding-authors.map(a => {
+        if "email" in a [#a.name, #a.email] else { a.name }
+      }).join(", ", last: " & ").
     ],
-    if equal_authors.len() > 0 [
-      #super("†")#equal_authors.map(a => a.name).join(", ", last: " & ") contributed equally to this work.
-    ],
+    if equal-authors.len() > 0 {
+      let parts = content-to-string(equal-contribution-text).split("{0}")
+      assert(parts.len() == 2, message: "preprint-equal-contribution must contain {0} once, for the author names")
+      let (before, after) = parts
+      [#super("†")#before#equal-authors.map(a => a.name).join(", ", last: " & ")#after]
+    },
     authornote,
     thanks,
   ).filter(x => x != none)
@@ -310,27 +381,33 @@
   // in normal flow. Non-floating place() takes no space and does not form a
   // paragraph (keeps the first body paragraph unindented). The footnote
   // counter is reset so body footnotes start at 1.
-  if title_note.len() > 0 {
-    place(hide(footnote(numbering: _ => [], title_note.join(" "))))
+  if title-note.len() > 0 {
+    place(hide(footnote(numbering: _ => [], title-note.join(" "))))
     counter(footnote).update(0)
   }
 
   let has-front-matter = (
     title != none
       or subtitle != none
-      or author_display != none
+      or author-line != none
       or affiliations != none
       or date != none
       or abstract != none
       or categories != none
       or wordcount == true
-      or toc
   )
+  // Centred front-matter block with the given space above. Not justified:
+  // stretched word gaps look wrong in centred lines (e.g. a wrapped title)
+  let centered(above, body) = align(center, block(width: 100%, above: above, below: 0em, {
+    set par(justify: false)
+    body
+  }))
+
   if has-front-matter {
     // Place title, author, abstract always in one column.
     place(top, scope: "parent", float: true, {
       if title != none {
-        align(center, block(width: 100%, above: 0em, below: 0em)[
+        centered(0em)[
           #set par(leading: heading-line-height) if heading-line-height != none
           #set text(font: heading-family) if heading-family != none
           #set text(weight: heading-weight)
@@ -344,48 +421,37 @@
               text(size: subtitle-size)[#subtitle]
             }
           )
-        ])
-      } else if subtitle != none {
-        align(center)[
-          #block(width: 100%, above: 1em, below: 0em)[
-            #text(weight: heading-weight, size: subtitle-size)[#subtitle]
-          ]
         ]
+      } else if subtitle != none {
+        centered(1em, text(weight: heading-weight, size: subtitle-size, subtitle))
       }
 
-      if author_display != none {
-        align(center)[
-          #block(width: 100%, above: 2em, below: 0em)[
-            #text(weight: "regular", size: subtitle-size)[#author_display]
-          ]
-        ]
+      if author-line != none {
+        centered(2em, text(weight: "regular", size: subtitle-size, author-line))
       }
 
       if affiliations != none {
-        align(center)[
-          #block(width: 100%, above: 1em, below: 0em)[
-            #text(weight: "regular", size: 1.1em)[
-              #for a in affiliations [
-                #if authors.len() > 1 [#super[#a.id]]#a.name#if a.keys().contains("department") [, #a.department] \
-              ]
-            ]
-          ]
-        ]
+        centered(1em, text(weight: "regular", size: 1.1em, {
+          for (i, a) in affiliations.enumerate() {
+            if authors.len() > 1 { super(str(i + 1)) }
+            a.name
+            if "department" in a [, #a.department]
+            linebreak()
+          }
+        }))
       }
 
       if date != none {
-        align(center)[#block(above: 2em, below: 0em)[
-          #date
-        ]]
+        centered(2em, date)
       }
 
       /* Abstract and metadata section */
       v(2em, weak: true)
       block(
         below: 2em,
-        inset: (bottom: 1em, left: 2.4em, right: 2.4em),
+        inset: (bottom: 1em, x: front-inset),
       )[
-        #set text(size: 0.92em)
+        #set text(size: 0.92em) // slightly smaller than body text
         #set par(first-line-indent: 0em)
         #if abstract != none {
           if abstract-title != none {
@@ -395,30 +461,27 @@
           }
         }
         #if categories != none {
-          block()[#v(0.4em)#text(style: "italic")[Keywords:] #categories]
+          block()[#v(0.4em)#text(style: "italic")[#keywords-title:] #categories]
         }
         #if wordcount == true {
-          block()[#text(style: "italic")[Words:] #total-words]
+          block()[#text(style: "italic")[#words-title:] #context preprint-words.final()]
         }
       ]
-
-      // Table of contents
-      if toc {
-        block(
-          inset: (bottom: 2em, left: 2.4em, right: 2.4em),
-        )[
-          #outline(
-            title: toc_title,
-            depth: toc_depth,
-            indent: toc_indent,
-          )
-        ]
-      }
     })
   }
 
-  // Word count with wordometer package
-  show: word-count.with(exclude: (<refs>))
+  // Table of contents in normal flow, as in Quarto's template: a float cannot
+  // break across pages, so a long TOC would overflow the title float. In
+  // multi-column layouts the TOC therefore sits in the first column.
+  if toc {
+    block(above: 0em, below: 2em, inset: (x: front-inset), outline(
+      title: toc_title,
+      depth: toc_depth,
+      indent: toc_indent,
+    ))
+  }
+
+  if wordcount == true { preprint-words.update(n => n + count-words(doc)) }
 
   /* Document content */
   doc

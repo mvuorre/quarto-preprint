@@ -1,0 +1,24 @@
+---
+title: Options override theme defaults
+# Colours are hex strings (escaped by Pandoc)
+linkcolor: "#0066cc"
+citecolor: "#cc0000"
+filecolor: "#008800"
+number-sections: true
+format:
+  preprint-typst:
+    keep-typ: true
+    theme: jou
+    fontsize: 14pt
+    columns: 1
+---
+
+`theme: jou` sets two columns and 10pt text, but this document asks for one column and 14pt text, which must win.
+
+# Link colours {#sec-intro}
+
+An external [link](https://quarto.org) should be blue (#0066cc), an internal [link](#sec-intro) green, and the cross-references @sec-intro and @eq-x red.
+
+$$
+x = y
+$$ {#eq-x}

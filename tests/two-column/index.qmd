@@ -12,28 +12,29 @@ affiliations:
   - id: 2
     name: Tilburg University
     department: Department of Social Psychology
+abstract: |
+  {{< lipsum 1 >}}
+bibliography: ../../bibliography.bib
 format:
   preprint-typst:
     include-before-body:
       - text: "#show <refs>: set par(hanging-indent: 1.4em)"
     theme: jou
+    section-numbering: "1."
     keep-typ: true
     citeproc: true
     wordcount: true
 ---
 
-```{r}
-#| echo: false
+# Introduction
 
-x <- rnorm(10)
-```
-
----
-abstract: |
-  {{< lipsum 1 >}}
----
+This sentence refers to works [@rcoreteamLanguageEnvironmentStatistical2025; @allaireQuarto2025]. This one cites @allaireQuarto2025 in text, and this one cites two works again [@rcoreteamLanguageEnvironmentStatistical2025; @allaireQuarto2025].
 
 {{< lipsum 3 >}}
+
+>A Quote
+>
+>---Source
 
 ## Detail
 

@@ -1,0 +1,17 @@
+---
+title: Margin layout
+reference-location: margin
+format:
+  preprint-typst:
+    keep-typ: true
+---
+
+Margin content must sit in the margin, not over the body text. This paragraph has a footnote, which becomes a margin note.[^1] The body text continues for a while so that any overlap with the margin note would be clearly visible on the page, which is what this test checks.
+
+[^1]: A footnote shown as a margin note.
+
+::: {.column-margin}
+A margin block placed next to this paragraph.
+:::
+
+More body text that follows the margin block and should keep its full width without colliding with any of the content in the margin column on the right.

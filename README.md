@@ -4,9 +4,13 @@ A [Quarto](https://quarto.org/) extension for creating PDF documents with [Typst
 
 # Examples
 
-| Default output | `theme: jou` output | Full-width content | Single-column appendices |
-|:--:|:--:|:--:|:--:|
-| [![](https://github.com/mvuorre/quarto-preprint/releases/latest/download/example.png)](https://github.com/mvuorre/quarto-preprint/releases/latest/download/example.pdf) | [![](https://github.com/mvuorre/quarto-preprint/releases/latest/download/example-jou.png)](https://github.com/mvuorre/quarto-preprint/releases/latest/download/example-jou.pdf) | [![](https://github.com/mvuorre/quarto-preprint/releases/latest/download/example-jou-p2.png)](https://github.com/mvuorre/quarto-preprint/releases/latest/download/example-jou.pdf) | [![](https://github.com/mvuorre/quarto-preprint/releases/latest/download/example-jou-p3.png)](https://github.com/mvuorre/quarto-preprint/releases/latest/download/example-jou.pdf) |
+| Default output | `theme: jou` output |
+|:--:|:--:|
+| [![](https://github.com/mvuorre/quarto-preprint/releases/latest/download/example.png)](https://github.com/mvuorre/quarto-preprint/releases/latest/download/example.pdf) | [![](https://github.com/mvuorre/quarto-preprint/releases/latest/download/example-jou.png)](https://github.com/mvuorre/quarto-preprint/releases/latest/download/example-jou.pdf) |
+
+| Full-width content | Single-column appendices |
+|:--:|:--:|
+| [![](https://github.com/mvuorre/quarto-preprint/releases/latest/download/example-jou-p2.png)](https://github.com/mvuorre/quarto-preprint/releases/latest/download/example-jou.pdf) | [![](https://github.com/mvuorre/quarto-preprint/releases/latest/download/example-jou-p3.png)](https://github.com/mvuorre/quarto-preprint/releases/latest/download/example-jou.pdf) |
 
 # Overview
 
@@ -83,29 +87,26 @@ Front matter variables can be shared across output formats (such as `toc` above)
   - Example: `authornote: "Author affiliations and contact"`
 - `wordcount` (boolean) - Display word count below abstract
   - Example: `wordcount: true`
+  - Counts the main text's prose, including headings and footnotes. Code, tables, figures and their captions, equations, the reference list, the abstract, and appendices are not counted. Citations are counted with `citeproc: true`, because Pandoc writes them as plain text. Callouts are counted, except cross-referenced ones.
 - `hide-abstract-title` (boolean) - Hide the abstract heading by default; set to `false` to show Quarto's standard abstract label
   - Example: `hide-abstract-title: false`
 - `theme` (string) - Select a theme ("default", "jou")
-  - Example: `theme: jou` creates an optimized two-column layout
+  - Example: `theme: jou` creates an optimized two-column layout (10pt text, narrower margins)
+  - Explicit `fontsize`, `columns`, and `margin` settings take precedence over the theme
 - `functions` (array) - Enable Typst functions in Quarto divs \[[typst-function](https://github.com/christopherkenny/typst-function)\]
   - Example: `functions: ["place"]`
-- `corresponding-text` (string) - How to refer to corresponding authors (default: "Send correspondence to:")
-  - Example: `corresponding-text: "Corresponding authors:"` displays as "Corresponding authors: Name, email."
-- `bibliography-title` (string) - Title of bibliography section [[Typst](https://typst.app/docs/reference/model/bibliography/#parameters-title), [Quarto](https://quarto.org/docs/output-formats/typst.html#bibliography)]
-  - Only works when using Typst's own citation processing system
-  - Example: `bibliography-title: Works cited`
 
 ## Typography
 
 - `mathfont` (string) - Font family for equations \[[Quarto](https://quarto.org/docs/output-formats/typst.html)\]
   - Example: `mathfont: "New Computer Modern Math"`
 - `codefont` (string) - Font family for code \[[Quarto](https://quarto.org/docs/output-formats/typst.html)\]
-  - Example: `codefont: "Monacy"`
-- `linkcolor` (string) - Color for hyperlinks \[[Quarto](https://quarto.org/docs/output-formats/html-themes.html#basic-options), [Typst](https://typst.app/docs/reference/visualize/color/)\]
-  - Example: `linkcolor: "blue"` or `linkcolor: "#0066cc"`
-- `citecolor` (string) - Color for citations and cross-references when Typst handles them \[[Quarto](https://quarto.org/docs/output-formats/typst.html)\]
+  - Example: `codefont: "Monaco"`
+- `linkcolor` (hex code) - Color for hyperlinks \[[Quarto](https://quarto.org/docs/output-formats/html-themes.html#basic-options), [Typst](https://typst.app/docs/reference/visualize/color/)\]
+  - Example: `linkcolor: "#0066cc"`
+- `citecolor` (hex code) - Color for citations and cross-references when Typst handles them \[[Quarto](https://quarto.org/docs/output-formats/typst.html)\]
   - Example: `citecolor: "#0066cc"`
-- `filecolor` (string) - Color for internal label links \[[Quarto](https://quarto.org/docs/output-formats/typst.html)\]
+- `filecolor` (hex code) - Color for internal label links \[[Quarto](https://quarto.org/docs/output-formats/typst.html)\]
   - Example: `filecolor: "#444444"`
 
 ## Branding
@@ -128,6 +129,8 @@ format:
   - Example: `line-number: true`
   - This is simplified to a boolean instead of allowing custom numbering as per Typst.
 - `linestretch` (number) - Multiplier for line spacing \[[Quarto](https://quarto.org/docs/output-formats/typst.html), [Typst](https://typst.app/docs/reference/model/par/#parameters-leading)\]
+  - Multiplies Typst's default leading (0.65em), same as Quarto. 
+  - The default is 10/13 (0.5em leading); `1` would be Typst's default, looser spacing
   - Example: `linestretch: 1.1`
 - `spacing` (string) - Vertical spacing between paragraphs \[[Typst](https://typst.app/docs/reference/model/par/#parameters-spacing)\]
   - Example: `spacing: "0.6em"`
@@ -137,6 +140,8 @@ format:
   - Example: `all: false`
 - `col-gutter` (string) - Horizontal spacing between columns \[[Typst](https://typst.app/docs/reference/layout/columns/#parameters-gutter)\]
   - Example: `col-gutter: "4.2%"` or `col-gutter: "2em"`
+- [Margin content](https://quarto.org/docs/output-formats/typst.html#margin-layout) works as in Quarto's Typst format.
+  - **Note:** any margin content, even a single `.column-margin` div or `reference-location: margin`, switches the document to one column, also with `theme: jou`. Set `columns: 2` explicitly to keep two (narrow) columns.
 
 ## Language
 
@@ -144,12 +149,17 @@ format:
   - Example: `lang: "en"` or `lang: "de"`
 - `region` (string) - Document region \[[Quarto](https://quarto.org/docs/authoring/language.html), [Typst](https://typst.app/docs/reference/text/text/#parameters-region)\]
   - Example: `region: "US"` or `region: "GB"`
+- Labels ("Appendix", "Keywords", ...) follow `lang` where Quarto has a translation. Change any label with Quarto's [`language`](https://quarto.org/docs/authoring/language.html) option. Besides Quarto's own keys (e.g. `crossref-apx-prefix`, `title-block-keywords`, or `section-title-references`, which titles Typst's reference list), *preprint-typst* uses these, which have no translations:
+  - `preprint-words`: word count label ("Words")
+  - `preprint-correspondence`: "Send correspondence to:"
+  - `preprint-equal-contribution`: "{0} contributed equally to this work.", where `{0}` is replaced by the author names
+  - Note callouts are labelled "Box" (see [Boxes](#boxes))
 
 ## Bibliography & citations
 
 ### Using Typst's own citation processing
 
-Typst has its [own citation processing system](https://quarto.org/docs/authoring/citations.html#typst), whose behavior you can customize with [`bibliography-title`](https://typst.app/docs/reference/model/bibliography/#parameters-title), [`bibliographystyle`](https://typst.app/docs/reference/model/bibliography/#parameters-style).
+Typst has its [own citation processing system](https://quarto.org/docs/authoring/citations.html#typst). Set its style with [`bibliographystyle`](https://typst.app/docs/reference/model/bibliography/#parameters-style) (default: `apa`) or `csl`, and the title of its reference list with the `section-title-references` language label.
 
 ### Using Pandoc (recommended)
 
@@ -181,12 +191,12 @@ Quarto documents require citations in a separate .bib file. The [vscode-zotero](
 
 ## Boxes
 
-In `preprint-typst`, [Quarto note callouts](https://quarto.org/docs/authoring/callouts.html) render as understated grayscale boxes and `@nte-*` references are labeled as boxes.
+In `preprint-typst`, [Quarto note callouts](https://quarto.org/docs/authoring/callouts.html) render as understated grayscale boxes labelled "Box" ("Box 1" when cross-referenced with an `#nte-` id). Other callout types keep Quarto's styling. To use a different label, set Quarto's [language](https://quarto.org/docs/authoring/language.html) strings `callout-note-title`, `crossref-nte-prefix`, and `crossref-note-prefix`.
 
 ```md
-::: {#nte-boxes .callout-note icon=false}
+::: {#nte-boxes .callout-note}
 ## This is a box
-Use `icon=false` to show the box without an icon.
+Boxes, like all callouts, have no icon by default. Use `icon=true` to show one.
 :::
 
 See @nte-boxes.
@@ -234,10 +244,14 @@ To include an appendix, include the following [raw Typst](https://quarto.org/doc
 Appendix content.
 ````
 
-(The heading above would render as "Appendix A: Appendix title". A heading titled `# Appendix` renders as "Appendix A". Figures, tables, and listings are numbered separately within each appendix, e.g. "Figure A1". Callouts and equations continue the main text numbering [see <https://github.com/mvuorre/quarto-preprint/issues/46>].)
+(The heading above would render as "Appendix A: Appendix title". A heading titled `# Appendix` renders as "Appendix A". Figures, tables, listings, equations, and callouts are numbered separately within each appendix, e.g. "Figure A1", "Figure A1a", "Equation A1", "Box A1".)
 
 Note: If you want the appendix to appear as an [appendix in HTML output](https://quarto.org/docs/authoring/appendices.html) as well, add the `.appendix` class to the headings. Appendices are an experimental feature. They are provided through a custom Typst function, and their implementation and functionality may change as Quarto’s Typst integration matures.
 
 # Get help & contribute
 
 Send your comments, bug reports, and pull requests to <https://github.com/mvuorre/quarto-preprint>. If you're reporting a bug, please include a reproducible example / full details of what you’re trying to do, how, and what goes wrong. If you want to submit an improvement, please submit an issue before submitting a pull request.
+
+## Testing
+
+`make test` renders `example.qmd` and every `tests/*/index.qmd`, checks the `expect:` entries in their front matter, and writes `_build/<timestamp>/report.html` with any failures, warnings, and every page that changed since `main` (set another git ref with `make test REF=v1.6.0`). Requires [uv](https://docs.astral.sh/uv/).

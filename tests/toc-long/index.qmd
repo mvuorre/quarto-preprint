@@ -1,0 +1,248 @@
+---
+title: A long table of contents
+abstract: The table of contents below is too long for page 1 and must continue on page 2.
+toc: true
+format:
+  preprint-typst:
+    keep-typ: true
+---
+
+# Section 1
+
+Text of section 1.
+
+# Section 2
+
+Text of section 2.
+
+# Section 3
+
+Text of section 3.
+
+# Section 4
+
+Text of section 4.
+
+# Section 5
+
+Text of section 5.
+
+# Section 6
+
+Text of section 6.
+
+# Section 7
+
+Text of section 7.
+
+# Section 8
+
+Text of section 8.
+
+# Section 9
+
+Text of section 9.
+
+# Section 10
+
+Text of section 10.
+
+# Section 11
+
+Text of section 11.
+
+# Section 12
+
+Text of section 12.
+
+# Section 13
+
+Text of section 13.
+
+# Section 14
+
+Text of section 14.
+
+# Section 15
+
+Text of section 15.
+
+# Section 16
+
+Text of section 16.
+
+# Section 17
+
+Text of section 17.
+
+# Section 18
+
+Text of section 18.
+
+# Section 19
+
+Text of section 19.
+
+# Section 20
+
+Text of section 20.
+
+# Section 21
+
+Text of section 21.
+
+# Section 22
+
+Text of section 22.
+
+# Section 23
+
+Text of section 23.
+
+# Section 24
+
+Text of section 24.
+
+# Section 25
+
+Text of section 25.
+
+# Section 26
+
+Text of section 26.
+
+# Section 27
+
+Text of section 27.
+
+# Section 28
+
+Text of section 28.
+
+# Section 29
+
+Text of section 29.
+
+# Section 30
+
+Text of section 30.
+
+# Section 31
+
+Text of section 31.
+
+# Section 32
+
+Text of section 32.
+
+# Section 33
+
+Text of section 33.
+
+# Section 34
+
+Text of section 34.
+
+# Section 35
+
+Text of section 35.
+
+# Section 36
+
+Text of section 36.
+
+# Section 37
+
+Text of section 37.
+
+# Section 38
+
+Text of section 38.
+
+# Section 39
+
+Text of section 39.
+
+# Section 40
+
+Text of section 40.
+
+# Section 41
+
+Text of section 41.
+
+# Section 42
+
+Text of section 42.
+
+# Section 43
+
+Text of section 43.
+
+# Section 44
+
+Text of section 44.
+
+# Section 45
+
+Text of section 45.
+
+# Section 46
+
+Text of section 46.
+
+# Section 47
+
+Text of section 47.
+
+# Section 48
+
+Text of section 48.
+
+# Section 49
+
+Text of section 49.
+
+# Section 50
+
+Text of section 50.
+
+# Section 51
+
+Text of section 51.
+
+# Section 52
+
+Text of section 52.
+
+# Section 53
+
+Text of section 53.
+
+# Section 54
+
+Text of section 54.
+
+# Section 55
+
+Text of section 55.
+
+# Section 56
+
+Text of section 56.
+
+# Section 57
+
+Text of section 57.
+
+# Section 58
+
+Text of section 58.
+
+# Section 59
+
+Text of section 59.
+
+# Section 60
+
+Text of section 60.

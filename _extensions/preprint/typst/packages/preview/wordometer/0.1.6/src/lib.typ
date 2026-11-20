@@ -13,11 +13,12 @@
 /// - `words`: Number of words, defined by `regex("\b[\w'’]+\b")`.
 /// - `sentences`: Number of sentences, defined by `regex("\w+\s*[.?!]")`.
 ///
-/// - string (string):
 /// -> dictionary | int
 #let string-word-count(string) = (
   characters: string.replace(regex("\s+"), "").clusters().len(),
-  words: string.matches(regex("[\p{Han}]|\b[[\w--\p{Han}]'’.,\-]+\b")).len(),
+  words: string
+    .matches(regex("[\p{Han}\p{Hira}\p{Kana}\p{Hang}]|\b[[\w--[\p{Han}\p{Hira}\p{Kana}\p{Hang}]]'’.,\-]+\b"))
+    .len(),
   sentences: string.matches(regex("\w+\s*[.?!。？！]")).len(),
 )
 
@@ -35,26 +36,25 @@
 ///
 /// #wordometer.utils.concat-adjacent-text([Qu'est-ce *que* c'est !?].children)
 ///
-/// - children (array): Array of content to simplify.
-#let concat-adjacent-text(children) = {
+#let concat-adjacent-text(
+  /// Array of content to simplify.
+  /// -> array
+  children,
+) = {
   if children.len() == 0 { return () }
   let squashed = (children.at(0),)
 
   let as-text(el) = {
     let fn = repr(el.func())
-    if fn == "text" { el.text }
-    else if fn == "space" { " " }
-    else if fn in "linebreak" { "\n" }
-    else if fn in "parbreak" { "\n\n" }
-    else if fn in "pagebreak" { "\n\n\n\n" }
-    else if fn == "smartquote" {
+    if fn == "text" { el.text } else if fn == "space" { " " } else if fn in "linebreak" { "\n" } else if (
+      fn in "parbreak"
+    ) { "\n\n" } else if fn in "pagebreak" { "\n\n\n\n" } else if fn == "smartquote" {
       if el.double { "\"" } else { "'" }
     }
   }
 
   let last-text = as-text(squashed.at(-1))
   for child in children.slice(1) {
-
     // don't squash labelled sequences. the label should be
     // preserved because it might be used to exclude elements
     let has-label = child.at("label", default: none) != none
@@ -117,9 +117,9 @@
 
 #let interpret-exclude-patterns(exclude) = {
   exclude.map(element-fn => {
-    if type(element-fn) in (str, label, dictionary) { element-fn }
-    else if type(element-fn) == function { repr(element-fn) }
-    else if type(element-fn) == selector {
+    if type(element-fn) in (str, label, dictionary) { element-fn } else if type(element-fn) == function {
+      repr(element-fn)
+    } else if type(element-fn) == selector {
       parse-basic-where-selector(element-fn)
     } else {
       panic("Exclude patterns must be element functions, strings, or labels; got:", element-fn)
@@ -134,24 +134,31 @@
 /// and calls `f` on the contained text, returning a (nested) array of all the
 /// return values.
 ///
-/// - f (function): Unary function to pass text to.
-/// - content (content): Content element to traverse.
-/// - exclude (array): Content to skip while traversing the tree, specified by:
-///   - name, e.g., `"heading"`
-///   - function, e.g., `heading`
-///   - selector, e.g., `heading.where(level: 1)` (only basic `where` selectors
-///     are supported)
-///   - label, e.g., `<no-wc>`
-///  Default value includes equations and elements without child content or
-///  text:
-///  #wordometer.utils.IGNORED_ELEMENTS.sorted().map(repr).map(raw).join([, ],
-///  last: [, and ]).
-///
-///  To exclude figures, but include figure captions, pass the name
-///  `"figure-body"` (which is not a real element). To include figure bodies,
-///  but exclude their captions, pass the name `"caption"`.
-#let map-tree(f, content, exclude: IGNORED_ELEMENTS) = {
+#let map-tree(
+  /// Unary function to pass text to.
+  /// -> function
+  f,
+  /// Content element to traverse.
+  content,
+  /// Content to skip while traversing the tree, specified by:
+  /// - name, e.g., `"heading"`
+  /// - function, e.g., `heading`
+  /// - selector, e.g., `heading.where(level: 1)` (only basic `where` selectors
+  ///   are supported)
+  /// - label, e.g., `<no-wc>`
+  /// Default value includes equations and elements without child content or
+  /// text:
+  /// #wordometer.utils.IGNORED_ELEMENTS.sorted().map(repr).map(raw).join([, ],
+  /// last: [, and ]).
+  ///
+  /// To exclude figures, but include figure captions, pass the name
+  /// `"figure-body"` (which is not a real element). To include figure bodies,
+  /// but exclude their captions, pass the name `"caption"`.
+  /// -> array
+  exclude: IGNORED_ELEMENTS,
+) = {
   if content == none { return none }
+  if type(content) != std.content { return none }
   let exclude = interpret-exclude-patterns(exclude)
   let map-subtree = map-tree.with(f, exclude: exclude)
 
@@ -171,13 +178,11 @@
   if fn in exclude {
     none
 
-  // check if element has a label that is excluded
+    // check if element has a label that is excluded
   } else if content.at("label", default: none) in exclude {
     none
-
   } else if fn in ("text", "raw") {
     f(content.text)
-
   } else if "children" in fields {
     let children = content.children
 
@@ -186,39 +191,39 @@
       children = concat-adjacent-text(children)
     }
 
-    children
-      .map(map-subtree)
-      .filter(x => x != none)
-
+    children.map(map-subtree).filter(x => x != none)
+  } else if "term" in fields and "description" in fields {
+    (
+      map-subtree(content.term),
+      map-subtree(content.description),
+    ).filter(x => x != none)
   } else if fn == "figure" {
     (
       if "figure-body" not in exclude { map-subtree(content.body) },
       if "caption" in content.fields() { map-subtree(content.caption) },
-    )
-      .filter(x => x != none)
-
+    ).filter(x => x != none)
   } else if fn == "styled" {
     map-subtree(content.child)
-
   } else if "body" in fields {
     map-subtree(content.body)
-
   } else {
     none
-
   }
-
 }
 
 /// Extract plain text from content
 ///
 /// This is a quick-and-dirty conversion which does not preserve styling or
 /// layout and which may introduces superfluous spaces.
-/// - content (content): Content to extract plain text from.
-/// - ..options ( ): Additional named arguments:
-///   - `exclude`: Content to exclude (see `map-tree()`). Can be an array of
-///     element functions, element function names, or labels.
-#let extract-text(content, ..options) = {
+#let extract-text(
+  /// Content to extract plain text from.
+  /// -> content
+  content,
+  /// Additional named arguments:
+  /// - `exclude`: Content to exclude from word count (see `map-tree()`). Can be
+  ///   an array of element functions, element function names, or labels.
+  ..options,
+) = {
   if type(content) == str { return content }
   let out = (map-tree(x => x, content, ..options),).flatten().join(" ")
   out + "" // ensures none becomes empty string
@@ -229,31 +234,34 @@
 /// Returns a results dictionary, not the content passed to it. (See
 /// `string-word-count()`).
 ///
-/// - content (content):
 /// -> dictionary
-/// - exclude (array): Content to exclude from word count (see `map-tree()`).
-///  Can be an array of element functions, element function names, or labels.
-/// - counter (fn): A function that accepts a string and returns a dictionary of
-///  counts.
-///
-///  For example, to count vowels, you might do:
-///
-///  ```typ
-///  #word-count-of([ABCDEFG], counter: s => (
-///      vowels: lower(s).matches(regex("[aeiou]")).len(),
-///  ))
-///  ```
-/// - method (string): The count aggregation method to use. Can be:
-///   - `"stringify"`: Convert the content into one big string, then perform the
-///     word count.
-///   - `"bubble"`: Recursively traverse the content tree performing word counts
-///     at each textual leaf node and propagating them up to parent elements.
-///   Performance and results may vary by method!
-///   In my experience, `"stringify"` is faster.
 #let word-count-of(
   content,
+
+  /// Content to exclude from word count (see `map-tree()`).
+  /// Can be an array of element functions, element function names, or labels.
+  /// -> array
   exclude: (),
+  /// A function that accepts a string and returns a dictionary of
+  /// counts.
+  ///
+  /// For example, to count vowels, you might do:
+  ///
+  /// ```typ
+  /// #word-count-of([ABCDEFG], counter: s => (
+  ///     vowels: lower(s).matches(regex("[aeiou]")).len(),
+  /// ))
+  /// ```
+  /// -> function
   counter: string-word-count,
+  /// The count aggregation method to use. Can be:
+  /// - `"stringify"`: Convert the content into one big string, then perform the
+  ///   word count.
+  /// - `"bubble"`: Recursively traverse the content tree performing word counts
+  ///   at each textual leaf node and propagating counts to parent elements.
+  /// Performance and results may vary by method!
+  /// In my experience, `"stringify"` is faster.
+  /// -> string
   method: "stringify",
 ) = {
   let exclude = IGNORED_ELEMENTS + (exclude,).flatten()
@@ -262,10 +270,7 @@
   assert(method in options, message: "Unknown choice " + repr(method) + ". Options are " + repr(options) + ".")
 
   if method == "bubble" {
-    (map-tree(counter, content, exclude: exclude),)
-      .filter(x => x != none)
-      .flatten()
-      .fold(counter(""), dictionary-sum)
+    (map-tree(counter, content, exclude: exclude),).filter(x => x != none).flatten().fold(counter(""), dictionary-sum)
   } else if method == "stringify" {
     counter(extract-text(content, exclude: exclude))
   }
@@ -283,17 +288,20 @@
 /// ```typst
 /// #word-count-callback(stats => [There are #stats.words words])
 /// ```
-///
-/// - fn (function): A function accepting a dictionary and returning content to
-///  perform the word count on.
-/// - ..options ( ): Additional named arguments:
-///   - `exclude`: Content to exclude from word count (see `map-tree()`). Can be
-///     an array of element functions, element function names, or labels.
-///   - `counter`: A function that accepts a string and returns a dictionary of
-///     counts.
-///   - `method`: Content traversal method to use (see `word-count-of()`).
 /// -> content
-#let word-count-callback(fn, ..options) = {
+#let word-count-callback(
+  /// A function accepting a dictionary and returning content to
+  /// perform the word count on.
+  /// -> function
+  fn,
+  /// Additional named arguments:
+  /// - `exclude`: Content to exclude from word count (see `map-tree()`). Can be
+  ///   an array of element functions, element function names, or labels.
+  /// - `counter`: A function that accepts a string and returns a dictionary of
+  ///   counts.
+  /// - `method`: Content traversal method to use (see `word-count-of()`).
+  ..options,
+) = {
   let preview-content = [#fn(string-word-count(""))]
   let stats = word-count-of(preview-content, ..options)
   fn(stats)
@@ -303,7 +311,7 @@
   let stats = state("wordometer").final()
   assert(stats != none, message: {
     "Global word count for "
-    "#total-"+field
+    "#total-" + field
     " is not enabled.\n"
     "Hint: Please add `#show: word-count` before the document."
   })
@@ -331,16 +339,18 @@
 /// `#total-characters`, which are shortcuts for the final values of states of
 /// the same name (e.g., `#context state("total-words").final()`)
 ///
-/// - content (content):
-///   Content to word count.
-/// - ..options ( ): Additional named arguments:
-///   - `exclude`: Content to exclude from word count (see `map-tree()`). Can be
-///     an array of element functions, element function names, or labels.
-///   - `counter`: A function that accepts a string and returns a dictionary of
-///     counts.
-///   - `method`: Content traversal method to use (see `word-count-of()`).
 /// -> content
-#let word-count-global(content, ..options) = {
+#let word-count-global(
+  /// Content to word count.
+  content,
+  /// Additional named arguments:
+  /// - `exclude`: Content to exclude from word count (see `map-tree()`). Can be
+  ///   an array of element functions, element function names, or labels.
+  /// - `counter`: A function that accepts a string and returns a dictionary of
+  ///   counts.
+  /// - `method`: Content traversal method to use (see `word-count-of()`).
+  ..options,
+) = {
   let stats = word-count-of(content, ..options)
   state("wordometer").update(old-stats => {
     if old-stats == none { return stats }
@@ -354,27 +364,29 @@
 /// Master function which accepts content (calling `word-count-global()`) or a
 /// callback function (calling `word-count-callback()`).
 ///
-/// - arg (content, fn):
-///   Can be:
-///   #set raw(lang: "typ")
-///   - `content`: A word count is performed for the content and the results are
-///     accessible through `#total-words` and `#total-characters`. This uses a
-///     global state, so should only be used once in a document (e.g., via a
-///     document show rule: `#show: word-count`).
-///   - `function`: A callback function accepting a dictionary of word count
-///     results and returning content to be word counted. For example:
-///     ```typ
-///     #word-count(total => [This sentence contains #total.characters letters.])
-///    ```
-/// - ..options ( ): Additional named arguments:
-///   - `exclude`: Content to exclude from word count (see `map-tree()`). Can be
-///     an array of element functions, element function names, or labels.
-///   - `counter`: A function that accepts a string and returns a dictionary of
-///     counts.
-///   - `method`: Content traversal method to use (see `word-count-of()`).
-///
 /// -> dictionary
-#let word-count(arg, ..options) = {
+#let word-count(
+  /// Can be:
+  /// #set raw(lang: "typ")
+  /// - `content`: A word count is performed for the content and the results are
+  ///   accessible through `#total-words` and `#total-characters`. This uses a
+  ///   global state, so should only be used once in a document (e.g., via a
+  ///   document show rule: `#show: word-count`).
+  /// - `function`: A callback function accepting a dictionary of word count
+  ///   results and returning content to be word counted. For example:
+  ///   ```typ
+  ///   #word-count(total => [This sentence contains #total.characters letters.])
+  ///   ```
+  /// -> content | function
+  arg,
+  /// Additional named arguments:
+  /// - `exclude`: Content to exclude from word count (see `map-tree()`). Can be
+  ///   an array of element functions, element function names, or labels.
+  /// - `counter`: A function that accepts a string and returns a dictionary of
+  ///   counts.
+  /// - `method`: Content traversal method to use (see `word-count-of()`).
+  ..options,
+) = {
   if type(arg) == function {
     word-count-callback(arg, ..options)
   } else {

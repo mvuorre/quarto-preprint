@@ -1,94 +1,30 @@
-// Quarto callout overrides for academic boxes.
+// Note callouts as understated grayscale "Boxes".
 //
-// Leave Quarto's callout() function intact for normal callouts. Cross-referenced
-// note callouts are converted to boxes in the figure show rule below, where the
-// semantic kind/supplement is available.
+// The "Box" label comes from language strings in _extension.yml
+// (callout-note-title, crossref-nte-prefix, crossref-note-prefix), so
+// Quarto's own callout and cross-reference code produces "Box 1: Title" and
+// "Box 1" in references. Here we only change the colours.
+//
+// Quarto's callout() (definitions.typ) receives colours but not the callout
+// type, so note callouts are recognised by Quarto's note colour, or by the
+// brand primary colour that replaces it when a brand is used. If Quarto
+// changes its note colour, notes fall back to Quarto's own style; a brand
+// whose primary colour is also its warning, danger, or success colour makes
+// those callouts boxes too.
+//
+// We wrap Quarto's callout() rather than copy it: Quarto's callout figure show
+// rule takes its output apart and relies on its structure. This file is
+// included before the body (not in the header) because brand-color is only
+// defined after the header includes. Written against Quarto 1.11.
 
-#show ref: it => {
-  if it.supplement == [Note] {
-    ref(it.target, supplement: [Box])
-  } else {
-    it
-  }
-}
+#let quarto-callout = callout
+#let note-icon-colors = (rgb("#0758E5"), brand-color.at("primary", default: none)).filter(c => c != none)
 
-// Use Quarto's callout cross-reference machinery, but label note callouts as
-// boxes and let callout supplement labels win when authors use wrn/tip/etc.
-#show figure: it => {
-  if type(it.kind) != str {
-    return it
-  }
-  let kind_match = it.kind.matches(regex("^quarto-callout-(.*)")).at(0, default: none)
-  if kind_match == none {
-    return it
-  }
-  let kind = kind_match.captures.at(0, default: "other")
-  kind = upper(kind.first()) + kind.slice(1)
-  let label = if type(it.supplement) == str {
-    it.supplement
-  } else if it.supplement != none {
-    content-to-string(it.supplement)
+#let callout(..args) = {
+  if args.named().at("icon_color", default: none) in note-icon-colors {
+    // The border and icon share icon_color
+    quarto-callout(..args, background_color: luma(238), icon_color: luma(150))
   } else {
-    kind
-  }
-  label = if label == "Note" { "Box" } else { label }
-  let is-box = label == "Box"
-
-  let old_callout = it.body.children.at(1).body.children.at(1)
-  let old_title_block = old_callout.body.children.at(0)
-  let children = old_title_block.body.body.children
-  let old_title = if children.len() == 1 {
-    children.at(0)
-  } else {
-    children.at(1)
-  }
-
-  let callout_num = it.counter.display(it.numbering)
-  let new_title = if empty(old_title) {
-    [#label #callout_num]
-  } else {
-    [#label #callout_num: #old_title]
-  }
-  let new_title_content = if children.len() == 1 {
-    new_title
-  } else {
-    children.at(0) + new_title
-  }
-
-  let new_title_block = block_with_new_content(
-    old_title_block,
-    block_with_new_content(old_title_block.body, new_title_content),
-  )
-
-  if is-box {
-    let box-title-fill = luma(238)
-    let box-title-block = block(
-      fill: box-title-fill,
-      width: 100%,
-      inset: 8pt,
-      new_title_content,
-    )
-    let box-body = block(inset: 1pt, width: 100%, below: 0pt, box-title-block)
-    if old_callout.body.children.len() > 1 {
-      let old_body_block = old_callout.body.children.at(1)
-      box-body += block(
-        inset: (top: 0pt, bottom: 1pt, left: 1pt, right: 1pt),
-        width: 100%,
-        old_body_block.body,
-      )
-    }
-    align(left, block(
-      breakable: false,
-      fill: box-title-fill,
-      stroke: (paint: luma(170), thickness: 0.5pt, cap: "round"),
-      width: 100%,
-      radius: 0pt,
-      box-body,
-    ))
-  } else {
-    align(left, block_with_new_content(
-      old_callout,
-      block(below: 0pt, new_title_block) + old_callout.body.children.at(1),
-    ))
+    quarto-callout(..args)
   }
 }

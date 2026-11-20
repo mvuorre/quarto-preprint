@@ -42,3 +42,14 @@ Level three heading.
 #### Heading four
 
 Level four heading.
+
+::: {#nte-b .callout-note}
+## Brand note
+A note callout is a grayscale box also with brand colours.
+:::
+
+::: {.callout-tip}
+Other callouts keep their brand colours.
+:::
+
+See @nte-b.

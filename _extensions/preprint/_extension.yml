@@ -2,17 +2,31 @@ title: Preprint
 authors:
   - name: Matti Vuorre
     orcid: 0000-0001-5052-066X
-version: 1.6.5
-quarto-required: ">=1.9.36"
+version: 1.7.0
+quarto-required: ">=1.11.9"
 contributes:
   formats:
     typst:
       hide-abstract-title: true
+      # No callout icons by default; `icon=true` on a callout turns one back on
+      callout-icon: false
+      language:
+        # Note callouts are labelled "Box" (see typst-callouts.typ)
+        callout-note-title: Box
+        crossref-nte-prefix: Box
+        crossref-note-prefix: Box
+        # Labels without a Quarto translation (documents can set `language:`).
+        # {0} is replaced by the author names.
+        preprint-words: Words
+        preprint-correspondence: "Send correspondence to:"
+        preprint-equal-contribution: "{0} contributed equally to this work."
       functions: [place]
-      include-in-header:
-        # Override "Note" Quarto callouts with simplified "Boxes"
+      include-before-body:
+        # Render note callouts as grayscale "Boxes". 
         - typst-callouts.typ
       template-partials:
+        # Appendix-aware numbering (see numbering.typ)
+        - numbering.typ
         - typst-template.typ
         - typst-show.typ
       filters:

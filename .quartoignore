@@ -13,5 +13,7 @@ docs/
 *.svg
 *.html
 tests/
+tools/
+_build/
 NEWS.md
 README.md

@@ -13,7 +13,7 @@ A small [Typst](https://typst.app/) package for quick and easy in-document word 
 ## Basic usage
 
 ```typ
-#import "@preview/wordometer:0.1.5": word-count, total-words
+#import "@preview/wordometer:0.1.6": word-count, total-words
 
 #show: word-count
 
@@ -44,7 +44,21 @@ In this document #strike[(excluding me)], there are #total-words words all up.
 ], exclude: <no-wc>)
 ```
 
+## Development and testing
+
+We use [Tytanic](https://typst-community.github.io/tytanic/) for unit tests. Run with
+```
+tt run --font-path tests/
+```
+to ensure CJK fonts are available.
+
 ## Changelog
+
+### v0.1.6
+
+- Improve CJK word counting support (#10)
+- Add support for term list elements (#21)
+- Fix crash with labeled footnotes (#20)
 
 ### v0.1.5
 

@@ -14,7 +14,7 @@ $if(by-author)$
   $for(by-author)$
       (
         name: [$it.name.literal$],
-        affiliation: [$for(it.affiliations)$$it.id$$sep$,$endfor$],
+        affiliations: ($for(it.affiliations)$[$it.id$],$endfor$),
         $if(it.attributes.corresponding)$corresponding: $it.attributes.corresponding$,$endif$
         $if(it.attributes.equal-contributor)$equal-contributor: $it.attributes.equal-contributor$,$endif$
         $if(it.orcid)$orcid: "https://orcid.org/$it.orcid$",$endif$
@@ -27,9 +27,9 @@ $if(affiliations)$
   affiliations: (
 $for(affiliations)$
     (
-      id: "$it.id$",
-      name: "$it.name$",
-      $if(it.department)$department: "$it.department$",$endif$
+      id: [$it.id$],
+      name: [$it.name$],
+      $if(it.department)$department: [$it.department$],$endif$
     ),
 $endfor$
   ),
@@ -47,7 +47,7 @@ $if(abstract)$
   abstract: [$abstract$],
 $if(hide-abstract-title)$
 $else$
-  abstract-title: "$labels.abstract$",
+  abstract-title: [$labels.abstract$],
 $endif$
 $endif$
 $if(papersize)$
@@ -82,9 +82,6 @@ $if(brand.typography.headings.line-height)$
   heading-line-height: $brand.typography.headings.line-height$,
 $endif$
 $endif$
-$if(number-sections)$
-  sectionnumbering: "1.1.1.1.",
-$endif$
 $if(section-numbering)$
   sectionnumbering: "$section-numbering$",
 $endif$
@@ -105,16 +102,16 @@ $endif$
   pagenumbering: $if(page-numbering)$"$page-numbering$"$else$none$endif$,
   linenumbering: $if(line-number)$"1"$else$none$endif$,
 $if(linkcolor)$
-  linkcolor: $linkcolor$,
+  linkcolor: [$linkcolor$],
 $else$
   // brand-color is always defined by Quarto >=1.9.36 (empty dict without brand)
   linkcolor: brand-color.at("primary", default: blue),
 $endif$
 $if(citecolor)$
-  citecolor: $citecolor$,
+  citecolor: [$citecolor$],
 $endif$
 $if(filecolor)$
-  filecolor: $filecolor$,
+  filecolor: [$filecolor$],
 $endif$
 $if(toc)$
   toc: $toc$,
@@ -138,46 +135,33 @@ $endif$
 $if(all)$
   all: $all$,
 $endif$
-$if(citation)$
-  citation: (
-    type: "$citation.type$",
-    container-title: "$citation.container-title$",
-    doi: "$citation.doi$",
-    url: "$citation.url$"
-  ),
-$endif$
 $if(authornote)$
   authornote: [$authornote$],
 $endif$
-$if(corresponding-text)$
-  corresponding-text: [$corresponding-text$],
-$endif$
+  correspondence-text: [$quarto.language.preprint-correspondence$],
+  equal-contribution-text: [$quarto.language.preprint-equal-contribution$],
 // Use categories or keywords
 $if(categories)$
   categories: [$for(categories)$$it$$sep$, $endfor$],
 $elseif(keywords)$
   categories: [$for(keywords)$$it$$sep$, $endfor$],
 $endif$
+  keywords-title: [$quarto.language.title-block-keywords$],
+  words-title: [$quarto.language.preprint-words$],
 $if(wordcount)$
   wordcount: $wordcount$,
 $endif$
 $if(col-gutter)$
   col-gutter: $col-gutter$,
 $endif$
-$if(bibliographystyle)$
-  bibliographystyle: "$bibliographystyle$",
-$endif$
-$if(bibliography-title)$
-  bibliography-title: [$bibliography-title$],
-$endif$
-// Theme system (unified for standalone and Quarto)
 $if(theme)$
   theme: "$theme$",
-$elseif(theme-jou)$
-  theme: "jou",
 $endif$
 // Explicit overrides (optional)
-$if(margin)$
+$if(margin-geometry)$
+  // Margin notes: Quarto's page.typ sets the margins (marginalia.setup)
+  margin-layout: true,
+$elseif(margin)$
   margin: ($for(margin/pairs)$$margin.key$: $margin.value$,$endfor$),
 $endif$
 $if(columns)$

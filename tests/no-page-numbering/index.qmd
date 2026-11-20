@@ -1,0 +1,13 @@
+---
+title: No page numbering
+page-numbering: false
+format:
+  preprint-typst:
+    keep-typ: true
+---
+
+This document spans two pages but has no page numbers or running head, so page 2 has no header.
+
+{{< pagebreak >}}
+
+Second page.

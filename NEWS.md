@@ -1,6 +1,43 @@
-## TBD
+## 1.7.0
+
+### Breaking changes
+
+- Remove the legacy `theme-jou: true` option (use `theme: jou`) 
+- Remove ignored `prefix` and `numbering` arguments of `appendix()`
+- Remove the `corresponding-text` option; use the `preprint-correspondence` language label instead (e.g. `language: {preprint-correspondence: "Corresponding authors:"}`)
+- Remove the `bibliography-title` option; use the `section-title-references` language label instead
+  - See <https://quarto.org/docs/authoring/language.html#alternate-language>
+- Callouts have no icons by default (Quarto's `callout-icon: false`); use `icon=true` on a callout, or `callout-icon: true` in the document, to show them
+- Unlabeled display equations are no longer numbered, so equation numbers match Quarto's HTML output
+- `linkcolor`, `citecolor`, and `filecolor` take hex codes (e.g. `"#0066cc"`), as in Quarto's Typst format; Typst colour names such as `blue` are no longer accepted
+- `theme: jou` no longer overrides explicit `fontsize`, `columns`, and `margin` settings
+- Any margin content (margin notes, `.column-margin`) makes the document one column by default, also with `theme: jou`
+- The word count (`wordcount: true`) counts only the main text's prose (and references if `citeproc: true`): code, tables, figures and captions, and appendices are no longer counted
+
+### New features
+
+- Equations, callouts, and subfigures are numbered within appendices ("Equation A1", "Box A1", "Figure A1a") (#46), as are custom cross-reference kinds
+- Appendix TOC entries read as in the body ("Appendix A: Title")
+- "Appendix" and "Keywords" labels follow the document language; all labels can be changed with Quarto's `language` option, including the new `preprint-words`, `preprint-correspondence`, and `preprint-equal-contribution` labels
+  - See <https://quarto.org/docs/authoring/language.html#alternate-language>
+- Fix & simplify callouts
+  - All note callouts, not only cross-referenced ones, render as grayscale boxes labelled "Box". The implementation no longer copies Quarto's callout code, so it is robust to Quarto updates
+- Bump bundled wordometer to 0.1.6
+
+### Fixes
 
 - Improve Appendix numberings and headings
+- Improve list formatting
+- Fix compile errors with hex colours, `page-numbering: false` in multi-page documents, corresponding authors without an email, keywords containing markup, and unnumbered figure captions
+- Affiliations are shown as numbers in listed order instead of their ids (e.g. "aff-1")
+- Affiliation names and departments keep special characters and markup
+- Title block, headings, and code blocks are no longer justified
+- The starter template uses `citeproc: true`, so references appear in the References section
+- Long TOCs continue to the next page instead of overprinting the bottom of page 1; TOC follows the title block in normal flow (same as Quarto's Typst format)
+- Figures between `appendix()` and the first appendix heading no longer get the number "01"
+- Quarto's margin layout (margin notes, `.column-margin`) no longer prints margin content over the body text
+- Table captions align to the column edge like figure captions, also when the table is narrow
+- Figures, tables, and callouts no longer get extra space at the top of a page or column, and consecutive ones are spaced like a figure after a paragraph
 
 ## 1.6.5
 

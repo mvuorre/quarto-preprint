@@ -1,0 +1,31 @@
+---
+title: A long title that wraps onto a second line, to check that centred front matter is not justified
+author:
+  - name: First Author
+    corresponding: true
+    affiliations:
+      - id: lab
+        name: "Lab_5 @ Uni #1"
+        department: Dept. of *Psychology*
+      - Inline University
+  - name: Second Author
+    email: second@example.org
+    corresponding: true
+    affiliations:
+      - ref: lab
+  - name: Third Author
+    affiliations:
+      - Inline University
+keywords: ["*Drosophila*", "R"]
+authornote: Author notes can cite [@rcoreteamLanguageEnvironmentStatistical2025].
+bibliography: ../../bibliography.bib
+format:
+  preprint-typst:
+    keep-typ: true
+expect:
+  contains:
+    - "Send correspondence to: First Author & Second Author, second@example.org."
+    - "Author notes can cite (R Core Team"
+---
+
+Affiliations are numbered in the order listed: First Author^1,2^, Second Author^1^, Third Author^2^. Names keep their special characters ("Lab_5 @ Uni #1") and markup (*Psychology* in italics). The keywords show *Drosophila* in italics. The correspondence note lists both corresponding authors with the one email address given, and the author note has a formatted citation, as does this sentence [@rcoreteamLanguageEnvironmentStatistical2025].
